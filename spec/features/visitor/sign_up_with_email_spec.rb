@@ -9,7 +9,7 @@ RSpec.feature "user signs up for census" do
     fill_in 'Last name', with: 'Casimir'
     fill_in 'Email', with: ENV['JESSE_EMAIL']
 
-    click_button 'Submit'
+    click_button 'Send confirmation'
 
     expect(page).to have_content("A confirmation email has been sent to #{ENV['JESSE_EMAIL']}.")
   end
