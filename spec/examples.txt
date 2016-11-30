@@ -1,7 +1,7 @@
 example_id                                              | status | run_time        |
 ------------------------------------------------------- | ------ | --------------- |
-./spec/features/visitor/sign_up_with_email_spec.rb[1:1] | failed | 0.27771 seconds |
-./spec/models/user_spec.rb[1:1]                         | passed | 0.0027 seconds  |
-./spec/models/user_spec.rb[1:2]                         | passed | 0.02524 seconds |
-./spec/models/user_spec.rb[1:3]                         | passed | 0.00231 seconds |
-./spec/models/user_spec.rb[1:4]                         | failed | 0.00137 seconds |
+./spec/features/visitor/sign_up_with_email_spec.rb[1:1] | failed | 0.23106 seconds |
+./spec/models/user_spec.rb[1:1]                         | passed | 0.00242 seconds |
+./spec/models/user_spec.rb[1:2]                         | passed | 0.00248 seconds |
+./spec/models/user_spec.rb[1:3]                         | passed | 0.02548 seconds |
+./spec/models/user_spec.rb[1:4]                         | passed | 0.00509 seconds |
