@@ -10,4 +10,6 @@ class User < ApplicationRecord
           email:      user_params["email"],
           token:      token)
   end
+
+  # add token private method.
 end

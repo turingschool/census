@@ -1,4 +1,4 @@
-class InitializeController < ApplicationController
+class ConfirmationsController < ApplicationController
   def new
     @user = User.new
   end
@@ -7,7 +7,6 @@ class InitializeController < ApplicationController
     @user = User.start_to_create(user_params)
     if @user.save!
       # send email - user.send_confirmation
-      render :confirmation_sent
     else
       # need to test for sad path
     end
