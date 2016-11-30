@@ -13,6 +13,10 @@ gem 'figaro'
 
 # Produciton debugging
 gem 'rails_12factor', group: :production
+
+# Devise
+gem 'devise'
+
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'pry'
