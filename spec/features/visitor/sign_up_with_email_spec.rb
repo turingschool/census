@@ -1,12 +1,3 @@
-# As a visitor,
-# When I visit the app
-# I see a form
-# And I enter my name
-# And I enter my email
-# And I click 'send confirmation'
-#
-# Then I see a confirmation message
-# And I receive an email with a confirmation link.
 require 'rails_helper'
 
 RSpec.feature "user signs up for census" do
