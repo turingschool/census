@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "user signs up for census" do
   scenario "by initiating email confirmation" do
-    visit new_confirmations_path
+    visit new_users_path
     expect(page).to have_css('form')
 
     fill_in 'First name', with: 'Jeff'

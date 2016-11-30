@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  resource 'confirmations', only: [:new, :create]
+  resource 'users', only: [:new, :create, :update, :edit, :show]
 end
