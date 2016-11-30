@@ -19,3 +19,6 @@ coverage
 
 # Ignore spec examples
 /spec/example.txt
+
+# Ignore application configuration
+/config/application.yml
