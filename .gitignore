@@ -16,3 +16,6 @@
 # Ignore Byebug command history file.
 .byebug_history
 coverage
+
+# Ignore spec examples
+/spec/example.txt
