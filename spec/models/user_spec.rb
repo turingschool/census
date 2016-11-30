@@ -13,5 +13,8 @@ RSpec.describe User, type: :model do
     user = User.start_to_create(user_params)
 
     expect(user).to eq(true)
+    expect(User.first.first_name).to eq("Jeff")
+    expect(User.first.last_name).to eq("Casimir")
+    expect(User.first.email).to eq(ENV["JESSE_EMAIL"])
   end
 end
