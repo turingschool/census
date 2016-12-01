@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  resource 'confirmations', only: [:new, :create]
+  root to: 'home#index'
 end
