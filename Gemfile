@@ -9,6 +9,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'rails_12factor', group: :production
 gem 'figaro'
+gem 'devise'
 
 group :development, :test do
   gem 'byebug', platform: :mri
