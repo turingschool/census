@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'User signs up' do
+RSpec.feature 'User signs up' do
   scenario 'by completing minimum registration' do
     visit root_path
     click_link 'Login'
