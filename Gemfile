@@ -14,7 +14,7 @@ gem 'doorkeeper'
 
 group :development, :test do
   gem 'byebug', platform: :mri
-  gem 'pry'
+  gem 'pry-rails'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'launchy'
