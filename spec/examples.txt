@@ -1,4 +1,5 @@
-example_id                                                     | status  | run_time        |
--------------------------------------------------------------- | ------- | --------------- |
-./spec/acceptance/user_completes_min_registration_spec.rb[1:1] | passed  | 0.90341 seconds |
-./spec/models/user_spec.rb[1:1]                                | pending | 0.00002 seconds |
+example_id                                                     | status | run_time        |
+-------------------------------------------------------------- | ------ | --------------- |
+./spec/acceptance/user_completes_min_registration_spec.rb[1:1] | passed | 0.79742 seconds |
+./spec/models/user_spec.rb[1:1]                                | passed | 0.53631 seconds |
+./spec/models/user_spec.rb[1:2]                                | passed | 0.00419 seconds |
