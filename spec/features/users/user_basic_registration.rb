@@ -14,8 +14,6 @@ RSpec.feature 'User signs up' do
 
     help_message = 'A message with a confirmation link has been sent to your email address. Please follow the link to activate your account.'
 
-    save_and_open_page
-
     expect(page).to have_content(help_message)
     expect(User.count).to eq(1)
     expect(User.last.first_name).to eq('Jeff')
