@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.feature 'User signs up' do
   scenario 'by completing minimum registration' do
     visit root_path
-    click_link 'Login'
     click_link 'Sign up'
     fill_in 'First name', with: 'Jeff'
     fill_in 'Last name', with: 'Casimir'
