@@ -7,8 +7,14 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
+
+# Production debugging
 gem 'rails_12factor', group: :production
+
+# Store environment variables on test/development securely
 gem 'figaro'
+
+# User authentication/authorization
 gem 'devise'
 gem 'doorkeeper'
 
@@ -21,6 +27,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
+  gem 'faker'
   gem 'simplecov', require: false
 
 end

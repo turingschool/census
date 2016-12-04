@@ -1,5 +1,8 @@
-example_id                                                                 | status  | run_time        |
--------------------------------------------------------------------------- | ------- | --------------- |
-./spec/acceptance/user_completes_min_registration_spec.rb[1:1]             | passed  | 0.51201 seconds |
-./spec/features/logged_in_user_registers_new_client_oauth_app_spec.rb[1:1] | passed  | 0.34808 seconds |
-./spec/models/user_spec.rb[1:1]                                            | pending | 0.00002 seconds |
+example_id                                                                 | status | run_time        |
+-------------------------------------------------------------------------- | ------ | --------------- |
+./spec/acceptance/user_completes_min_registration_spec.rb[1:1]             | passed | 1.17 seconds    |
+./spec/features/logged_in_user_registers_new_client_oauth_app_spec.rb[1:1] | passed | 0.10125 seconds |
+./spec/features/users/user_basic_registration_spec.rb[1:1]                 | passed | 0.14583 seconds |
+./spec/features/users/user_basic_registration_spec.rb[1:2]                 | passed | 0.11718 seconds |
+./spec/models/user_spec.rb[1:1]                                            | passed | 0.00413 seconds |
+./spec/models/user_spec.rb[1:2]                                            | passed | 0.00421 seconds |
