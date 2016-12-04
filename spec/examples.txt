@@ -1,7 +1,8 @@
 example_id                                                     | status | run_time        |
 -------------------------------------------------------------- | ------ | --------------- |
-./spec/acceptance/user_completes_min_registration_spec.rb[1:1] | passed | 1.08 seconds    |
-./spec/features/users/user_basic_registration_spec.rb[1:1]     | passed | 0.1252 seconds  |
-./spec/features/users/user_basic_registration_spec.rb[1:2]     | passed | 0.09425 seconds |
-./spec/models/user_spec.rb[1:1]                                | passed | 0.00317 seconds |
-./spec/models/user_spec.rb[1:2]                                | passed | 0.00464 seconds |
+./spec/acceptance/user_completes_min_registration_spec.rb[1:1] | passed | 0.10368 seconds |
+./spec/acceptance/user_views_account_info_spec.rb[1:1]         | failed | 0.37755 seconds |
+./spec/features/users/user_basic_registration_spec.rb[1:1]     | passed | 0.11348 seconds |
+./spec/features/users/user_basic_registration_spec.rb[1:2]     | passed | 0.08486 seconds |
+./spec/models/user_spec.rb[1:1]                                | passed | 0.00303 seconds |
+./spec/models/user_spec.rb[1:2]                                | passed | 0.34454 seconds |
