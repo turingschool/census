@@ -17,6 +17,9 @@ gem 'figaro'
 # User authentication/authorization
 gem 'devise'
 
+# Styling
+gem 'bootstrap-sass'
+
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'pry'
