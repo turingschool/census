@@ -1,0 +1,6 @@
+<ul>
+  <li><%= link_to 'Login', new_user_session_path %></li>
+  <% if current_user %>
+    <li><%= link_to 'Account Info', user_path(current_user) %></li>
+  <% end %>
+</ul>

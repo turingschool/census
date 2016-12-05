@@ -9,14 +9,8 @@
   </head>
 
   <body>
-    <% flash.each do |key, value| %>
-      <div class="alert alert <%= key %>">
-        <%= value %>
-      </div>
-    <% end %>
-
-    <%= link_to 'Login', new_user_session_path %>
-
+    <%= render '/shared/flash' %>
+    <%= render '/shared/navbar' %>
     <%= yield %>
   </body>
 </html>

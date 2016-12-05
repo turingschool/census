@@ -4,7 +4,7 @@ FactoryGirl.define do
     last_name { Faker::Name.last_name }
     email { Faker::Internet.email }
     password "password"
-    password_confirmation "password"
+    confirmed_at DateTime.new()
   end
 
   def password

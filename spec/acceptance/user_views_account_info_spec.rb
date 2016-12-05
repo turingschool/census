@@ -4,10 +4,14 @@ RSpec.feature 'User views account info' do
   scenario 'by visiting user show page' do
     user = create(:user)
     visit root_path
+
     click_link 'Login'
     fill_in 'Email', with: user.email
     fill_in 'Password', with: user.password
-    click_button 'Login'
+    click_button 'Log in'
+
+    # allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
     click_link 'Account Info'
 
     expect(page).to have_content("Account Profile")
