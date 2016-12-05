@@ -10,8 +10,6 @@ RSpec.feature 'User views account info' do
     fill_in 'Password', with: user.password
     click_button 'Log in'
 
-    # allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
-
     click_link 'Account Info'
 
     expect(page).to have_content("Account Profile")
