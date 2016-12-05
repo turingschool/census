@@ -16,6 +16,7 @@ gem 'figaro'
 
 # User authentication/authorization
 gem 'devise'
+gem 'doorkeeper'
 
 group :development, :test do
   gem 'byebug', platform: :mri
