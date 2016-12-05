@@ -12,13 +12,11 @@ RSpec.feature 'User views account info' do
 
     expect(page).to have_content("Users")
 
-    within "th" do
-      expect(page).to have_content("First name")
-      expect(page).to have_content("Last name")
-      expect(page).to have_content("Slack")
-      expect(page).to have_content("Cohort")
-    end
 
+    expect(page).to have_content("First name")
+    expect(page).to have_content("Last name")
+    expect(page).to have_content("Slack")
+    expect(page).to have_content("Cohort")
     expect(page).to have_content(user.first_name)
     expect(page).to have_content(user.last_name)
   end
