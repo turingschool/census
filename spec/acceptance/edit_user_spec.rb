@@ -34,7 +34,9 @@ RSpec.feature 'Edit all user attributes' do
     fill_in "GitHub", with: new_attributes[:git_hub]
     click_button "Update"
 
-    expect(current_path).to eq(user_path(user))
+    expect(current_path).to eq(user_path)
+    click_link "#{new_attributes[:first_name]} #{new_attributes[:last_name]}"
+
     expect(page).to have_content(new_attributes[:first_name])
     expect(page).to have_content(new_attributes[:last_name])
     expect(page).to have_content(new_attributes[:email])
