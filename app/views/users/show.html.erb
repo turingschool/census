@@ -1,0 +1,13 @@
+<h2>Account Profile</h2>
+<table>
+  <%= render 'shared/account_profile_row.html.erb',
+      header: "First name",
+      data: current_user.first_name %>
+  <%= render 'shared/account_profile_row.html.erb',
+      header: "Last name",
+      data: current_user.last_name %>
+  <%= render 'shared/account_profile_row.html.erb',
+      header: "Email",
+      data: current_user.email %>
+</table>
+<%= link_to "Edit profile" %>

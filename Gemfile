@@ -16,6 +16,7 @@ gem 'figaro'
 
 # User authentication/authorization
 gem 'devise'
+gem 'doorkeeper'
 
 # Styling
 gem 'bootstrap-sass'
