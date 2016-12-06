@@ -6,8 +6,4 @@ FactoryGirl.define do
     password "password"
     confirmed_at DateTime.new()
   end
-
-  def password
-    Faker::Internet.password(8)
-  end
 end
