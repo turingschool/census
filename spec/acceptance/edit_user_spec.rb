@@ -22,16 +22,17 @@ RSpec.feature 'Edit all user attributes' do
                        git_hub: "not_joe_git" }
 
     login(user)
-    visit edit_user_path
+    click_link "Account Info"
+    click_link "Edit profile"
     fill_in "First name", with: new_attributes[:first_name]
     fill_in "Last name", with: new_attributes[:last_name]
-    fill_in "email", with: new_attributes[:email]
-    fill_in "slack", with: new_attributes[:slack]
-    find("option[value=#{new_attributes[:cohort]}]").select_option
-    fill_in "twitter", with: new_attributes[:twitter]
-    fill_in "linked_in", with: new_attributes[:linked_in]
-    fill_in "git_hub", with: new_attributes[:git_hub]
-    click_button "Submit"
+    fill_in "Email", with: new_attributes[:email]
+    fill_in "Slack", with: new_attributes[:slack]
+    find("option[value='#{new_attributes[:cohort]}']").select_option
+    fill_in "Twitter", with: new_attributes[:twitter]
+    fill_in "LinkedIn", with: new_attributes[:linked_in]
+    fill_in "GitHub", with: new_attributes[:git_hub]
+    click_button "Update"
 
     expect(current_path).to eq(user_path(user))
     expect(page).to have_content(new_attributes[:first_name])
