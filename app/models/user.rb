@@ -7,7 +7,8 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
 
-  has_many :affiliations
+  has_many :affiliations, dependent: :destroy
+  has_many :groups, through: :affiliations
 
   def full_name
     "#{first_name} #{last_name}"
