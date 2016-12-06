@@ -1,6 +1,12 @@
 class UsersController < ApplicationController
   def index
-    @users = User.all;
+    if params[:cohort]
+      @users = User.where(cohort: params[:cohort])
+      @header = "Cohort: #{params[:cohort]}"
+    else
+      @users = User.all;
+      @header = "Users"
+    end
   end
 
   def show
