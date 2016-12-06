@@ -1,0 +1,5 @@
+<%= form_for @affiliations do |f| %>
+  <div class="field">
+    <%= f.collection_check_boxes :group_ids, Group.all, :id, :name_with_initial %>
+  </div>
+<% end %>
