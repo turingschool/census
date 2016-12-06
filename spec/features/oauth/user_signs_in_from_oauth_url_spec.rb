@@ -26,6 +26,8 @@ RSpec.describe 'OAuth Access Grant' do
     #Then I should see the client app;ication's information
     expect(page).to have_content 'Test App'
     #And I should see an option to grant access
+    expect(page).to have_button 'Authorize'
     #And I should see an option to deny access
+    expect(page).to have_button 'Deny'
   end
 end
