@@ -3,7 +3,12 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <%= render 'registration_fields', f: f %>
+  <%= render 'shared/registration_fields', f: f %>
+
+  <div class="field">
+    <%= check_box("Armstrong", "Armstrong", id: "armstrong") %>
+    <%= label_tag "Armstrong" %>
+  </div>
 
   <div class="field">
     <%= f.label :password %>
