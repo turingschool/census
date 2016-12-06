@@ -3,45 +3,7 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %><br />
-  </div>
-
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %><br />
-  </div>
-``
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email %><br />
-  </div>
-
-  <div class="field">
-    <%= f.label :twitter %><br />
-    <%= f.text_field :twitter %><br />
-  </div>
-
-  <div class="field">
-    <%= f.label :linked_in, "LinkedIn" %><br />
-    <%= f.text_field :linked_in %><br />
-  </div>
-
-  <div class="field">
-    <%= f.label :git_hub, "GitHub" %><br />
-    <%= f.text_field :git_hub %><br />
-  </div>
-
-  <div class="field">
-    <%= f.label :slack %><br />
-    <%= f.text_field :slack %><br />
-  </div>
-
-  <div class="field">
-    <%= f.label :cohort %><br />
-    <%= f.select :cohort, options_for_select([["Select One", ""], "1606", "1608", "1610", "1611"]) %>
-  </div>
+  <%= render 'shared/registration_fields', f: f %>
 
   <div class="field">
     <%= check_box("Armstrong", "Armstrong", id: "armstrong") %>

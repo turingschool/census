@@ -2,12 +2,11 @@
 <%= render 'cohort_dropdown' %>
 <table class="table">
   <tr>
-    <th>First name</th>
-    <th>Last name</th>
+    <th>Name</th>
     <th>Slack</th>
     <th>Cohort</th>
   </tr>
   <% @users.each do |user| %>
-    <%= render 'shared/user_row', user: user %>
+    <%= render 'user_row', user: user %>
   <% end %>
 </table>

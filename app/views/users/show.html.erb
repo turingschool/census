@@ -1,13 +1,28 @@
 <h2>Account Profile</h2>
 <table>
-  <%= render 'shared/account_profile_row.html.erb',
+  <%= render 'account_profile_row',
       header: "First name",
       data: current_user.first_name %>
-  <%= render 'shared/account_profile_row.html.erb',
+  <%= render 'account_profile_row',
       header: "Last name",
       data: current_user.last_name %>
-  <%= render 'shared/account_profile_row.html.erb',
+  <%= render 'account_profile_row',
       header: "Email",
       data: current_user.email %>
+  <%= render 'account_profile_row',
+      header: "Slack",
+      data: current_user.slack %>
+  <%= render 'account_profile_row',
+      header: "Cohort",
+      data: current_user.cohort %>
+  <%= render 'account_profile_row',
+      header: "Twitter",
+      data: current_user.twitter %>
+  <%= render 'account_profile_row',
+      header: "LinkedIn",
+      data: current_user.linked_in %>
+  <%= render 'account_profile_row',
+      header: "GitHub",
+      data: current_user.git_hub %>
 </table>
-<%= link_to "Edit profile" %>
+<%= link_to "Edit profile", edit_user_path(current_user) %>
