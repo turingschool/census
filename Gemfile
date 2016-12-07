@@ -32,7 +32,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'simplecov', require: false
-
+  gem 'oauth2'
 end
 
 group :development do
