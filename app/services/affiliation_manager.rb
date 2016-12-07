@@ -29,11 +29,10 @@ class AffiliationManager
     end
   end
 
-  def affiliations_to_destroy
-    unchecked_affiliations.reject { |affiliation| affiliation == nil }
-  end
-
   def destroy_affiliations_from_unchecked_groups
-
+    unchecked_groups.each do |group|
+      affiliation = Affiliation.find_by(group: group, user: user)
+      affiliation.destroy if affiliation
+    end
   end
 end

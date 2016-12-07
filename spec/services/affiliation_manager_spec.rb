@@ -56,6 +56,24 @@ RSpec.describe AffiliationManager do
     group_ids = ["", group_to_add.id]
     manager = AffiliationManager.new(group_ids, user)
 
-    manager.unchecked_affiliations
+    affiliations = manager.unchecked_affiliations
+
+    expect(affiliations.count).to eq(1)
+    expect(affiliations.first.group).to eq(group_to_remove)
+  end
+
+  it "can removes destroy unchecked affiliations" do
+    group_1 = create(:group)
+    group_2 = create(:group)
+    group_3 = create(:group)
+    user = create(:user)
+    create(:affiliation, group: group_1, user: user)
+    group_ids = ["", group_2.id, ""]
+
+    manager = AffiliationManager.new(group_ids, user)
+
+    manager.destroy_affiliations_from_unchecked_groups
+
+    expect(user.affiliations.count).to eq(0)
   end
 end
