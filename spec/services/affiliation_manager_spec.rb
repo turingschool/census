@@ -41,7 +41,7 @@ RSpec.describe AffiliationManager do
     group_ids = ["", checked_group.id]
     manager = AffiliationManager.new(group_ids, user)
 
-    manager.create_affiliations
+    manager.create_affiliations_from_checked_groups
     affiliations = user.affiliations
 
     expect(affiliations.count).to eq(1)
@@ -75,5 +75,20 @@ RSpec.describe AffiliationManager do
     manager.destroy_affiliations_from_unchecked_groups
 
     expect(user.affiliations.count).to eq(0)
+  end
+
+  it "will create checked affiliations and destroy unchecked affiliations" do
+    group_1 = create(:group)
+    group_2 = create(:group)
+    group_3 = create(:group)
+    user = create(:user)
+    create(:affiliation, group: group_1, user: user)
+    group_ids = ["", group_2.id, group_3.id]
+
+    AffiliationManager.new(group_ids, user).run
+
+    user.affiliations.each do |affiliation|
+      expect([group_2, group_3]).to include(affiliation.group)
+    end
   end
 end
