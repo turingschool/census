@@ -1,7 +1,8 @@
 class AffiliationManager
-  attr_reader :group_ids
-  def initialize(group_ids)
+  attr_reader :group_ids, :user
+  def initialize(group_ids, user)
     @group_ids = group_ids
+    @user = user
   end
 
   def clean_groups
@@ -16,7 +17,7 @@ class AffiliationManager
     Group.all.reject { |group| checked_groups.include?(group) }
   end
 
-  def create_affiliations(user)
+  def create_affiliations
     checked_groups.each do |group|
       Affiliation.find_or_create_by(group: group, user: user)
     end
@@ -24,7 +25,7 @@ class AffiliationManager
 
   def unchecked_affiliations
     unchecked_groups.map do |group|
-      Affiliation.find_by(group: group, user: current_user)
+      Affiliation.find_by(group: group, user: user)
     end
   end
 
