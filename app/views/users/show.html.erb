@@ -25,4 +25,7 @@
       header: "GitHub",
       data: current_user.git_hub %>
 </table>
+
+<%= render 'affiliations' %>
+<%= link_to "Edit affiliations", new_affiliation_path %>
 <%= link_to "Edit profile", edit_user_path(current_user) %>
