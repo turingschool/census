@@ -48,20 +48,6 @@ RSpec.describe AffiliationManager do
     expect(affiliations.first.group).to eq(checked_group)
   end
 
-  it "can find affiliations that need to be deleted" do
-    affiliation = create(:affiliation)
-    user = affiliation.user
-    group_to_remove = affiliation.group
-    group_to_add = create(:group)
-    group_ids = ["", group_to_add.id]
-    manager = AffiliationManager.new(group_ids, user)
-
-    affiliations = manager.unchecked_affiliations
-
-    expect(affiliations.count).to eq(1)
-    expect(affiliations.first.group).to eq(group_to_remove)
-  end
-
   it "can removes destroy unchecked affiliations" do
     group_1 = create(:group)
     group_2 = create(:group)

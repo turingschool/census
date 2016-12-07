@@ -23,12 +23,6 @@ class AffiliationManager
     end
   end
 
-  def unchecked_affiliations
-    unchecked_groups.map do |group|
-      Affiliation.find_by(group: group, user: user)
-    end
-  end
-
   def destroy_affiliations_from_unchecked_groups
     unchecked_groups.each do |group|
       affiliation = Affiliation.find_by(group: group, user: user)
