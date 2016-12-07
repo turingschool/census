@@ -1,5 +1,10 @@
-<%= form_for @affiliations do |f| %>
-  <div class="field">
-    <%= f.collection_check_boxes :group_ids, Group.all, :id, :name_with_initial %>
-  </div>
+<%= form_tag affiliations_path method: "post" do |f| %>
+  <%= hidden_field_tag "user[group_ids][]", nil %>
+  <% Group.all.each do |group| %>
+    <div class="field">
+      <%= check_box_tag group.id, group.id, @user.groups.include?(group), :name => 'user[group_ids][]' %>
+      <%= label_tag group.id, group.name %>
+    </div>
+  <% end %>
+  <%= submit_tag %>
 <% end %>

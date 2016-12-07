@@ -1,0 +1,7 @@
+<div class="container" id="affiliations">
+  <ul>
+    <% current_user.groups.each do |group| %>
+      <li><%= group.name %></li>
+    <% end %>
+  </ul>
+</div>
