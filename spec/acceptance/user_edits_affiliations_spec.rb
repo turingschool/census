@@ -10,8 +10,8 @@ RSpec.feature 'User edits affiliations' do
 
     click_link "Account Info"
     click_link "Edit affiliations"
-    find("#1").set(false)
-    find("#2").set(true)
+    find("##{original_group.id}").set(false)
+    find("##{new_group.id}").set(true)
     click_button "Save changes"
 
     expect(current_path).to eq(user_path(user))
