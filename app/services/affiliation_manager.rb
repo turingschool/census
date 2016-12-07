@@ -16,9 +16,9 @@ class AffiliationManager
     Group.all.reject { |group| checked_groups.include?(group) }
   end
 
-  def create_affiliations_from_checked_groups
+  def create_affiliations(user)
     checked_groups.each do |group|
-      Affiliation.find_or_create_by(group: group, user: current_user)
+      Affiliation.find_or_create_by(group: group, user: user)
     end
   end
 
