@@ -4,4 +4,11 @@ Rails.application.routes.draw do
   root to: 'home#index'
   resources :users, only: [:index, :show, :edit, :update]
   resources :affiliations, only: [:new, :create]
+
+  namespace :api do
+    namespace :v1 do
+      get '/user', to: 'credentials#show'
+    end
+  end
+
 end
