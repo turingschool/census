@@ -1,4 +1,6 @@
-# README
+# Census - A Turing School of Software & Design Application
+
+[![security](https://hakiri.io/github/bcgoss/census/master.svg)](https://hakiri.io/github/bcgoss/census/master)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
