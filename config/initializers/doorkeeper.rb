@@ -7,7 +7,12 @@ Doorkeeper.configure do
     # fail "Please configure doorkeeper resource_owner_authenticator block located in #{__FILE__}"
     # Put your resource owner authentication logic here.
     # Example implementation:
-    current_user || redirect_to(new_user_session_url)
+
+
+    # current_user || redirect_to(new_user_session_url)
+
+
+
   end
 
   # If you want to restrict access to the web interface for adding oauth authorized applications, you need to declare the block below.
@@ -36,7 +41,7 @@ Doorkeeper.configure do
   # The controller Doorkeeper::ApplicationController inherits from.
   # Defaults to ActionController::Base.
   # https://github.com/doorkeeper-gem/doorkeeper#custom-base-controller
-  # base_controller 'ApplicationController'
+  base_controller 'ApplicationController'
 
   # Reuse access token for the same resource owner within an application (disabled by default)
   # Rationale: https://github.com/doorkeeper-gem/doorkeeper/issues/383

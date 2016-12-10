@@ -1,0 +1,28 @@
+require 'rails_helper'
+
+RSpec.describe "OAuth flow from client app" do
+  scenario "redirects back to client app affter successful login" do
+    application = create(:oauth_application)
+    # oauth = {
+    #   client_id: application.uid,
+    #   redirect_uri: application.redirect_uri,
+    #   response_type: "code"
+    # }
+
+    # allow_any_instance_of(ApplicationController).to receive("request.env['omniauth.origin']").and_return(true)
+
+    user = create(:user)
+    # visit oauth_authorization_path(oauth)
+    visit "/oauth/applications?client_id=#{application.uid}&redirect_uri=#{application.redirect_uri}&response_type=code"
+    fill_in "Email", with: user.email
+    fill_in "Password", with: user.password
+    click_button "Log in"
+
+    expect(current_path).to eq(oauth_authorization_path)
+    click_button "Authorize"
+
+    expect(current_path).to eq(application.redirect_uri)
+  end
+
+
+end
