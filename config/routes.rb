@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      get '/me', to: 'credentials#show'
+      get '/user', to: 'credentials#show'
     end
   end
 

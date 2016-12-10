@@ -4,7 +4,8 @@ module Api::V1
     respond_to    :json
 
     def show
-      respond_with current_resource_owner
+      # "hello world!"
+      render json: current_resource_owner
     end
   end
 end
