@@ -28,5 +28,15 @@ RSpec.describe "OAuth flow from client app" do
     # expect(current_path).to eq(application.redirect_uri)
   end
 
+  scenario "renders 404 if the client app is not recognized" do
+    user = create(:user)
+
+    visit oauth_authorization_path( client_id: "fake_id",
+                                    redirect_uri: "fake_url",
+                                    response_type: "code")
+
+    expect(status_code).to eq(403)
+  end
+
 
 end

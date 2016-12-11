@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   # before_filter :store_current_location, :unless => :devise_controller?
-  before_action :store_current_location, if: :request_from_client?
+  before_action :check_authenticity, if: :request_from_client?
   #
   def request_from_client?
     !params[:client_id].nil? # and it is a valid id
@@ -11,12 +11,20 @@ class ApplicationController < ActionController::Base
     # and if so, delete it.
   end
 
+  def check_authenticity
+    if authentic_client_id?
+      store_current_location
+    else
+      head :forbidden
+    end
+  end
+
   def store_current_location
-    # store the redirect uri in the curren session
     session[:return_path] = request.fullpath
-    # overide the default devise sessions controller behaviour
-    # to redirect to the redirect uri
-    # if it exists in the sessions controller
+  end
+
+  def authentic_client_id?
+    Doorkeeper::Application.by_uid(params[:client_id])
   end
 
  #  def after_sign_in_path_for(resource)
