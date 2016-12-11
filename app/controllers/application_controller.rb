@@ -13,15 +13,13 @@ class ApplicationController < ActionController::Base
 
   def store_current_location
     # store the redirect uri in the curren session
-    session[:hello_world] = true
-
+    session[:return_path] = request.fullpath
     # overide the default devise sessions controller behaviour
     # to redirect to the redirect uri
     # if it exists in the sessions controller
   end
 
  #  def after_sign_in_path_for(resource)
- #    byebug
  #    stored_location_for(resource) ||
  #    if resource.is_a?(User) && resource.can_publish?
  #       publisher_url
@@ -41,10 +39,4 @@ class ApplicationController < ActionController::Base
                                                         :slack,
                                                         :cohort ])
   end
-
-  private
-
-    def store_current_location
-      byebug
-    end
 end

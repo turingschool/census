@@ -9,7 +9,7 @@ Doorkeeper.configure do
     # Example implementation:
 
 
-    # current_user || redirect_to(new_user_session_url)
+    current_user || redirect_to(new_user_session_url)
 
 
 
