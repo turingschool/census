@@ -3,25 +3,32 @@
 [![security](https://hakiri.io/github/bcgoss/census/master.svg)](https://hakiri.io/github/bcgoss/census/master) [![Dependency Status](https://gemnasium.com/badges/github.com/bcgoss/census.svg)](https://gemnasium.com/github.com/bcgoss/census) [![Code Climate](https://codeclimate.com/github/bcgoss/census/badges/gpa.svg)](https://codeclimate.com/github/bcgoss/census) [![Test Coverage](https://codeclimate.com/github/bcgoss/census/badges/coverage.svg)](https://codeclimate.com/github/bcgoss/census/coverage)
 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+TODO: Write a project description
 
-Things you may want to cover:
+## Installation
 
-* Ruby version
+TODO: Describe the installation process
 
-* System dependencies
+## Usage
 
-* Configuration
+TODO: Write usage instructions
 
-* Database creation
+## Contributing
 
-* Database initialization
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request :D
 
-* How to run the test suite
+## History
 
-* Services (job queues, cache servers, search engines, etc.)
+TODO: Write history
 
-* Deployment instructions
+## Credits
 
-* ...
+TODO: Write credits
+
+## License
+
+TODO: Write license (possibly MIT?)
