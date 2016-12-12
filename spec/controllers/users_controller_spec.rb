@@ -26,4 +26,35 @@ RSpec.describe UsersController, type: :controller do
       expect(response.status).to eq(404)
     end
   end
+
+  context "Logged in user navigates to" do
+    before do
+      @user = create :user
+      sign_in @user
+    end
+
+    it "user#index, page is served successfully" do
+      get :index
+
+      expect(response.status).to eq(200)
+    end
+
+    it "user#show, page is served successfully" do
+      get :show, params: { id: @user.id }
+
+      expect(response.status).to eq(200)
+    end
+
+    it "user#edit, page is served successfully" do
+      get :edit, params: { id: @user.id }
+
+      expect(response.status).to eq(200)
+    end
+
+    it "user#update, page is served successfully" do
+      put :update, params: { id: @user.id, user: { first_name: "Ducky" }}
+
+      expect(response.status).to eq(302)
+    end
+  end
 end
