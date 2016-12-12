@@ -36,7 +36,7 @@ Doorkeeper.configure do
   # The controller Doorkeeper::ApplicationController inherits from.
   # Defaults to ActionController::Base.
   # https://github.com/doorkeeper-gem/doorkeeper#custom-base-controller
-  # base_controller 'ApplicationController'
+  base_controller 'DoorkeeperController'
 
   # Reuse access token for the same resource owner within an application (disabled by default)
   # Rationale: https://github.com/doorkeeper-gem/doorkeeper/issues/383
