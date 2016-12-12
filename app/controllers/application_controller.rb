@@ -13,7 +13,7 @@ CHECK PERMISSIONS
 Current User: #{!!current_user}
 Controller: #{params[:controller]}
 Action: #{params[:action]}
-**********" #unless RAILS_ENV == "production"
+**********" unless ENV["RAILS_ENV"] == "production"
       render file: "/public/404", status: 404, layout: false
     end
   end
