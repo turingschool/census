@@ -2,13 +2,16 @@ require 'rails_helper'
 
 RSpec.feature "Logged In User Registers New Client OAuth App", type: :feature do
   it "they get a client id and client secret" do
+    user = create :user
+    login(user)
+
     visit new_oauth_application_path
 
-    fill_in 'doorkeeper_application[name]', with: 'Thingy'
+    fill_in 'doorkeeper_application[name]', with: 'Monocle'
     fill_in 'doorkeeper_application[redirect_uri]', with: 'https://localhost:3000/auth/census/callback'
     click_on 'Submit'
 
-    expect(page).to have_content('Application: Thingy')
+    expect(page).to have_content('Application: Monocle')
     expect(page).to have_content('Application Id: ')
     expect(page).to have_content('Secret: ')
     expect(page).to have_content('Callback urls: https://localhost:3000/auth/census/callback')
