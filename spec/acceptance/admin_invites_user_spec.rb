@@ -8,7 +8,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Invitations' do
+RSpec.feature 'Invitations' do
   scenario 'are created when an admin user completes the invitation form' do
     admin = create :admin
     login(admin)
