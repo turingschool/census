@@ -1,7 +1,7 @@
 class CreateInvitations < ActiveRecord::Migration[5.0]
   def change
     create_table :invitations do |t|
-      t.string :status
+      t.integer :status, defualt: 0
       t.string :email
       t.string :invitation_code
       t.references :user, foreign_key: true
