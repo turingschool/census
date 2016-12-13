@@ -7,7 +7,9 @@ FactoryGirl.define do
     confirmed_at DateTime.new()
 
     factory :admin do
-      roles ["admin"]
+      after(:create) do | admin, _ |
+        create_list(:role, 1, name: "admin", users: [admin])
+      end
     end
   end
 end
