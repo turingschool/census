@@ -14,6 +14,7 @@ RSpec.feature 'Invitations' do
     login(admin)
 
     visit new_invitation_path
+    save_and_open_page
     fill_in 'Emails', with: 'email1@example.com, email2@example.com'
     select 'mentor', from: '#group-select'
     # find('#group-select').find("option[value='mentor']").select_option

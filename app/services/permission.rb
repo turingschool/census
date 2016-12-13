@@ -1,6 +1,8 @@
 class Permission
   def self.authorized?(user, controller, action)
-    if user
+    if user && user.roles.include?(Role.find_by(name: "admin"))
+      return true if controller == "invitations" && action.in?(%w(new))
+    elsif user
       return true if controller == "users" && action.in?(%w(index show edit update))
       return true if controller == "home" && action.in?(%w(index))
       return true if controller == "affiliations" && action.in?(%w(create new))
