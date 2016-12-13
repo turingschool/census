@@ -9,6 +9,9 @@ class User < ApplicationRecord
 
   has_many :affiliations, dependent: :destroy
   has_many :groups, through: :affiliations
+  has_many :user_roles, dependent: :destroy
+  has_many :roles, through: :user_roles
+
 
   def full_name
     "#{first_name} #{last_name}"
