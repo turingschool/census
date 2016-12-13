@@ -21,6 +21,9 @@ gem 'doorkeeper'
 # Styling
 gem 'bootstrap-sass'
 
+# Emailing
+gem 'mailcatcher'
+
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'pry-rails'

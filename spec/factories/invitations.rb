@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :invitation do
-    status "MyString"
-    email "MyString"
-    invitation_code "MyString"
+    status 0
+    email "me@example.com"
+    invitation_code nil
     user nil
   end
 end

@@ -4,10 +4,12 @@ class InvitationsController < ApplicationController
   end
 
   def create
-    invitation_params[:email].each do |email|
-      # Invitation.new
-      # send_email(email)
+    invitation_params[:email].split(", ").each do |email|
+      invitation = current_user.invitations.new(email: email, status: 0)
+      invitation.send! if invitation.save
+      # add sad path!
     end
+    redirect_to admin_dashboard_path
   end
 
   private
