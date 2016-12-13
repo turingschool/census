@@ -15,4 +15,8 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :admin do
+    get '/dashboard', to: 'dashboard#show', as: 'dashboard'
+  end
+
 end

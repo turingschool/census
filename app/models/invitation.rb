@@ -22,6 +22,7 @@ class Invitation < ApplicationRecord
   private
 
     def new_user_registration_url
+      # Needs to be updated for production
       "/users/sign_up"
     end
 

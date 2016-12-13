@@ -9,6 +9,7 @@ class InvitationsController < ApplicationController
       invitation.send! if invitation.save
       # add sad path!
     end
+    flash[:notice] = "Your emails are being sent. You will receive a confirmation once this process is complete."
     redirect_to admin_dashboard_path
   end
 
