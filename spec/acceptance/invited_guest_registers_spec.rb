@@ -25,17 +25,18 @@ RSpec.feature 'Invited user' do
     fill_in 'Last name', with: 'Casimir'
 
     expect { click_button 'Sign up'}.to change { User.count }.by(1)
-  
+    #
     user = User.last
-binding.pry
-    login(user)
-save_and_open_page
+    # user.password = 'password'
+
+    sign_in user
+# save_and_open_page
     visit user_path(user.id)
-binding.pry
-save_and_open_page
+# binding.pry
+# save_and_open_page
 
     expect(page).to have_content('Mentor')
-    
+
   end
 
   it 'cannot change the email' do
