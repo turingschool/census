@@ -4,5 +4,6 @@ FactoryGirl.define do
     email "me@example.com"
     invitation_code nil
     user nil
+    role
   end
 end

@@ -1,5 +1,6 @@
 class Invitation < ApplicationRecord
   belongs_to :user
+  belongs_to :role
   validates_uniqueness_of :email
   validates_presence_of :email
   validates_presence_of :status
@@ -12,7 +13,9 @@ class Invitation < ApplicationRecord
   end
 
   def create_invitation_code
-    Digest::SHA256.hexdigest part_1 + part_2
+    self.invitation_code = Digest::SHA256.hexdigest part_1 + part_2
+    save
+    invitation_code
   end
 
   def generate_url
