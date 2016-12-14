@@ -17,4 +17,8 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def list_roles
+    roles.map { |role| role.name }.join(', ')
+  end
 end

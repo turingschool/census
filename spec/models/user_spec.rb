@@ -12,4 +12,10 @@ RSpec.describe User, type: :model do
     user = create(:user)
     expect(user.full_name).to eq("#{user.first_name} #{user.last_name}")
   end
+
+  it "can report out its roles" do
+    user = create :user_with_roles
+
+    expect(user.list_roles).to eq("dummy_role, dummy_role")
+  end
 end
