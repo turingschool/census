@@ -26,12 +26,17 @@ cohort_1606 = [
 ]
 
 cohort_1606.each do |person|
-  User.create({
-    first_name: person.split.first,
-    last_name: person.split.last,
+  first_name = person.split.first
+  last_name = person.split.last
+  user = User.new({
+    first_name: first_name,
+    last_name: last_name,
     email: "#{first_name}.#{last_name}@example.com",
     image: "https://robohash.org/#{first_name}#{last_name}",
     password: "password1",
     confirmed_at: DateTime.new()
   })
+  if user.save
+    puts "Added #{user.first_name} #{user.last_name} to the Users table."
+  end
 end
