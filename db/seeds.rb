@@ -11,7 +11,7 @@ Doorkeeper::Application.create(name: "Monocle", redirect_uri: "http://localhost:
 cohort_1606 = [
   "Dan Broadbent",
   "Ryan Workman",
-  "Calaway",
+  "C Calaway",
   "Brian Heim",
   "Brendan Dillon",
   "Bryan Goss",
@@ -26,12 +26,11 @@ cohort_1606 = [
 ]
 
 cohort_1606.each do |person|
-  first_name = person.split[-2]
-  last_name = person.split.last
   User.create({
-    first_name: first_name,
-    last_name: last_name,
-    email: "#{first_name + '.' if first_name}#{last_name}@example.com",
+    first_name: person.split.first,
+    last_name: person.split.last,
+    email: "#{first_name}.#{last_name}@example.com",
+    image: "https://robohash.org/#{first_name}#{last_name}",
     password: "password1",
     confirmed_at: DateTime.new()
   })
