@@ -47,6 +47,7 @@ RSpec.describe InvitationManager do
     manager = InvitationManager.new(invitation_params, user)
 
     expect(manager.status).to eq(:error)
+    expect(manager.success?).to eq(false)
   end
 
   it "returns an error if no role" do
@@ -54,12 +55,14 @@ RSpec.describe InvitationManager do
     manager = InvitationManager.new(params, user)
 
     expect(manager.status).to eq(:error)
+    expect(manager.success?).to eq(false)
   end
 
   it "returns a notice if all invitations are created" do
     manager = InvitationManager.new(good_params, user)
 
     expect(manager.status).to eq(:notice)
+    expect(manager.success?).to eq(true)
   end
 
   it "adds a role to each invitation" do

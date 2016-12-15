@@ -19,6 +19,10 @@ class InvitationManager
     @role && @bad_emails.empty? ? :notice : :error
   end
 
+  def success?
+    status == :notice
+  end
+
   private
 
     def process_emails
