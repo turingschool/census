@@ -9,7 +9,7 @@ class Invitation < ApplicationRecord
 
   def send!
     InvitationMailer.invite(self).deliver_now
-    status = 1
+    self.mailed!
   end
 
   def create_invitation_code

@@ -1,4 +1,5 @@
 class InvitationsController < ApplicationController
+  before_action :invitation, only: [:destroy, :update]
   def new
     @invitation = Invitation.new
   end
@@ -13,6 +14,16 @@ class InvitationsController < ApplicationController
     redirect_to admin_dashboard_path
   end
 
+  def update
+    @invitation.send!
+    redirect_to admin_dashboard_path
+  end
+
+  def destroy
+    @invitation.destroy
+    redirect_to admin_dashboard_path
+  end
+
   private
     def invitation_params
       whitelist = params.require(:invitation).permit(:email)
@@ -20,4 +31,7 @@ class InvitationsController < ApplicationController
       return whitelist
     end
 
+    def invitation
+      @invitation ||= Invitation.find(params[:id])
+    end
 end
