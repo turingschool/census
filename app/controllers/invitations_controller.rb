@@ -30,18 +30,4 @@ class InvitationsController < ApplicationController
     def invitation
       @invitation ||= Invitation.find(params[:id])
     end
-
-    def error_message(emails, bad_emails)
-      "#{emails.count - bad_emails.count} out of #{emails.count} invites " + \
-      "sent. Error sending #{bad_emails.join(', ')}."
-    end
-
-    def invitation_includes_a_role?
-      !!params[:invitation][:role]
-    end
-
-    def go_back
-      flash[:error] = "Select a role."
-      redirect_to new_invitation_path(invitation: { emails: params[:invitation][:emails] })
-    end
 end
