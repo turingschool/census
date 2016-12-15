@@ -6,28 +6,12 @@ class InvitationsController < ApplicationController
 
   def create
     manager = InvitationManager.new(invitation_params, current_user)
-    # result = manager.create
-    # flash[result.status] = result.message
-    # redirect_to result.path
-
-
-    go_back unless invitation_includes_a_role?
-    emails = invitation_params[:email].split(", ")
-    bad_emails = []
-    emails.each do |email|
-      invitation = current_user.invitations.new(email: email, status: 0)
-      if invitation.save
-        invitation.send!
-      else
-        bad_emails << email
-      end
-    end
-    if bad_emails.empty?
-      flash[:notice] = "Your emails are being sent. You will receive a confirmation once this process is complete."
+    flash[manager.status] = manager.status_message
+    if manager.status == :notice
+      redirect_to admin_dashboard_path
     else
-      flash[:error] = error_message(emails, bad_emails)
+      redirect_to new_invitation_path
     end
-    redirect_to admin_dashboard_path
   end
 
   def update
