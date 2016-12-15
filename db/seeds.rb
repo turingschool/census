@@ -11,7 +11,7 @@ Doorkeeper::Application.create(name: "Monocle", redirect_uri: "http://localhost:
 cohort_1606 = [
   "Dan Broadbent",
   "Ryan Workman",
-  "C Calaway",
+  "Calaway Calaway",
   "Brian Heim",
   "Brendan Dillon",
   "Bryan Goss",
