@@ -1,15 +1,4 @@
 require 'rails_helper'
-#As an unregistered user
-#When I visit my unique registration link
-#I am taken to the registration form
-#And I see my email (non-editable)
-#And I fill in my password
-#And I click "Register"
-#Then I am taken to the user profile page
-#And I see my account information
-#And I see my group
-#And I receive a welcome to Census email
-
 
 RSpec.feature 'Invited user' do
   it 'registers an account' do
