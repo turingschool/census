@@ -7,11 +7,7 @@ class InvitationsController < ApplicationController
   def create
     manager = InvitationManager.new(invitation_params, current_user)
     flash[manager.status] = manager.status_message
-    if manager.status == :notice
-      redirect_to admin_dashboard_path
-    else
-      redirect_to new_invitation_path
-    end
+    redirect_to manager.success? ? admin_dashboard_path : new_invitation_path
   end
 
   def update
