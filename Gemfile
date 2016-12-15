@@ -7,6 +7,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
+gem 'paperclip'
+gem 'aws-sdk', '~> 2.3'
 
 # Production debugging
 gem 'rails_12factor', group: :production
