@@ -37,3 +37,8 @@
   <%= f.label :cohort %><br />
   <%= f.select :cohort, options_for_select([["Select One", ""], "1606", "1608", "1610", "1611"]) %>
 </div>
+
+<div class="field">
+  <%= f.label "Upload an Image" %>
+  <%= f.file_field :image %>
+</div>

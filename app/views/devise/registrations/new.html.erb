@@ -1,6 +1,6 @@
 <h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), multipart: true) do |f| %>
   <%= devise_error_messages! %>
 
   <%= render 'shared/registration_fields', f: f %>
