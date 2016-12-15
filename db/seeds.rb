@@ -31,6 +31,7 @@ cohort_1606.each do |person|
   user = User.new({
     first_name: first_name,
     last_name: last_name,
+    cohort: "1606"
     email: "#{first_name}.#{last_name}@example.com",
     image: "https://robohash.org/#{first_name}#{last_name}",
     password: "password1",
