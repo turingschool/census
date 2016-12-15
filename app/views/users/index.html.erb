@@ -1,12 +1,16 @@
-<h2><%= @header %></h2>
-<%= render 'cohort_dropdown' %>
-<table class="table">
-  <tr>
-    <th>Name</th>
-    <th>Slack</th>
-    <th>Cohort</th>
-  </tr>
-  <% @users.each do |user| %>
-    <%= render 'user_row', user: user %>
-  <% end %>
-</table>
+<div class="container"
+  <h2><%= @header %></h2>
+  <%= render 'cohort_dropdown' %>
+  <table class="table">
+    <thead class="thead-inverse">
+      <tr>
+        <th>Name</th>
+        <th>Slack</th>
+        <th>Cohort</th>
+      </tr>
+    </thead>
+      <% @users.each do |user| %>
+        <%= render 'user_row', user: user %>
+      <% end %>
+  </table>
+</div>
