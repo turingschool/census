@@ -7,13 +7,13 @@ class ApplicationController < ActionController::Base
 
   def authorize!
     unless Permission.authorized?(current_user, params[:controller], params[:action])
-# DEBUGGING ONLY
-# puts "**********
-# CHECK PERMISSIONS
-# Current User: #{!!current_user}
-# Controller: #{params[:controller]}
-# Action: #{params[:action]}
-# **********" unless ENV["RAILS_ENV"] == "production"
+#DEBUGGING ONLY
+puts "**********
+CHECK PERMISSIONS
+Current User: #{!!current_user}
+Controller: #{params[:controller]}
+Action: #{params[:action]}
+**********" unless ENV["RAILS_ENV"] == "production"
       render file: "/public/404", status: 404, layout: false
     end
   end

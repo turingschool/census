@@ -1,43 +1,60 @@
-<div class="field">
-  <%= f.label :first_name %><br />
-  <%= f.text_field :first_name %><br />
+<div class="form-group">
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, class: "form-control" %><br />
+  </div>
 </div>
 
-<div class="field">
-  <%= f.label :last_name %><br />
-  <%= f.text_field :last_name %><br />
+<div class="form-group">
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name, class: "form-control" %><br />
+  </div>
 </div>
 
-<div class="field">
-  <%= f.label :email %><br />
-  <% if invited? %>
-    <%= f.email_field :email, readonly: true %><br />
-  <% else %>
-    <%= f.email_field :email %><br />
-  <% end %>
+<div class="form-group">
+  <div class="field">
+    <%= f.label :email %><br />
+    <% if invited? %>
+      <%= f.email_field :email, readonly: true, class: 'form-control' %><br />
+    <% else %>
+      <%= f.email_field :email, class: 'form-control' %><br />
+    <% end %>
+  </div>
 </div>
 
-<div class="field">
-  <%= f.label :twitter %><br />
-  <%= f.text_field :twitter %><br />
+<div class="form-group">
+  <div class="field">
+    <%= f.label :twitter %><br />
+    <%= f.text_field :twitter, class: "form-control" %><br />
+  </div>
 </div>
 
-<div class="field">
-  <%= f.label :linked_in, "LinkedIn" %><br />
-  <%= f.text_field :linked_in %><br />
+<div class="form-group">
+  <div class="field">
+    <%= f.label :linked_in, "LinkedIn" %><br />
+    <%= f.text_field :linked_in, class: "form-control" %><br />
+  </div>
 </div>
 
-<div class="field">
-  <%= f.label :git_hub, "GitHub" %><br />
-  <%= f.text_field :git_hub %><br />
+<div class="form-group">
+  <div class="field">
+    <%= f.label :git_hub, "GitHub" %><br />
+    <%= f.text_field :git_hub, class: "form-control" %><br />
+  </div>
 </div>
 
-<div class="field">
-  <%= f.label :slack %><br />
-  <%= f.text_field :slack %><br />
+<div class="form-group">
+  <div class="field">
+    <%= f.label :slack %><br />
+    <%= f.text_field :slack, class: "form-control" %><br />
+  </div>
 </div>
 
-<div class="field">
-  <%= f.label :cohort %><br />
-  <%= f.select :cohort, options_for_select([["Select One", ""], "1606", "1608", "1610", "1611"]) %>
+<div class="form-group">
+  <div class="field">
+    <%= f.label :cohort %><br />
+    <!-- TODO figure out how to change this Rails tag into a bootstrap dropdown-select -->
+    <%= f.select :cohort, options_for_select([["Select One", ""], "1606", "1608", "1610", "1611"]) %>
+  </div>
 </div>
