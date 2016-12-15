@@ -22,10 +22,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     if valid_invitation_code?
-      @user= User.new(invited_user_params) 
+      @user= User.new(invited_user_params)
       @user.roles << invitation(session[:invitation_code]).role
       @user.skip_confirmation!
       if @user.save
+        session[:invitation_code] = nil
         redirect_to new_user_session_path
       else
         thing2
@@ -88,15 +89,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
     def invited_user_params
       params.require(:user).permit(
-        :email, 
-        :first_name, 
-        :last_name, 
-        :twitter, 
-        :linked_in, 
-        :git_hub, 
-        :slack, 
-        :cohort, 
-        :password, 
+        :email,
+        :first_name,
+        :last_name,
+        :twitter,
+        :linked_in,
+        :git_hub,
+        :slack,
+        :cohort,
+        :password,
         :password_confirmation
       )
     end

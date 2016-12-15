@@ -10,7 +10,11 @@
 
 <div class="field">
   <%= f.label :email %><br />
-  <%= f.email_field :email %><br />
+  <% if invited? %>
+    <%= f.email_field :email, readonly: true %><br />
+  <% else %>
+    <%= f.email_field :email %><br />
+  <% end %>
 </div>
 
 <div class="field">

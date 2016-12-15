@@ -17,14 +17,14 @@ RSpec.feature 'Invited user' do
     invite = create :invitation, role: role
     visit invite.generate_url
 
-    expect(find_field('Email').value).to eq('me@example.com')
-    
+    expect(find('#user_email').value).to eq('me@example.com')
+
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'password'
     fill_in 'First name', with: 'Jeff'
     fill_in 'Last name', with: 'Casimir'
 
-    expect { click_button 'Sign up'}.to change { User.count }.by(1)
+    expect { click_button 'Sign up' }.to change { User.count }.by(1)
 
     user = User.last
     sign_in user
@@ -34,7 +34,11 @@ RSpec.feature 'Invited user' do
   end
 
   it 'cannot change the email' do
+    role = create :role, name: 'Mentor'
+    invite = create :invitation, role: role
+    visit invite.generate_url
 
+    expect(find('#user_email').readonly?).to eq(true)
   end
 
   it 'cannot sign up if invitation code is not valid' do
