@@ -49,6 +49,14 @@ RSpec.feature 'Invited user' do
   end
 
   it 'sees the registration form again if details are missing' do
+    role = create :role, name: 'Mentor'
+    invite = create :invitation, role: role
+    visit invite.generate_url
 
+    fill_in 'Password', with: 'password'
+    fill_in 'Password confirmation', with: 'password'
+    fill_in 'First name', with: 'Jeff'
+    click_button 'Sign up'
+    expect(current_url).to eq(current_host + invite.generate_url)
   end
 end

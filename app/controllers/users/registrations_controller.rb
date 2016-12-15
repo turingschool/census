@@ -29,7 +29,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
         session[:invitation_code] = nil
         redirect_to new_user_session_path
       else
-        thing2
+        flash[:error] = @user.errors.full_messages.join(", ")
+        redirect_to new_user_registration_path(invite_code: session[:invitation_code])
       end
     else
       super
