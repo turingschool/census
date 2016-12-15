@@ -5,8 +5,7 @@ class InvitationsController < ApplicationController
   end
 
   def create
-
-    # manager = InvitationManager.new(invitation_params)
+    manager = InvitationManager.new(invitation_params, current_user)
     # result = manager.create
     # flash[result.status] = result.message
     # redirect_to result.path
