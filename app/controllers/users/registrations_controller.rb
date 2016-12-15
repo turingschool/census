@@ -12,7 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         session[:invitation_code] = invitation.invitation_code
         render :new
       else
-        super
+        render file: "/public/404", status: 404, layout: false
       end
     else
       super

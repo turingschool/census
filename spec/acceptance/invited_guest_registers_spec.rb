@@ -42,7 +42,10 @@ RSpec.feature 'Invited user' do
   end
 
   it 'cannot sign up if invitation code is not valid' do
+    invite = create :invitation
+    visit '/users/sign_up?invite_code=bad_code'
 
+    expect(page).to have_content("The page you were looking for doesn't exist.")
   end
 
   it 'sees the registration form again if details are missing' do
