@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 20161215002350) do
     t.string   "twitter"
     t.string   "linked_in"
     t.string   "git_hub"
+    t.string   "image"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
