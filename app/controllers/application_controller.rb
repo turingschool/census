@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   def authorize!
     unless Permission.authorized?(current_user, params[:controller], params[:action])
-# DEBUGGING ONLY
+#DEBUGGING ONLY
 puts "**********
 CHECK PERMISSIONS
 Current User: #{!!current_user}

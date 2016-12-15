@@ -9,8 +9,16 @@ class User < ApplicationRecord
 
   has_many :affiliations, dependent: :destroy
   has_many :groups, through: :affiliations
+  has_many :user_roles, dependent: :destroy
+  has_many :roles, through: :user_roles
+  has_many :invitations
+
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def list_roles
+    roles.map { |role| role.name }.join(', ')
   end
 end
