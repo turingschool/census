@@ -25,6 +25,7 @@ Action: #{params[:action]}
                                                         :linked_in,
                                                         :git_hub,
                                                         :slack,
-                                                        :cohort ])
+                                                        :cohort,
+                                                        :image ])
   end
 end
