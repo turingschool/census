@@ -3,13 +3,14 @@ class Invitation < ApplicationRecord
   belongs_to :role
   validates_uniqueness_of :email
   validates_presence_of :email
+  validates_format_of :email, :with => /@/
   validates_presence_of :status
 
   enum status: [:queued, :mailed, :accepted, :rescinded]
 
   def send!
     InvitationMailer.invite(self).deliver_now
-    status = 1
+    self.mailed!
   end
 
   def create_invitation_code
