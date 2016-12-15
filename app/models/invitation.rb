@@ -3,6 +3,7 @@ class Invitation < ApplicationRecord
   belongs_to :role
   validates_uniqueness_of :email
   validates_presence_of :email
+  validates_format_of :email, :with => /@/
   validates_presence_of :status
 
   enum status: [:queued, :mailed, :accepted, :rescinded]

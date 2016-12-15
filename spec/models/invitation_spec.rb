@@ -7,6 +7,11 @@ RSpec.describe Invitation, type: :model do
   it { should belong_to(:user) }
   it { should belong_to(:role) }
 
+  it "validates emails contain an @" do
+    invite = Invitation.new(email: "hello world!", status: 0)
+    expect(invite.save).to eq(false)
+  end
+
   it "queues an email to be sent" do
     invitation = create :invitation, status: 0
     invitation.send!
