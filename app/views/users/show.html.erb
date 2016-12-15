@@ -24,6 +24,9 @@
   <%= render 'account_profile_row',
       header: "GitHub",
       data: current_user.git_hub %>
+  <%= render 'account_profile_row',
+      header: "Roles",
+      data: current_user.list_roles %>
 </table>
 
 <%= render 'affiliations' %>

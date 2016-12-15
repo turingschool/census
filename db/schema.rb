@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161206170737) do
+ActiveRecord::Schema.define(version: 20161214220240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,18 @@ ActiveRecord::Schema.define(version: 20161206170737) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "invitations", force: :cascade do |t|
+    t.integer  "status"
+    t.string   "email"
+    t.string   "invitation_code"
+    t.integer  "user_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "role_id"
+    t.index ["role_id"], name: "index_invitations_on_role_id", using: :btree
+    t.index ["user_id"], name: "index_invitations_on_user_id", using: :btree
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|
@@ -68,6 +80,21 @@ ActiveRecord::Schema.define(version: 20161206170737) do
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_roles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_user_roles_on_role_id", using: :btree
+    t.index ["user_id"], name: "index_user_roles_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -99,6 +126,10 @@ ActiveRecord::Schema.define(version: 20161206170737) do
 
   add_foreign_key "affiliations", "groups"
   add_foreign_key "affiliations", "users"
+  add_foreign_key "invitations", "roles"
+  add_foreign_key "invitations", "users"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
+  add_foreign_key "user_roles", "roles"
+  add_foreign_key "user_roles", "users"
 end

@@ -1,0 +1,8 @@
+<h1>New Invitation</h1>
+<%= form_for @invitation do |f| %>
+  <%= f.label :email, "Emails" %>
+  <%= f.text_area :email, placeholder: "Comma separated list of email addresses" %>
+  <%= select_tag :group, options_for_select(["mentor"]), id: "group-select" %>
+  <%= label_tag :group %>
+  <%= f.submit "Invite" %>
+<% end %>
