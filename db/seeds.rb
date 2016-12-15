@@ -9,3 +9,11 @@
 Doorkeeper::Application.create(name: "Monocle", redirect_uri: "http://localhost:3001/auth/census/callback", scopes: '')
 
 User.create(first_name: "C", last_name: "Calaway", email: "c@calaway.cc", password: "password1", confirmed_at: DateTime.new())
+
+# Create some roles
+["applicant", "invited", "enrolled", "active student",
+ "on leave", "graduated", "exited", "removed", "mentor"].each do |role|
+   print "Creating role: '#{role}'... "
+   Role.find_or_create_by(name: role)
+   print "Role #{Role.last.id} has been created with name '#{Role.last.name}'\n\n"
+ end

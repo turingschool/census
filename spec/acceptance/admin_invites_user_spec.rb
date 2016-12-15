@@ -16,7 +16,6 @@ RSpec.feature 'Invitations' do
     visit new_invitation_path
     fill_in 'Emails', with: 'email1@example.com, email2@example.com'
     select 'mentor', from: 'group'
-    # find('#group-select').find("option[value='mentor']").select_option
     click_button "Invite"
 
     expect(current_path).to eq(admin_dashboard_path)
