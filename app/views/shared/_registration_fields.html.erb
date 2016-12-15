@@ -18,7 +18,7 @@
     <% if invited? %>
       <%= f.email_field :email, readonly: true, class: 'form-control' %><br />
     <% else %>
-      <%= f.email_field :email, 'form-control' %><br />
+      <%= f.email_field :email, class: 'form-control' %><br />
     <% end %>
   </div>
 </div>
