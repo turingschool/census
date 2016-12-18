@@ -145,7 +145,7 @@ GEM
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
     orm_adapter (0.5.0)
-    paperclip (5.1.0)
+    paperclip (5.0.0)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
       cocaine (~> 0.5.5)
@@ -276,7 +276,7 @@ DEPENDENCIES
   launchy
   listen (~> 3.0.5)
   oauth2
-  paperclip
+  paperclip (~> 5.0.0)
   pg (~> 0.18)
   pry-rails
   puma (~> 3.0)
