@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :groups, through: :affiliations
 
   # paperclip configuration
-  has_attached_file :image, default_url: "app/assets/images/:style/missing.png", styles: {
+  has_attached_file :image, default_url: "images/:style/missing.png", styles: {
     thumb: '100x100>',
     square: '200x200#',
     medium: '300x300>'
