@@ -12,12 +12,12 @@ RSpec.describe Api::V1::UsersController do
 
     expect(response_users.first["first_name"]).to eq(users.first["first_name"])
     expect(response_users.first["last_name"]).to eq(users.first["last_name"])
-    expect(response_users.first["email"]).to eq(users.first["email"])
-    expect(response_users.first["image"]).to eq(users.first["image"])
+    expect(response_users.first["cohort"]).to eq(users.first["cohort"])
+    expect(response_users.first["image_url"]).to eq(users.first.image.url)
 
     expect(response_users.last["first_name"]).to eq(users.last["first_name"])
     expect(response_users.last["last_name"]).to eq(users.last["last_name"])
-    expect(response_users.last["email"]).to eq(users.last["email"])
-    expect(response_users.last["image"]).to eq(users.last["image"])
+    expect(response_users.last["cohort"]).to eq(users.last["cohort"])
+    expect(response_users.last["image_url"]).to eq(users.last.image.url)
   end
 end
