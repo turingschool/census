@@ -30,6 +30,7 @@ class Permission
       return true if controller == "api/v1/users" && action.in?(%w(index))
     end
       print_warning(user, controller, action)
+      false
   end
 
   def print_warning(user, controller, action)
