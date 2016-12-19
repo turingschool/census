@@ -23,7 +23,6 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
-  config.include Devise::TestHelpers, type: :controller
   config.include Paperclip::Shoulda::Matchers
 end
 
