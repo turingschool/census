@@ -30,6 +30,18 @@ ActiveRecord::Schema.define(version: 20161215002350) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "invitations", force: :cascade do |t|
+    t.integer  "status"
+    t.string   "email"
+    t.string   "invitation_code"
+    t.integer  "user_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "role_id"
+    t.index ["role_id"], name: "index_invitations_on_role_id", using: :btree
+    t.index ["user_id"], name: "index_invitations_on_user_id", using: :btree
+  end
+
   create_table "oauth_access_grants", force: :cascade do |t|
     t.integer  "resource_owner_id", null: false
     t.integer  "application_id",    null: false
@@ -68,6 +80,21 @@ ActiveRecord::Schema.define(version: 20161215002350) do
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_roles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_user_roles_on_role_id", using: :btree
+    t.index ["user_id"], name: "index_user_roles_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -92,7 +119,6 @@ ActiveRecord::Schema.define(version: 20161215002350) do
     t.string   "twitter"
     t.string   "linked_in"
     t.string   "git_hub"
-    t.string   "image"
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
@@ -104,6 +130,10 @@ ActiveRecord::Schema.define(version: 20161215002350) do
 
   add_foreign_key "affiliations", "groups"
   add_foreign_key "affiliations", "users"
+  add_foreign_key "invitations", "roles"
+  add_foreign_key "invitations", "users"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
+  add_foreign_key "user_roles", "roles"
+  add_foreign_key "user_roles", "users"
 end
