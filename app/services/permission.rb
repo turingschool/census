@@ -9,7 +9,7 @@ class Permission
       return true if controller == "admin/dashboard" && action.in?(%w(show))
       return true if controller == 'users/sessions' && action.in?(%w(create destroy))
       return true if controller == 'home' && action.in?(%w(index))
-      return true if controller == 'users' && action.in?(%w(index))
+      return true if controller == 'users' && action.in?(%w(index show edit update))
     elsif user
       return true if controller == "users" && action.in?(%w(index show edit update))
       return true if controller == "home" && action.in?(%w(index))
