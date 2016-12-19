@@ -8,6 +8,12 @@ RSpec.describe User, type: :model do
   it { should have_many(:roles).through(:user_roles) }
   it { should have_many(:invitations) }
 
+  # testing paperclip
+  it { should have_attached_file(:image) }
+  it { should validate_attachment_content_type(:image).
+                allowing('image/png', 'image/gif', 'image/png').
+                rejecting('text/plain', 'text/xml') }
+
   it "has a full name" do
     user = create(:user)
     expect(user.full_name).to eq("#{user.first_name} #{user.last_name}")
