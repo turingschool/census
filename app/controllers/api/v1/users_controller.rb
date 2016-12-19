@@ -1,8 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   def index
-    users = User.all
-
-    users = users.map do |user|
+    users_data = User.all.map do |user|
       {
         "first_name"=>user.first_name,
         "last_name"=>user.last_name,
@@ -11,6 +9,6 @@ class Api::V1::UsersController < ApplicationController
       }
     end
 
-    render json: users
+    render json: users_data
   end
 end
