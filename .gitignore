@@ -22,3 +22,6 @@ coverage
 
 # Ignore application configuration
 /config/application.yml
+
+# Ignore images from AWS
+/public/system

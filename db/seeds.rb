@@ -8,7 +8,39 @@
 
 Doorkeeper::Application.create(name: "Monocle", redirect_uri: "http://localhost:3001/auth/census/callback", scopes: '')
 
-User.create(first_name: "C", last_name: "Calaway", email: "c@calaway.cc", password: "password1", confirmed_at: DateTime.new())
+# Create some users
+cohort_1606 = [
+  "Dan Broadbent",
+  "Ryan Workman",
+  "Calaway Calaway",
+  "Brian Heim",
+  "Brendan Dillon",
+  "Bryan Goss",
+  "Jasmin Hudacsek",
+  "Susi Irwin",
+  "Nate Anderson",
+  "David Davydov",
+  "Raphael Barbo",
+  "Jesse Spevack",
+  "Sonia Gupta",
+  "Jean Joeris"
+]
+
+cohort_1606.each do |person|
+  first_name = person.split.first
+  last_name = person.split.last
+  user = User.new({
+    first_name: first_name,
+    last_name: last_name,
+    cohort: "1606"
+    email: "#{first_name}.#{last_name}@example.com",
+    password: "password1",
+    confirmed_at: DateTime.new()
+  })
+  if user.save
+    puts "Added #{user.first_name} #{user.last_name} to the Users table."
+  end
+end
 
 # Create some roles
 ["applicant", "invited", "enrolled", "active student",
