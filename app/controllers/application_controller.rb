@@ -4,18 +4,20 @@ class ApplicationController < ActionController::Base
   before_action :authorize!
 
   protected
+  def current_permission
+    @current_permission ||= Permission.new(current_user)
+  end
 
   def authorize!
-    unless Permission.authorized?(current_user, params[:controller], params[:action])
-#DEBUGGING ONLY
-puts "**********
-CHECK PERMISSIONS
-Current User: #{!!current_user}
-Controller: #{params[:controller]}
-Action: #{params[:action]}
-**********" unless ENV["RAILS_ENV"] == "production"
+    unless authorized?
       render file: "/public/404", status: 404, layout: false
     end
+  end
+
+  def authorized?
+    current_permission.authorized?(current_user,
+                                   params[:controller],
+                                   params[:action])
   end
 
   def configure_permitted_parameters
@@ -25,6 +27,7 @@ Action: #{params[:action]}
                                                         :linked_in,
                                                         :git_hub,
                                                         :slack,
-                                                        :cohort ])
+                                                        :cohort,
+                                                        :image ])
   end
 end
