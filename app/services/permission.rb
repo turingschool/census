@@ -12,9 +12,10 @@ class Permission
       return true if controller == "affiliations" && action.in?(%w(create new))
       return true if controller == "devise/sessions" && action.in?(%w(create destroy))
       return true if controller == "devise/confirmations" && action.in?(%w(show))
-      return true if controller == "doorkeeper/authorizations" && action.in?(%w(new))
+      return true if controller == "doorkeeper/authorizations" && action.in?(%w(new create))
       return true if controller == "doorkeeper/applications" && action.in?(%w(new create index show edit update destroy))
       return true if controller == "users/sessions" && action.in?(%w(create destroy))
+      # return true if controller == "api/v1/api" && action.in?(%w(show))
       false
     else
       return true if controller == "home" && action.in?(%w(index))
@@ -23,6 +24,8 @@ class Permission
       return true if controller == "users/registrations" && action.in?(%w(new create))
       return true if controller == "doorkeeper/authorizations" && action.in?(%w(new))
       return true if controller == "users/sessions" && action.in?(%w(new create))
+      # return true if controller == "api/v1/credentials" && action.in?(%w(show))
+
       false
     end
   end
