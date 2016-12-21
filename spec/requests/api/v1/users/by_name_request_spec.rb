@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::UsersController do
-  it "returns info for all users" do
+RSpec.describe Api::V1::Users::ByNameController do
+  it "returns info for users whose names match search criterion" do
     # Census API
     # Request:
     # GET ‘/by_name’ { q: ‘ad’ } - we will adapt this to include the authentication header/params you will require
@@ -21,12 +21,12 @@ RSpec.describe Api::V1::UsersController do
     get "/api/v1/users/by_name?q=an"
     response_users = JSON.parse(response.body)
 
-    expect(response).to 200
-    expect(response_users.count).to eq(2)
+    expect(response).to have_http_status(200)
+    expect(response_users.count).to eq(3)
 
-    expect(response_users.first["first_name"]).to eq(user1.first["first_name"])
-    expect(response_users.first["last_name"]).to eq(user1.first["last_name"])
-    expect(response_users.first["cohort"]).to eq(user1.first["cohort"])
-    expect(response_users.first["image_url"]).to eq(user1.first.image.url)
+    expect(response_users.first["first_name"]).to eq(user1["first_name"])
+    expect(response_users.first["last_name"]).to eq(user1["last_name"])
+    expect(response_users.first["cohort"]).to eq(user1["cohort"])
+    expect(response_users.first["image_url"]).to eq(user1.image.url)
   end
 end
