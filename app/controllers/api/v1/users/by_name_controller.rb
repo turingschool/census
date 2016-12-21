@@ -1,13 +1,6 @@
 class Api::V1::Users::ByNameController < ApplicationController
   def index
-    search_term = params[:q].upcase
-
-    users = User.where(
-      "upper(first_name) LIKE ? OR
-      upper(last_name) LIKE ?",
-      "%#{search_term}%",
-      "%#{search_term}%"
-    )
+    users = User.search_by_name(params[:q])
 
     users_data = users.map do |user|
       {
