@@ -20,15 +20,10 @@ class Invitation < ApplicationRecord
   end
 
   def generate_url
-    new_user_registration_url + "?invite_code=#{create_invitation_code}"
+    Rails.application.routes.url_helpers.new_user_registration_path + "?invite_code=#{create_invitation_code}"
   end
 
   private
-
-    def new_user_registration_url
-      # Needs to be updated for production
-      "/users/sign_up"
-    end
 
     def part_1
       "#{email} #{created_at} "

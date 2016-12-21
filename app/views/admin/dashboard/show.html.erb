@@ -10,7 +10,7 @@
         <th>Created at</th>
         <th>Actions</th>
       </tr>
-      <%= Invitation.all.each do |invite| %>
+      <% Invitation.all.each do |invite| %>
         <tr>
           <td><%= invite.email %></td>
           <td><%= invite.status %></td>
