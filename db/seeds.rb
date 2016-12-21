@@ -32,7 +32,7 @@ cohort_1606.each do |person|
   user = User.new({
     first_name: first_name,
     last_name: last_name,
-    cohort: "1606"
+    cohort: "1606",
     email: "#{first_name}.#{last_name}@example.com",
     password: "password1",
     confirmed_at: DateTime.new()
