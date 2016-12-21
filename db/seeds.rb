@@ -59,4 +59,4 @@ jeff = User.find_or_create_by(  first_name: "Jeff",
 print "Found or created Jeff with id #{jeff.id}.... "
 print "Adding admin role to Jeff.... "
 jeff.roles << Role.find_by(name: "admin")
-print "Jeff now has role: #{jeff.role.last.name}.\n\n"
+print "Jeff now has role: #{jeff.roles.last.name}.\n\n"
