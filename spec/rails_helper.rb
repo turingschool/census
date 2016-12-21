@@ -4,6 +4,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rails'
+require 'paperclip/matchers'
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
@@ -22,7 +23,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
-  config.include Devise::TestHelpers, type: :controller
+  config.include Paperclip::Shoulda::Matchers
 end
 
 def login(user)

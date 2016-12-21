@@ -9,7 +9,11 @@ RSpec.describe Doorkeeper::ApplicationsController, type: :controller do
     end
 
     it "doorkeeper/applications#create, they receive 404 page" do
-      post :create, doorkeeper_application: {name: "Monocle", redirect_uri: "https://localhost:3000/auth/census/callback", scopes: ""}
+      params = {doorkeeper_application: {
+        name: "Monocle",
+        redirect_uri: "https://localhost:3000/auth/census/callback",
+        scopes: ""}}
+      post :create, params: params
 
       expect(response.status).to eq(404)
     end
@@ -59,7 +63,11 @@ RSpec.describe Doorkeeper::ApplicationsController, type: :controller do
     end
 
     it "doorkeeper/applications#create, they are redirected" do
-      post :create, doorkeeper_application: {name: "Monocle", redirect_uri: "https://localhost:3000/auth/census/callback", scopes: ""}
+      params = {doorkeeper_application: {
+        name: "Monocle",
+        redirect_uri: "https://localhost:3000/auth/census/callback",
+        scopes: ""}}
+      post :create, params: params
 
       expect(response.status).to eq(302)
     end
