@@ -2,6 +2,7 @@
   <h1>Admin Dashboard</h1>
   <%= link_to "Invite People", new_invitation_path, class: "btn btn-primary" %>
   <h3>Pending Invitations</h3>
+  <%= select_tag :role, options_for_select(['mentor', 'admin']), id: 'role' %>
   <div class="container" id="pending-invitations">
     <table class="table table-hover">
       <tr>
@@ -11,7 +12,7 @@
         <th>Actions</th>
       </tr>
       <% Invitation.all.each do |invite| %>
-        <tr>
+        <tr class='invitation' data-id=#{invite.id}>
           <td><%= invite.email %></td>
           <td><%= invite.status %></td>
           <td><%= invite.created_at.to_date %></td>
