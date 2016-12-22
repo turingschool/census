@@ -5,4 +5,8 @@
   <% else %>
     <li><%= link_to 'Login', new_user_session_path %></li>
   <% end %>
+
+  <% if user_is_admin? %>
+    <li><%= link_to 'Go to Dashboard', admin_dashboard_path %></li>
+  <% end %>
 </ul>
