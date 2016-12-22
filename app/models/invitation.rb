@@ -20,10 +20,15 @@ class Invitation < ApplicationRecord
   end
 
   def generate_url
-    Rails.application.routes.url_helpers.new_user_registration_path + "?invite_code=#{create_invitation_code}"
+    url + "?invite_code=#{create_invitation_code}"
   end
 
   private
+
+    def url
+      host = ENV["RAILS_ENV"] == "production" ? "https://census-app-staging.herokuapp.com" : "localhost:3000"
+      Rails.application.routes.url_helpers.new_user_registration_url(host: host)
+    end
 
     def part_1
       "#{email} #{created_at} "
