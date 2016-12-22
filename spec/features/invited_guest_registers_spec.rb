@@ -4,6 +4,7 @@ RSpec.feature 'Invited user features' do
   it 'cannot change the email' do
     role = create :role, name: 'Mentor'
     invite = create :invitation, role: role
+    
     visit invite.generate_url
 
     expect(find('#user_email').readonly?).to eq(true)
