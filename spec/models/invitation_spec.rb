@@ -30,7 +30,7 @@ RSpec.describe Invitation, type: :model do
   it "generates a special url" do
     invitation = create :invitation
     url = invitation.generate_url
-    expected = "/users/sign_up?invite_code=#{invitation.create_invitation_code}"
+    expected = "http://localhost:3000/users/sign_up?invite_code=#{invitation.create_invitation_code}"
 
     expect(url).to eq(expected)
   end
