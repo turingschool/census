@@ -3,36 +3,36 @@
 <table>
   <%= render 'account_profile_row',
       header: "First name",
-      data: current_user.first_name %>
+      data: @user.first_name %>
   <%= render 'account_profile_row',
       header: "Last name",
-      data: current_user.last_name %>
+      data: @user.last_name %>
   <%= render 'account_profile_row',
       header: "Email",
-      data: current_user.email %>
+      data: @user.email %>
   <%= render 'account_profile_row',
       header: "Slack",
-      data: current_user.slack %>
+      data: @user.slack %>
   <%= render 'account_profile_row',
       header: "Cohort",
-      data: current_user.cohort %>
+      data: @user.cohort %>
   <%= render 'account_profile_row',
       header: "Twitter",
-      data: current_user.twitter %>
+      data: @user.twitter %>
   <%= render 'account_profile_row',
       header: "LinkedIn",
-      data: current_user.linked_in %>
+      data: @user.linked_in %>
   <%= render 'account_profile_row',
       header: "GitHub",
-      data: current_user.git_hub %>
+      data: @user.git_hub %>
   <%= render 'account_profile_row',
       header: "Roles",
-      data: current_user.list_roles %>
+      data: @user.list_roles %>
 </table>
 
 <%= render 'affiliations' %>
 <%= link_to 'Change password', edit_user_registration_path%>
-<%= link_to "Edit profile", edit_user_path(current_user), class: 'btn btn-default' %>
+<%= link_to "Edit profile", edit_user_path(@user), class: 'btn btn-default' %>
 <%= link_to "Edit affiliations", new_affiliation_path, class: 'btn btn-default' %>
 <hr />
 <h3>Oauth</h3>
