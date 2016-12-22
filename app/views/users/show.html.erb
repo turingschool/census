@@ -29,7 +29,7 @@
       header: "Roles",
       data: @user.list_roles %>
 </table>
-
+<% if @user == current_user %>
 <%= render 'affiliations' %>
 <%= link_to 'Change password', edit_user_registration_path%>
 <%= link_to "Edit profile", edit_user_path(@user), class: 'btn btn-default' %>
@@ -40,4 +40,5 @@
 <%= link_to 'Registered Applications', oauth_applications_path, class: 'btn btn-info' %><br><br>
 <p>View the applications you have given permission to user your data:</p>
 <%= link_to 'Authorized Applications', oauth_authorized_applications_path, class: 'btn btn-success' %>
+<% end %>
 </div>
