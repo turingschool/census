@@ -8,6 +8,8 @@ class Invitation < ApplicationRecord
 
   enum status: [:queued, :mailed, :accepted, :rescinded]
 
+  scope :last_five_minutes, -> { where("created_at >=  ?", Time.current - 5.minutes) }
+
   def send!
     InvitationMailer.invite(self).deliver_now
     self.mailed!
