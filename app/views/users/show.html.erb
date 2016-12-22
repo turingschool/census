@@ -1,3 +1,4 @@
+<div class='container'> 
 <h2>Account Profile</h2>
 <table>
   <%= render 'account_profile_row',
@@ -30,5 +31,13 @@
 </table>
 
 <%= render 'affiliations' %>
-<%= link_to "Edit affiliations", new_affiliation_path %>
-<%= link_to "Edit profile", edit_user_path(current_user) %>
+<%= link_to 'Change password', edit_user_registration_path%>
+<%= link_to "Edit profile", edit_user_path(current_user), class: 'btn btn-default' %>
+<%= link_to "Edit affiliations", new_affiliation_path, class: 'btn btn-default' %>
+<hr />
+<h3>Oauth</h3>
+<p>Manage the applications you have registered with Census:</p>
+<%= link_to 'Registered Applications', oauth_applications_path, class: 'btn btn-info' %><br><br>
+<p>View the applications you have given permission to user your data:</p>
+<%= link_to 'Authorized Applications', oauth_authorized_applications_path, class: 'btn btn-success' %>
+</div>
