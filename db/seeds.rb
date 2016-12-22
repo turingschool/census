@@ -32,7 +32,7 @@ cohort_1606.each do |person|
   user = User.new({
     first_name: first_name,
     last_name: last_name,
-    cohort: "1606"
+    cohort: "1606",
     email: "#{first_name}.#{last_name}@example.com",
     password: "password1",
     confirmed_at: DateTime.new()
@@ -44,8 +44,19 @@ end
 
 # Create some roles
 ["applicant", "invited", "enrolled", "active student",
- "on leave", "graduated", "exited", "removed", "mentor"].each do |role|
+ "on leave", "graduated", "exited", "removed", "mentor", "admin"].each do |role|
    print "Creating role: '#{role}'... "
    Role.find_or_create_by(name: role)
    print "Role #{Role.last.id} has been created with name '#{Role.last.name}'\n\n"
  end
+
+#make jeff admin
+jeff = User.find_or_create_by(  first_name: "Jeff",
+                                last_name: "Casimir",
+                                email: "jeff@turing.io",
+                                slack: "j3",
+                                twitter: "j3")
+print "Found or created Jeff with id #{jeff.id}.... "
+print "Adding admin role to Jeff.... "
+jeff.roles << Role.find_by(name: "admin")
+print "Jeff now has role: #{jeff.roles.last.name}.\n\n"

@@ -1,6 +1,7 @@
 # Census - A Turing School of Software & Design Application
 
 [![security](https://hakiri.io/github/bcgoss/census/master.svg)](https://hakiri.io/github/bcgoss/census/master) [![Dependency Status](https://gemnasium.com/badges/github.com/bcgoss/census.svg)](https://gemnasium.com/github.com/bcgoss/census) [![Code Climate](https://codeclimate.com/github/bcgoss/census/badges/gpa.svg)](https://codeclimate.com/github/bcgoss/census) [![Test Coverage](https://codeclimate.com/github/bcgoss/census/badges/coverage.svg)](https://codeclimate.com/github/bcgoss/census/coverage)
+[![Build Status](https://travis-ci.org/bcgoss/census.svg?branch=staging)](https://travis-ci.org/bcgoss/census)
 
 
 TODO: Write a project description

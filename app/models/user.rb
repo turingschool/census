@@ -33,4 +33,13 @@ class User < ApplicationRecord
   def list_roles
     roles.map { |role| role.name }.join(', ')
   end
+
+  def self.search_by_name(term)
+    User.where(
+      "upper(first_name) LIKE ? OR
+      upper(last_name) LIKE ?",
+      "%#{term.upcase}%",
+      "%#{term.upcase}%"
+    )
+  end
 end

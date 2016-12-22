@@ -15,8 +15,12 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users, only: [:index]
-      
+
       get '/user', to: 'credentials#show'
+
+      namespace :users do
+        get '/by_name', to: 'by_name#index'
+      end
     end
   end
 
