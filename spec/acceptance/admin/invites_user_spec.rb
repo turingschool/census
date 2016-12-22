@@ -17,7 +17,7 @@ RSpec.feature 'Invitations' do
     expect(page).to have_content('email1@example.com')
     expect(page).to have_content('email2@example.com')
     expect(page).to have_content('mailed', count: 2)
-    expect(page).to have_content('minutes ago', count: 2)
+    expect(page).to have_content('less than a minute', count: 2)
     expect(page).to_not have_content(other_invitation.email)
   end
 end

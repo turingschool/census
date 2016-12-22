@@ -9,7 +9,7 @@
     <tr>
       <td><%= invite.email %></td>
       <td><%= invite.status %></td>
-      <td><%= time_ago_in_words(invite.created_at.to_date) %></td>
+      <td><%= time_ago_in_words(invite.created_at) %> ago</td>
       <td>
         <div class="btn-group" role="group">
           <%= link_to "Resend",
