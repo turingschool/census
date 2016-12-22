@@ -2,7 +2,7 @@ class InvitationsController < ApplicationController
   before_action :invitation, only: [:destroy, :update]
 
   def index
-    binding.pry
+    @invitations = current_user.invitations.last_five_minutes
   end
 
   def new
