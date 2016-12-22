@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :users,         only: [:index, :show, :edit, :update]
   resources :affiliations,  only: [:new, :create]
-  resources :invitations,   only: [:new, :create, :update, :destroy]
+  resources :invitations,   only: [:new, :create, :update, :destroy, :index]
 
   namespace :api do
     namespace :v1 do

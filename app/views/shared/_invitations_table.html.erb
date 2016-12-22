@@ -1,0 +1,27 @@
+<table class="table table-hover">
+  <tr>
+    <th>Email</th>
+    <th>Status</th>
+    <th>Created at</th>
+    <th>Actions</th>
+  </tr>
+  <% invitations.each do |invite| %>
+    <tr>
+      <td><%= invite.email %></td>
+      <td><%= invite.status %></td>
+      <td><%= time_ago_in_words(invite.created_at) %> ago</td>
+      <td>
+        <div class="btn-group" role="group">
+          <%= link_to "Resend",
+              invitation_path(invite),
+              method: 'put',
+              class: 'btn btn-default' %>
+          <%= link_to "Cancel",
+              invitation_path(invite),
+              method: 'delete',
+              class: 'btn btn-default' %>
+        </div>
+      </td>
+    </tr>
+  <% end %>
+</table>

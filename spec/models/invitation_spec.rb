@@ -34,4 +34,11 @@ RSpec.describe Invitation, type: :model do
 
     expect(url).to eq(expected)
   end
+
+  it "returns invitations from the last 5 minutes" do
+    invitation = create :invitation
+    old_invitation = create :invitation, email: "me2@example.com", created_at: Time.current - 6.minutes
+    expect(Invitation.last_five_minutes).to include(invitation)
+    expect(Invitation.last_five_minutes).to_not include(old_invitation)
+  end
 end

@@ -1,6 +1,9 @@
 require 'rails_helper'
 
+
 RSpec.feature "Admin dashboard" do
+  include ActionView::Helpers::DateHelper
+
   it "displays invitation content" do
     admin = create :admin
     create :invitation, email: "you@example.com"
@@ -16,9 +19,7 @@ RSpec.feature "Admin dashboard" do
       expect(page).to have_link("Resend", count: 2)
       expect(page).to have_link("Cancel", count: 2)
       expect(page).to have_content(Invitation.first.email)
-      expect(page).to have_content(Invitation.first.created_at.to_date)
       expect(page).to have_content(Invitation.last.email)
-      expect(page).to have_content(Invitation.last.created_at.to_date)
     end
   end
 end
