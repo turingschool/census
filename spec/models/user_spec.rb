@@ -24,4 +24,14 @@ RSpec.describe User, type: :model do
 
     expect(user.list_roles).to eq("dummy_role, dummy_role")
   end
+
+  it "can return users by name search" do
+    dan  = create :user, first_name: "Dan", last_name: "Broadbent"
+    susi = create :user, first_name: "Susi", last_name: "Irwin"
+    nate = create :user, first_name: "Nate", last_name: "Anderson"
+
+    users = User.search_by_name("an")
+
+    expect(users).to eq([dan, nate])
+  end
 end
