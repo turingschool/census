@@ -4,7 +4,7 @@ RSpec.feature 'Invited user features' do
   it 'cannot change the email' do
     role = create :role, name: 'Mentor'
     invite = create :invitation, role: role
-    
+
     visit invite.generate_url
 
     expect(find('#user_email').readonly?).to eq(true)
@@ -26,6 +26,6 @@ RSpec.feature 'Invited user features' do
     fill_in 'Password confirmation', with: 'password'
     fill_in 'First name', with: 'Jeff'
     click_button 'Sign up'
-    expect(current_url).to eq(current_host + invite.generate_url)
+    expect(current_url).to eq(invite.generate_url)
   end
 end
