@@ -13,7 +13,6 @@ class User < ApplicationRecord
   has_many :roles, through: :user_roles
   has_many :invitations
 
-
   # paperclip configuration
   has_attached_file :image, default_url: "images/:style/missing.png", styles: {
     thumb: '100x100>',
