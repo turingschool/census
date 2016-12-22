@@ -30,8 +30,15 @@ RSpec.describe Invitation, type: :model do
   it "generates a special url" do
     invitation = create :invitation
     url = invitation.generate_url
-    expected = "/users/sign_up?invite_code=#{invitation.create_invitation_code}"
+    expected = "http://localhost:3000/users/sign_up?invite_code=#{invitation.create_invitation_code}"
 
     expect(url).to eq(expected)
+  end
+
+  it "returns invitations from the last 5 minutes" do
+    invitation = create :invitation
+    old_invitation = create :invitation, email: "me2@example.com", created_at: Time.current - 6.minutes
+    expect(Invitation.last_five_minutes).to include(invitation)
+    expect(Invitation.last_five_minutes).to_not include(old_invitation)
   end
 end
