@@ -1,0 +1,9 @@
+<h2>Edit Profile</h2>
+<div class='container'>
+<%= form_for @user do |f| %>
+  <%= render 'shared/registration_fields', f: f %>
+  <div class="actions">
+    <%= f.submit "Update" %>
+  </div>
+<% end %>
+</div>

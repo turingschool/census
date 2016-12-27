@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.3.0'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
@@ -7,19 +8,35 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
+gem "paperclip", "~> 5.0.0"
+gem 'aws-sdk', '~> 2.3'
+gem 'active_model_serializers', '~> 0.10.0'
+
+# Production debugging
 gem 'rails_12factor', group: :production
+
+# Store environment variables on test/development securely
+gem 'figaro'
+
+# User authentication/authorization
+gem 'devise'
+gem 'doorkeeper'
+
+# Styling
+gem 'bootstrap-sass'
 
 group :development, :test do
   gem 'byebug', platform: :mri
-  gem 'pry'
+  gem 'pry-rails'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'launchy'
   gem 'shoulda-matchers'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
+  gem 'faker'
   gem 'simplecov', require: false
-
+  gem 'oauth2' #used to simulate client app in testing
 end
 
 group :development do

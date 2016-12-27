@@ -16,3 +16,12 @@
 # Ignore Byebug command history file.
 .byebug_history
 coverage
+
+# Ignore spec examples
+/spec/examples.txt
+
+# Ignore application configuration
+/config/application.yml
+
+# Ignore images from AWS
+/public/system
