@@ -14,7 +14,7 @@
   </tr>
   </thead>
   <tbody>
-  <% current_user.applications.each do |application| %>
+  <% @applications.each do |application| %>
     <tr id="application_<%= application.id %>">
       <td><%= link_to application.name, oauth_application_path(application) %></td>
       <td><%= application.redirect_uri %></td>
