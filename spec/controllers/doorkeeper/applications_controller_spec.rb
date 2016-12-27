@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Doorkeeper::ApplicationsController, type: :controller do
+  before {skip 'Switching to oauth/applications'}
   context "Visitor navigates to" do
     it "doorkeeper/applications#new, they receive 404 page" do
       post :new
@@ -53,7 +54,7 @@ RSpec.describe Doorkeeper::ApplicationsController, type: :controller do
     before do
       @user = create :user
       sign_in @user
-      @app = create :oauth_application
+      @app = create :oauth_application, owner: @user
     end
 
     it "doorkeeper/applications#new, the page is rendered successfully" do
