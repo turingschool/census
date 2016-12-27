@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_many :roles, through: :user_roles
   has_many :invitations
 
-  has_many :oauth_applications, class_name: 'Doorkeeper::Application', as :owner
+  has_many :oauth_applications, class_name: 'Doorkeeper::Application', as: :owner
 
   # paperclip configuration
   has_attached_file :image, default_url: "images/:style/missing.png", styles: {
