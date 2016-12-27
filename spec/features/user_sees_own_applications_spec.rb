@@ -6,7 +6,7 @@ RSpec.describe 'Oauth Applications' do
     sign_in me
     my_application = create :oauth_application, owner: me
     
-    visit oauth_application_path(my_application)
+    visit oauth_applications_path
 
     expect(page).to have_content my_application.name
   end
