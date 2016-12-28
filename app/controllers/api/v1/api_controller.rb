@@ -1,5 +1,4 @@
 module Api::V1
-  # class ApiController < ::ApplicationController
   class ApiController < ActionController::Base
     private
       def current_resource_owner
