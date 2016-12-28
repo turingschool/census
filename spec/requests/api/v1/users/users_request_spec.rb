@@ -3,8 +3,6 @@ require 'rails_helper'
 RSpec.describe Api::V1::UsersController do
   context "Request is sent _without_ authorization credentials" do
     it "returns a 401 (unauthorized) response status" do
-      users = create_list(:user, 2)
-
       get "/api/v1/users"
 
       expect(response).to have_http_status(401)
