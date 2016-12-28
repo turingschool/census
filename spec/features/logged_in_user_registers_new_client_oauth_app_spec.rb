@@ -16,4 +16,17 @@ RSpec.feature "Logged In User Registers New Client OAuth App", type: :feature do
     expect(page).to have_content('Secret: ')
     expect(page).to have_content('Callback urls: https://localhost:3000/auth/census/callback')
   end
+
+  it 'sees a useful error if information is missing' do
+    me = create :user
+    sign_in me
+
+    visit new_oauth_application_path
+
+    fill_in 'doorkeeper_application[name]', with: 'Monocle'
+
+    click_on 'Submit'
+
+    expect(page).to have_content "Redirect URI Can't be blank"
+  end
 end
