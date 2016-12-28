@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'OAuth Access Grant' do
   it 'redirects to login for unauthenticated users' do
     user = create :user
-    application = create :oauth_application, name: 'Test App'
+    application = create :application, name: 'Test App'
 
     visit "/oauth/authorize?client_id=#{application.uid}&response_type=code&redirect_uri=#{application.redirect_uri}"
 
@@ -17,7 +17,7 @@ RSpec.describe 'OAuth Access Grant' do
     fill_in 'user[password]', with: user.password
     click_on 'Log in'
 
-    application = create :oauth_application, name: 'Test App'
+    application = create :application, name: 'Test App'
     visit "/oauth/authorize?client_id=#{application.uid}&response_type=code&redirect_uri=#{application.redirect_uri}"
 
     expect(page).to have_content 'Test App'

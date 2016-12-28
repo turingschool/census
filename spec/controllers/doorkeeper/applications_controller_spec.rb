@@ -53,7 +53,7 @@ RSpec.describe Doorkeeper::ApplicationsController, type: :controller do
     before do
       @user = create :user
       sign_in @user
-      @app = create :oauth_application
+      @app = create :application
     end
 
     it "doorkeeper/applications#new, the page is rendered successfully" do

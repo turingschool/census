@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "OAuth flow from client app" do
   scenario "redirects back to client app affter successful login" do
-    application = create(:oauth_application)
+    application = create(:application)
     user = create(:user)
     visit oauth_authorization_path( client_id: application.uid,
                                     redirect_uri: application.redirect_uri,
