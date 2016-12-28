@@ -35,7 +35,6 @@ class Permission
       return true if controller == "doorkeeper/authorizations" && action.in?(%w(new))
       return true if controller == "users/sessions" && action.in?(%w(new create))
       # TODO: The below permissions are temporary. Add requirement later.
-      return true if controller == "api/v1/users" && action.in?(%w(index))
       return true if controller == "api/v1/users/by_name" && action.in?(%w(index))
     end
       print_warning(user, controller, action)
