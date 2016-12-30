@@ -2,10 +2,11 @@ class InvitationManager
   attr_reader :emails,
               :bad_emails
 
-  def initialize(params, user)
+  def initialize(params, user, url)
     @role = Role.find_by(name: params[:role])
     @emails = params[:email].split(", ")
     @user = user
+    @url = url
     @bad_emails = process_emails if @role
   end
 
@@ -28,7 +29,7 @@ class InvitationManager
     def process_emails
       emails.reduce([]) do |bad_emails, email|
         invitation = @user.invitations.new(email: email, status: 0, role: @role)
-        invitation.save ? invitation.send! : bad_emails << email
+        invitation.save ? invitation.send!(@url) : bad_emails << email
         bad_emails
       end
     end

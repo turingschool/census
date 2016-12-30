@@ -4,7 +4,7 @@ RSpec.feature 'Invited user' do
   it 'registers an account' do
     role = create :role, name: 'Mentor'
     invite = create :invitation, role: role
-    visit invite.generate_url
+    visit invite.generate_url(new_user_registration_url)
 
     expect(find('#user_email').value).to eq('me@example.com')
 
