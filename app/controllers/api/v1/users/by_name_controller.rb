@@ -1,4 +1,6 @@
-class Api::V1::Users::ByNameController < ApplicationController
+class Api::V1::Users::ByNameController < Api::V1::ApiController
+  before_action :doorkeeper_authorize!
+
   def index
     users = User.search_by_name(params[:q])
 
