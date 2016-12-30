@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Invitation, type: :model do
+  let(:new_user_registration_url) { "http://www.example.com/users/sign_up" }
+
   it { should validate_presence_of(:email) }
   it { should validate_presence_of(:status) }
   it { should validate_uniqueness_of(:email) }
@@ -14,7 +16,7 @@ RSpec.describe Invitation, type: :model do
 
   it "queues an email to be sent" do
     invitation = create :invitation, status: 0
-    invitation.send!
+    invitation.send!(new_user_registration_url)
 
     expect(invitation.mailed?)
   end
@@ -29,8 +31,9 @@ RSpec.describe Invitation, type: :model do
 
   it "generates a special url" do
     invitation = create :invitation
-    url = invitation.generate_url
-    expected = "http://localhost:3000/users/sign_up?invite_code=#{invitation.create_invitation_code}"
+    url = invitation.generate_url(new_user_registration_url)
+    expected = "http://www.example.com/users/sign_up" +
+               "?invite_code=#{invitation.create_invitation_code}"
 
     expect(url).to eq(expected)
   end
