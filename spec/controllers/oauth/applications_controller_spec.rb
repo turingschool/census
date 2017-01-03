@@ -53,7 +53,7 @@ RSpec.describe Oauth::ApplicationsController, type: :controller do
     before do
       @user = create :user
       sign_in @user
-      @app = create :oauth_application, owner: @user
+      @app = create :application, owner: @user
     end
 
     it "oauth/applications#new, the page is rendered successfully" do

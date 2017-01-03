@@ -10,13 +10,15 @@ class InvitationsController < ApplicationController
   end
 
   def create
-    manager = InvitationManager.new(invitation_params, current_user)
+    manager = InvitationManager.new(invitation_params,
+                                    current_user,
+                                    new_user_registration_url)
     flash[manager.status] = manager.status_message
     redirect_to manager.success? ? invitations_path : new_invitation_path
   end
 
   def update
-    @invitation.send!
+    @invitation.send!(new_user_registration_url)
     redirect_to admin_dashboard_path
   end
 
