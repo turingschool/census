@@ -102,4 +102,58 @@ RSpec.describe Oauth::ApplicationsController, type: :controller do
       expect(response.status).to eq(302)
     end
   end
+
+  context "Admin navigates to" do
+    before do
+      @admin = create :admin
+      sign_in @admin
+      @app = create :application, owner: @admin
+    end
+
+    it "oauth/applications#new, the page is rendered successfully" do
+      post :new
+
+      expect(response.status).to eq(200)
+    end
+
+    it "oauth/applications#create, they are redirected" do
+      params = {doorkeeper_application: {
+        name: "Monocle",
+        redirect_uri: "https://localhost:3000/auth/census/callback",
+        scopes: ""}}
+      post :create, params: params
+
+      expect(response.status).to eq(302)
+    end
+
+    it "oauth/applications#index, the page is rendered successfully" do
+      post :index
+
+      expect(response.status).to eq(200)
+    end
+
+    it "oauth/applications#edit, the page is rendered successfully" do
+      get :edit, params: {id: @app.id}
+
+      expect(response.status).to eq(200)
+    end
+
+    it "oauth/applications#show, the page is rendered successfully" do
+      get :show, params: {id: @app.id}
+
+      expect(response.status).to eq(200)
+    end
+
+    it "oauth/applications#update, they are redirected" do
+      post :update, params: {id: @app.id, doorkeeper_application: {name: "Monocle"}}
+
+      expect(response.status).to eq(302)
+    end
+
+    it "oauth/applications#destory, they are redirected" do
+      delete :destroy, params: {id: @app.id}
+
+      expect(response.status).to eq(302)
+    end
+  end
 end
