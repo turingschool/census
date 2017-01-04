@@ -21,4 +21,17 @@ RSpec.describe Doorkeeper::AuthorizationsController, type: :controller do
       expect(response.status).to eq(200)
     end
   end
+
+  context "Admin navigates to" do
+    before do
+      @admin = create :admin
+      sign_in @admin
+    end
+
+    it "doorkeeper/authorizations#new, page is served successfully" do
+      get :new
+
+      expect(response.status).to eq(200)
+    end
+  end
 end
