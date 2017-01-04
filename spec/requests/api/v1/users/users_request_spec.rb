@@ -25,11 +25,13 @@ RSpec.describe Api::V1::UsersController do
       expect(response_users.first["last_name"]).to eq(users.first["last_name"])
       expect(response_users.first["cohort"]).to eq(users.first["cohort"])
       expect(response_users.first["image_url"]).to eq(test_root_url + users.first.image.url)
+      expect(response_users.first["id"]).to eq(users.first.id)
 
       expect(response_users.last["first_name"]).to eq(users.last["first_name"])
       expect(response_users.last["last_name"]).to eq(users.last["last_name"])
       expect(response_users.last["cohort"]).to eq(users.last["cohort"])
       expect(response_users.last["image_url"]).to eq(test_root_url + users.last.image.url)
+      expect(response_users.last["id"]).to eq(users.last.id)
     end
   end
 end
