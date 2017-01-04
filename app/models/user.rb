@@ -35,6 +35,10 @@ class User < ApplicationRecord
     roles.map { |role| role.name }.join(', ')
   end
 
+  def admin?
+    roles.where(name: 'admin').exists?
+  end
+
   def self.search_by_name(term)
     User.where(
       "upper(first_name) LIKE ? OR
