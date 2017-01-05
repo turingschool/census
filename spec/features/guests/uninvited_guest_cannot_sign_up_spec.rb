@@ -12,4 +12,10 @@ RSpec.feature 'Uninvited user features' do
 
     expect(page).to have_content('Login')
   end
+
+  it 'cannot send HTTP parameters' do
+    visit new_user_registration_url + "?invite_code=evil-code"
+
+    expect(page).to have_content("The page you were looking for doesn't exist.")
+  end
 end
