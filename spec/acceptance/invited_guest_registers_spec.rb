@@ -19,6 +19,7 @@ RSpec.feature 'Invited user' do
     sign_in user
     visit user_path(user.id)
 
+    expect(user.roles.find_by(name: "Mentor")).to_not be_nil
     expect(page).to have_content('Mentor')
   end
 end
