@@ -6,8 +6,8 @@ RSpec.feature 'Invitations' do
     admin = create :admin
     other_invitation = create :invitation, user: admin, created_at: Time.current - 6.minutes
     login(admin)
-    
-    click_link 'Inivte Users'
+
+    click_link 'Invite Users'
     expect(current_path).to eq(new_invitation_path)
 
     fill_in 'Emails', with: 'email1@example.com, email2@example.com'
