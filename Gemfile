@@ -18,9 +18,12 @@ gem 'rails_12factor', group: :production
 # Store environment variables on test/development securely
 gem 'figaro'
 
-# User authentication/authorization
+# User authentication and some authorization
 gem 'devise'
 gem 'doorkeeper'
+
+# Authorization
+gem 'cancancan'
 
 # Styling
 gem 'bootstrap-sass'
