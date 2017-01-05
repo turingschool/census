@@ -14,9 +14,9 @@ RSpec.feature 'User signs up' do
     fill_in 'Password confirmation', with: 'password'
     click_button 'Sign up'
 
-    save_and_open_page
+    # save_and_open_page
 
-    help_message = 'A message with a confirmation link has been sent to your email address. Please follow the link to activate your account.'
+    help_message = 'You have succesfully signed up! Please log in to continue.'
 
     expect(page).to have_content(help_message)
     expect(User.count).to eq(1)
