@@ -9,12 +9,9 @@ RSpec.feature 'User signs up' do
 
     fill_in 'First name', with: 'Jeff'
     fill_in 'Last name', with: 'Casimir'
-    fill_in 'Email', with: ENV['MY_EMAIL']
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'password'
     click_button 'Sign up'
-
-    # save_and_open_page
 
     help_message = 'You have succesfully signed up! Please log in to continue.'
 
@@ -22,7 +19,6 @@ RSpec.feature 'User signs up' do
     expect(User.count).to eq(1)
     expect(User.last.first_name).to eq('Jeff')
     expect(User.last.last_name).to eq('Casimir')
-    expect(User.last.email).to eq(ENV['MY_EMAIL'])
   end
 
   scenario 'and does not fill in first name' do
