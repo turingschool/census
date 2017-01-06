@@ -5,6 +5,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rails'
 require 'paperclip/matchers'
+require "cancan/matchers"
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
