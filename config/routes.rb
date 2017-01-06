@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  use_doorkeeper do 
+  use_doorkeeper do
     controllers :applications => 'oauth/applications'
   end
 
@@ -19,6 +19,8 @@ Rails.application.routes.draw do
       resources :users, only: [:index]
 
       get '/user', to: 'credentials#show'
+
+      post '/sendgrid/events', to: 'send_grid/events#update'
 
       namespace :users do
         get '/by_name', to: 'by_name#index'
