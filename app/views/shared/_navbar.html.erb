@@ -14,8 +14,8 @@
 
       <% if user_is_admin? %>
         <li><%= link_to 'Go to Dashboard', admin_dashboard_path %></li>
+        <li><%= link_to 'Invite Users', new_invitation_path %></li>
       <% end %>
     </ul>
   </div>
 </div>
-
