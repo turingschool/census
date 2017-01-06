@@ -26,6 +26,17 @@ RSpec.describe User, type: :model do
     expect(user.list_roles).to eq("dummy_role, dummy_role")
   end
 
+  it "can find specific role associated with it" do
+    user = create :user
+    role_1 = create :role, name: "enrolled"
+    role_2 = create :role, name: "active student"
+    user.roles << [role_1, role_2]
+
+    expect(user.has_role?("enrolled")).to_be true
+    expect(user.has_role?("active student")).to_be true
+    expect(user.has_role?("admin")).to_be false
+  end
+
   it "can return users by name search" do
     dan  = create :user, first_name: "Dan", last_name: "Broadbent"
     susi = create :user, first_name: "Susi", last_name: "Irwin"

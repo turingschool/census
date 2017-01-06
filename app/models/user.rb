@@ -36,7 +36,7 @@ class User < ApplicationRecord
   end
 
   def admin?
-    roles.where(name: 'admin').exists?
+    roles.find_by(name: 'admin').exists?
   end
 
   def self.search_by_name(term)
