@@ -35,8 +35,8 @@ class User < ApplicationRecord
     roles.map { |role| role.name }.join(', ')
   end
 
-  def admin?
-    roles.find_by(name: 'admin').exists?
+  def has_role?(role)
+    roles.where(name: "#{role}").exists?
   end
 
   def self.search_by_name(term)

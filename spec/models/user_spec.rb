@@ -32,9 +32,9 @@ RSpec.describe User, type: :model do
     role_2 = create :role, name: "active student"
     user.roles << [role_1, role_2]
 
-    expect(user.has_role?("enrolled")).to_be true
-    expect(user.has_role?("active student")).to_be true
-    expect(user.has_role?("admin")).to_be false
+    expect(user.has_role?("enrolled")).to be(true)
+    expect(user.has_role?("active student")).to be(true)
+    expect(user.has_role?("admin")).to be(false)
   end
 
   it "can return users by name search" do
