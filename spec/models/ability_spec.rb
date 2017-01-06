@@ -17,6 +17,10 @@ RSpec.describe Ability, type: :model do
 
   end
 
+  it 'checks all active student users permissions' do
+
+  end
+
   it 'checks all exited users permissions' do
 
   end
@@ -26,6 +30,6 @@ RSpec.describe Ability, type: :model do
   end
 
   it 'checks all mentor permissions' do
-    
+
   end
 end
