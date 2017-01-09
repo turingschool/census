@@ -7,13 +7,12 @@ class Ability
 
     if user.has_role?("admin")
       can :manage, :all
-    elsif user.has_role?("mentor")
-      # can :update, User, :user_id user.id
-      # can :read, User
-    elsif user.has_role?("active student")
-
-    elsif user.has_role?("enrolled")
-
+    elsif user.has_role?("mentor") || user.has_role?("active student") || user.has_role?("enrolled")
+      can :update, User, user_id: user.id
+      can :read, User
+      can :read, Group
+      can :read, Role
+      can :read, Affiliation
     elsif user.has_role?("exited") || user.has_role?("removed")
       cannot :manage, :all
     else
