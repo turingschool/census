@@ -12,7 +12,13 @@ class User < ApplicationRecord
       message: "accepts only alphanumeric and underscore characters."
     },
     allow_blank: true
-
+  validates :linked_in,
+    length: { in: 5..30 },
+    format: {
+      with: /\A[a-zA-Z0-9]+\z/,
+      message: "accepts only alphanumeric characters."
+    },
+    allow_blank: true
   validates :first_name, presence: true
   validates :last_name, presence: true
 
