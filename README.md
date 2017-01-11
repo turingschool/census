@@ -65,8 +65,15 @@ bundle exec rake db:{create,migrate}
 ```
 
 To run development locally, use the command:
-```rails server```
+```
+rails server
+```
 ## [API Endpoints](#api-endpoints)
+
+To receive a user by name:
+```
+GET 'https://login.turing.io/api/v1/users/by_name?q=[NAME]'
+```
 
 
 ## [Maintainer](#maintainer)
