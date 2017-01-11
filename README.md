@@ -20,14 +20,52 @@
 
 ## [Requirements](#requirements)
 ### [Ruby on Rails](#ror)
+```
+RAILS VERSION
+  - 5.0.0.1
+
+RUBY VERSION
+  - 2.3.0p0
+
+BUNDLED WITH
+  - 1.13.7
+```
 
 ### [Environment Variables](#environment-variables)
 
-### [Paperclip gem](#paperclip)
+Census is built to expect a certain number of environment variables. We suggest using something like [Figaro](https://github.com/laserlemon/figaro) to set them securely.
+
+You will need an AWS S3 Bucket, Access Key ID, a Secret Access Key and an AWS region defined. Use the [AWS SDK](https://github.com/aws/aws-sdk-ruby) gem to get started.
+
+Environment Variables:
+```
+SALT # used for salting email invite tokens
+MY_EMAIL # used for testing purposes. Can be any email.
+S3_BUCKET_NAME
+AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY
+AWS_REGION
+```
+
+### [Paperclip Gem](#paperclip)
+
+Census uses the [Paperclip](https://github.com/thoughtbot/paperclip#ruby-and-rails) gem in order to upload user profile photos. To ensure testing and development works, ImageMagick must be installed and Paperclip must have access to it.
+
+If you're on Mac OS X, you'll want to run the following with Homebrew:
+
+```brew install imagemagick```
 
 ## [Installation](#installation)
 
+To install, clone down the project and run the following commands:
 
+```
+bundle install
+bundle exec rake db:{create,migrate}
+```
+
+To run development locally, use the command:
+```rails server```
 ## [API Endpoints](#api-endpoints)
 
 
