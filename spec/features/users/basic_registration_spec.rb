@@ -28,7 +28,6 @@ RSpec.feature 'User signs up' do
     visit invite.generate_url(new_user_registration_url)
 
     fill_in 'Last name', with: 'Casimir'
-    fill_in 'Email', with: ENV['MY_EMAIL']
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'password'
     click_button 'Sign up'
