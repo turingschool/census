@@ -6,7 +6,7 @@ class Invitation < ApplicationRecord
   validates_format_of :email, :with => /@/
   validates_presence_of :status
 
-  enum status: [:queued, :mailed, :accepted, :rescinded]
+  enum status: [:queued, :mailed, :bounce, :accepted, :rescinded]
 
   scope :last_five_minutes, -> { where("created_at >=  ?", Time.current - 5.minutes) }
 
