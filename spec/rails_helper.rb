@@ -3,8 +3,11 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
-require 'capybara/rails'
 require 'paperclip/matchers'
+require 'capybara/rails'
+
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
@@ -27,9 +30,5 @@ RSpec.configure do |config|
 end
 
 def login(user)
-  visit root_path
-  click_link 'Login'
-  fill_in 'Email', with: user.email
-  fill_in 'Password', with: user.password
-  click_button 'Log in'
+  allow_any_instance_of(ApplicationController).to receive(:name).and_return("Wibble")
 end

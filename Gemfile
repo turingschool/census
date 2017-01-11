@@ -34,6 +34,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'launchy'
+  gem 'poltergeist'
   gem 'shoulda-matchers'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
