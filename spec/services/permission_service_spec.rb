@@ -7,8 +7,8 @@ RSpec.describe Permission do
     action = "index"
     current_permission = Permission.new(current_user)
 
-    expected_output = "**********\nCHECK PERMISSIONS\nCurrent User: false\nController: users\nAction: index\n**********\n"
-
+    expected_output = "\n🚨 CHECK PERMISSIONS! Current User: false – Controller: users – Action: index\n"
+    
     expect {
       current_permission.print_warning(current_user, controller, action)
     }.to output(expected_output).to_stdout

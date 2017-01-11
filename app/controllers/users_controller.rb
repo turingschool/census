@@ -20,9 +20,10 @@ class UsersController < ApplicationController
   def update
     @user.skip_reconfirmation!
     if @user.update_attributes(user_params)
-      flash[:notice] = "Update was successful."
+      flash[:success] = "Update was successful."
       redirect_to user_path(current_user)
     else
+      flash[:danger] = @user.errors.full_messages.join(". ")
       render :edit
     end
   end
