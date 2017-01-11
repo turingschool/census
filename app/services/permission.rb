@@ -17,7 +17,7 @@ class Permission
       return true if controller == 'oauth/applications' && action.in?(%w(new create show index destroy edit update))
       return true if controller == 'users/sessions' && action.in?(%w(create destroy))
       return true if controller == 'doorkeeper/authorized_applications' && action.in?(%w(index destroy))
-      return true if controller == 'users/registrations' && action.in?(%w(edit))
+      return true if controller == 'users/registrations' && action.in?(%w(edit update))
     elsif user
       return true if controller == "users" && action.in?(%w(index show edit update))
       return true if controller == "home" && action.in?(%w(index))
@@ -29,7 +29,7 @@ class Permission
       return true if controller == 'oauth/applications' && action.in?(%w(new create show index destroy edit update))
       return true if controller == "users/sessions" && action.in?(%w(create destroy))
       return true if controller == 'doorkeeper/authorized_applications' && action.in?(%w(index destroy))
-      return true if controller == 'users/registrations' && action.in?(%w(edit))
+      return true if controller == 'users/registrations' && action.in?(%w(edit update))
       false
     else
       return true if controller == "home" && action.in?(%w(index))
