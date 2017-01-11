@@ -35,4 +35,14 @@ RSpec.describe User, type: :model do
 
     expect(users).to eq([dan, nate])
   end
+
+  it "rejects invalid twitter usernames" do
+    okay = build(:user, twitter: "_calaway_")
+    invalid_characters = build(:user, twitter: "_ca!away_")
+    too_long = build(:user, twitter: "1234567890123456")
+
+    expect(okay.valid?).to be true
+    expect(invalid_characters.valid?).to be false
+    expect(too_long.valid?).to be false
+  end
 end
