@@ -29,7 +29,7 @@ RSpec.feature 'Edit all user attributes' do
     fill_in "Email", with: new_attributes[:email]
     fill_in "Slack", with: new_attributes[:slack]
     find("option[value='#{new_attributes[:cohort]}']").select_option
-    fill_in "Twitter", with: new_attributes[:twitter]
+    fill_in "user[twitter]", with: new_attributes[:twitter]
     fill_in "LinkedIn", with: new_attributes[:linked_in]
     fill_in "GitHub", with: new_attributes[:git_hub]
     click_button "Update"

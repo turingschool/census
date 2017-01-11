@@ -30,5 +30,9 @@ RSpec.configure do |config|
 end
 
 def login(user)
-  allow_any_instance_of(ApplicationController).to receive(:name).and_return("Wibble")
+  visit root_path
+  click_link 'Login'
+  fill_in 'Email', with: user.email
+  fill_in 'Password', with: user.password
+  click_button 'Log in'
 end
