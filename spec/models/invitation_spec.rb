@@ -24,7 +24,7 @@ RSpec.describe Invitation, type: :model do
   it "creates an invitation code" do
     invitation = create :invitation, created_at: "2016-12-13 22:25:56 UTC"
     invitation.create_invitation_code
-    expected_code = "546b2d69463d2bc94b2063a2330f5c85c2dc4f1b4b24d798e83e3419516a4f99"
+    expected_code = "127ef3a55484d105f6f86c837fd4da3ba22ba6bf86fabda6bce6a32a5c96676f"
 
     expect(invitation.invitation_code).to eq(expected_code)
   end
