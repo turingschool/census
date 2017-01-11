@@ -45,7 +45,7 @@ class Permission
 
   def print_warning(user, controller, action)
     unless ENV["RAILS_ENV"] == "production"
-      puts "**********\nCHECK PERMISSIONS\nCurrent User: #{!!user}\nController: #{controller}\nAction: #{action}\n**********"
+      print "\n🚨 CHECK PERMISSIONS! Current User: #{!!user} – Controller: #{controller} – Action: #{action}\n"
     end
   end
 end

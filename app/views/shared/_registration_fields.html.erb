@@ -25,8 +25,8 @@
 
 <div class="form-group">
   <div class="field">
-    <%= f.label :twitter %><br />
-    <%= f.text_field :twitter, class: "form-control" %><br />
+    <%= f.label :twitter %>  <span id="twitter-hint" class="bg-danger hidden" style="font-style:italic;">(Enter username only. E.g. for "@j3" enter only "j3")</span><br />
+    <%= f.text_field :twitter, class: "form-control", id: "twitter-field" %><br />
   </div>
 </div>
 

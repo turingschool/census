@@ -12,7 +12,7 @@ RSpec.feature 'User signs up' do
     fill_in 'Last name', with: user[:last_name]
     fill_in 'Password', with: user[:password]
     fill_in 'Password confirmation', with: user[:password]
-    fill_in 'Twitter', with: user[:twitter]
+    fill_in 'user[twitter]', with: user[:twitter]
     fill_in 'LinkedIn', with: user[:linked_in]
     fill_in 'GitHub', with: user[:git_hub]
     fill_in 'Slack', with: user[:slack]
