@@ -18,92 +18,84 @@ RSpec.describe 'User abilities:' do
       random_role = ['enrolled', 'active student'].shuffle.pop
       role = create :role, name: "#{random_role}"
       user.roles << role
-      byebug
       ability = Ability.new(user)
 
-      # expect(ability).to be_able_to(:read, User.new)
-      # expect(ability).to be_able_to(:update, User.new(user: user))
-      # expect(ability).to be_able_to(:create, User.new(user: user))
-      expect(ability).to be_able_to(:read, Group.new)
-      expect(ability).to be_able_to(:read, Role.new)
-      expect(ability).to be_able_to(:read, Affiliation.new)
-      expect(ability).to be_able_to(:manage, Doorkeeper::Application.new(user: user))
+      expect(ability.can? :read, User).to eq(true)
+      expect(ability.can? :update, User, user_id: user.id).to eq(true)
+      expect(ability.can? :create, User).to eq(true)
+      expect(ability.can? :read, Group).to eq(true)
+      expect(ability.can? :read, Role).to eq(true)
+      expect(ability.can? :read, Affiliation).to eq(true)
+      expect(ability.can? :manage, Doorkeeper::Application, user_id: user.id).to eq(true)
 
-      expect(ability).to_not be_able_to(:delete, User.new)
-      expect(ability).to_not be_able_to(:manage, Invitation.new)
-      expect(ability).to_not be_able_to(:create, Group.new)
-      expect(ability).to_not be_able_to(:delete, Group.new)
-      expect(ability).to_not be_able_to(:manage, Role.new)
-      expect(ability).to_not be_able_to(:manage, UserRole.new)
-      expect(ability).to_not be_able_to(:create, Affiliation.new)
-      expect(ability).to_not be_able_to(:update, Affiliation.new)
-      expect(ability).to_not be_able_to(:delete, Affiliation.new)
+      expect(ability.can? :delete, User).to eq(false)
+      expect(ability.can? :manage, Invitation).to eq(false)
+      expect(ability.can? :create, Group).to eq(false)
+      expect(ability.can? :delete, Group).to eq(false)
+      expect(ability.can? :manage, Role).to eq(false)
+      expect(ability.can? :manage, UserRole).to eq(false)
+      expect(ability.can? :create, Affiliation).to eq(false)
+      expect(ability.can? :update, Affiliation).to eq(false)
+      expect(ability.can? :delete, Affiliation).to eq(false)
     end
   end
 
   context 'anonymous guest' do
-    xit "can't do most things" do
+    it "can't do most things" do
       user = create :user
       ability = Ability.new(user)
-      #
-      # expect(ability).to_not be_able_to(:manage, Invitation.new)
-      # expect(ability).to_not be_able_to(:manage, User.new)
-      # expect(ability).to_not be_able_to(:manage, Group.new)
-      # expect(ability).to_not be_able_to(:manage, Role.new)
-      # expect(ability).to_not be_able_to(:manage, UserRole.new)
-      # expect(ability).to_not be_able_to(:manage, Affiliation.new)
-      # expect(ability).to_not be_able_to(:manage, Doorkeeper::Application.new)
-      expect(ability).to_not be_able_to(:manage, :all)
+
+      expect(ability.can? :manage, :all).to eq(false)
     end
   end
 
   context 'admin' do
-    xit 'can do everything' do
+    it 'can do everything' do
       user = create :user
       role = create :role, name: 'admin'
       user.roles << role
       ability = Ability.new(user)
 
-      expect(ability).to be_able_to(:manage, :all)
+      expect(ability.can? :manage, :all).to eq(true)
     end
   end
 
   context 'mentor' do
-    xit 'can see an all users' do
+    it 'can see an all users' do
       user = create :user
       role = create :role, name: 'mentor'
       user.roles << role
       ability = Ability.new(user)
 
-      expect(ability).to be_able_to(:read, User.new)
-      # expect(ability).to be_able_to(:update, User.new(user: user))
-      # expect(ability).to be_able_to(:create, User.new(user: user))
-      expect(ability).to be_able_to(:read, Group.new)
-      expect(ability).to be_able_to(:read, Role.new)
-      expect(ability).to be_able_to(:read, Affiliation.new)
-      # expect(ability).to be_able_to(:manage, Doorkeeper::Application.new(user: user))
+      expect(ability.can? :read, User, user_id: user.id).to eq(true)
+      expect(ability.can? :update, User, user_id: user.id).to eq(true)
+      expect(ability.can? :create, User).to eq(true)
+      expect(ability.can? :read, Group).to eq(true)
+      expect(ability.can? :read, Role).to eq(true)
+      expect(ability.can? :read, Affiliation).to eq(true)
+      expect(ability.can? :manage, Doorkeeper::Application, user_id: user.id).to eq(true)
 
-      expect(ability).to_not be_able_to(:delete, User.new)
-      expect(ability).to_not be_able_to(:manage, Invitation.new)
-      expect(ability).to_not be_able_to(:create, Group.new)
-      expect(ability).to_not be_able_to(:delete, Group.new)
-      expect(ability).to_not be_able_to(:manage, Role.new)
-      expect(ability).to_not be_able_to(:manage, UserRole.new)
-      expect(ability).to_not be_able_to(:create, Affiliation.new)
-      expect(ability).to_not be_able_to(:update, Affiliation.new)
-      expect(ability).to_not be_able_to(:delete, Affiliation.new)
+      expect(ability.can? :delete, User).to eq(false)
+      expect(ability.can? :manage, Invitation).to eq(false)
+      expect(ability.can? :create, Group).to eq(false)
+      expect(ability.can? :delete, Group).to eq(false)
+      expect(ability.can? :manage, Role).to eq(false)
+      expect(ability.can? :manage, UserRole).to eq(false)
+      expect(ability.can? :create, Affiliation).to eq(false)
+      expect(ability.can? :update, Affiliation).to eq(false)
+      expect(ability.can? :delete, Affiliation).to eq(false)
     end
   end
 
   context 'exited or removed user' do
-    xit 'cannot do anything' do
+    it 'cannot do anything' do
       user = create :user
       random_role = ['exited', 'removed'].shuffle.pop
-      role = create :role, name: '#{random_role}'
+      role = create :role, name: "#{random_role}"
       user.roles << role
       ability = Ability.new(user)
 
-      expect(ability).to_not be_able_to(:manage, :all)
+      expect(ability.can? :manage, :all).to eq(false)
     end
   end
 end
