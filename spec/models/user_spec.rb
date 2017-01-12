@@ -59,13 +59,13 @@ RSpec.describe User, type: :model do
   end
 
   context 'Role change' do
-    it 'can change students to alumni' do
+    it 'can change students to graduated' do
       user = create :user
       student = create :role, name: 'active student'
-      alumni = create :role, name: 'alumni'
+      graduated = create :role, name: 'graduated'
       user.roles << student
-      user.change_role('alumni')
-      expect(user.roles).to include(alumni)
+      user.change_role('graduated')
+      expect(user.roles).to include(graduated)
       expect(user.roles).not_to include(student)
     end
 
@@ -78,5 +78,17 @@ RSpec.describe User, type: :model do
       expect(user.roles).to include(student)
       expect(user.roles).not_to include(applicant)
     end
+
+    it 'can change student to dismissed' do
+      user = create :user
+      student = create :role, name: 'active student'
+      removed = create :role, name: 'removed'
+      user.roles << student
+      user.change_role('removed')
+      
+      expect(user.roles).to include(removed)
+      expect(user.roles).not_to include(student)
+    end
+
   end
 end

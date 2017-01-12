@@ -41,8 +41,8 @@
 <p>View the applications you have given permission to user your data:</p>
 <%= link_to 'Authorized Applications', oauth_authorized_applications_path, class: 'btn btn-success' %>
 <% elsif user_is_admin? %>
-  <% if @user.roles.where(name: 'student').exists? %>
-    <%= link_to 'Graduate', admin_user_path(@user, role: 'alumni'), method: :patch %>
+  <% if @user.roles.where(name: 'active student').exists? %>
+    <%= link_to 'Graduate', admin_user_path(@user, role: 'graduated'), method: :patch %>
     <%= link_to 'Discharge', admin_user_path(@user, role: 'discharged'), method: :patch %>
   <% end %>
 <% end %>
