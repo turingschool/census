@@ -3,10 +3,10 @@ class Invitation < ApplicationRecord
   belongs_to :role
   validates_uniqueness_of :email
   validates_presence_of :email
-  validates_format_of :email, :with => /@/
+  validates_format_of :email, with: /\A\S+@\S+\z/
   validates_presence_of :status
 
-  enum status: [:queued, :mailed, :accepted, :rescinded]
+  enum status: [:queued, :mailed, :bounce, :accepted, :rescinded]
 
   scope :last_five_minutes, -> { where("created_at >=  ?", Time.current - 5.minutes) }
 

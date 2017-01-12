@@ -4,6 +4,21 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
+  before_validation :twitter, :sanitize_inputs
+  validates :twitter,
+    length: { maximum: 15 },
+    format: {
+      with: /\A[a-zA-Z0-9_]+\z/,
+      message: "accepts only alphanumeric and underscore characters"
+    },
+    allow_blank: true
+  validates :linked_in,
+    length: { in: 5..30 },
+    format: {
+      with: /\A[a-zA-Z0-9]+\z/,
+      message: "accepts only alphanumeric characters"
+    },
+    allow_blank: true
   validates :first_name, presence: true
   validates :last_name, presence: true
 
@@ -46,5 +61,10 @@ class User < ApplicationRecord
       "%#{term.upcase}%",
       "%#{term.upcase}%"
     )
+  end
+
+  def sanitize_inputs
+    # Remove any "@" symbols from the begining of the string.
+    twitter.sub!(/\A@+/,"") if twitter
   end
 end

@@ -1,6 +1,11 @@
 <div class="container">
   <h2><%= @header %></h2>
+
   <%= render 'cohort_dropdown' %>
+
+  <label for="search_by_name">Search by Name:</label>
+  <input id="search-by-name" name="search_by_name" type="text" />
+
   <table class="table">
     <thead class="thead-inverse">
       <tr>
