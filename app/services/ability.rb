@@ -8,7 +8,7 @@ class Ability
     if user.has_role?("admin")
       can :manage, :all
     elsif user.has_role?("mentor") || user.has_role?("active student") || user.has_role?("enrolled")
-      can :update, User, :user_id user.id
+      can :update, User, user_id: user.id
       can :read, User
       can :read, Group
       can :read, Role
@@ -16,7 +16,7 @@ class Ability
     elsif user.has_role?("exited") || user.has_role?("removed")
       cannot :manage, :all
     else
-
+      cannot :manage, :all
     end
     #
     # The first argument to `can` is the action you are giving the user
