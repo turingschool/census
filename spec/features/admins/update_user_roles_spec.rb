@@ -31,20 +31,20 @@ RSpec.describe 'Admin' do
 
     student = create :user
     student_role = create :role, name: 'active student'
-    graduated_role = create :role, name: 'graduated'
+    graduated_role = create :role, name: 'removed'
     student.roles << student_role
     # When I navigate to a student's page
     visit user_path(student)
 
     # And I select an graduated role
     # And I select Update
-    click_on 'Graduate'
+    click_on 'Removed'
     # Then I land on the same page
     expect(current_path).to eq user_path(student)
     # And the user's status does not show as 'active student'
     expect(page).not_to have_content 'active student'
     # And the user's status now shows as 'graduated'
-    expect(page).to have_content 'graduated'
+    expect(page).to have_content 'removed'
   end
 
   it 'can change a users role from student to exited' do
