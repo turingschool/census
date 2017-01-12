@@ -69,4 +69,27 @@ RSpec.describe 'Admin' do
     # And the user's status now shows as 'exited'
     expect(page).to have_content 'exited'
   end
+
+  it 'can change a users role from applicant to active student' do
+    #   As an admin
+    admin = create :admin
+    sign_in admin
+
+    student = create :user
+    student_role = create :role, name: 'active student'
+    applicant_role = create :role, name: 'applicant'
+    student.roles << applicant_role
+    # When I navigate to a student's page
+    visit user_path(student)
+
+    # And I select an applicant role
+    # And I select Update
+    click_on 'Enroll'
+    # Then I land on the same page
+    expect(current_path).to eq user_path(student)
+    # And the user's status does not show as 'active student'
+    expect(page).not_to have_content 'applicant'
+    # And the user's status now shows as 'applicant'
+    expect(page).to have_content 'active student'
+  end
 end
