@@ -79,14 +79,14 @@ RSpec.describe User, type: :model do
       expect(user.roles).not_to include(applicant)
     end
 
-    it 'can change student to dismissed' do
+    it 'can change student to exited' do
       user = create :user
       student = create :role, name: 'active student'
-      removed = create :role, name: 'removed'
+      exited = create :role, name: 'exited'
       user.roles << student
-      user.change_role('removed')
-      
-      expect(user.roles).to include(removed)
+      user.change_role('exited')
+
+      expect(user.roles).to include(exited)
       expect(user.roles).not_to include(student)
     end
 

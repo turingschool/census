@@ -44,6 +44,7 @@
   <% if @user.roles.where(name: 'active student').exists? %>
     <%= link_to 'Graduate', admin_user_path(@user, role: 'graduated'), method: :patch %>
     <%= link_to 'Discharge', admin_user_path(@user, role: 'discharged'), method: :patch %>
+    <%= link_to 'Exited', admin_user_path(@user, role: 'exited'), method: :patch %>
   <% end %>
 <% end %>
 </div>
