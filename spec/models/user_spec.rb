@@ -45,4 +45,16 @@ RSpec.describe User, type: :model do
     expect(invalid_characters.valid?).to be false
     expect(too_long.valid?).to be false
   end
+
+  it "rejects invalid LinkedIn usernames" do
+    okay = build(:user, linked_in: "calaway")
+    invalid_characters = build(:user, linked_in: "ca!away_")
+    too_short = build(:user, linked_in: "1234")
+    too_long = build(:user, linked_in: "1234567890123456789012345678901")
+
+    expect(okay.valid?).to be true
+    expect(invalid_characters.valid?).to be false
+    expect(too_short.valid?).to be false
+    expect(too_long.valid?).to be false
+  end
 end

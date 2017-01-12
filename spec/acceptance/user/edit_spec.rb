@@ -9,7 +9,7 @@ RSpec.feature 'Edit all user attributes' do
                     slack: "joe_slack",
                     cohort: "1606",
                     twitter: "joe_tweet",
-                    linked_in: "joe_linked_in",
+                    linked_in: "joelinkedin",
                     git_hub: "joe_git")
 
     new_attributes = { first_name: "not_joe",
@@ -18,7 +18,7 @@ RSpec.feature 'Edit all user attributes' do
                        slack: "not_joe_slack",
                        cohort: "1608",
                        twitter: "not_joe_tweet",
-                       linked_in: "not_joe_linked_in",
+                       linked_in: "notjoelinkedin",
                        git_hub: "not_joe_git" }
 
     login(user)
@@ -30,7 +30,7 @@ RSpec.feature 'Edit all user attributes' do
     fill_in "Slack", with: new_attributes[:slack]
     find("option[value='#{new_attributes[:cohort]}']").select_option
     fill_in "user[twitter]", with: new_attributes[:twitter]
-    fill_in "LinkedIn", with: new_attributes[:linked_in]
+    fill_in "user[linked_in]", with: new_attributes[:linked_in]
     fill_in "GitHub", with: new_attributes[:git_hub]
     click_button "Update"
 

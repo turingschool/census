@@ -52,4 +52,25 @@ RSpec.describe 'User visits edit profile page', js: :true do
       expect(page).to have_text("Twitter accepts only alphanumeric and underscore characters.")
     end
   end
+
+  context "they enter an invalid LinkedIn username" do
+    scenario "they are shown a warning and then the update is rejected" do
+      user = create :user, linked_in: ""
+      login user
+
+      visit edit_user_path(user)
+
+      expect(page).to_not have_css(".input-field-error")
+
+      fill_in "user[linked_in]", with: "b@d"
+
+      expect(page).to have_css(".input-field-error")
+
+      click_on "Update"
+
+      expect(user.reload.linked_in).to eq("")
+      expect(page).to have_text("Linked in is too short (minimum is 5 characters).")
+      expect(page).to have_text("Linked in accepts only alphanumeric characters.")
+    end
+  end
 end
