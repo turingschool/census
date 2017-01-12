@@ -67,4 +67,21 @@ class User < ApplicationRecord
     # Remove any "@" symbols from the begining of the string.
     twitter.sub!(/\A@+/,"") if twitter
   end
+
+  def change_role(new_role_name)
+    new_role = Role.find_by(name: new_role_name)
+    errors.add(:roles, :not_found, message: 'not found') if new_role == []
+
+    if new_role_name.in?(['alumni', 'exited', 'removed'])
+      student = roles.find_by(name: 'active student')
+      roles.delete(student) if student
+      roles << new_role
+    end
+
+    if new_role_name == 'active student'
+      applicant = roles.find_by(name: 'applicant')
+      roles.delete(applicant) if applicant
+      roles << new_role
+    end
+  end
 end

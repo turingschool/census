@@ -57,4 +57,26 @@ RSpec.describe User, type: :model do
     expect(too_short.valid?).to be false
     expect(too_long.valid?).to be false
   end
+
+  context 'Role change' do
+    it 'can change students to alumni' do
+      user = create :user
+      student = create :role, name: 'active student'
+      alumni = create :role, name: 'alumni'
+      user.roles << student
+      user.change_role('alumni')
+      expect(user.roles).to include(alumni)
+      expect(user.roles).not_to include(student)
+    end
+
+    it 'can change applicant to student' do
+      user = create :user
+      student = create :role, name: 'active student'
+      applicant = create :role, name: 'applicant'
+      user.roles << applicant
+      user.change_role('active student')
+      expect(user.roles).to include(student)
+      expect(user.roles).not_to include(applicant)
+    end
+  end
 end
