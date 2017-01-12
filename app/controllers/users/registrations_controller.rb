@@ -15,7 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         render file: "/public/404", status: 404, layout: false
       end
     else
-      super
+      render file: "/public/404", status: 404, layout: false
     end
   end
 
@@ -27,6 +27,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       @user.skip_confirmation!
       if @user.save
         session[:invitation_code] = nil
+        flash[:info] = 'You have succesfully signed up! Please log in to continue.'
         redirect_to new_user_session_path
       else
         flash[:error] = @user.errors.full_messages.join(", ")

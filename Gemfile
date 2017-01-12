@@ -18,9 +18,12 @@ gem 'rails_12factor', group: :production
 # Store environment variables on test/development securely
 gem 'figaro'
 
-# User authentication/authorization
+# User authentication and some authorization
 gem 'devise'
 gem 'doorkeeper'
+
+# Authorization
+gem 'cancancan'
 
 # Styling
 gem 'bootstrap-sass'
@@ -31,6 +34,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'launchy'
+  gem 'poltergeist'
   gem 'shoulda-matchers'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
@@ -43,6 +47,7 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
   gem 'listen', '~> 3.0.5'
+  gem 'brakeman', :require => false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

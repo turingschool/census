@@ -25,15 +25,15 @@
 
 <div class="form-group">
   <div class="field">
-    <%= f.label :twitter %><br />
-    <%= f.text_field :twitter, class: "form-control" %><br />
+    <%= f.label :twitter %>  <span id="twitter-hint" class="bg-danger hidden" style="font-style:italic;">(Enter username only. E.g. for "@j3" enter only "j3")</span><br />
+    <%= f.text_field :twitter, class: "form-control", id: "twitter-field" %><br />
   </div>
 </div>
 
 <div class="form-group">
   <div class="field">
-    <%= f.label :linked_in, "LinkedIn" %><br />
-    <%= f.text_field :linked_in, class: "form-control" %><br />
+    <%= f.label :linked_in, "LinkedIn" %>  <span id="linkedin-hint" class="bg-danger hidden" style="font-style:italic;">(Enter username only. E.g. for https://www.linkedin.com/in/jcasimir" enter only "jcasimir")</span><br />
+    <%= f.text_field :linked_in, class: "form-control", id: "linkedin-field" %><br />
   </div>
 </div>
 

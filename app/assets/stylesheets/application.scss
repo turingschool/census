@@ -17,3 +17,11 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
  @import 'bootstrap/theme';
+
+input.input-field-error {
+  background: #ff9999;
+}
+
+.hidden {
+  visibility: hidden;
+}
