@@ -27,6 +27,7 @@ gem 'cancancan'
 
 # Styling
 gem 'bootstrap-sass'
+gem 'rack-cors', require: 'rack/cors'
 
 group :development, :test do
   gem 'byebug', platform: :mri

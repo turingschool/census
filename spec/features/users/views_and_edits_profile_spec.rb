@@ -48,8 +48,8 @@ RSpec.describe 'User visits edit profile page', js: :true do
       click_on "Update"
 
       expect(user.reload.twitter).to eq("")
-      expect(page).to have_text("Twitter is too long (maximum is 15 characters).")
-      expect(page).to have_text("Twitter accepts only alphanumeric and underscore characters.")
+      expect(page).to have_text("Twitter is too long (maximum is 15 characters)")
+      expect(page).to have_text("Twitter accepts only alphanumeric and underscore characters")
     end
   end
 
@@ -69,8 +69,8 @@ RSpec.describe 'User visits edit profile page', js: :true do
       click_on "Update"
 
       expect(user.reload.linked_in).to eq("")
-      expect(page).to have_text("Linked in is too short (minimum is 5 characters).")
-      expect(page).to have_text("Linked in accepts only alphanumeric characters.")
+      expect(page).to have_text("Linked in is too short (minimum is 5 characters)")
+      expect(page).to have_text("Linked in accepts only alphanumeric characters")
     end
   end
 end
