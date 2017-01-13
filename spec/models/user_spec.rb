@@ -74,4 +74,37 @@ RSpec.describe User, type: :model do
 
     expect(user.has_role?('enrolled')).to eq(true)
   end
+
+  context 'Role change' do
+    it 'can change students to graduated' do
+      user = create :user
+      student = create :role, name: 'active student'
+      graduated = create :role, name: 'graduated'
+      user.roles << student
+      user.change_role('graduated')
+      expect(user.roles).to include(graduated)
+      expect(user.roles).not_to include(student)
+    end
+
+    it 'can change applicant to student' do
+      user = create :user
+      student = create :role, name: 'active student'
+      applicant = create :role, name: 'applicant'
+      user.roles << applicant
+      user.change_role('active student')
+      expect(user.roles).to include(student)
+      expect(user.roles).not_to include(applicant)
+    end
+
+    it 'can change student to exited' do
+      user = create :user
+      student = create :role, name: 'active student'
+      exited = create :role, name: 'exited'
+      user.roles << student
+      user.change_role('exited')
+
+      expect(user.roles).to include(exited)
+      expect(user.roles).not_to include(student)
+    end
+  end
 end

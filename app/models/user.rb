@@ -74,4 +74,20 @@ class User < ApplicationRecord
     role = Role.create(name: 'enrolled')
     roles << role
   end
+
+  def change_role(new_role_name)
+    new_role = Role.find_by(name: new_role_name)
+
+    if new_role.name.in?(['graduated', 'exited', 'removed'])
+      student = roles.find_by(name: 'active student')
+      roles.delete(student) if student
+      roles << new_role
+    end
+
+    if new_role.name == 'active student'
+      applicant = roles.find_by(name: 'applicant')
+      roles.delete(applicant) if applicant
+      roles << new_role
+    end
+  end
 end
