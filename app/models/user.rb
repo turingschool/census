@@ -4,7 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-  before_validation :twitter, :sanitize_inputs
+  before_validation :twitter,
+                    :sanitize_inputs,
+                    :set_role
   validates :twitter,
     length: { maximum: 15 },
     format: {
@@ -66,5 +68,10 @@ class User < ApplicationRecord
   def sanitize_inputs
     # Remove any "@" symbols from the begining of the string.
     twitter.sub!(/\A@+/,"") if twitter
+  end
+
+  def set_role
+    role = Role.create(name: 'invited')
+    roles << role
   end
 end

@@ -68,4 +68,10 @@ RSpec.describe User, type: :model do
     expect(too_short.valid?).to be false
     expect(too_long.valid?).to be false
   end
+
+  it "sets its default role before saving" do
+    user = create(:user)
+
+    expect(user.has_role?('invited')).to eq(true)
+  end
 end
