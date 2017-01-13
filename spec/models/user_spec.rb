@@ -44,7 +44,7 @@ RSpec.describe User, type: :model do
 
     users = User.search_by_name("an")
 
-    expect(users).to eq([dan, nate])
+    expect(users.sort).to eq([dan, nate])
   end
 
   it "rejects invalid twitter usernames" do
