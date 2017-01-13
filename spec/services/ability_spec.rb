@@ -26,6 +26,8 @@ RSpec.describe 'User abilities:' do
       expect(ability.can? :read, Group).to eq(true)
       expect(ability.can? :read, Role).to eq(true)
       expect(ability.can? :read, Affiliation).to eq(true)
+      expect(ability.can? :create, Affiliation).to eq(true)
+      expect(ability.can? :update, Affiliation).to eq(true)
       expect(ability.can? :manage, Doorkeeper::Application, user_id: user.id).to eq(true)
 
       expect(ability.can? :delete, User).to eq(false)
@@ -34,8 +36,6 @@ RSpec.describe 'User abilities:' do
       expect(ability.can? :delete, Group).to eq(false)
       expect(ability.can? :manage, Role).to eq(false)
       expect(ability.can? :manage, UserRole).to eq(false)
-      expect(ability.can? :create, Affiliation).to eq(false)
-      expect(ability.can? :update, Affiliation).to eq(false)
       expect(ability.can? :delete, Affiliation).to eq(false)
     end
   end
@@ -73,6 +73,8 @@ RSpec.describe 'User abilities:' do
       expect(ability.can? :read, Group).to eq(true)
       expect(ability.can? :read, Role).to eq(true)
       expect(ability.can? :read, Affiliation).to eq(true)
+      expect(ability.can? :create, Affiliation).to eq(true)
+      expect(ability.can? :update, Affiliation).to eq(true)
       expect(ability.can? :manage, Doorkeeper::Application, user_id: user.id).to eq(true)
 
       expect(ability.can? :delete, User).to eq(false)
@@ -81,8 +83,6 @@ RSpec.describe 'User abilities:' do
       expect(ability.can? :delete, Group).to eq(false)
       expect(ability.can? :manage, Role).to eq(false)
       expect(ability.can? :manage, UserRole).to eq(false)
-      expect(ability.can? :create, Affiliation).to eq(false)
-      expect(ability.can? :update, Affiliation).to eq(false)
       expect(ability.can? :delete, Affiliation).to eq(false)
     end
   end

@@ -3,6 +3,13 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   # before_action :authorize!
 
+  rescue_from CanCan::AccessDenied do |exception|
+    respond_to do |format|
+      format.json { head :not_found }
+      format.html { render file: "/public/404", status: 404, layout: false }
+    end
+  end
+
   protected
   # def current_permission
   #   @current_permission ||= Permission.new(current_user)
