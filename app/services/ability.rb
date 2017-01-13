@@ -17,6 +17,7 @@ class Ability
       can :create, Affiliation
       can :update, Affiliation
       can :manage, Doorkeeper::Application, owner_id: user.id
+      cannot :manage, Invitation
     elsif user.has_role?("exited") || user.has_role?("removed")
       cannot :manage, :all
     else
