@@ -1,5 +1,5 @@
 class Oauth::ApplicationsController < Doorkeeper::ApplicationsController
-  before_action :authenticate_user!
+  authorize_resource class: Doorkeeper::Application
 
   def index
     @applications = current_user.oauth_applications
@@ -21,7 +21,11 @@ class Oauth::ApplicationsController < Doorkeeper::ApplicationsController
   private
 
   def set_application
-    @application = current_user.oauth_applications.find(params[:id])
+    if current_user
+      @application = current_user.oauth_applications.find(params[:id])
+    else
+      render file: "/public/404", status: 404, layout: false
+    end
   end
 
 end

@@ -1,5 +1,6 @@
 class InvitationsController < ApplicationController
   before_action :invitation, only: [:destroy, :update]
+  # authorize_resource
 
   def index
     @invitations = current_user.invitations.last_five_minutes

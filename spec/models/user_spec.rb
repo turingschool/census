@@ -21,9 +21,20 @@ RSpec.describe User, type: :model do
   end
 
   it "can report out its roles" do
-    user = create :user_with_roles
+    user = create :user
 
-    expect(user.list_roles).to eq("dummy_role, dummy_role")
+    expect(user.list_roles).to eq("enrolled")
+  end
+
+  it "can find specific role associated with it" do
+    user = create :user
+    role_1 = create :role, name: "enrolled"
+    role_2 = create :role, name: "active student"
+    user.roles << [role_1, role_2]
+
+    expect(user.has_role?("enrolled")).to be(true)
+    expect(user.has_role?("active student")).to be(true)
+    expect(user.has_role?("admin")).to be(false)
   end
 
   it "can return users by name search" do
@@ -33,7 +44,7 @@ RSpec.describe User, type: :model do
 
     users = User.search_by_name("an")
 
-    expect(users).to eq([dan, nate])
+    expect(users.sort).to eq([dan, nate])
   end
 
   it "rejects invalid twitter usernames" do
@@ -56,5 +67,11 @@ RSpec.describe User, type: :model do
     expect(invalid_characters.valid?).to be false
     expect(too_short.valid?).to be false
     expect(too_long.valid?).to be false
+  end
+
+  it "sets its default role before saving" do
+    user = create(:user)
+
+    expect(user.has_role?('enrolled')).to eq(true)
   end
 end

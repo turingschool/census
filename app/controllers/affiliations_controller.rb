@@ -1,4 +1,6 @@
 class AffiliationsController < ApplicationController
+  authorize_resource
+
   def new
     @user = current_user
   end
