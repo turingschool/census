@@ -1,0 +1,22 @@
+<table class="table table-hover">
+  <tr>
+    <th>Name</th>
+  </tr>
+  <% cohorts.each do |cohort| %>
+    <tr class="cohort">
+      <td><%= cohort.name %></td>
+      <td>
+        <div class="btn-group" role="group">
+          <%#= link_to "Edit",
+              cohort_path(cohort),
+              method: 'put',
+              class: 'btn btn-default' %>
+          <%#= link_to "Delete",
+              cohort_path(cohort),
+              method: 'delete',
+              class: 'btn btn-danger' %>
+        </div>
+      </td>
+    </tr>
+  <% end %>
+</table>
