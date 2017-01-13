@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170113134159) do
+ActiveRecord::Schema.define(version: 20170113134804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,7 +124,6 @@ ActiveRecord::Schema.define(version: 20170113134159) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "slack"
-    t.string   "cohort"
     t.string   "twitter"
     t.string   "linked_in"
     t.string   "git_hub"
@@ -132,6 +131,8 @@ ActiveRecord::Schema.define(version: 20170113134159) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.integer  "cohort_id"
+    t.index ["cohort_id"], name: "index_users_on_cohort_id", using: :btree
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
@@ -145,4 +146,5 @@ ActiveRecord::Schema.define(version: 20170113134159) do
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
+  add_foreign_key "users", "cohorts"
 end
