@@ -71,7 +71,7 @@ class User < ApplicationRecord
   end
 
   def set_role
-    role = Role.create(name: 'invited')
+    role = Role.create(name: 'enrolled')
     roles << role
   end
 end

@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
+  authorize_resource
+
   def index
     if params[:cohort]
       @users = User.where(cohort: params[:cohort])

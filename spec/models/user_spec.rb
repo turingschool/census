@@ -21,9 +21,9 @@ RSpec.describe User, type: :model do
   end
 
   it "can report out its roles" do
-    user = create :user_with_roles
+    user = create :user
 
-    expect(user.list_roles).to eq("dummy_role, dummy_role")
+    expect(user.list_roles).to eq("enrolled")
   end
 
   it "can find specific role associated with it" do
@@ -72,6 +72,6 @@ RSpec.describe User, type: :model do
   it "sets its default role before saving" do
     user = create(:user)
 
-    expect(user.has_role?('invited')).to eq(true)
+    expect(user.has_role?('enrolled')).to eq(true)
   end
 end
