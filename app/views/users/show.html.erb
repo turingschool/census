@@ -1,4 +1,4 @@
-<div class='container'> 
+<div class='container'>
 <h2>Account Profile</h2>
 <table>
   <%= render 'account_profile_row',
@@ -40,5 +40,14 @@
 <%= link_to 'Registered Applications', oauth_applications_path, class: 'btn btn-info' %><br><br>
 <p>View the applications you have given permission to user your data:</p>
 <%= link_to 'Authorized Applications', oauth_authorized_applications_path, class: 'btn btn-success' %>
+<% elsif user_is_admin? %>
+<h3>Change Roles</h3>
+  <% if @user.roles.where(name: 'active student').exists? %>
+    <%= link_to 'Graduated', admin_user_path(@user, role: 'graduated'), method: :patch %>
+    <%= link_to 'Removed', admin_user_path(@user, role: 'removed'), method: :patch %>
+    <%= link_to 'Exited', admin_user_path(@user, role: 'exited'), method: :patch %>
+  <% elsif @user.roles.where(name: 'applicant').exists? %>
+    <%= link_to 'Enroll', admin_user_path(@user, role: 'active student'), method: :patch %>
+  <% end %>
 <% end %>
 </div>
