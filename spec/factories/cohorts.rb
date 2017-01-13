@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :cohort do
-    name "MyString"
+    name { Faker::Number.number(4) }
   end
 end

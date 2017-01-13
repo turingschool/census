@@ -8,6 +8,7 @@ RSpec.describe User, type: :model do
   it { should have_many(:roles).through(:user_roles) }
   it { should have_many(:invitations) }
   it { should have_many(:oauth_applications) }
+  it { should belong_to(:cohort) }
 
   # testing paperclip
   it { should have_attached_file(:image) }
