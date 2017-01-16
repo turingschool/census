@@ -2,21 +2,23 @@ require 'rails_helper'
 
 RSpec.feature 'Edit all user attributes' do
   scenario 'by submitting edit user form' do
-    user = create(  :user,
-                    first_name: "Joe",
-                    last_name: "Shmoe",
-                    email: "jshmoe@example.com",
-                    slack: "joe_slack",
-                    cohort: "1606",
-                    twitter: "joe_tweet",
-                    linked_in: "joelinkedin",
-                    git_hub: "joe_git")
+    cohort_1 = create :cohort
+    cohort_2 = create :cohort
+    user   = create( :user,
+                     first_name: "Joe",
+                     last_name: "Shmoe",
+                     email: "jshmoe@example.com",
+                     slack: "joe_slack",
+                     cohort_id: cohort_1.id,
+                     twitter: "joe_tweet",
+                     linked_in: "joelinkedin",
+                     git_hub: "joe_git")
 
     new_attributes = { first_name: "not_joe",
                        last_name: "not_shmoe",
                        email: "not_jshmoe@example.com",
                        slack: "not_joe_slack",
-                       cohort: "1608",
+                       cohort: cohort_2.id,
                        twitter: "not_joe_tweet",
                        linked_in: "notjoelinkedin",
                        git_hub: "not_joe_git" }

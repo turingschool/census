@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @cohorts = Cohort.all
   end
 
   def update
