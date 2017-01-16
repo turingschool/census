@@ -1,6 +1,8 @@
 <div class="container">
   <h1>All Cohorts</h1>
   <div class="container" id="active-cohorts">
-    <%= render 'shared/cohorts_table', cohorts: Cohort.all %>
+    <%= render 'shared/cohorts_table', cohorts: @cohorts %>
   </div>
+
+  <%= link_to "+ Add Cohort", new_admin_cohort_path, class: "btn btn-info" %>
 </div>
