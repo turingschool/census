@@ -1,5 +1,8 @@
 class Admin::CohortsController < ApplicationController
+  before_action :set_cohort, only: [:show, :update, :destroy, :edit]
+
   def index
+    @cohorts = Cohort.all
   end
 
   def new
@@ -8,18 +11,21 @@ class Admin::CohortsController < ApplicationController
 
   def create
     @cohort = Cohort.new(cohort_params)
+    if @cohort.save
+      redirect_to admin_cohorts_path
+    else
+      flash[:error] = @cohort.errors.full_messages.join(', ')
+      render :new
+    end
   end
 
   def show
-    @cohort = Cohort.find(params[:id])
   end
 
   def edit
-    @cohort = Cohort.find(params[:id])
   end
 
   def update
-    @cohort = Cohort.find(params[:id])
     if @cohort.update_attributes(cohort_params)
       redirect_to admin_cohorts_path
     else
@@ -29,14 +35,19 @@ class Admin::CohortsController < ApplicationController
   end
 
   def destroy
-    if Cohort.delete(params[:id])
-      redirect_to admin_cohorts_path
-    end
+    @cohort.destroy
+
+    flash[:notice] = "Cohort deleted!"
+    redirect_to admin_cohorts_path
   end
 
   private
 
   def cohort_params
-    byebug
+    params.require(:cohort).permit(:name)
+  end
+
+  def set_cohort
+    @cohort = Cohort.find(params[:id])
   end
 end
