@@ -18,7 +18,7 @@ RSpec.feature 'Edit all user attributes' do
                        last_name: "not_shmoe",
                        email: "not_jshmoe@example.com",
                        slack: "not_joe_slack",
-                       cohort: cohort_2.id,
+                       cohort_id: cohort_2.id,
                        twitter: "not_joe_tweet",
                        linked_in: "notjoelinkedin",
                        git_hub: "not_joe_git" }
@@ -30,7 +30,7 @@ RSpec.feature 'Edit all user attributes' do
     fill_in "Last name", with: new_attributes[:last_name]
     fill_in "Email", with: new_attributes[:email]
     fill_in "Slack", with: new_attributes[:slack]
-    find("option[id='#{new_attributes[:cohort_id]}']").select_option
+    find("option[value='#{new_attributes[:cohort_id]}']").select_option
     fill_in "user[twitter]", with: new_attributes[:twitter]
     fill_in "user[linked_in]", with: new_attributes[:linked_in]
     fill_in "GitHub", with: new_attributes[:git_hub]

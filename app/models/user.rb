@@ -91,4 +91,12 @@ class User < ApplicationRecord
       roles << new_role
     end
   end
+
+  def cohort_name
+    if cohort
+      cohort.name
+    else
+      "n/a"
+    end
+  end
 end

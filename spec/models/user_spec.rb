@@ -107,5 +107,18 @@ RSpec.describe User, type: :model do
       expect(user.roles).to include(exited)
       expect(user.roles).not_to include(student)
     end
+
+    it 'knows its own cohort if it belongs to one' do
+      cohort = create :cohort, name: "1606-BE"
+      user = create :user, cohort_id: cohort.id
+
+      expect(user.cohort_name).to eq("1606-BE")
+    end
+
+    it 'reports that it does not belong to a cohort' do
+      user = create :user, cohort_id: nil
+
+      expect(user.cohort_name).to eq("n/a")
+    end
   end
 end
