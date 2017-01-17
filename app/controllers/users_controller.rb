@@ -29,6 +29,7 @@ class UsersController < ApplicationController
       redirect_to user_path(current_user)
     else
       flash[:danger] = @user.errors.full_messages.join(". ")
+      @cohorts = Cohort.all
       render :edit
     end
   end
