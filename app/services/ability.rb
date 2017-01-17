@@ -11,7 +11,7 @@ class Ability
       can :create, User
       can :update, User, id: user.id
       can :read, User
-      can :read, Group
+      can :read, Cohort
       can :read, Role
       can :read, Affiliation
       can :create, Affiliation
