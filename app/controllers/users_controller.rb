@@ -9,7 +9,7 @@ class UsersController < ApplicationController
       @users = User.where(cohort: params[:cohort])
       @header = "Cohort: #{cohort.name}"
     else
-      @users = User.all;
+      @users = User.all
       @header = "Users"
     end
   end
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
                                     :linked_in,
                                     :git_hub,
                                     :slack,
-                                    :cohort,
+                                    :cohort_id,
                                     :image )
     end
 
