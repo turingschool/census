@@ -54,7 +54,11 @@
 <div class="form-group">
   <div class="field">
     <%= f.label :cohort_id %><br />
-    <%= f.select :cohort_id, options_from_collection_for_select(cohorts, "id", "name"), include_blank: true %>
+    <% if @user.cohort %>
+      <%= f.select :cohort_id, options_from_collection_for_select(cohorts, "id", "name", "#{@user.cohort.id}"), include_blank: true %>
+    <% else %>
+      <%= f.select :cohort_id, options_from_collection_for_select(cohorts, "id", "name"), include_blank: true %>
+    <% end %>
   </div>
 </div>
 
