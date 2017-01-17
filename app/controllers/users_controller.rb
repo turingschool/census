@@ -3,9 +3,11 @@ class UsersController < ApplicationController
   authorize_resource
 
   def index
+    @cohorts = Cohort.all
     if params[:cohort]
+      cohort = Cohort.find(params[:cohort])
       @users = User.where(cohort: params[:cohort])
-      @header = "Cohort: #{params[:cohort]}"
+      @header = "Cohort: #{cohort.name}"
     else
       @users = User.all;
       @header = "Users"

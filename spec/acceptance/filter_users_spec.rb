@@ -2,16 +2,15 @@ require 'rails_helper'
 
 RSpec.feature 'Filter users by cohort' do
   scenario 'by selecting cohort from dropdown' do
-    cohort = create(:cohort)
+    cohort   = create(:cohort, name: "1606")
+    cohort_2 = create(:cohort, name: "1608")
     create(:user, cohort_id: cohort.id)
-    user = create(:user, cohort_id: cohort.id)
+    user = create(:user, cohort_id: cohort_2.id)
 
     login(user)
 
-    save_and_open_page
-
     expect(page).to have_css("tr", count: 3)
-    find("option[value='1606']").select_option
+    find("option[value='#{cohort.id}']").select_option
     click_button "Filter"
 
     expect(page).to have_content("Cohort: 1606")
