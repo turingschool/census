@@ -21,7 +21,7 @@ RSpec.describe Api::V1::CredentialsController do
       expect(response).to have_http_status(200)
       expect(response_user["first_name"]).to eq(user["first_name"])
       expect(response_user["last_name"]).to eq(user["last_name"])
-      expect(response_user["cohort"]).to eq(user["cohort"])
+      expect(response_user["cohort"]["id"]).to eq(user["cohort_id"])
       expect(response_user["id"]).to eq(user.id)
     end
   end

@@ -72,7 +72,7 @@ class User < ApplicationRecord
   end
 
   def set_role
-    role = Role.create(name: 'enrolled')
+    role = Role.find_or_create_by(name: 'enrolled')
     roles << role
   end
 

@@ -12,7 +12,6 @@ RSpec.feature "Admin user" do
     click_on "View Cohorts"
     expect(current_path).to eq(admin_cohorts_path)
     within('#active-cohorts') do
-      # expect(('.cohort').count).to eq(3)
       expect(page).to have_content("1606-be")
       expect(page).to have_content("1606-fe")
       expect(page).to have_content("1608-be")
