@@ -7,7 +7,7 @@ RSpec.describe 'OAuth Access Grant' do
 
     visit "/oauth/authorize?client_id=#{application.uid}&response_type=code&redirect_uri=#{application.redirect_uri}"
 
-    expect(page).to have_content 'Log in'
+    expect(page).to have_content 'Log In'
   end
 
   it 'displays grant information to authenticated users' do
@@ -15,7 +15,7 @@ RSpec.describe 'OAuth Access Grant' do
     visit new_user_session_path
     fill_in 'user[email]', with: user.email
     fill_in 'user[password]', with: user.password
-    click_on 'Log in'
+    click_on 'Log In'
 
     application = create :application, name: 'Test App', owner: user
     visit "/oauth/authorize?client_id=#{application.uid}&response_type=code&redirect_uri=#{application.redirect_uri}"
