@@ -7,7 +7,7 @@ RSpec.describe 'OAuth Access Grant' do
 
     visit "/oauth/authorize?client_id=#{application.uid}&response_type=code&redirect_uri=#{application.redirect_uri}"
 
-    expect(page).to have_content 'Log In'
+    expect(page).to have_content 'Log in'
   end
 
   it 'displays grant information to authenticated users' do
