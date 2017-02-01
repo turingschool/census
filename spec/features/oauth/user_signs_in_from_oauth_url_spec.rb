@@ -15,7 +15,7 @@ RSpec.describe 'OAuth Access Grant' do
     visit new_user_session_path
     fill_in 'user[email]', with: user.email
     fill_in 'user[password]', with: user.password
-    click_on 'Log In'
+    click_on 'Log in'
 
     application = create :application, name: 'Test App', owner: user
     visit "/oauth/authorize?client_id=#{application.uid}&response_type=code&redirect_uri=#{application.redirect_uri}"
