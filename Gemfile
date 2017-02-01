@@ -42,6 +42,7 @@ group :development, :test do
   gem 'faker'
   gem 'simplecov', require: false
   gem 'oauth2' #used to simulate client app in testing
+  gem 'phantomjs', :require => 'phantomjs/poltergeist'
 end
 
 group :development do
