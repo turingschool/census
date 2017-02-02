@@ -29,6 +29,7 @@ class User < ApplicationRecord
   has_many :user_roles, dependent: :destroy
   has_many :roles, through: :user_roles
   has_many :invitations
+  belongs_to :cohort
 
   has_many :oauth_applications, class_name: 'Doorkeeper::Application', as: :owner
 
@@ -71,7 +72,7 @@ class User < ApplicationRecord
   end
 
   def set_role
-    role = Role.create(name: 'enrolled')
+    role = Role.find_or_create_by(name: 'enrolled')
     roles << role
   end
 
@@ -88,6 +89,14 @@ class User < ApplicationRecord
       applicant = roles.find_by(name: 'applicant')
       roles.delete(applicant) if applicant
       roles << new_role
+    end
+  end
+
+  def cohort_name
+    if cohort
+      cohort.name
+    else
+      "n/a"
     end
   end
 end
