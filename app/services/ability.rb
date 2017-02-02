@@ -12,6 +12,7 @@ class Ability
       can :update, User, id: user.id
       can :read, User
       can :read, Cohort
+      can :read, Group
       can :read, Role
       can :read, Affiliation
       can :create, Affiliation
@@ -23,6 +24,7 @@ class Ability
     else
       cannot :manage, :all
     end
+
     #
     # The first argument to `can` is the action you are giving the user
     # permission to do.
