@@ -1,0 +1,25 @@
+<table class="table table-hover">
+  <tr>
+    <th>Name</th>
+    <th># of Students</th>
+    <th>Actions</th>
+  </tr>
+  <% cohorts.each do |cohort| %>
+    <tr class="cohort">
+      <td><%= cohort.name %></td>
+      <td><%= cohort.student_count %></td>
+      <td>
+        <div class="btn-group" role="group">
+          <%= link_to "Edit",
+              edit_admin_cohort_path(cohort),
+              class: 'btn btn-default' %>
+          <%= link_to "Delete",
+              admin_cohort_path(cohort),
+              method: 'delete',
+              class: 'btn btn-danger',
+              data: {confirm: "Are you sure?"} %>
+        </div>
+      </td>
+    </tr>
+  <% end %>
+</table>

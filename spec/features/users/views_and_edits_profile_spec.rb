@@ -44,6 +44,7 @@ RSpec.describe 'User visits edit profile page', js: :true do
       login user
 
       visit edit_user_path(user)
+
       fill_in "user[twitter]", with: "s!xteench@r@ctor"
       click_on "Update"
 
