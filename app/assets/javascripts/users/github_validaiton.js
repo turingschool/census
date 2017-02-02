@@ -3,7 +3,7 @@ $( document ).ready(function() {
 });
 
 function validateGithub() {
-  if (this.value.match(/[^a-zA-Z0-9-]/)) {
+  if (this.value.match(/\B@([a-z0-9](?:-?[a-z0-9]){0,38})/)) {
     $(this).addClass('input-field-error')
     $(this).siblings('#github-hint').removeClass('hidden')
   } else {

@@ -12,14 +12,14 @@ RSpec.feature 'Edit all user attributes' do
                     linked_in: "joelinkedin",
                     git_hub: "joe_git")
 
-    new_attributes = { first_name: "not_joe",
-                       last_name: "not_shmoe",
-                       email: "not_jshmoe@example.com",
-                       slack: "not_joe_slack",
+    new_attributes = { first_name: "notjoe",
+                       last_name: "notshmoe",
+                       email: "notjshmoe@example.com",
+                       slack: "notjoe_slack",
                        cohort: "1608",
-                       twitter: "not_joe_tweet",
+                       twitter: "notjoe_tweet",
                        linked_in: "notjoelinkedin",
-                       git_hub: "not_joe_git" }
+                       git_hub: "notjoegit" }
 
     login(user)
     click_link "Account Info"
@@ -27,11 +27,11 @@ RSpec.feature 'Edit all user attributes' do
     fill_in "First name", with: new_attributes[:first_name]
     fill_in "Last name", with: new_attributes[:last_name]
     fill_in "Email", with: new_attributes[:email]
-    fill_in "Slack", with: new_attributes[:slack]
+    fill_in "user[slack]", with: new_attributes[:slack]
     find("option[value='#{new_attributes[:cohort]}']").select_option
     fill_in "user[twitter]", with: new_attributes[:twitter]
     fill_in "user[linked_in]", with: new_attributes[:linked_in]
-    fill_in "GitHub", with: new_attributes[:git_hub]
+    fill_in "user[git_hub]", with: new_attributes[:git_hub]
     click_button "Update"
 
     expect(current_path).to eq(user_path(user))
