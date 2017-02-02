@@ -4,7 +4,7 @@ class InvitationManager
 
   def initialize(params, user, url)
     @role = Role.find_by(name: params[:role])
-    @emails = params[:email].split(", ")
+    @emails = params[:email].split(",").map{|e| e.strip}
     @user = user
     @url = url
     @bad_emails = process_emails if @role
