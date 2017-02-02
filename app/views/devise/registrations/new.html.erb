@@ -10,7 +10,7 @@
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), multipart: true) do |f| %>
         <%= devise_error_messages! %>
 
-        <%= render 'shared/registration_fields', f: f %>
+        <%= render 'shared/registration_fields', f: f, cohorts: @cohorts %>
 
         <div class="form-group">
           <div class="field">

@@ -4,6 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
+    @cohorts = Cohort.all
     if params[:invite_code]
       invitation = invitation(params[:invite_code])
       if invitation
@@ -22,7 +23,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     if valid_invitation_code?
-      @user= User.new(invited_user_params)
+      @user = User.new(invited_user_params)
       @user.roles << invitation(session[:invitation_code]).role
       @user.skip_confirmation!
       if @user.save

@@ -1,5 +1,6 @@
 <div class="container">
   <h1>Admin Dashboard</h1>
+  <%= link_to "View Cohorts", admin_cohorts_path, class: "btn btn-info" %>
   <%= link_to "Invite People", new_invitation_path, class: "btn btn-primary" %>
   <h3>Pending Invitations</h3>
   <div class="container" id="pending-invitations">

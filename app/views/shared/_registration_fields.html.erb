@@ -53,9 +53,12 @@
 
 <div class="form-group">
   <div class="field">
-    <%= f.label :cohort %><br />
-    <!-- TODO figure out how to change this Rails tag into a bootstrap dropdown-select -->
-    <%= f.select :cohort, options_for_select([["Select One", ""], "1606", "1608", "1610", "1611"]) %>
+    <%= f.label :cohort_id %><br />
+    <% if @user.cohort %>
+      <%= f.select :cohort_id, options_from_collection_for_select(cohorts, "id", "name", "#{@user.cohort.id}"), include_blank: true %>
+    <% else %>
+      <%= f.select :cohort_id, options_from_collection_for_select(cohorts, "id", "name"), include_blank: true %>
+    <% end %>
   </div>
 </div>
 

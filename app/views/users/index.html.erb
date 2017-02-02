@@ -1,7 +1,7 @@
 <div class="container">
   <h2><%= @header %></h2>
 
-  <%= render 'cohort_dropdown' %>
+  <%= render 'cohort_dropdown', cohorts: @cohorts %>
 
   <label for="search_by_name">Search by Name:</label>
   <input id="search-by-name" name="search_by_name" type="text" />
