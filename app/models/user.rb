@@ -62,8 +62,8 @@ class User < ApplicationRecord
       "upper(first_name) LIKE ? OR
       upper(last_name) LIKE ?",
       "%#{term.upcase}%",
-      "%#{term.upcase}%"
-    )
+      "%#{term.upcase}%").
+      order(:id)
   end
 
   def sanitize_inputs
