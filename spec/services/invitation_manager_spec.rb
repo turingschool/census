@@ -8,6 +8,21 @@ RSpec.describe InvitationManager do
       role: "mentor" }
   end
 
+  let(:no_space_invitation_params) do
+    { email: "this@example.com,that@example.com",
+      role: "mentor" }
+  end
+
+  let(:space_before_comma_params) do
+    { email: "this@example.com , that@example.com",
+      role: "mentor" }
+  end
+
+  let(:one_email_with_comma) do
+    { email: "this@example.com,",
+      role: "mentor" }
+  end
+
   let(:good_params) do
     { email: "good@example.com", role: "mentor" }
   end
@@ -33,6 +48,27 @@ RSpec.describe InvitationManager do
   it "has a status for bad emails" do
     manager = InvitationManager.new(invitation_params, user, url)
     msg = "1 out of 3 invites sent. Error sending bad_email, bad_example.com."
+
+    expect(manager.status_message).to eq(msg)
+  end
+
+  it "works with space before comma" do
+    manager = InvitationManager.new(space_before_comma_params, user, url)
+    msg = "Your emails are being sent. You will receive a confirmation once this process is complete."
+
+    expect(manager.status_message).to eq(msg)
+  end
+
+  it "works with one email and a comma" do
+    manager = InvitationManager.new(one_email_with_comma, user, url)
+    msg = "Your emails are being sent. You will receive a confirmation once this process is complete."
+
+    expect(manager.status_message).to eq(msg)
+  end
+
+  it "don't need space between emails" do
+    manager = InvitationManager.new(no_space_invitation_params, user, url)
+    msg = "Your emails are being sent. You will receive a confirmation once this process is complete."
 
     expect(manager.status_message).to eq(msg)
   end
