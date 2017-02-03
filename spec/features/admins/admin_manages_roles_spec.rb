@@ -2,11 +2,11 @@ require "rails_helper"
 
 RSpec.feature "admin manages user roles" do
   before :each do
-    # @role1, @role2, @role3 = create_list(:role, 3)
     @roles = create_list(:role, 3)
     admin = create :admin
     sign_in admin
   end
+
   context "admin visits admin dashboard" do
     it "links to role index" do
       visit admin_dashboard_path
@@ -27,6 +27,19 @@ RSpec.feature "admin manages user roles" do
         end
       end
     end
+
+    it "creates a new role" do
+      visit admin_roles_path
+
+      fill_in "Name", with: "NewRole"
+      click_on "Create Role"
+
+      expect(page).to have_content("NewRole")
+    end
+
   end
+
+
+
 
 end
