@@ -2,7 +2,8 @@ require "rails_helper"
 
 RSpec.feature "admin manages user roles" do
   before :each do
-    @role1, @role2, @role3 = create_list(:role, 3)
+    # @role1, @role2, @role3 = create_list(:role, 3)
+    @roles = create_list(:role, 3)
     admin = create :admin
     sign_in admin
   end
@@ -19,9 +20,13 @@ RSpec.feature "admin manages user roles" do
     it "displays all roles" do
       visit admin_roles_path
 
-      expect(page).to have_content(@role1.name)
-      expect(page).to have_content(@role2.name)
-      expect(page).to have_content(@role3.name)
+      @roles.each do |role|
+        expect(page).to have_content(role.name)
+        within(".#{role.name}") do
+          expect(page).to have_content("#{role.users.count}")
+        end
+      end
     end
   end
+
 end
