@@ -24,6 +24,8 @@ RSpec.feature 'Invited user features' do
     invite_path = invite.generate_url(new_user_registration_url)
     visit invite_path
 
+    expect(page).to have_select('user_cohort_id', selected: '1608-BE')
+
     fill_in 'Password', with: 'password'
     fill_in 'Password confirmation', with: 'password'
     fill_in 'First name', with: 'Jeff'
