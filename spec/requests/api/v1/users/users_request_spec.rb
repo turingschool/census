@@ -36,21 +36,23 @@ RSpec.describe Api::V1::UsersController do
   end
   context "Request for user by id is sent _with_ authorization credentials" do
     it "returns info for all users" do
-      test_root_url = "http://www.example.com/"
-      users = create_list(:user, 2)
-      token = create(:access_token, resource_owner_id: users.first.id).token
 
-      get "/api/v1/users/#{users.first.id}", params: {access_token: token}
-      user = JSON.parse(response.body)
+      test_root_url = "http://www.example.com/"
+      user = create(:user)
+      token = create(:access_token, resource_owner_id: user.id).token
+
+      # get "/api/v1/users/#{users.first.id}", params: {access_token: token}
+      get api_v1_user_path(user.id), params: {access_token: token}
+
+      json_user = JSON.parse(response.body)
 
       expect(response).to have_http_status(200)
-      expect(user.count).to eq(1)
 
-      expect(user["first_name"]).to eq(users.first["first_name"])
-      expect(user["last_name"]).to eq(users.first["last_name"])
-      expect(user["cohort"]["id"]).to eq(users.first["cohort_id"])
-      expect(user["image_url"]).to eq(test_root_url + users.first.image.url)
-      expect(user["id"]).to eq(users.first.id)
+      expect(json_user["first_name"]).to eq(user["first_name"])
+      expect(json_user["last_name"]).to eq(user["last_name"])
+      expect(json_user["cohort"]["id"]).to eq(user["cohort_id"])
+      expect(json_user["image_url"]).to eq(test_root_url + user.image.url)
+      expect(json_user["id"]).to eq(user.id)
 
     end
   end

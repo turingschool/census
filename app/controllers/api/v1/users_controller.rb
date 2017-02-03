@@ -6,7 +6,7 @@ class Api::V1::UsersController < Api::V1::ApiController
   end
 
   def show
-    render json: User.find(1), status: 200
+    render json: User.find(params[:id]), root_url: root_url, status: 200
   end
 
 end
