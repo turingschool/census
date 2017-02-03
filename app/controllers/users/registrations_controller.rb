@@ -6,9 +6,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def new
     @cohorts = Cohort.all
     if params[:invite_code]
-      invitation = invitation(params[:invite_code])
+      invite_code = params[:invite_code]
+      invitation = invitation(invite_code)
       if invitation
-        @user = User.new(email: invitation.email)
+        @user = User.new(email: invitation.email, cohort: invitation.cohort)
         @user.skip_confirmation!
         session[:invitation_code] = invitation.invitation_code
         render :new

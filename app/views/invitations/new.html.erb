@@ -2,7 +2,9 @@
 <%= form_for @invitation do |f| %>
   <%= f.label :email, "Emails" %>
   <%= f.text_area :email, placeholder: "Comma separated list of email addresses" %>
-  <%= select_tag :role, options_for_select(["mentor", "invited"]), id: "role-select" %>
   <%= label_tag :role %>
+  <%= select_tag :role, options_for_select(["mentor", "invited"]), id: "role-select" %>
+  <%= label_tag :cohort %>
+  <%= select_tag :cohort, options_for_select(@cohorts), id: "cohort-select" %>
   <%= f.submit "Invite" %>
 <% end %>
