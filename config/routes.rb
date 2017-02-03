@@ -16,15 +16,18 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :users, only: [:index, :show]
+      namespace :users do
+        get '/by_name', to: 'by_name#index'
+      end
+
+      get '/users/:id', to: 'users#show'
+
+      get '/users', to: 'users#index'
 
       get '/user', to: 'credentials#show'
 
       post '/sendgrid/events', to: 'send_grid/events#update'
 
-      namespace :users do
-        get '/by_name', to: 'by_name#index'
-      end
     end
   end
 

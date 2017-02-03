@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Api::V1::UsersController do
   context "Request is sent _without_ authorization credentials" do
     it "returns a 401 (unauthorized) response status" do
-      get "/api/v1/users"
+      get api_v1_users_path
 
       expect(response).to have_http_status(401)
     end
@@ -51,7 +51,7 @@ RSpec.describe Api::V1::UsersController do
       expect(json_user["first_name"]).to eq(user["first_name"])
       expect(json_user["last_name"]).to eq(user["last_name"])
       expect(json_user["cohort"]["id"]).to eq(user["cohort_id"])
-      expect(json_user["image_url"]).to eq(test_root_url + user.image.url)
+      expect(json_user["image_url"]).to eq(user.image.url)
       expect(json_user["id"]).to eq(user.id)
 
     end
