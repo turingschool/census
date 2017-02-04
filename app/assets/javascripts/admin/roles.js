@@ -2,7 +2,7 @@ function onFail(err) {
   console.error(err)
 }
 
-function onRoleSuccess(data) {
+function onRoleUpdate(data) {
   let roleID = data['id'];
   let updatedRoleName = data['name'];
   let roleRow = document.getElementById("role-1");
@@ -23,7 +23,7 @@ function editRole() {
         url: `/api/v1/roles/${roleID}`,
         data: {role: {'name': updatedRoleName}}
       })
-      .done(onRoleSuccess)
+      .done(onRoleUpdate)
       .fail(onFail)
     }
   })
