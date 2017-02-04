@@ -1,11 +1,11 @@
-<table class="table table-hover">
+<table class="table table-hover role-table">
   <tr>
     <th>Name</th>
     <th># of Members</th>
   </tr>
   <% roles.each do |role| %>
-    <tr class="role <%= role.name %>">
-      <td><%= role.name %></td>
+    <tr id="role-<%= role.id %>" class="role <%= role.name %>">
+      <td><p class="role-name"><%= role.name %></p></td>
       <td><%= role.member_count %></td>
     </tr>
   <% end %>
