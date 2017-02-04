@@ -6,7 +6,7 @@ function onRoleUpdate(data) {
   let roleID = data['id'];
   let updatedRoleName = data['name'];
   let updatedRoleMemberCount = data['member_count']
-  let roleRow = document.getElementById("role-1");
+  let roleRow = document.getElementById(`role-${roleID}`);
   roleRow.children[0].innerHTML = `<p class="role-name">${updatedRoleName}</p>`;
   roleRow.children[1].innerHTML = `${updatedRoleMemberCount}`;
 }
@@ -30,6 +30,22 @@ function editRole() {
   })
 }
 
+function deleteRole() {
+  let roleID = this.parentElement.parentElement.id.split('-')[1];
+  $.ajax({
+    method: `DELETE`,
+    url: `/api/v1/roles/${roleID}`,
+  })
+  .done(onRoleDelete)
+  .fail(onFail);
+}
+
 $('.manage-roles-views').ready(function(){
   $('.role-name').on('click', editRole)
+  $('.role-delete-button').on('click', deleteRole)
 })
+
+function onRoleDelete(data){
+  let roleRow = document.getElementById(`role-${data['id']}`);
+  roleRow.outerHTML = ""
+}

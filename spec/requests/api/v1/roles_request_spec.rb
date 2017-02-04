@@ -13,7 +13,7 @@ RSpec.describe "Roles API" do
       patch "/api/v1/roles/#{role.id}", params: params, headers: headers
 
       role = JSON.parse(response.body)
-      binding.pry
+
       expect(response).to have_http_status(200)
     end
 

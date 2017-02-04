@@ -2,11 +2,13 @@
   <tr>
     <th>Name</th>
     <th># of Members</th>
+    <th></th>
   </tr>
   <% roles.each do |role| %>
     <tr id="role-<%= role.id %>" class="role <%= role.name %>">
       <td><p class="role-name"><%= role.name %></p></td>
       <td><%= role.member_count %></td>
+      <td><p class='btn btn-default role-delete-button'>Delete</p></td>
     </tr>
   <% end %>
 </table>

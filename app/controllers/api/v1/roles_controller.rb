@@ -13,7 +13,7 @@ class Api::V1::RolesController < Api::V1::ApiController
   def destroy
     role = Role.find(params[:id])
     if role.destroy
-      render json: "#{role.name} removed".to_json
+      render json: {id: role.id, message: "#{role.name} removed"}.to_json
     else
       render json: "Unable to delete #{role.name}.".to_json, status: 400
     end
