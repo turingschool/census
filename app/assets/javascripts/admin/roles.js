@@ -5,9 +5,10 @@ function onFail(err) {
 function onRoleUpdate(data) {
   let roleID = data['id'];
   let updatedRoleName = data['name'];
+  let updatedRoleMemberCount = data['member_count']
   let roleRow = document.getElementById("role-1");
-  roleRow.children[0].innerHTML = `<p class="role-name">${updatedRoleName}</p>`
-  roleRow.children[1].innerHTML = 'updated'
+  roleRow.children[0].innerHTML = `<p class="role-name">${updatedRoleName}</p>`;
+  roleRow.children[1].innerHTML = `${updatedRoleMemberCount}`;
 }
 
 function editRole() {
