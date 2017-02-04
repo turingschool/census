@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
       get '/users', to: 'users#index'
 
-      get '/user', to: 'credentials#show'
+      get '/user_credentials', to: 'credentials#show'
 
       post '/sendgrid/events', to: 'send_grid/events#update'
 
