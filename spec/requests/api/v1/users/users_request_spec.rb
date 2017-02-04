@@ -35,13 +35,12 @@ RSpec.describe Api::V1::UsersController do
     end
   end
   context "Request for user by id is sent _with_ authorization credentials" do
-    it "returns info for all users" do
+    it "returns info for requested user" do
 
       test_root_url = "http://www.example.com/"
       user = create(:user)
       token = create(:access_token, resource_owner_id: user.id).token
 
-      # get "/api/v1/users/#{users.first.id}", params: {access_token: token}
       get api_v1_user_path(user.id), params: {access_token: token}
 
       json_user = JSON.parse(response.body)
@@ -50,9 +49,14 @@ RSpec.describe Api::V1::UsersController do
 
       expect(json_user["first_name"]).to eq(user["first_name"])
       expect(json_user["last_name"]).to eq(user["last_name"])
-      expect(json_user["cohort"]["id"]).to eq(user["cohort_id"])
-      expect(json_user["image_url"]).to eq(user.image.url)
+      expect(json_user["cohort"]).to eq(user.cohort.name)
+      expect(json_user["image_url"]).to eq(test_root_url + user.image.url)
       expect(json_user["id"]).to eq(user.id)
+      expect(json_user["email"]).to eq(user.email)
+      expect(json_user["slack"]).to eq(user.slack)
+      expect(json_user["twitter"]).to eq(user.twitter)
+      expect(json_user["linked_in"]).to eq(user.linked_in)
+      expect(json_user["git_hub"]).to eq(user.git_hub)
 
     end
   end
