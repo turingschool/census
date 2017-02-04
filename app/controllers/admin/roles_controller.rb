@@ -15,7 +15,6 @@ class Admin::RolesController < ApplicationController
     redirect_to admin_roles_path
   end
 
-
   private
     def role_params
       params.require(:role).permit(:name)

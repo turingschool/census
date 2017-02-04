@@ -23,14 +23,31 @@ RSpec.describe "Roles API" do
     #   role = create(:role)
     #
     #   headers = {"CONTENT-TYPE" => "application/json"}
-    #   params = {role: {id: 275, name: "UpdatedName"}, access_token: token}.to_json
+    #   params = {role: {id: role.id, first_name: "UpdatedName"}, access_token: token}.to_json
     #
-    #   patch "/api/v1/roles/#{275}", params: params, headers: headers
+    #   patch "/api/v1/roles/#{role.id}", params: params, headers: headers
     #
     #   role = JSON.parse(response.body)
     #
     #   expect(response).to have_http_status(400)
     #
     # end
+  end
+
+  context "delete /api/v1/roles/:id" do
+    it "deletes a role" do
+      user = create(:user)
+      token = create(:access_token, resource_owner_id: user.id).token
+      role = create(:role)
+
+      headers = {"CONTENT-TYPE" => "application/json"}
+      params = {access_token: token}.to_json
+
+      delete "/api/v1/roles/#{role.id}", params: params, headers: headers
+
+      role = JSON.parse(response.body)
+
+      expect(response).to be_success
+    end
   end
 end

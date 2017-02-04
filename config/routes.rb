@@ -22,7 +22,8 @@ Rails.application.routes.draw do
 
       post '/sendgrid/events', to: 'send_grid/events#update'
 
-      patch '/roles/:id', to: 'roles#update'
+      patch '/roles/:id',  to: 'roles#update'
+      delete '/roles/:id', to: 'roles#destroy'
       namespace :users do
         get '/by_name', to: 'by_name#index'
       end
