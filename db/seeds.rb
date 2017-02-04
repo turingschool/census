@@ -1,12 +1,12 @@
 Doorkeeper::Application.create(name: "Monocle", redirect_uri: "http://localhost:3001/auth/census/callback", scopes: '')
 
+User.destroy_all
 Affiliation.destroy_all
 Invitation.destroy_all
 Cohort.destroy_all
 Group.destroy_all
 Role.destroy_all
 UserRole.destroy_all
-User.destroy_all
 
 cohort_1608 = [
   "Joey Stansfield",
@@ -28,6 +28,7 @@ Cohort.create(name: "1610-FE")
 
 active_student = Role.find_by(name: "active student")
 admin = Role.find_by(name: "admin")
+applicant = Role.find_by(name: "applicant")
 
 cohort_1608.each do |person|
   first_name = person.split.first
@@ -54,6 +55,15 @@ admin_user = User.new({
   password: "password",
   confirmed_at: DateTime.new()
 })
-
 admin_user.roles << admin
 admin_user.save
+
+applicant_user = User.new({
+  first_name: "Wanna",
+  last_name: "Be",
+  email: "wannabe@example.com",
+  password: "password",
+  confirmed_at: DateTime.new()
+})
+applicant_user.roles << applicant
+applicant_user.save
