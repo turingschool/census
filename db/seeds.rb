@@ -1,64 +1,59 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 Doorkeeper::Application.create(name: "Monocle", redirect_uri: "http://localhost:3001/auth/census/callback", scopes: '')
 
-# Create some users
-cohort_1606 = [
-  "Dan Broadbent",
-  "Ryan Workman",
-  "Calaway Calaway",
-  "Brian Heim",
-  "Brendan Dillon",
-  "Bryan Goss",
-  "Jasmin Hudacsek",
-  "Susi Irwin",
-  "Nate Anderson",
-  "David Davydov",
-  "Raphael Barbo",
-  "Jesse Spevack",
-  "Sonia Gupta",
-  "Jean Joeris"
+Affiliation.destroy_all
+Invitation.destroy_all
+Cohort.destroy_all
+Group.destroy_all
+Role.destroy_all
+UserRole.destroy_all
+User.destroy_all
+
+cohort_1608 = [
+  "Joey Stansfield",
+  "Ali Schlereth",
+  "Brad Green"
 ]
 
-cohort = Cohort.create(name: "1606-BE")
+cohort = Cohort.create(name: "1608-BE")
+Cohort.create(name: "1608-FE")
+Cohort.create(name: "1610-BE")
+Cohort.create(name: "1610-FE")
 
-cohort_1606.each do |person|
+["applicant", "invited", "enrolled", "active student",
+ "on leave", "graduated", "exited", "removed", "mentor", "admin"].each do |role|
+   p "Creating role: '#{role}'... "
+   Role.find_or_create_by(name: role)
+   p "Role #{Role.last.id} has been created with name #{Role.last.name}"
+ end
+
+active_student = Role.find_by(name: "active student")
+admin = Role.find_by(name: "admin")
+
+cohort_1608.each do |person|
   first_name = person.split.first
   last_name = person.split.last
+
   user = User.new({
     first_name: first_name,
     last_name: last_name,
     cohort_id: cohort.id,
-    email: "#{first_name}.#{last_name}@example.com",
-    password: "password1",
+    email: "#{first_name.first.downcase}.#{last_name.first.downcase}@example.com",
+    password: "password",
     confirmed_at: DateTime.new()
   })
+  user.roles << active_student
   if user.save
-    puts "Added #{user.first_name} #{user.last_name} to the Users table."
+    p "Added #{user.first_name} #{user.last_name} to the Users table."
   end
 end
 
-# Create some roles
-["applicant", "invited", "enrolled", "active student",
- "on leave", "graduated", "exited", "removed", "mentor", "admin"].each do |role|
-   print "Creating role: '#{role}'... "
-   Role.find_or_create_by(name: role)
-   print "Role #{Role.last.id} has been created with name '#{Role.last.name}'\n\n"
- end
+admin_user = User.new({
+  first_name: "Ad",
+  last_name: "Min",
+  email: "admin@example.com",
+  password: "password",
+  confirmed_at: DateTime.new()
+})
 
-#make jeff admin
-jeff = User.find_or_create_by(  first_name: "Jeff",
-                                last_name: "Casimir",
-                                email: "jeff@turing.io",
-                                slack: "j3",
-                                twitter: "j3")
-print "Found or created Jeff with id #{jeff.id}.... "
-print "Adding admin role to Jeff.... "
-jeff.roles << Role.find_by(name: "admin")
-print "Jeff now has role: #{jeff.roles.last.name}.\n\n"
+admin_user.roles << admin
+admin_user.save
