@@ -3,7 +3,11 @@ function onFail(err) {
 }
 
 function onRoleSuccess(data) {
-  debugger;
+  let roleID = data['id'];
+  let updatedRoleName = data['name'];
+  let roleRow = document.getElementById("role-1");
+  roleRow.children[0].innerHTML = `<p class="role-name">${updatedRoleName}</p>`
+  roleRow.children[1].innerHTML = 'updated'
 }
 
 function editRole() {
@@ -11,9 +15,9 @@ function editRole() {
   let roleID = this.parentElement.parentElement.id.split('-')[1];
   let roleCell = this.parentElement;
   roleCell.innerHTML = `<input class="role-update" value="${role}">`;
-  let updatedRoleName = document.getElementsByClassName('role-update')[0].value;
   $('input.role-update').on('keypress', function(keypress){
     if (keypress.keyCode == 13) {
+      let updatedRoleName = document.getElementsByClassName('role-update')[0].value;
       $.ajax({
         method: 'PATCH',
         url: `/api/v1/roles/${roleID}`,
