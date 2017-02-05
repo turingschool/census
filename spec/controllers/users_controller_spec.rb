@@ -29,7 +29,7 @@ RSpec.describe UsersController, type: :controller do
 
   context "Logged in user navigates to" do
     before do
-      @user = create :user
+      @user = create :enrolled_user
       sign_in @user
     end
 

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'User creates affiliations' do
   scenario 'by completing the my affiliations form' do
-    user = create(:user)
+    user = create(:enrolled_user)
     group = create(:group)
     create(:group, name: "LGBTTuring")
     login(user)

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'User views account info' do
   scenario 'by visiting user show page' do
-    user = create(:user)
+    user = create(:enrolled_user)
     login(user)
 
     expect(page).to have_content("Users")

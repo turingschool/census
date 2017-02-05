@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :role do
-    name "default"
+    name "enrolled"
   end
 end
