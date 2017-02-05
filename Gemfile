@@ -11,6 +11,8 @@ gem 'jbuilder', '~> 2.5'
 gem "paperclip", "~> 5.0.0"
 gem 'aws-sdk', '~> 2.3'
 gem 'active_model_serializers', '~> 0.10.0'
+gem 'rb-readline'
+gem 'coolline'
 
 # Production debugging
 gem 'rails_12factor', group: :production

@@ -1,0 +1,13 @@
+<div class="container manage-groups-view">
+  <h1>Groups</h1>
+  <div class="container">
+      <%= form_for @group, url: admin_groups_path do |f| %>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+        <%= f.submit "Create Group", class:"btn btn-primary btn-xs" %>
+      <% end %>
+  </div>
+  <div class="container" id="active-groups">
+    <%= render 'shared/groups_table', groups: @groups %>
+  </div>
+</div>

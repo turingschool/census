@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe InvitationManager do
   before(:each) { create :role, name: "mentor" }
+  before(:each) { create :cohort, name: "1608-BE" }
 
   let(:invitation_params) do
     { email: "bad_email, good@example.com, bad_example.com",
@@ -25,6 +26,10 @@ RSpec.describe InvitationManager do
 
   let(:good_params) do
     { email: "good@example.com", role: "mentor" }
+  end
+
+  let(:cohort_params) do
+    { email: "good@example.com", role: "mentor", cohort: "1608-BE" }
   end
 
   let(:user) { create :admin }
@@ -110,5 +115,15 @@ RSpec.describe InvitationManager do
     expect(invite.email).to eq("good@example.com")
     expect(invite.role.name).to eq("mentor")
     expect(invite.status).to eq("mailed")
+  end
+
+  it "adds a cohort if specified" do
+    InvitationManager.new(cohort_params, user, url)
+    invite = Invitation.first
+
+    expect(invite.email).to eq("good@example.com")
+    expect(invite.role.name).to eq("mentor")
+    expect(invite.status).to eq("mailed")
+    expect(invite.cohort.name).to eq("1608-BE")
   end
 end
