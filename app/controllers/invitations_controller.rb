@@ -8,6 +8,7 @@ class InvitationsController < ApplicationController
 
   def new
     @invitation = Invitation.new
+    @cohorts = Cohort.all.map{ |c| c.name }.unshift("")
   end
 
   def create
@@ -32,6 +33,7 @@ class InvitationsController < ApplicationController
     def invitation_params
       whitelist = params.require(:invitation).permit(:email)
       whitelist[:role] = params[:role]
+      whitelist[:cohort] = params[:cohort]
       return whitelist
     end
 
