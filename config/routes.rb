@@ -34,7 +34,7 @@ Rails.application.routes.draw do
     get '/dashboard', to: 'dashboard#show', as: 'dashboard'
     resources :users,  only: [:update]
     resources :roles,  only: [:index, :create]
-    resources :groups, only: [:index]
+    resources :groups, only: [:index, :create]
     resources :cohorts
   end
 
