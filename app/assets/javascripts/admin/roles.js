@@ -3,25 +3,25 @@ function onFail(err) {
 }
 
 function onRoleUpdate(data) {
-  let roleID = data['id'];
-  let updatedRoleName = data['name'];
-  let updatedRoleMemberCount = data['member_count']
-  let roleRow = document.getElementById(`role-${roleID}`);
-  roleRow.children[0].innerHTML = `<p class="role-name">${updatedRoleName}</p>`;
-  roleRow.children[1].innerHTML = `${updatedRoleMemberCount}`;
+  var roleID = data['id'];
+  var updatedRoleName = data['name'];
+  var updatedRoleMemberCount = data['member_count']
+  var roleRow = document.getElementById('role-' + roleID);
+  roleRow.children[0].innerHTML = '<p class="role-name">' + updatedRoleName + '</p>';
+  roleRow.children[1].innerHTML = updatedRoleMemberCount;
 }
 
 function editRole() {
-  let role = this.innerText;
-  let roleID = this.parentElement.parentElement.id.split('-')[1];
-  let roleCell = this.parentElement;
-  roleCell.innerHTML = `<input class="role-update" value="${role}">`;
+  var role = this.innerText;
+  var roleID = this.parentElement.parentElement.id.split('-')[1];
+  var roleCell = this.parentElement;
+  roleCell.innerHTML = '<input class="role-update" value="' + role + '">';
   $('input.role-update').on('keypress', function(keypress){
     if (keypress.keyCode == 13) {
-      let updatedRoleName = document.getElementsByClassName('role-update')[0].value;
+      var updatedRoleName = document.getElementsByClassName('role-update')[0].value;
       $.ajax({
         method: 'PATCH',
-        url: `/api/v1/roles/${roleID}`,
+        url: '/api/v1/roles/' + roleID,
         data: {role: {'name': updatedRoleName}}
       })
       .done(onRoleUpdate)
@@ -31,10 +31,10 @@ function editRole() {
 }
 
 function deleteRole() {
-  let roleID = this.parentElement.parentElement.id.split('-')[1];
+  var roleID = this.parentElement.parentElement.id.split('-')[1];
   $.ajax({
-    method: `DELETE`,
-    url: `/api/v1/roles/${roleID}`,
+    method: 'DELETE',
+    url: '/api/v1/roles/' + roleID,
   })
   .done(onRoleDelete)
   .fail(onFail);
@@ -46,6 +46,6 @@ $('.manage-roles-views').ready(function(){
 })
 
 function onRoleDelete(data){
-  let roleRow = document.getElementById(`role-${data['id']}`);
+  var roleRow = document.getElementById('role-' + data['id']);
   roleRow.outerHTML = ""
 }
