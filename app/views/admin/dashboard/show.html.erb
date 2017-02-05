@@ -2,7 +2,8 @@
   <h1>Admin Dashboard</h1>
   <%= link_to "View Cohorts", admin_cohorts_path, class: "btn btn-info" %>
   <%= link_to "Manage Roles", admin_roles_path, class: "btn btn-primary" %>
-  <%= link_to "Invite People", new_invitation_path, class: "btn btn-info" %>
+  <%= link_to "Manage Groups", admin_groups_path, class: "btn btn-info" %>
+  <%= link_to "Invite People", new_invitation_path, class: "btn btn-primary" %>
   <h3>Pending Invitations</h3>
   <div class="container" id="pending-invitations">
     <%= render 'shared/invitations_table', invitations: Invitation.all %>

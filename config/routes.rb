@@ -32,8 +32,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get '/dashboard', to: 'dashboard#show', as: 'dashboard'
-    resources :users, only: [:update]
-    resources :roles, only: [:index, :create]
+    resources :users,  only: [:update]
+    resources :roles,  only: [:index, :create]
+    resources :groups, only: [:index]
     resources :cohorts
   end
 
