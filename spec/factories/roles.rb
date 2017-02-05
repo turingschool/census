@@ -1,5 +1,9 @@
 FactoryGirl.define do
   factory :role do
-    name "default"
+
+    sequence(:name, (%w[invited enrolled exited mentor graduated removed]).cycle) do |name|
+      "#{name}"
+    end
+
   end
 end
