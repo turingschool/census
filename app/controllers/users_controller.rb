@@ -15,22 +15,16 @@ class UsersController < ApplicationController
   end
 
   def show
-    if current_user.has_role?("admin")
-      @user = User.find(params[:id])
-    end
+    find_user_if_admin
   end
 
   def edit
-    if current_user.has_role?("admin")
-      @user = User.find(params[:id])
-    end
+    find_user_if_admin
     @cohorts = Cohort.all
   end
 
   def update
-    if current_user.has_role?("admin")
-      @user = User.find(params[:id])
-    end
+    find_user_if_admin
     @user.skip_reconfirmation!
     if @user.update_attributes(user_params)
       flash[:success] = "Update was successful."
@@ -58,5 +52,9 @@ class UsersController < ApplicationController
 
     def set_user
       @user = current_user
+    end
+
+    def find_user_if_admin  
+      @user = User.find(params[:id]) if current_user.has_role?("admin")
     end
 end
