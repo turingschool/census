@@ -126,7 +126,6 @@ ActiveRecord::Schema.define(version: 20170203023051) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "slack"
-    t.string   "cohort"
     t.string   "twitter"
     t.string   "linked_in"
     t.string   "git_hub"

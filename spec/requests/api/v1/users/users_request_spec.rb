@@ -23,13 +23,13 @@ RSpec.describe Api::V1::UsersController do
 
       expect(response_users.first["first_name"]).to eq(users.first["first_name"])
       expect(response_users.first["last_name"]).to eq(users.first["last_name"])
-      expect(response_users.first["cohort"]["id"]).to eq(users.first["cohort_id"])
+      expect(response_users.first["cohort"]).to eq(users.first.cohort.name)
       expect(response_users.first["image_url"]).to eq(test_root_url + users.first.image.url)
       expect(response_users.first["id"]).to eq(users.first.id)
 
       expect(response_users.last["first_name"]).to eq(users.last["first_name"])
       expect(response_users.last["last_name"]).to eq(users.last["last_name"])
-      expect(response_users.last["cohort"]["id"]).to eq(users.last["cohort_id"])
+      expect(response_users.last["cohort"]).to eq(users.last.cohort.name)
       expect(response_users.last["image_url"]).to eq(test_root_url + users.last.image.url)
       expect(response_users.last["id"]).to eq(users.last.id)
     end
@@ -39,6 +39,7 @@ RSpec.describe Api::V1::UsersController do
 
       test_root_url = "http://www.example.com/"
       user = create(:user)
+      create_list(:group, 1, name: "dummygroup", users: [user])
       token = create(:access_token, resource_owner_id: user.id).token
 
       get api_v1_user_path(user.id), params: {access_token: token}
@@ -57,6 +58,8 @@ RSpec.describe Api::V1::UsersController do
       expect(json_user["twitter"]).to eq(user.twitter)
       expect(json_user["linked_in"]).to eq(user.linked_in)
       expect(json_user["git_hub"]).to eq(user.git_hub)
+      expect(json_user["groups"].first).to eq(user.groups.first.name)
+      expect(json_user["roles"].first).to eq(user.roles.first.name)
 
     end
   end
