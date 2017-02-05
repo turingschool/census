@@ -4,8 +4,8 @@ RSpec.feature 'Filter users by cohort' do
   scenario 'by selecting cohort from dropdown' do
     cohort   = create(:cohort, name: "1606")
     cohort_2 = create(:cohort, name: "1608")
-    create(:user, cohort_id: cohort.id)
-    user = create(:user, cohort_id: cohort_2.id)
+    create(:enrolled_user, cohort_id: cohort.id)
+    user = create(:enrolled_user, cohort_id: cohort_2.id)
 
     login(user)
 

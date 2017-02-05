@@ -11,4 +11,9 @@ class UserSerializer < ActiveModel::Serializer
       url
     end
   end
+
+  def cohort
+    object.cohort.name
+  end
+
 end

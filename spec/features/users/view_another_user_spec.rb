@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'User profiles' do
   it 'shows another user information' do
-    me = create :user
+    me = create :enrolled_user
     othe = create :user, first_name: 'Andrew', last_name: 'Carmer'
 
     login me
@@ -15,7 +15,7 @@ RSpec.describe 'User profiles' do
   end
 
   it 'prevets another user from editing my infromation' do
-    me = create :user
+    me = create :enrolled_user
     other = create :user, first_name: 'Andrew', last_name: 'Carmer'
 
     login me

@@ -22,7 +22,7 @@ RSpec.describe User, type: :model do
   end
 
   it "can report out its roles" do
-    user = create :user
+    user = create :enrolled_user
 
     expect(user.list_roles).to eq("enrolled")
   end
@@ -68,12 +68,6 @@ RSpec.describe User, type: :model do
     expect(invalid_characters.valid?).to be false
     expect(too_short.valid?).to be false
     expect(too_long.valid?).to be false
-  end
-
-  it "sets its default role before saving" do
-    user = create(:user)
-
-    expect(user.has_role?('enrolled')).to eq(true)
   end
 
   context 'Role change' do

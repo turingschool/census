@@ -23,7 +23,7 @@ RSpec.describe Api::V1::Users::ByNameController do
       expect(response).to have_http_status(200)
       expect(response_users.count).to eq(2)
 
-      expect(response_users.first["cohort"]["id"]).to eq(user1["cohort_id"])
+      expect(response_users.first["cohort"]).to eq(user1.cohort.name)
       expect(response_users.first["image_url"]).to eq(test_root_url + user1.image.url)
     end
   end

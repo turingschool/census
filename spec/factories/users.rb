@@ -15,6 +15,12 @@ FactoryGirl.define do
       end
     end
 
+    factory :enrolled_user do
+      after(:create) do |enrolled_user, _ |
+        create_list(:role, 1, name: "enrolled", users: [enrolled_user])
+      end
+    end
+
     factory :user_with_roles do
       after(:create) do | user_with_roles, _ |
         create_list(:role, 2, name: "dummy_role", users: [user_with_roles])
