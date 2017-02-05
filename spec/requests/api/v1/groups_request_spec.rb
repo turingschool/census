@@ -17,6 +17,7 @@ RSpec.describe "Groups API" do
       expect(response).to have_http_status(200)
       expect(group['name']).to eq("UpdatedName")
       expect(group['id']).to eq(original_group.id)
+      expect(group['member_count']).to eq(original_group.member_count)
     end
 
   end
@@ -25,18 +26,19 @@ RSpec.describe "Groups API" do
     it "deletes a group" do
       user = create(:user)
       token = create(:access_token, resource_owner_id: user.id).token
-      group = create(:group)
+      original_group = create(:group)
 
       headers = {"CONTENT-TYPE" => "application/json"}
       params = {access_token: token}.to_json
 
-      delete "/api/v1/groups/#{group.id}", params: params, headers: headers
+      delete "/api/v1/groups/#{original_group.id}", params: params, headers: headers
 
-      role = JSON.parse(response.body)
+      group = JSON.parse(response.body)
 
       expect(response).to be_success
-      expect(role['id']).to eq(group.id)
-      expect(role['name']).to eq("#{group.name}")
+      expect(group['id']).to eq(original_group.id)
+      expect(group['name']).to eq("#{original_group.name}")
+      expect(group['member_count']).to eq(original_group.member_count)
     end
   end
 end
