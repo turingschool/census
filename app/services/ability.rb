@@ -10,7 +10,7 @@ class Ability
     elsif user.has_role?("mentor") || user.has_role?("active student") || user.has_role?("enrolled")
       can :create, User
       can :update, User, id: user.id
-      can :read, User
+      can :read, User, id: user.id
       can :read, Cohort
       can :read, Group
       can :read, Role

@@ -14,6 +14,11 @@ cohort_1608 = [
   "Brad Green"
 ]
 
+["Turing Lab", "Pahlka", "Joan of Clarke"].each do |name|
+  Group.find_or_create_by(name: name)
+  p "Group #{name} has been created"
+end
+
 cohort = Cohort.create(name: "1608-BE")
 Cohort.create(name: "1608-FE")
 Cohort.create(name: "1610-BE")
@@ -21,7 +26,6 @@ Cohort.create(name: "1610-FE")
 
 ["applicant", "invited", "enrolled", "active student",
  "on leave", "graduated", "exited", "removed", "mentor", "admin"].each do |role|
-   p "Creating role: '#{role}'... "
    Role.find_or_create_by(name: role)
    p "Role #{Role.last.id} has been created with name #{Role.last.name}"
  end
@@ -67,3 +71,13 @@ applicant_user = User.new({
 })
 applicant_user.roles << applicant
 applicant_user.save
+
+accordian = User.new({
+  first_name: "Accordian",
+  last_name: "Player",
+  email: "accordian@example.com",
+  password: "password",
+  confirmed_at: DateTime.new()
+})
+accordian.groups << Group.find_by(name: "Pahlka")
+accordian.save
