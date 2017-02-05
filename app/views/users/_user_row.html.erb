@@ -1,5 +1,9 @@
 <tr class="user">
-  <td class="user-name"><%= link_to "#{user.full_name}", user_path(user) %></td>
+  <% if user_is_admin? %>
+    <td class="user-name"><%= link_to "#{user.full_name}", user_path(user) %></td>
+  <% else %>
+    <td class="user-name"><%= user.full_name %></td>
+  <% end %>
   <td class="user-slack"><%= user.slack %></td>
   <td class="user-cohort"><%= user.cohort_name %></td>
 </tr>
