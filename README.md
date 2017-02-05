@@ -75,6 +75,20 @@ To receive a user by name:
 GET 'https://login.turing.io/api/v1/users/by_name?q=[NAME]'
 ```
 
+To receive a user by ID:
+```
+GET 'https://login.turing.io/api/v1/users/:id'
+```
+
+To receive all users:
+```
+GET 'https://login.turing.io/api/v1/users/'
+```
+
+To receive your own user credentials:
+```
+GET 'https://login.turing.io/api/v1/user_credentials'
+```
 
 ## [Maintainer](#maintainer)
 
