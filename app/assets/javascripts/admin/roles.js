@@ -40,12 +40,12 @@ function deleteRole() {
   .fail(onFail);
 }
 
-$('.manage-roles-views').ready(function(){
-  $('.role-name').on('click', editRole)
-  $('.role-delete-button').on('click', deleteRole)
-})
-
 function onRoleDelete(data){
   let roleRow = document.getElementById(`role-${data['id']}`);
   roleRow.outerHTML = ""
 }
+
+$('.manage-roles-views').ready(function(){
+  $('.role-name').on('click', editRole)
+  $('.role-delete-button').on('click', deleteRole)
+})
