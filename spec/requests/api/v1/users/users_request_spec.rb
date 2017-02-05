@@ -38,7 +38,7 @@ RSpec.describe Api::V1::UsersController do
     it "returns info for requested user" do
 
       test_root_url = "http://www.example.com/"
-      user = create(:user)
+      user = create(:enrolled_user)
       create_list(:group, 1, name: "dummygroup", users: [user])
       token = create(:access_token, resource_owner_id: user.id).token
 

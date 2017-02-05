@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'User logs out' do
   scenario 'by selecting logout' do
-    user = create(:user)
+    user = create(:enrolled_user)
     login(user)
     click_link 'Logout'
 

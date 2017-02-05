@@ -4,7 +4,7 @@ RSpec.feature 'Edit all user attributes' do
   scenario 'by submitting edit user form' do
     cohort_1 = create :cohort
     cohort_2 = create :cohort
-    user   = create( :user,
+    user   = create( :enrolled_user,
                      first_name: "Joe",
                      last_name: "Shmoe",
                      email: "jshmoe@example.com",
