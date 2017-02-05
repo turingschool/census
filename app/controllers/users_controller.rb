@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update]
+  before_action :set_user, only: [:edit, :update, :show]
   authorize_resource
 
   def index
@@ -15,18 +15,26 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    if current_user.has_role?("admin")
+      @user = User.find(params[:id])
+    end
   end
 
   def edit
+    if current_user.has_role?("admin")
+      @user = User.find(params[:id])
+    end
     @cohorts = Cohort.all
   end
 
   def update
+    if current_user.has_role?("admin")
+      @user = User.find(params[:id])
+    end
     @user.skip_reconfirmation!
     if @user.update_attributes(user_params)
       flash[:success] = "Update was successful."
-      redirect_to user_path(current_user)
+      redirect_to user_path(@user)
     else
       flash[:danger] = @user.errors.full_messages.join(". ")
       @cohorts = Cohort.all
