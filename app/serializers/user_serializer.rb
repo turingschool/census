@@ -12,8 +12,8 @@ class UserSerializer < ActiveModel::Serializer
     end
   end
 
-  def cohort
-    object.cohort.name
-  end
+  # def cohort
+  #   object.cohort.name
+  # end
 
 end
