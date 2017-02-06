@@ -15,9 +15,9 @@ function editRole() {
   var role = this.innerText;
   var roleID = this.parentElement.parentElement.id.split('-')[1];
   var roleCell = this.parentElement;
-  roleCell.innerHTML = '<input class="role-update" value="' + role + '" autofocus>';
+  roleCell.innerHTML = '<input class="role-update" value="' + role + '">';
+  document.getElementsByClassName('role-update')[0].focus();
   $('input.role-update').on('blur keypress', function(keypress){
-    debugger;
     if (keypress.keyCode == 13 || keypress.keyCode == null) {
       var updatedRoleName = document.getElementsByClassName('role-update')[0].value;
       $.ajax({
