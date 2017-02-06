@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Oauth Applications' do
   it 'index shows a list of my applications' do
-    me = create :enrolled_user
+    me = create :active_student
     sign_in me
     my_application = create :application, owner: me
 
@@ -12,7 +12,7 @@ RSpec.describe 'Oauth Applications' do
   end
 
   it 'are not visible to other users' do
-    me = create :enrolled_user
+    me = create :active_student
     sign_in me
     other = create :user
     app = create :application, owner: other

@@ -15,7 +15,7 @@ RSpec.describe 'User abilities:' do
   context 'enrolled or active student user' do
     it 'can manage most functionality' do
       user = create :user
-      random_role = ['enrolled', 'active student'].shuffle.pop
+      random_role = ['graduated', 'active student'].shuffle.pop
       role = create :role, name: "#{random_role}"
       user.roles << role
       ability = Ability.new(user)

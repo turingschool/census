@@ -51,7 +51,7 @@ RSpec.describe Oauth::ApplicationsController, type: :controller do
 
   context "Logged in user navigates to" do
     before do
-      @user = create :enrolled_user
+      @user = create :active_student
       sign_in @user
       @app = create :application, owner: @user
     end

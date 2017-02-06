@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "Logged In User Registers New Client OAuth App", type: :feature do
   it "they get a client id and client secret" do
-    user = create :enrolled_user
+    user = create :active_student
     login(user)
 
     visit new_oauth_application_path
@@ -18,7 +18,7 @@ RSpec.feature "Logged In User Registers New Client OAuth App", type: :feature do
   end
 
   it 'sees a useful error if information is missing' do
-    me = create :enrolled_user
+    me = create :active_student
     sign_in me
 
     visit new_oauth_application_path
