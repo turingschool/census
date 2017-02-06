@@ -10,7 +10,7 @@ RSpec.describe Api::V1::CredentialsController do
   end
 
   context "Request is sent _with_ authorization credentials" do
-    it "returns info for all users" do
+    xit "returns info for all users" do
       test_root_url = "http://www.example.com/"
       user = create :user
       token = create(:access_token, resource_owner_id: user.id).token

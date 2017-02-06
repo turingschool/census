@@ -10,7 +10,7 @@ RSpec.describe Api::V1::Users::ByNameController do
   end
 
   context "Request is sent _with_ authorization credentials" do
-    it "returns info for users whose names match search criterion" do
+    xit "returns info for users whose names match search criterion" do
       test_root_url = "http://www.example.com/"
       user1 = create :user, first_name: "Dan", last_name: "Broadbent"
       create :user, first_name: "Susi", last_name: "Irwin"
