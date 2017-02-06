@@ -16,8 +16,9 @@ function editGroup() {
   var groupID = this.parentElement.parentElement.id.split('-')[1];
   var groupCell = this.parentElement;
   groupCell.innerHTML = '<input class="group-update" value="' + group + '">';
-  $('input.group-update').on('keypress', function(keypress){
-    if (keypress.keyCode == 13) {
+  groupCell.children[0].focus();
+  $('input.group-update').on('blur keypress', function(keypress){
+    if (keypress.keyCode == 13 || keypress.keyCode == null) {
       var updatedGroupName = document.getElementsByClassName('group-update')[0].value;
       $.ajax({
         method: 'PATCH',
@@ -46,6 +47,6 @@ function onGroupDelete(data){
 }
 
 $('.manage-groups-views').ready(function(){
-  $('.group-name').on('click', editGroup)
+  $('.group-table').on('click', '.group-name', editGroup)
   $('.group-delete-button').on('click', deleteGroup)
 })

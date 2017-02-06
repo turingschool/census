@@ -16,7 +16,7 @@ function editRole() {
   var roleID = this.parentElement.parentElement.id.split('-')[1];
   var roleCell = this.parentElement;
   roleCell.innerHTML = '<input class="role-update" value="' + role + '">';
-  document.getElementsByClassName('role-update')[0].focus();
+  roleCell.children[0].focus();
   $('input.role-update').on('blur keypress', function(keypress){
     if (keypress.keyCode == 13 || keypress.keyCode == null) {
       var updatedRoleName = document.getElementsByClassName('role-update')[0].value;
