@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170203023051) do
+ActiveRecord::Schema.define(version: 20170206234606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,8 +26,9 @@ ActiveRecord::Schema.define(version: 20170203023051) do
 
   create_table "cohorts", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "status",     default: 0
   end
 
   create_table "groups", force: :cascade do |t|
@@ -126,6 +127,7 @@ ActiveRecord::Schema.define(version: 20170203023051) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "slack"
+    t.string   "cohort"
     t.string   "twitter"
     t.string   "linked_in"
     t.string   "git_hub"
