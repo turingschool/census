@@ -20,6 +20,8 @@ Rails.application.routes.draw do
         get '/by_name', to: 'by_name#index'
       end
 
+      # get '/mentor_ship/users', to: 'mentorship#index'
+
       get '/users/:id', to: 'users#show', as: 'user'
 
       get '/users', to: 'users#index'
