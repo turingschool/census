@@ -61,4 +61,33 @@ RSpec.describe "General Search API" do
 
     end
   end
+  context  "GET api/v1/users/search" do
+    it "searches by group and returns users with first, last and groups" do
+      group_1, group_2 = create_list(:group, 2)
+      users = create_list(:user, 3)
+      users.first.groups << group_1
+      users.second.groups << group_1
+      users.third.groups << group_2
+
+      params = {q: group_1.name}
+      get "/api/v1/users/search_all", params: params
+
+      json_users = JSON.parse(response.body)
+
+      expect(json_users.count).to eq(2)
+
+      first = json_users.any? do |user|
+        user["first_name"] == users.first.first_name
+      end
+
+      last = json_users.any? do |user|
+        user["last_name"] == users.first.last_name
+      end
+
+      expect(first).to be_truthy
+      expect(last).to be_truthy
+      expect(json_users.first["groups"].first).to eq(group_1.name)
+
+    end
+  end
 end

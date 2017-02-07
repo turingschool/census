@@ -7,10 +7,21 @@ class Api::V1::SearchAllController < Api::V1::ApiController
       cohort = Cohort.find_by(name: params[:q])
       users = cohort.users
     elsif ROLES.include?(params["q"])
-      roles = Role.find_by(name: params[:q])
-      users = roles.users
+      role = Role.find_by(name: params[:q])
+      users = role.users
+    elsif groups.include?(params["q"])
+      group = Group.find_by(name: params[:q])
+      users = group.users
     end
     render json: users
+  end
+
+  private
+
+  def groups
+    Group.all.map do |group|
+      group.name
+    end
   end
 
 end
