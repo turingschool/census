@@ -11,7 +11,7 @@ RSpec.feature 'Invitations' do
     expect(current_path).to eq(new_invitation_path)
 
     fill_in 'Emails', with: 'email1@example.com, email2@example.com'
-    select 'mentor', from: 'role'
+    select 'Mentor', from: 'role'
     click_button "Invite"
 
     expect(current_path).to eq(invitations_path)

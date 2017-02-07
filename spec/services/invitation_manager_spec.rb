@@ -6,30 +6,30 @@ RSpec.describe InvitationManager do
 
   let(:invitation_params) do
     { email: "bad_email, good@example.com, bad_example.com",
-      role: "mentor" }
+      role: "Mentor" }
   end
 
   let(:no_space_invitation_params) do
     { email: "this@example.com,that@example.com",
-      role: "mentor" }
+      role: "Mentor" }
   end
 
   let(:space_before_comma_params) do
     { email: "this@example.com , that@example.com",
-      role: "mentor" }
+      role: "Mentor" }
   end
 
   let(:one_email_with_comma) do
     { email: "this@example.com,",
-      role: "mentor" }
+      role: "Mentor" }
   end
 
   let(:good_params) do
-    { email: "good@example.com", role: "mentor" }
+    { email: "good@example.com", role: "Mentor" }
   end
 
   let(:cohort_params) do
-    { email: "good@example.com", role: "mentor", cohort: "1608-BE" }
+    { email: "good@example.com", role: "Mentor", cohort: "1608-BE" }
   end
 
   let(:user) { create :admin }
