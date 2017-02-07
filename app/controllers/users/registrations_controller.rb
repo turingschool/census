@@ -100,7 +100,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         :linked_in,
         :git_hub,
         :slack,
-        :cohort,
+        :cohort_id,
         :password,
         :password_confirmation
       )
