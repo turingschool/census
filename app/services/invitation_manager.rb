@@ -3,8 +3,8 @@ class InvitationManager
               :bad_emails
 
   def initialize(params, user, url)
-    @role = Role.find_by(name: params[:role])
     @cohort = params[:cohort] || ""
+    @role = find_role(params[:role])
     @emails = params[:email].split(",").map{|e| e.strip}
     @user = user
     @url = url
@@ -26,6 +26,26 @@ class InvitationManager
   end
 
   private
+
+    def find_role(role)
+      case role
+
+      when "Student"
+        case Cohort.find_by(name: @cohort).status
+        when "unstarted"
+          return Role.find_by(name: "enrolled")
+        when "active"
+          return Role.find_by(name: "active student")
+        when "finished"
+          return Role.find_by(name: "graduated")
+        end
+
+      when "Mentor"
+        return Role.find_by(name: "mentor")
+      when "Admin"
+        return Role.find_by(name: "admin")
+      end
+    end
 
     def process_emails
       emails.reduce([]) do |bad_emails, email|

@@ -3,7 +3,7 @@
   <%= f.label :email, "Emails" %>
   <%= f.text_area :email, placeholder: "Comma separated list of email addresses" %>
   <%= label_tag :role %>
-  <%= select_tag :role, options_for_select(["mentor", "invited"]), id: "role-select" %>
+  <%= select_tag :role, options_for_select(["Student", "Mentor", "Admin"]), id: "role-select" %>
   <%= label_tag :cohort %>
   <%= select_tag :cohort, options_for_select(@cohorts), id: "cohort-select" %>
   <%= f.submit "Invite" %>

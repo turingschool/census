@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :affiliation do
-    user factory: :enrolled_user
+    user factory: :active_student
     group
   end
 end
