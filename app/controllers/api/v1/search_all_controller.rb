@@ -12,6 +12,9 @@ class Api::V1::SearchAllController < Api::V1::ApiController
     elsif groups.include?(params["q"])
       group = Group.find_by(name: params[:q])
       users = group.users
+    else
+      users = User.where(first_name: params["q"])
+      users = users + User.where(last_name: params["q"])
     end
     render json: users
   end

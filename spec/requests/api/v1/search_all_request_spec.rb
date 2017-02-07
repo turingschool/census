@@ -90,4 +90,58 @@ RSpec.describe "General Search API" do
 
     end
   end
+  context  "GET api/v1/users/search" do
+    it "searches by first_name and returns users with first, last and groups" do
+      user_1 = create(:user, first_name: "brad")
+      user_2 = create(:user, first_name: "brad")
+      user_3 = create(:user, first_name: "ali")
+      group = create(:group, users: [user_1, user_2, user_3])
+
+      params = {q: "brad"}
+      get "/api/v1/users/search_all", params: params
+
+      json_users = JSON.parse(response.body)
+
+      expect(json_users.count).to eq(2)
+
+      first = json_users.all? do |user|
+        user["first_name"] == "brad"
+      end
+
+      last = json_users.any? do |user|
+        user["last_name"] == user_1.last_name
+      end
+
+      expect(first).to be_truthy
+      expect(last).to be_truthy
+      expect(json_users.first["groups"].first).to eq(group.name)
+    end
+  end
+  context  "GET api/v1/users/search" do
+    it "searches by last_name and returns users with first, last and groups" do
+      user_1 = create(:user, last_name: "schlereth")
+      user_2 = create(:user, last_name: "schlereth")
+      user_3 = create(:user, last_name: "green")
+      group = create(:group, users: [user_1, user_2, user_3])
+
+      params = {q: "schlereth"}
+      get "/api/v1/users/search_all", params: params
+
+      json_users = JSON.parse(response.body)
+
+      expect(json_users.count).to eq(2)
+
+      last = json_users.all? do |user|
+        user["last_name"] == "schlereth"
+      end
+
+      first = json_users.any? do |user|
+        user["first_name"] == user_1.first_name
+      end
+
+      expect(first).to be_truthy
+      expect(last).to be_truthy
+      expect(json_users.first["groups"].first).to eq(group.name)
+    end
+  end
 end
