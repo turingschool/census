@@ -2,18 +2,20 @@
   <tr>
     <th>Name</th>
     <th># of Students</th>
+    <th>Status</th>
     <th>Actions</th>
   </tr>
   <% cohorts.each do |cohort| %>
     <tr class="cohort">
       <td><%= cohort.name %></td>
       <td><%= cohort.student_count %></td>
+      <td><%= cohort.status %></td>
       <td>
         <div class="btn-group" role="group">
           <% if cohort.status == "unstarted" %>
-            <%= link_to "Start", "", class: "btn btn-warning" %>
+            <%= link_to "Start", admin_cohort_path(cohort, status: "active"), method: 'put', class: "btn btn-warning" %>
           <% elsif cohort.status == "active" %>
-            <%= link_to "Finish", "", class: "btn btn-warning" %>
+            <%= link_to "Finish", admin_cohort_path(cohort, status: "finished"), method: 'put', class: "btn btn-warning" %>
           <% end %>
           <%= link_to "Edit",
               edit_admin_cohort_path(cohort),

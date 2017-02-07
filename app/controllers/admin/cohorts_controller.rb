@@ -44,7 +44,7 @@ class Admin::CohortsController < ApplicationController
   private
 
   def cohort_params
-    params.require(:cohort).permit(:name)
+    params.permit(:name, :status)
   end
 
   def set_cohort
