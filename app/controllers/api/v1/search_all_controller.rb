@@ -3,28 +3,41 @@ class Api::V1::SearchAllController < Api::V1::ApiController
           "graduated", "exited", "removed", "mentor", "admin"]
 
   def index
-    if params["q"].count("0-9") > 0
-      cohort = Cohort.find_by(name: params[:q])
-      users = cohort.users
-    elsif ROLES.include?(params["q"])
-      role = Role.find_by(name: params[:q])
-      users = role.users
-    elsif groups.include?(params["q"])
-      group = Group.find_by(name: params[:q])
-      users = group.users
-    else
-      users = User.where(first_name: params["q"])
-      users = users + User.where(last_name: params["q"])
+    users = User.none
+    cohorts = Cohort.where(
+      "upper(name) LIKE ?",
+      "%#{params["q"].upcase}%"
+      )
+    cohorts.each do |cohort|
+      users += cohort.users
     end
+
+    roles = Role.where(
+      "upper(name) LIKE ?",
+      "%#{params["q"].upcase}%"
+      )
+
+    roles.each do |role|
+      users += role.users
+    end
+
+    groups = Group.where(
+      "upper(name) LIKE ?",
+      "%#{params["q"].upcase}%"
+      )
+
+    groups.each do |group|
+      users += group.users
+    end
+
+    users += User.where(
+      "upper(first_name) LIKE ? OR
+      upper(last_name) LIKE ?",
+      "%#{params["q"].upcase}%",
+      "%#{params["q"].upcase}%"
+      )
+
     render json: users
-  end
-
-  private
-
-  def groups
-    Group.all.map do |group|
-      group.name
-    end
   end
 
 end
