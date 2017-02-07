@@ -13,4 +13,27 @@ RSpec.describe Cohort, type: :model do
 
     expect(cohort.student_count).to eq(3)
   end
+
+  it "can update student roles" do
+    cohort = create :cohort, name: "1608-BE"
+    user = create :enrolled_user, cohort: cohort
+    create :role, name: "active student"
+    create :role, name: "graduated"
+
+    cohort.update_student_roles("active")
+    expect(user.roles.first.name).to eq("active student")
+  end
+
+  it "doesn't update students with wonky roles" do
+    cohort = create :cohort, name: "1608-BE"
+    create :role, name: "active student"
+    create :role, name: "graduated"
+    create :role, name: "enrolled"
+    exited = create :role, name: "exited"
+    user = create :user, cohort: cohort
+    user.roles << exited
+
+    cohort.update_student_roles("active")
+    expect(user.roles.first.name).to eq("exited")
+  end
 end
