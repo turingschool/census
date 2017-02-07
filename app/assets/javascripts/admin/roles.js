@@ -16,8 +16,9 @@ function editRole() {
   var roleID = this.parentElement.parentElement.id.split('-')[1];
   var roleCell = this.parentElement;
   roleCell.innerHTML = '<input class="role-update" value="' + role + '">';
-  $('input.role-update').on('keypress', function(keypress){
-    if (keypress.keyCode == 13) {
+  roleCell.children[0].focus();
+  $('input.role-update').on('blur keypress', function(keypress){
+    if (keypress.keyCode == 13 || keypress.keyCode == null) {
       var updatedRoleName = document.getElementsByClassName('role-update')[0].value;
       $.ajax({
         method: 'PATCH',
@@ -41,7 +42,7 @@ function deleteRole() {
 }
 
 $('.manage-roles-views').ready(function(){
-  $('.role-name').on('click', editRole)
+  $('.role-table').on('click', '.role-name', editRole)
   $('.role-delete-button').on('click', deleteRole)
 })
 

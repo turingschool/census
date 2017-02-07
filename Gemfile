@@ -14,6 +14,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'sprockets', '~> 3.0'
 gem 'rb-readline'
 gem 'coolline'
+gem 'active_designer'
 
 # Production debugging
 gem 'rails_12factor', group: :production
