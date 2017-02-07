@@ -26,12 +26,18 @@ RSpec.describe Api::V1::UsersController do
       expect(response_users.first["cohort"]["name"]).to eq(users.first.cohort.name)
       expect(response_users.first["image_url"]).to eq(test_root_url + users.first.image.url)
       expect(response_users.first["id"]).to eq(users.first.id)
+      expect(response_users.first["email"]).to eq(users.first.email)
+      expect(response_users.first["slack"]).to eq(users.first.slack)
+      expect(response_users.first["roles"]).to eq([])
 
       expect(response_users.last["first_name"]).to eq(users.last["first_name"])
       expect(response_users.last["last_name"]).to eq(users.last["last_name"])
       expect(response_users.last["cohort"]["name"]).to eq(users.last.cohort.name)
       expect(response_users.last["image_url"]).to eq(test_root_url + users.last.image.url)
       expect(response_users.last["id"]).to eq(users.last.id)
+      expect(response_users.last["email"]).to eq(users.last.email)
+      expect(response_users.last["slack"]).to eq(users.last.slack)
+      expect(response_users.last["roles"]).to eq([])
     end
   end
   context "Request for user by id is sent _with_ authorization credentials" do
