@@ -24,6 +24,7 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    active_designer (0.0.3)
     active_model_serializers (0.10.4)
       actionpack (>= 4.1, < 6)
       activemodel (>= 4.1, < 6)
@@ -284,6 +285,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_designer
   active_model_serializers (~> 0.10.0)
   aws-sdk (~> 2.3)
   bootstrap-sass
