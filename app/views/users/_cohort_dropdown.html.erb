@@ -1,5 +1,5 @@
 <%= form_tag("/users", method: "get") do %>
   <%= label_tag :cohort %>
-  <%= select_tag :cohort, options_from_collection_for_select(cohorts, "id", "name") %>
+  <%= select_tag :cohort, options_from_collection_for_select(cohorts, "id", "name"), class: "pretty-select" %>
   <%= submit_tag "Filter", class: "btn btn-default btn-sm" %>
 <% end %>
