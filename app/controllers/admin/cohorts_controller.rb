@@ -26,6 +26,7 @@ class Admin::CohortsController < ApplicationController
   end
 
   def update
+    @cohort.update_student_roles(params[:status]) if params[:status]
     if @cohort.update_attributes(cohort_params)
       redirect_to admin_cohorts_path
     else
