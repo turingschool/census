@@ -21,7 +21,7 @@ RSpec.feature 'Edit all user attributes' do
                        cohort_id: cohort_2.id,
                        twitter: "not_joe_tweet",
                        linked_in: "notjoelinkedin",
-                       git_hub: "not_joe_git" }
+                       git_hub: "notjoegit" }
 
     login(user)
     click_link "Account Info"
