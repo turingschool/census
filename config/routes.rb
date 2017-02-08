@@ -43,6 +43,9 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    namespace :roles do
+      get '/users', to: 'users#edit', as: 'users_edit'
+    end
     get '/dashboard', to: 'dashboard#show', as: 'dashboard'
     resources :users,  only: [:update]
     resources :roles,  only: [:index, :create]

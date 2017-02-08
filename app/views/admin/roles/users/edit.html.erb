@@ -1,0 +1,24 @@
+<div class="row">
+  Find: <input type="search" id="search-box">
+</div>
+
+<div class="row">
+  Table goes here
+</div>
+
+<div class="row">
+  <select>
+    <option value="Add">Add Role(s)</option>
+    <option value="Delete">Remove Role(s)</option>
+  </select>
+</div>
+
+<div class="row">
+  <% @roles.each do |role| %>
+    <input type="checkbox" id="role-<%=role.id%>" value="role-<%=role.name%>"> <label><%= role.name %></label>
+  <% end %>
+</div>
+
+<div class="row">
+  <button type="button">Save</button>
+</div>
