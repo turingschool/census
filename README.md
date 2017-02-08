@@ -13,9 +13,12 @@
   - [Paperclip gem](#paperclip)
 - [Installation](#installation)
 - [API Endpoints](#api-endpoints)
-- [Register and Application](#register)
+- [Register an Application](#register)
   - [Gems](#gems)
   - [Common Issues](#issues)
+- [Roles](#roles)
+  - [Permissions](#permissions)
+  - [Flags](#flags)
 - [Maintainer](#maintainer)
     - [Original Contributors](#original-contributors)
 - [Contribute](#contribute)
@@ -93,7 +96,7 @@ To receive your own user credentials:
 GET 'https://census-app-staging/api/v1/user_credentials'
 ```
 
-## [Register an Application to use OAuth with Census](#register)
+## [Register an Application](#register)
 Census uses [Devise](https://github.com/plataformatec/devise) and [Doorkeeper](https://github.com/doorkeeper-gem/doorkeeper) to manage authentication.
 
 ### [Gems](#gems)
@@ -105,6 +108,32 @@ Currently, there are 2 gems to help you set up OAuth, one for [staging](https://
   
 * Expiring Tokens
   - Be aware that tokens expire every 90 days. Doorkeeper provides a way to grab a refresh token so your session isn't interupted.
+
+## [Roles](#roles)
+Some roles are just a flag for querying, others define your permissions on the site. Below is a list of all the currently available roles.
+<br>
+Note that the staging server is messy and roles may be incorrect for some users. Contact an admin if you need to change your permissions.
+
+### [Permissions](#permissions)
+* Admin
+  - Can crud all aspects of users.
+  - Can manage applications
+  
+* Staff / Active Student / Graduated / Mentor
+  - Can read and update their own personal info.
+  - Can join public groups.
+  - Can read cohort information (view cohort pages).
+  - Can manage applications
+  
+* Enrolled
+  - Can read and update their own personal info.
+  - Can read cohort information (view cohort pages).
+  
+* Exited / Removed
+  - Can't do anything
+  
+### [Flags](#flags)
+* Instructor
 
 ## [Maintainer](#maintainer)
 
