@@ -99,4 +99,56 @@ class User < ApplicationRecord
       "n/a"
     end
   end
+
+  def self.search_all(query)
+    users = User.none
+    users += search_cohorts(query)
+    users += search_roles(query)
+    users += search_groups(query)
+    users += search_users(query)
+    users.flatten
+  end
+
+  def self.search_cohorts(query)
+    cohorts = Cohort.where(
+      "upper(name) LIKE ?",
+      "%#{query.upcase}%"
+      )
+    users = cohorts.map do |cohort|
+      cohort.users
+    end
+  end
+
+  def self.search_roles(query)
+    roles = Role.where(
+      "upper(name) LIKE ?",
+      "%#{query.upcase}%"
+      )
+
+    users = roles.map do |role|
+      role.users
+    end
+
+  end
+
+  def self.search_groups(query)
+    groups = Group.where(
+      "upper(name) LIKE ?",
+      "%#{query.upcase}%"
+      )
+    users = groups.map do |group|
+      group.users
+    end
+  end
+
+  def self.search_users(query)
+    User.where(
+      "upper(first_name) LIKE ? OR
+      upper(last_name) LIKE ?",
+      "%#{query.upcase}%",
+      "%#{query.upcase}%"
+      )
+  end
+
+
 end
