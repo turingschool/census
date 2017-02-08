@@ -1,24 +1,41 @@
-<div class="row">
-  Find: <input type="search" id="search-box">
-</div>
+<div class="admin-edit-user-roles">
 
-<div class="row">
-  Table goes here
-</div>
+  <div class="row">
+    Find: <input type="search" id="search-box">
+  </div>
 
-<div class="row">
-  <select>
-    <option value="Add">Add Role(s)</option>
-    <option value="Delete">Remove Role(s)</option>
-  </select>
-</div>
+  <div class="row">
+    <table class="table table-hover role-table">
+      <thead>
+        <tr>
+          <th>First</th>
+          <th>Last</th>
+          <th>Cohort</th>
+          <th>Roles</th>
+        </tr>
+      </thead>
+      <tbody>
 
-<div class="row">
-  <% @roles.each do |role| %>
-    <input type="checkbox" id="role-<%=role.id%>" value="role-<%=role.name%>"> <label><%= role.name %></label>
-  <% end %>
-</div>
+      </tbody>
 
-<div class="row">
-  <button type="button">Save</button>
+    </table>
+  </div>
+
+  <div class="row">
+    <select>
+      <option value="Add">Add Role(s)</option>
+      <option value="Delete">Remove Role(s)</option>
+    </select>
+  </div>
+
+  <div class="row">
+    <% @roles.each do |role| %>
+      <input type="checkbox" id="role-<%=role.id%>" value="role-<%=role.name%>"> <label><%= role.name %></label>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <button type="button">Save</button>
+  </div>
+
 </div>
