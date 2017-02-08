@@ -76,6 +76,8 @@ rails server
 ```
 ## [API Endpoints](#api-endpoints)
 
+To hit the Census API, you need to send an `access_token` as a param. This is the token that you get back with the users credentials during the OAuth handshake.
+
 To receive a user by name:
 ```
 GET 'https://census-app-staging/api/v1/users/by_name?q=[NAME]'
@@ -89,6 +91,28 @@ GET 'https://census-app-staging/api/v1/users/:id'
 To receive all users:
 ```
 GET 'https://census-app-staging/api/v1/users/'
+```
+
+The user endpoints return JSON in this format:
+```
+{
+  "id": 55,
+  "first_name": "Channa",
+  "last_name": "Golan",
+  "cohort": "1608-BE",
+  "image_url": "https://census-app-staging.herokuapp.com/images/original/missing.png",
+  "email": "Channa.Golan@example.com",
+  "slack": "",
+  "twitter": "",
+  "linked_in": "",
+  "git_hub": "",
+  "groups": [],
+  "roles": [
+    "invited",
+    "enrolled",
+    "active student"
+  ]
+}
 ```
 
 To receive your own user credentials:
