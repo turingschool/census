@@ -24,7 +24,7 @@ Cohort.create(name: "1608-FE")
 Cohort.create(name: "1610-BE")
 Cohort.create(name: "1610-FE")
 
-["enrolled", "active student", "graduated", "exited", "removed", "mentor", "admin"].each do |role|
+["enrolled", "active student", "graduated", "exited", "removed", "mentor", "admin", "staff", "instructor"].each do |role|
    Role.find_or_create_by(name: role)
    p "Role #{Role.last.id} has been created with name #{Role.last.name}"
  end
