@@ -13,6 +13,9 @@
   - [Paperclip gem](#paperclip)
 - [Installation](#installation)
 - [API Endpoints](#api-endpoints)
+- [Register and Application](#register)
+  - [Gems](#gems)
+  - [Common Issues](#issues)
 - [Maintainer](#maintainer)
     - [Original Contributors](#original-contributors)
 - [Contribute](#contribute)
@@ -89,6 +92,19 @@ To receive your own user credentials:
 ```
 GET 'https://census-app-staging/api/v1/user_credentials'
 ```
+
+## [Register an Application to use OAuth with Census](#register)
+Census uses [Devise](https://github.com/plataformatec/devise) and [Doorkeeper](https://github.com/doorkeeper-gem/doorkeeper) to manage authentication.
+
+### [Gems](#gems)
+Currently, there are 2 gems to help you set up OAuth, one for [staging](https://github.com/NZenitram/census_staging_oauth) and one for [production](https://github.com/turingschool-projects/omniauth-census). Soon, we will add a configuation option so you don't need to change your gemfile before pushing to production.
+
+### [Common Issues](#issues)
+* HTTPS
+  - Census only allows authentication from a secure connection. This won't be a problem on a Heroku server, but it's a bit of a headache on localhost. In order to test OAuth locally, you need to create an ssl certificate and run a local server "securly." Luckily, Nick Martinez wrote a great [tutorial](https://github.com/NZenitram/census_staging_oauth) to make this work in the "Important Stuff" section of the oauth staging gem.
+  
+* Expiring Tokens
+  - Be aware that tokens expire every 90 days. Doorkeeper provides a way to grab a refresh token so your session isn't interupted.
 
 ## [Maintainer](#maintainer)
 
