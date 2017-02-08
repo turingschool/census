@@ -76,7 +76,7 @@ rails server
 ```
 ## [API Endpoints](#api-endpoints)
 
-To hit the Census API, you need to send an `access_token` as a param. This is the token that you get back with the users credentials during the OAuth handshake.
+To hit the Census API, you need to send an `access_token` as a param. This is the token that you get back with the users credentials during the OAuth handshake. That will look something like `user_credentials['token']` depending on the variable that you use to store the response.
 
 To receive a user by name:
 ```
