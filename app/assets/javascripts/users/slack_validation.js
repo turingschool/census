@@ -3,7 +3,7 @@ $( document ).ready(function() {
 });
 
 function validateSlack() {
-  if (this.value.match(/[^a-zA-Z0-9-.]/)) {
+  if (this.value.match(/[^a-z0-9-.]/)) {
     $(this).addClass('input-field-error')
     $(this).siblings('#slack-hint').removeClass('hidden')
   } else {
