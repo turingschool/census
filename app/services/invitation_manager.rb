@@ -28,23 +28,32 @@ class InvitationManager
   private
 
     def find_role(role)
-      case role
-
-      when "Student"
-        case Cohort.find_by(name: @cohort).status
-        when "unstarted"
-          return Role.find_by(name: "enrolled")
-        when "active"
-          return Role.find_by(name: "active student")
-        when "finished"
-          return Role.find_by(name: "graduated")
-        end
-
-      when "Mentor"
-        return Role.find_by(name: "mentor")
-      when "Admin"
-        return Role.find_by(name: "admin")
+      if role == "Student"
+        set_role_for_student
+      elsif role == "Mentor"
+        set_role_for_mentor
+      elsif role == "Admin"
+        set_role_for_admin
       end
+    end
+
+    def set_role_for_student
+      cohort_status = Cohort.find_by(name: @cohort).status
+      Role.find_by(name: role_key[cohort_status])
+    end
+
+    def set_role_for_mentor
+      Role.find_by(name: "mentor")
+    end
+
+    def set_role_for_admin
+      Role.find_by(name: "admin")
+    end
+
+    def role_key
+      { "unstarted" => "enrolled",
+        "active" => "active student",
+        "finished" => "graduated" }
     end
 
     def process_emails
