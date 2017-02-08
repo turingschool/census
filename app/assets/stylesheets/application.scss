@@ -25,3 +25,33 @@ input.input-field-error {
 .hidden {
   visibility: hidden;
 }
+
+.pretty-select {
+  width: 100px;
+  border: .5px solid grey;
+  box-shadow: none;
+  margin: 10px;
+}
+
+.cohort-filter {
+  margin: 10px;
+}
+
+.search-by-name {
+  margin: 10px;
+}
+
+#search-by-name {
+  margin: 10px;
+  border-radius: 3px;
+  width: 20%;
+}
+
+.emails-input {
+  width: 40%;
+  margin-bottom: 10px;
+}
+
+.acct-info {
+  width: 50%;
+}

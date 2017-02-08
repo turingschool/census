@@ -10,7 +10,6 @@ class UsersController < ApplicationController
       @header = "Cohort: #{cohort.name}"
     else
       @users = User.all
-      @header = "Users"
     end
   end
 
@@ -54,7 +53,7 @@ class UsersController < ApplicationController
       @user = current_user
     end
 
-    def find_user_if_admin  
+    def find_user_if_admin
       @user = User.find(params[:id]) if current_user.has_role?("admin")
     end
 end
