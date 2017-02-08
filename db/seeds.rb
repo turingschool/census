@@ -1,8 +1,8 @@
 Doorkeeper::Application.create(name: "Monocle", redirect_uri: "http://localhost:3001/auth/census/callback", scopes: '')
 
+Invitation.destroy_all
 User.destroy_all
 Affiliation.destroy_all
-Invitation.destroy_all
 Cohort.destroy_all
 Group.destroy_all
 Role.destroy_all
