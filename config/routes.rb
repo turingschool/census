@@ -20,6 +20,11 @@ Rails.application.routes.draw do
         get '/by_name', to: 'by_name#index'
 
         get '/search_all', to: 'search_all#index'
+
+        patch '/add_roles', to: 'roles#add'
+
+        patch '/remove_roles', to: 'roles#remove'
+
       end
 
       # get '/mentor_ship/users', to: 'mentorship#index'
@@ -43,6 +48,9 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    namespace :roles do
+      get '/users', to: 'users#edit', as: 'users_edit'
+    end
     get '/dashboard', to: 'dashboard#show', as: 'dashboard'
     resources :users,  only: [:update]
     resources :roles,  only: [:index, :create]
