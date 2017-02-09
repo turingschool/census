@@ -26,11 +26,15 @@ function appendUsers(data) {
         roles+=(role["name"]+", ")
       })
       var cleanRoles = roles.slice(0,-2);
+      var cohort = "";
+      if (user["cohort"] != null) {
+        cohort = user["cohort"]["name"]
+      }
       userTable.append('<tr data-user-id='+user["id"]+'>'+
         '<td class="selected-user"><input type="checkbox"</td>'+
         '<td>'+user["first_name"]+'</td>'+
         '<td>'+user["last_name"]+'</td>'+
-        '<td>'+user["cohort"]["name"]+'</td>'+
+        '<td>'+cohort+'</td>'+
         '<td>'+cleanRoles+'</td>'+
       '</tr>')
     }
