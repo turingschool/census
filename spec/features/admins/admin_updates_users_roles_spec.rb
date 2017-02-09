@@ -12,7 +12,7 @@ RSpec.describe "Admin updates users' roles" do
       visit admin_roles_users_edit_path
 
       expect(page).to have_content("Find")
-      expect(page).to have_css('#search-box')
+      expect(page).to have_css('#searchBox')
       expect(page).to have_content("Add Role(s)")
       expect(page).to have_content(role_1.name)
       expect(page).to have_content(role_2.name)
