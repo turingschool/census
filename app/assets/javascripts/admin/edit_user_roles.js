@@ -1,7 +1,8 @@
 $('.admin-edit-user-roles').ready(function() {
-  $('#searchBox').on('blur keypress', function(keypress) {
-    if (keypress.keyCode == 13 || keypress.keyCode == null) {
+  $('#searchBox').on('keypress', function(keypress) {
+    if (keypress.keyCode == 13) {
       var searchParams = $(this).val();
+      clearUnchecked();
       fetchUsers(searchParams);
     }
   })
@@ -54,4 +55,11 @@ function userNotInTable(id) {
     }
   })
   return present
+}
+
+function clearUnchecked() {
+  var unchecked = $('#user-role-search .selected-user input[type=checkbox]:not(:checked)')
+  $.each(unchecked, function(index, input){
+    $(input).parents('tr').remove();
+  })
 }
