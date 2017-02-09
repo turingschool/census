@@ -20,6 +20,11 @@ Rails.application.routes.draw do
         get '/by_name', to: 'by_name#index'
 
         get '/search_all', to: 'search_all#index'
+
+        get '/add_roles', to: 'roles#add'
+
+        get '/add_roles', to: 'roles#remove'
+
       end
 
       # get '/mentor_ship/users', to: 'mentorship#index'
