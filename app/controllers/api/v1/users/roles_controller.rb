@@ -10,7 +10,12 @@ class Api::V1::Users::RolesController < Api::V1::ApiController
   end
 
   def remove
-    require "pry"; binding.pry
+    roles = Role.find(params[:roles])
+    users = User.find(params[:users])
+    users.each do |user|
+      roles.each {|role| user.roles.delete(role) }
+    end
+    render json: users
   end
 
 end
