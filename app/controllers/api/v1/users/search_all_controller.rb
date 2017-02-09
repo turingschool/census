@@ -1,4 +1,4 @@
-class Api::V1::SearchAllController < Api::V1::ApiController
+class Api::V1::Users::SearchAllController < Api::V1::ApiController
   ROLES = ["applicant", "invited", "enrolled", "active student", "on leave",
           "graduated", "exited", "removed", "mentor", "admin"]
 
