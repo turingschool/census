@@ -27,6 +27,7 @@ function appendUsers(data) {
       })
       var cleanRoles = roles.slice(0,-2);
       userTable.append('<tr data-user-id='+user["id"]+'>'+
+        '<td class="selected-user"><input type="checkbox"</td>'+
         '<td>'+user["first_name"]+'</td>'+
         '<td>'+user["last_name"]+'</td>'+
         '<td>'+user["cohort"]["name"]+'</td>'+
