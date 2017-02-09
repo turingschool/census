@@ -20,15 +20,28 @@ function fetchUsers(searchParams) {
 function appendUsers(data) {
   var userTable = $('#user-role-search');
   data.forEach(function(user){
-    var roles = ""
-    user["roles"].forEach(function(role){
-      roles+=(role["name"]+", ")
-    })
-    var cleanRoles = roles.slice(0,-2);
-    userTable.append('<tr data-user-id='+user["id"]+'><td>'+user["first_name"]+'</td><td>'+user["last_name"]+'</td><td>'+user["cohort"]["name"]+'</td><td>'+cleanRoles+'</td></tr>')
+    if (userNotInTable(user["id"])) {
+      var roles = ""
+      user["roles"].forEach(function(role){
+        roles+=(role["name"]+", ")
+      })
+      var cleanRoles = roles.slice(0,-2);
+      userTable.append('<tr data-user-id='+user["id"]+'><td>'+user["first_name"]+'</td><td>'+user["last_name"]+'</td><td>'+user["cohort"]["name"]+'</td><td>'+cleanRoles+'</td></tr>')
+    }
   })
 }
 
 function onFail(err) {
   console.error(err);
+}
+
+function userNotInTable(id) {
+  var rows = $('#user-role-search').children().children()
+  var present = true
+  $.each(rows, function(index, row){
+    if (row.getAttribute("data-user-id") == id) {
+      present = false
+    }
+  })
+  return present
 }
