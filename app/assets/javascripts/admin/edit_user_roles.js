@@ -26,7 +26,12 @@ function appendUsers(data) {
         roles+=(role["name"]+", ")
       })
       var cleanRoles = roles.slice(0,-2);
-      userTable.append('<tr data-user-id='+user["id"]+'><td>'+user["first_name"]+'</td><td>'+user["last_name"]+'</td><td>'+user["cohort"]["name"]+'</td><td>'+cleanRoles+'</td></tr>')
+      userTable.append('<tr data-user-id='+user["id"]+'>'+
+        '<td>'+user["first_name"]+'</td>'+
+        '<td>'+user["last_name"]+'</td>'+
+        '<td>'+user["cohort"]["name"]+'</td>'+
+        '<td>'+cleanRoles+'</td>'+
+      '</tr>')
     }
   })
 }
