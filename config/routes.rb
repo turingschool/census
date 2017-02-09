@@ -21,9 +21,9 @@ Rails.application.routes.draw do
 
         get '/search_all', to: 'search_all#index'
 
-        get '/add_roles', to: 'roles#add'
+        patch '/add_roles', to: 'roles#add'
 
-        get '/add_roles', to: 'roles#remove'
+        patch '/remove_roles', to: 'roles#remove'
 
       end
 
