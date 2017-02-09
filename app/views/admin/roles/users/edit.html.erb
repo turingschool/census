@@ -23,20 +23,20 @@
   </div>
 
   <div class="row">
-    <select>
+    <select id="add-delete-role">
       <option value="Add">Add Role(s)</option>
       <option value="Delete">Remove Role(s)</option>
     </select>
   </div>
 
-  <div class="row">
+  <div class="row" id="role-check-boxes">
     <% @roles.each do |role| %>
-      <input type="checkbox" id="role-<%=role.id%>" value="role-<%=role.name%>"> <label><%= role.name %></label>
+      <input type="checkbox" data-role-id="<%=role.id%>" id="role-<%=role.id%>" value="role-<%=role.name%>"> <label><%= role.name %></label>
     <% end %>
   </div>
 
   <div class="row">
-    <button type="button">Save</button>
+    <button type="button" id="save-button">Save</button>
   </div>
 
 </div>

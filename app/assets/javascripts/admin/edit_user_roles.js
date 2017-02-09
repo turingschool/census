@@ -6,6 +6,14 @@ $('.admin-edit-user-roles').ready(function() {
       fetchUsers(searchParams);
     }
   })
+  $('#save-button').on('click', function(event) {
+    var action = $('#add-delete-role').val();
+    if (action == 'Add') {
+      addUserRoles();
+    } else if (action == "Delete"){
+      removeUserRoles();
+    }
+  })
 })
 
 function fetchUsers(searchParams) {
@@ -17,6 +25,27 @@ function fetchUsers(searchParams) {
   .done(appendUsers)
   .fail(onFail);
 }
+
+function requestAddUserRoles(userIds, roleIds) {
+  $.ajax({
+    method: 'PATCH',
+    url: '/api/v1/users/add_roles',
+    data: {users: userIds, roles: roleIds}
+  })
+  .done(console.log("Added roles"))
+  .fail(onFail);
+}
+
+function requestRemoveUserRoles(userIds, roleIds) {
+  $.ajax({
+    method: 'PATCH',
+    url: '/api/v1/users/remove_roles',
+    data: {users: userIds, roles: roleIds}
+  })
+  .done(console.log("Removed roles"))
+  .fail(onFail);
+}
+
 
 function appendUsers(data) {
   var userTable = $('#user-role-search');
@@ -62,4 +91,32 @@ function clearUnchecked() {
   $.each(unchecked, function(index, input){
     $(input).parents('tr').remove();
   })
+}
+
+function addUserRoles() {
+  var checkedUsers = $('#user-role-search .selected-user input[type=checkbox]:checked')
+  var userIds = []
+  $.each(checkedUsers, function(index, input){
+    userIds.push($(input).parents('tr').data("user-id"))
+  })
+  var checkedRoles = $('#role-check-boxes input[type=checkbox]:checked')
+  var roleIds = []
+  $.each(checkedRoles, function(index, input){
+    roleIds.push($(input).data("role-id"))
+  })
+  requestAddUserRoles(userIds, roleIds);
+}
+
+function removeUserRoles() {
+  var checkedUsers = $('#user-role-search .selected-user input[type=checkbox]:checked')
+  var userIds = []
+  $.each(checkedUsers, function(index, input){
+    userIds.push($(input).parents('tr').data("user-id"))
+  })
+  var checkedRoles = $('#role-check-boxes input[type=checkbox]:checked')
+  var roleIds = []
+  $.each(checkedRoles, function(index, input){
+    roleIds.push($(input).data("role-id"))
+  })
+  requestRemoveUserRoles(userIds, roleIds);
 }
