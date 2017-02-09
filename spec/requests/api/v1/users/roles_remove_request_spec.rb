@@ -13,13 +13,15 @@ RSpec.describe "User Roles API" do
 
       users = JSON.parse(response.body)
 
-      expect(response).to have_http_status(200)
-      roles_present = users.each do |user|
-        user['roles'].any? do |role|
-          role['id'] = role_2.id
+      roles_not_present = false
+      users.each do |user|
+        roles_not_present = user['roles'].none? do |role|
+          role['id'] == role_2.id
         end
       end
-      expect(roles_present).to be_truthy
+
+      expect(response).to have_http_status(200)
+      expect(roles_not_present).to eq(true)
     end
   end
 end
