@@ -11,7 +11,7 @@ RSpec.describe "User Roles API" do
 
       patch "/api/v1/users/add_roles", params: params, headers: headers
 
-      role = JSON.parse(response.body)
+      roles = JSON.parse(response.body)
 
       expect(response).to have_http_status(200)
     end
