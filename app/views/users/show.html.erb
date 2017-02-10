@@ -43,11 +43,11 @@
 <% elsif user_is_admin? %>
 <h3>Change Roles</h3>
   <% if @user.roles.where(name: 'active student').exists? %>
-    <%= link_to 'Graduated', admin_user_path(@user, role: 'graduated'), method: :patch %>
-    <%= link_to 'Removed', admin_user_path(@user, role: 'removed'), method: :patch %>
-    <%= link_to 'Exited', admin_user_path(@user, role: 'exited'), method: :patch %>
+    <%= link_to 'Graduated', admin_user_path(@user, role: 'graduated'), method: :patch, class: 'btn btn-default btn-xs' %>
+    <%= link_to 'Removed', admin_user_path(@user, role: 'removed'), method: :patch, class: 'btn btn-default btn-xs' %>
+    <%= link_to 'Exited', admin_user_path(@user, role: 'exited'), method: :patch, class: 'btn btn-default btn-xs' %>
   <% elsif @user.roles.where(name: 'applicant').exists? %>
-    <%= link_to 'Enroll', admin_user_path(@user, role: 'active student'), method: :patch %>
+    <%= link_to 'Enroll', admin_user_path(@user, role: 'active student'), method: :patch, class: 'btn btn-default btn-xs' %>
   <% end %>
 <% end %>
 </div>

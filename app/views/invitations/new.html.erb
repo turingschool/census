@@ -6,5 +6,5 @@
   <%= select_tag :role, options_for_select(["Student", "Mentor", "Admin"]), id: "role-select", class: "pretty-select" %>
   <%= label_tag :cohort %>
   <%= select_tag :cohort, options_for_select(@cohorts), id: "cohort-select", class: "pretty-select" %>
-  <%= f.submit "Invite", class: 'btn btn-warning btn-sm' %>
+  <%= f.submit "Invite", class: 'btn btn-warning btn-xs' %>
 <% end %>

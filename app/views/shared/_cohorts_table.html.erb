@@ -13,17 +13,17 @@
       <td>
         <div class="btn-group" role="group">
           <% if cohort.status == "unstarted" %>
-            <%= link_to "Start", admin_cohort_path(cohort, status: "active"), method: 'put', class: "btn btn-warning" %>
+            <%= link_to "Start", admin_cohort_path(cohort, status: "active"), method: 'put', class: "btn btn-warning btn-xs" %>
           <% elsif cohort.status == "active" %>
-            <%= link_to "Finish", admin_cohort_path(cohort, status: "finished"), method: 'put', class: "btn btn-warning" %>
+            <%= link_to "Finish", admin_cohort_path(cohort, status: "finished"), method: 'put', class: "btn btn-warning btn-xs" %>
           <% end %>
           <%= link_to "Edit",
               edit_admin_cohort_path(cohort),
-              class: 'btn btn-default' %>
+              class: 'btn btn-default btn-xs' %>
           <%= link_to "Delete",
               admin_cohort_path(cohort),
               method: 'delete',
-              class: 'btn btn-danger',
+              class: 'btn btn-danger btn-xs',
               data: {confirm: "Are you sure?"} %>
         </div>
       </td>
