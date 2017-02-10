@@ -29,10 +29,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
       @user.skip_confirmation!
       if @user.save
         session[:invitation_code] = nil
-        flash[:info] = 'You have succesfully signed up! Please log in to continue.'
+        flash[:success] = 'You have succesfully signed up! Please log in to continue.'
         redirect_to new_user_session_path
       else
-        flash[:error] = @user.errors.full_messages.join(", ")
+        flash[:danger] = @user.errors.full_messages.join(", ")
         redirect_to new_user_registration_path(invite_code: session[:invitation_code])
       end
     else
