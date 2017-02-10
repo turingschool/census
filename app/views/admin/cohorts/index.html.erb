@@ -3,7 +3,10 @@
   <div class="container" id="active-cohorts">
     <%= render 'shared/cohorts_table', cohorts: @cohorts %>
   </div>
-
-  <%= link_to "+ Add Cohort", new_admin_cohort_path, class: "btn btn-info" %>
-  <%= link_to "<< Back to Dashboard", admin_dashboard_path %>
+  <div class="container">
+    <%= link_to "+ Add Cohort", new_admin_cohort_path, class: "btn btn-info" %>
+  </div>
+  <div class="container">
+    <%= link_to "<< Back to Dashboard", admin_dashboard_path %>
+  </div>
 </div>
