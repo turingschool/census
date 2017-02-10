@@ -31,9 +31,9 @@
 </table>
 <% if @user == current_user %>
 <%= render 'affiliations' %>
-<%= link_to 'Change password', edit_user_registration_path%>
-<%= link_to "Edit profile", edit_user_path(@user), class: 'btn btn-default' %>
-<%= link_to "Edit affiliations", new_affiliation_path, class: 'btn btn-default' %>
+<%= link_to 'Change password', edit_user_registration_path, class: 'btn btn-default btn-xs'%>
+<%= link_to "Edit profile", edit_user_path(@user), class: 'btn btn-default btn-xs' %>
+<%= link_to "Edit affiliations", new_affiliation_path, class: 'btn btn-default btn-xs' %>
 <hr />
 <h3>Oauth</h3>
 <p>Manage the applications you have registered with Census:</p>
