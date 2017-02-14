@@ -3,7 +3,7 @@
 <%= form_for @user do |f| %>
   <%= render 'shared/registration_fields', f: f, cohorts: @cohorts %>
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit "Update", class: 'btn btn-default btn-xs' %>
   </div>
 <% end %>
 </div>
