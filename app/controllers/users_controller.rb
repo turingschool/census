@@ -1,29 +1,36 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_user, only: [:edit, :update, :show]
+  authorize_resource
+
   def index
+    @cohorts = Cohort.all
     if params[:cohort]
+      cohort = Cohort.find(params[:cohort])
       @users = User.where(cohort: params[:cohort])
-      @header = "Cohort: #{params[:cohort]}"
+      @header = "Cohort: #{cohort.name}"
     else
-      @users = User.all;
-      @header = "Users"
+      @users = User.all
     end
   end
 
   def show
-    @user = User.find_by(id: params[:id])
+    find_user_if_admin
   end
 
   def edit
+    find_user_if_admin
+    @cohorts = Cohort.all
   end
 
   def update
+    find_user_if_admin
     @user.skip_reconfirmation!
     if @user.update_attributes(user_params)
       flash[:success] = "Update was successful."
-      redirect_to user_path(current_user)
+      redirect_to user_path(@user)
     else
       flash[:danger] = @user.errors.full_messages.join(". ")
+      @cohorts = Cohort.all
       render :edit
     end
   end
@@ -38,11 +45,15 @@ class UsersController < ApplicationController
                                     :linked_in,
                                     :git_hub,
                                     :slack,
-                                    :cohort,
+                                    :cohort_id,
                                     :image )
     end
 
     def set_user
       @user = current_user
+    end
+
+    def find_user_if_admin
+      @user = User.find(params[:id]) if current_user.has_role?("admin")
     end
 end

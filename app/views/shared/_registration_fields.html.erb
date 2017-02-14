@@ -39,23 +39,26 @@
 
 <div class="form-group">
   <div class="field">
-    <%= f.label :git_hub, "GitHub" %><br />
-    <%= f.text_field :git_hub, class: "form-control" %><br />
+    <%= f.label :git_hub, "GitHub" %> <span id="github-hint" class="bg-danger hidden" style="font-style:italic;">(Enter username only. E.g. for "https://www.github.io/jcasimir" enter only "jcasimir")</span><br />
+    <%= f.text_field :git_hub, class: "form-control", id: "github-field" %><br />
   </div>
 </div>
 
 <div class="form-group">
   <div class="field">
-    <%= f.label :slack %><br />
-    <%= f.text_field :slack, class: "form-control" %><br />
+    <%= f.label :slack, "Slack" %> <span id="slack-hint" class="bg-danger hidden" style="font-style:italic;">(Enter username only. E.g. for "@j3" enter only "j3")</span><br />
+    <%= f.text_field :slack, class: "form-control", id: "slack-field" %><br />
   </div>
 </div>
 
 <div class="form-group">
   <div class="field">
-    <%= f.label :cohort %><br />
-    <!-- TODO figure out how to change this Rails tag into a bootstrap dropdown-select -->
-    <%= f.select :cohort, options_for_select([["Select One", ""], "1606", "1608", "1610", "1611"]) %>
+    <%= f.label :cohort_id %><br />
+    <% if @user.cohort %>
+      <%= f.select :cohort_id, options_from_collection_for_select(cohorts, "id", "name", "#{@user.cohort.id}"), include_blank: true %>
+    <% else %>
+      <%= f.select :cohort_id, options_from_collection_for_select(cohorts, "id", "name"), include_blank: true %>
+    <% end %>
   </div>
 </div>
 

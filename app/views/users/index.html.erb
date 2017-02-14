@@ -1,10 +1,14 @@
 <div class="container">
-  <h2><%= @header %></h2>
+  <h2>Users</h2>
 
-  <%= render 'cohort_dropdown' %>
+  <div class="cohort-filter">
+    <%= render 'cohort_dropdown', cohorts: @cohorts %>
+  </div>
 
-  <label for="search_by_name">Search by Name:</label>
-  <input id="search-by-name" name="search_by_name" type="text" />
+  <div class="search-by-name">
+    <label for="search_by_name">Search by Name: </label>
+    <input id="search-by-name" name="search_by_name" type="text" />
+  </div>
 
   <table class="table">
     <thead class="thead-inverse">

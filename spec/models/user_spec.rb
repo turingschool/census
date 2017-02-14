@@ -8,6 +8,7 @@ RSpec.describe User, type: :model do
   it { should have_many(:roles).through(:user_roles) }
   it { should have_many(:invitations) }
   it { should have_many(:oauth_applications) }
+  it { should belong_to(:cohort) }
 
   # testing paperclip
   it { should have_attached_file(:image) }
@@ -21,9 +22,20 @@ RSpec.describe User, type: :model do
   end
 
   it "can report out its roles" do
-    user = create :user_with_roles
+    user = create :enrolled_user
 
-    expect(user.list_roles).to eq("dummy_role, dummy_role")
+    expect(user.list_roles).to eq("enrolled")
+  end
+
+  it "can find specific role associated with it" do
+    user = create :user
+    role_1 = create :role, name: "enrolled"
+    role_2 = create :role, name: "active student"
+    user.roles << [role_1, role_2]
+
+    expect(user.has_role?("enrolled")).to be(true)
+    expect(user.has_role?("active student")).to be(true)
+    expect(user.has_role?("admin")).to be(false)
   end
 
   it "can return users by name search" do
@@ -33,7 +45,7 @@ RSpec.describe User, type: :model do
 
     users = User.search_by_name("an")
 
-    expect(users).to eq([dan, nate])
+    expect(users.sort).to eq([dan, nate])
   end
 
   it "rejects invalid twitter usernames" do
@@ -90,5 +102,17 @@ RSpec.describe User, type: :model do
       expect(user.roles).not_to include(student)
     end
 
+    it 'knows its own cohort if it belongs to one' do
+      cohort = create :cohort, name: "1606-BE"
+      user = create :user, cohort_id: cohort.id
+
+      expect(user.cohort_name).to eq("1606-BE")
+    end
+
+    it 'reports that it does not belong to a cohort' do
+      user = create :user, cohort_id: nil
+
+      expect(user.cohort_name).to eq("n/a")
+    end
   end
 end

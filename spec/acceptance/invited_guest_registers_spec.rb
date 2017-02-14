@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'Invited user' do
   it 'registers an account' do
-    role = create :role, name: 'Mentor'
+    role = create :role, name: 'mentor'
     invite = create :invitation, role: role
     visit invite.generate_url(new_user_registration_url)
 
@@ -19,7 +19,7 @@ RSpec.feature 'Invited user' do
     sign_in user
     visit user_path(user.id)
 
-    expect(user.roles.find_by(name: "Mentor")).to_not be_nil
-    expect(page).to have_content('Mentor')
+    expect(user.roles.find_by(name: "mentor")).to_not be_nil
+    expect(page).to have_content('mentor')
   end
 end

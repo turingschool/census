@@ -1,0 +1,42 @@
+<div class="admin-edit-user-roles">
+
+  <div class="row">
+    Find: <input type="search" id="searchBox">
+  </div>
+
+  <div class="row">
+    <table id="user-role-search" class="table table-hover role-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>First</th>
+          <th>Last</th>
+          <th>Cohort</th>
+          <th>Roles</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+
+    </table>
+  </div>
+
+  <div class="row">
+    <select id="add-delete-role">
+      <option value="Add">Add Role(s)</option>
+      <option value="Delete">Remove Role(s)</option>
+    </select>
+  </div>
+
+  <div class="row" id="role-check-boxes">
+    <% @roles.each do |role| %>
+      <input type="checkbox" data-role-id="<%=role.id%>" id="role-<%=role.id%>" value="role-<%=role.name%>"> <label><%= role.name %></label>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <button class="btn btn-default btn-xs" type="button" id="save-button">Save</button>
+  </div>
+
+</div>

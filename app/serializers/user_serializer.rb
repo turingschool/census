@@ -1,5 +1,13 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :last_name, :cohort, :image_url
+  attributes :id,
+             :first_name,
+             :last_name,
+             :cohort,
+             :image_url,
+             :email,
+             :slack,
+             :roles,
+             :groups
 
   def image_url
     url = object.image.url
@@ -11,4 +19,11 @@ class UserSerializer < ActiveModel::Serializer
       url
     end
   end
+
+  def groups
+    object.groups.map do |group|
+      group.name
+    end
+  end
+
 end

@@ -4,7 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
-  before_validation :twitter, :sanitize_inputs
+  before_validation :twitter,
+                    :sanitize_inputs
+
   validates :twitter,
     length: { maximum: 15 },
     format: {
@@ -27,6 +29,7 @@ class User < ApplicationRecord
   has_many :user_roles, dependent: :destroy
   has_many :roles, through: :user_roles
   has_many :invitations
+  belongs_to :cohort
 
   has_many :oauth_applications, class_name: 'Doorkeeper::Application', as: :owner
 
@@ -50,8 +53,8 @@ class User < ApplicationRecord
     roles.map { |role| role.name }.join(', ')
   end
 
-  def admin?
-    roles.where(name: 'admin').exists?
+  def has_role?(role)
+    roles.where(name: "#{role}").exists?
   end
 
   def self.search_by_name(term)
@@ -59,14 +62,19 @@ class User < ApplicationRecord
       "upper(first_name) LIKE ? OR
       upper(last_name) LIKE ?",
       "%#{term.upcase}%",
-      "%#{term.upcase}%"
-    )
+      "%#{term.upcase}%").
+      order(:id)
   end
 
   def sanitize_inputs
     # Remove any "@" symbols from the begining of the string.
     twitter.sub!(/\A@+/,"") if twitter
   end
+
+  # def set_role
+  #   role = Role.find_or_create_by(name: 'enrolled')
+  #   roles << role
+  # end
 
   def change_role(new_role_name)
     new_role = Role.find_by(name: new_role_name)
@@ -83,4 +91,64 @@ class User < ApplicationRecord
       roles << new_role
     end
   end
+
+  def cohort_name
+    if cohort
+      cohort.name
+    else
+      "n/a"
+    end
+  end
+
+  def self.search_all(query)
+    users = User.none
+    users += search_cohorts(query)
+    users += search_roles(query)
+    users += search_groups(query)
+    users += search_users(query)
+    users.flatten
+  end
+
+  def self.search_cohorts(query)
+    cohorts = Cohort.where(
+      "upper(name) LIKE ?",
+      "%#{query.upcase}%"
+      )
+    users = cohorts.map do |cohort|
+      cohort.users
+    end
+  end
+
+  def self.search_roles(query)
+    roles = Role.where(
+      "upper(name) LIKE ?",
+      "%#{query.upcase}%"
+      )
+
+    users = roles.map do |role|
+      role.users
+    end
+
+  end
+
+  def self.search_groups(query)
+    groups = Group.where(
+      "upper(name) LIKE ?",
+      "%#{query.upcase}%"
+      )
+    users = groups.map do |group|
+      group.users
+    end
+  end
+
+  def self.search_users(query)
+    User.where(
+      "upper(first_name) LIKE ? OR
+      upper(last_name) LIKE ?",
+      "%#{query.upcase}%",
+      "%#{query.upcase}%"
+      )
+  end
+
+
 end

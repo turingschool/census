@@ -1,6 +1,6 @@
 <div class='container'>
 <h2>Account Profile</h2>
-<table>
+<table class="table acct-info">
   <%= render 'account_profile_row',
       header: "First name",
       data: @user.first_name %>
@@ -15,7 +15,7 @@
       data: @user.slack %>
   <%= render 'account_profile_row',
       header: "Cohort",
-      data: @user.cohort %>
+      data: @user.cohort_name %>
   <%= render 'account_profile_row',
       header: "Twitter",
       data: @user.twitter %>
@@ -31,9 +31,9 @@
 </table>
 <% if @user == current_user %>
 <%= render 'affiliations' %>
-<%= link_to 'Change password', edit_user_registration_path%>
-<%= link_to "Edit profile", edit_user_path(@user), class: 'btn btn-default' %>
-<%= link_to "Edit affiliations", new_affiliation_path, class: 'btn btn-default' %>
+<%= link_to 'Change password', edit_user_registration_path, class: 'btn btn-default btn-xs'%>
+<%= link_to "Edit profile", edit_user_path(@user), class: 'btn btn-default btn-xs' %>
+<%= link_to "Edit affiliations", new_affiliation_path, class: 'btn btn-default btn-xs' %>
 <hr />
 <h3>Oauth</h3>
 <p>Manage the applications you have registered with Census:</p>
@@ -43,11 +43,11 @@
 <% elsif user_is_admin? %>
 <h3>Change Roles</h3>
   <% if @user.roles.where(name: 'active student').exists? %>
-    <%= link_to 'Graduated', admin_user_path(@user, role: 'graduated'), method: :patch %>
-    <%= link_to 'Removed', admin_user_path(@user, role: 'removed'), method: :patch %>
-    <%= link_to 'Exited', admin_user_path(@user, role: 'exited'), method: :patch %>
+    <%= link_to 'Graduated', admin_user_path(@user, role: 'graduated'), method: :patch, class: 'btn btn-default btn-xs' %>
+    <%= link_to 'Removed', admin_user_path(@user, role: 'removed'), method: :patch, class: 'btn btn-default btn-xs' %>
+    <%= link_to 'Exited', admin_user_path(@user, role: 'exited'), method: :patch, class: 'btn btn-default btn-xs' %>
   <% elsif @user.roles.where(name: 'applicant').exists? %>
-    <%= link_to 'Enroll', admin_user_path(@user, role: 'active student'), method: :patch %>
+    <%= link_to 'Enroll', admin_user_path(@user, role: 'active student'), method: :patch, class: 'btn btn-default btn-xs' %>
   <% end %>
 <% end %>
 </div>

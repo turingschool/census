@@ -1,5 +1,7 @@
 FactoryGirl.define do
   factory :group do
-    name "Armstrong"
+    sequence(:name, (%w[Pahlka TuringLab Armstrong LBTQTuring JoanClarke]).cycle) do |name|
+      "#{name}"
+    end
   end
 end

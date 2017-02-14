@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'User signs up' do
   scenario 'by completing full registration' do
+    cohort = create :cohort
     user = attributes_for(:user)
     role = create :role, name: 'Enrolled'
     invite = create :invitation, role: role
@@ -14,9 +15,9 @@ RSpec.feature 'User signs up' do
     fill_in 'Password confirmation', with: user[:password]
     fill_in 'user[twitter]', with: user[:twitter]
     fill_in 'user[linked_in]', with: user[:linked_in]
-    fill_in 'GitHub', with: user[:git_hub]
-    fill_in 'Slack', with: user[:slack]
-    find("option[value='1606']").select_option
+    fill_in 'user[git_hub]', with: user[:git_hub]
+    fill_in 'user[slack]', with: user[:slack]
+    find("option[value='#{cohort.id}']").select_option
     find("#armstrong").click
 
     click_button 'Sign up'

@@ -16,12 +16,31 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :users, only: [:index]
+      namespace :users do
+        get '/by_name', to: 'by_name#index'
 
-      get '/user', to: 'credentials#show'
+        get '/search_all', to: 'search_all#index'
+
+        patch '/add_roles', to: 'roles#add'
+
+        patch '/remove_roles', to: 'roles#remove'
+
+      end
+
+      # get '/mentor_ship/users', to: 'mentorship#index'
+
+      get '/users/:id', to: 'users#show', as: 'user'
+
+      get '/users', to: 'users#index'
+
+      get '/user_credentials', to: 'credentials#show'
 
       post '/sendgrid/events', to: 'send_grid/events#update'
 
+      patch '/roles/:id',   to: 'roles#update'
+      delete '/roles/:id',  to: 'roles#destroy'
+      patch '/groups/:id',  to: 'groups#update'
+      delete '/groups/:id', to: 'groups#destroy'
       namespace :users do
         get '/by_name', to: 'by_name#index'
       end
@@ -29,8 +48,14 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    namespace :roles do
+      get '/users', to: 'users#edit', as: 'users_edit'
+    end
     get '/dashboard', to: 'dashboard#show', as: 'dashboard'
-    resources :users, only: [:update]
+    resources :users,  only: [:update]
+    resources :roles,  only: [:index, :create]
+    resources :groups, only: [:index, :create]
+    resources :cohorts
   end
 
 end

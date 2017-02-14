@@ -3,7 +3,7 @@ $( document ).ready(function() {
 });
 
 function validateLinkedIn() {
-  if (this.value.match(/[^a-zA-Z0-9]/)) {
+  if (this.value.match(/[^a-zA-Z0-9-]/)) {
     $(this).addClass('input-field-error')
     $(this).siblings('#linkedin-hint').removeClass('hidden')
   } else {

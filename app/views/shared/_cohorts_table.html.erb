@@ -1,0 +1,32 @@
+<table class="table table-hover">
+  <tr>
+    <th>Name</th>
+    <th># of Students</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
+  <% cohorts.each do |cohort| %>
+    <tr class="cohort">
+      <td><%= cohort.name %></td>
+      <td><%= cohort.student_count %></td>
+      <td><%= cohort.status %></td>
+      <td>
+        <div class="btn-group" role="group">
+          <% if cohort.status == "unstarted" %>
+            <%= link_to "Start", admin_cohort_path(cohort, status: "active"), method: 'put', class: "btn btn-warning btn-xs" %>
+          <% elsif cohort.status == "active" %>
+            <%= link_to "Finish", admin_cohort_path(cohort, status: "finished"), method: 'put', class: "btn btn-warning btn-xs" %>
+          <% end %>
+          <%= link_to "Edit",
+              edit_admin_cohort_path(cohort),
+              class: 'btn btn-default btn-xs' %>
+          <%= link_to "Delete",
+              admin_cohort_path(cohort),
+              method: 'delete',
+              class: 'btn btn-danger btn-xs',
+              data: {confirm: "Are you sure?"} %>
+        </div>
+      </td>
+    </tr>
+  <% end %>
+</table>
