@@ -14,7 +14,7 @@ class Admin::CohortsController < ApplicationController
     if @cohort.save
       redirect_to admin_cohorts_path
     else
-      flash[:error] = @cohort.errors.full_messages.join(', ')
+      flash[:danger] = @cohort.errors.full_messages.join(', ')
       render :new
     end
   end
@@ -30,7 +30,7 @@ class Admin::CohortsController < ApplicationController
     if @cohort.update_attributes(cohort_params)
       redirect_to admin_cohorts_path
     else
-      flash[:error] = @cohort.errors.full_messages.join(', ')
+      flash[:danger] = @cohort.errors.full_messages.join(', ')
       redirect_to admin_cohort_path(@cohort)
     end
   end
@@ -38,7 +38,7 @@ class Admin::CohortsController < ApplicationController
   def destroy
     @cohort.destroy
 
-    flash[:notice] = "Cohort deleted!"
+    flash[:success] = "Cohort deleted!"
     redirect_to admin_cohorts_path
   end
 
