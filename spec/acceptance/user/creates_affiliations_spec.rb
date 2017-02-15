@@ -14,8 +14,6 @@ RSpec.feature 'User creates affiliations' do
     click_button "Save changes"
 
     expect(current_path).to eq(user_path(user))
-    within "div#affiliations" do
-      expect(page).to have_content("Armstrong")
-    end
+    expect(page).to have_content("Armstrong")
   end
 end

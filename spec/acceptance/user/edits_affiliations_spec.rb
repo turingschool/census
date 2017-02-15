@@ -15,9 +15,7 @@ RSpec.feature 'User edits affiliations' do
     click_button "Save changes"
 
     expect(current_path).to eq(user_path(user))
-    within "div#affiliations" do
-      expect(page).to have_content("LGBTTuring")
-      expect(page).to_not have_content(original_group.name)
-    end
+    expect(page).to have_content("LGBTTuring")
+    expect(page).to_not have_content(original_group.name)
   end
 end

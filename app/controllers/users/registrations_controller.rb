@@ -30,7 +30,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
       if @user.save
         session[:invitation_code] = nil
         flash[:success] = 'You have succesfully signed up! Please log in to continue.'
-        redirect_to new_user_session_path
+        # redirect_to new_user_session_path
+        respond_with resource, location: after_sign_in_path_for(resource)
       else
         flash[:danger] = @user.errors.full_messages.join(", ")
         redirect_to new_user_registration_path(invite_code: session[:invitation_code])

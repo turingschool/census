@@ -115,4 +115,14 @@ RSpec.describe User, type: :model do
       expect(user.cohort_name).to eq("n/a")
     end
   end
+
+  context "Groups" do
+    it "lists its own groups" do
+      groups = create_list(:group, 3)
+      user = create(:user)
+      user.groups = groups
+
+      expect(user.list_groups.include?(groups.first.name)).to be_truthy 
+    end
+  end
 end

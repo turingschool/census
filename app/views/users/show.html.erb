@@ -28,9 +28,12 @@
   <%= render 'account_profile_row',
       header: "Roles",
       data: @user.list_roles %>
+  <%= render 'account_profile_row',
+      header: "Groups",
+      data: @user.list_groups %>
 </table>
 <% if @user == current_user %>
-<%= render 'affiliations' %>
+<!-- <%= render 'affiliations' %> -->
 <%= link_to 'Change password', edit_user_registration_path, class: 'btn btn-default btn-xs'%>
 <%= link_to "Edit profile", edit_user_path(@user), class: 'btn btn-default btn-xs' %>
 <%= link_to "Edit affiliations", new_affiliation_path, class: 'btn btn-default btn-xs' %>
