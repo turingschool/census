@@ -1,4 +1,4 @@
-class Admin::GroupsController < ApplicationController
+class Admin::GroupsController < AdminController
 
   def index
     @groups = Group.all
