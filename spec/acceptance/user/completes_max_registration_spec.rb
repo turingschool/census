@@ -18,7 +18,6 @@ RSpec.feature 'User signs up' do
     fill_in 'user[git_hub]', with: user[:git_hub]
     fill_in 'user[slack]', with: user[:slack]
     find("option[value='#{cohort.id}']").select_option
-    find("#armstrong").click
 
     click_button 'Sign up'
 
