@@ -14,13 +14,6 @@
 
         <div class="form-group">
           <div class="field">
-            <%= check_box("Armstrong", "Armstrong", id: "armstrong") %>
-            <%= label_tag "Armstrong" %>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="field">
             <%= f.label :password %>
             <% if @minimum_password_length %>
             <em>(<%= @minimum_password_length %> characters minimum)</em>
