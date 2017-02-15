@@ -6,6 +6,12 @@ $('.admin-edit-user-roles').ready(function() {
       fetchUsers(searchParams);
     }
   })
+  $('#submitButton').click(function(e) {
+    e.preventDefault();
+    searchParams = $('#searchBox').val();
+    clearUnchecked();
+    fetchUsers(searchParams);
+  });
   $('#save-button').on('click', function(event) {
     var action = $('#add-delete-role').val();
     if (action == 'Add') {
