@@ -10,13 +10,13 @@
     <input id="search-by-name" name="search_by_name" type="text" />
   </div>
 
-  <table class="table">
+  <table class="table" data-toggle="table">
     <thead class="thead-inverse">
       <tr>
-        <th>Name</th>
-        <th>Slack</th>
-        <th>Cohort</th>
-      </tr>
+        <th data-sortable="true">Name</th>
+        <th data-sortable="true">Slack</th>
+        <th data-sortable="true">Cohort</th>
+      </tr> 
     </thead>
       <% @users.each do |user| %>
         <%= render 'user_row', user: user %>

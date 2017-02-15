@@ -12,11 +12,13 @@
  *
  *= require_tree .
  *= require_self
+ *= require bootstrap-table
  */
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
  @import 'bootstrap/theme';
+ @import "bootstrap-table";
 
 input.input-field-error {
   background: #ff9999;

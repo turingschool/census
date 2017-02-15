@@ -1,9 +1,11 @@
-<table class="table table-hover group-table">
-  <tr>
-    <th>Name</th>
-    <th># of Members</th>
-    <th></th>
-  </tr>
+<table class="table table-hover group-table" data-toggle="table">
+  <thead>
+    <tr>
+      <th data-sortable="true">Name</th>
+      <th data-sortable="true"># of Members</th>
+      <th></th>
+    </tr>
+  </thead>
   <% groups.each do |group| %>
     <tr id="group-<%= group.id %>" class="group <%= group.name %>">
       <td><p class="group-name"><%= group.name %></p></td>
