@@ -22,15 +22,17 @@ $('.admin-edit-user-roles').ready(function() {
   })
   $('#checkAll').on('click', function(event) {
     if ($('#checkAll').is(":checked")) {
-      $( ".singleBox" ).prop( "checked", true );
+      $(".singleBox").prop("checked", true);
     } else {
-      $( ".singleBox" ).prop( "checked", false );
+      $(".singleBox").prop("checked", false);
     }
   })
+  $('.no-records-found').remove();
 })
 
 function updateTable(data) {
   $('#user-role-search tbody').remove();
+  $('input[type="checkbox"]').prop("checked", false);
   appendUsers(data);
   $(".admin-edit-user-roles").notify(
   data.length == 1 ? data.length + " user updated!" : data.length + " users updated!", "success");
