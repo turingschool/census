@@ -1,4 +1,4 @@
-class Admin::UsersController < ApplicationController
+class Admin::UsersController < AdminController
   def update
     @user = User.find_by(id: params[:id])
     if @user.change_role(params[:role])

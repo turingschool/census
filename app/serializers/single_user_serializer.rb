@@ -12,7 +12,7 @@ class SingleUserSerializer < ActiveModel::Serializer
   end
 
   def cohort
-    object.cohort.name
+    object.cohort.name if object.cohort
   end
 
   def groups
