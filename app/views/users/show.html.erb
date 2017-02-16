@@ -1,5 +1,4 @@
 <div class='container'>
-<<<<<<< HEAD
 <h2>My Account</h2>
 <% if user_is_admin? && @user != current_user %>
   <p><%= link_to "Edit User", edit_user_path(@user), class: 'btn btn-info btn-sm' %><p>
@@ -37,21 +36,23 @@
         header: "Groups",
         data: @user.list_groups %>
   </table>
-</div
+</div>
 <% if @user == current_user %>
   <div class="col-md-5">
-    <%= link_to 'Change password', edit_user_registration_path, class: 'btn btn-default btn-xs'%>
-    <%= link_to "Edit profile", edit_user_path(@user), class: 'btn btn-default btn-xs' %>
-    <%= link_to "Edit affiliations", new_affiliation_path, class: 'btn btn-default btn-xs' %>
+    <p><%= link_to 'Change password', edit_user_registration_path, class: 'btn btn-default btn-xs'%></p>
+    <p><%= link_to "Edit profile", edit_user_path(@user), class: 'btn btn-default btn-xs' %></p>
+    <p><%= link_to "Edit affiliations", new_affiliation_path, class: 'btn btn-default btn-xs' %></p>
   </div>
+
   <hr />
   <div class="col-md-5">
     <h3>Oauth</h3>
     <p>Manage the applications you have registered with Census:</p>
-    <%= link_to 'Registered Applications', oauth_applications_path, class: 'btn btn-info' %><br><br>
+    <%= link_to 'Registered Applications', oauth_applications_path, class: 'btn btn-info btn-xs' %><br><br>
     <p>View the applications you have given permission to user your data:</p>
-    <%= link_to 'Authorized Applications', oauth_authorized_applications_path, class: 'btn btn-success' %>
+    <%= link_to 'Authorized Applications', oauth_authorized_applications_path, class: 'btn btn-success btn-xs' %>
   </div>
+
 <% elsif user_is_admin? %>
   <% if @user.roles.where(name: 'active student').exists? %>
     <h3>Change Roles</h3>
