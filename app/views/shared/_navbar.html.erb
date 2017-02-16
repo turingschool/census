@@ -12,7 +12,7 @@
 
       <% if user_signed_in? %>
         <li><%= link_to 'Community', root_path, class: 'blue-link' %></li>
-        <li><%= link_to 'Account Info', user_path(current_user), class:"blue-link" %></li>
+        <li><%= link_to 'My Account', user_path(current_user), class:"blue-link" %></li>
         <li><%= link_to 'Logout', destroy_user_session_path, method: :delete, class:"blue-link" %></li>
       <% else %>
         <li><%= link_to 'Login', new_user_session_path, class:"blue-link" %></li>
