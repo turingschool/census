@@ -6,6 +6,12 @@ $('.admin-edit-user-roles').ready(function() {
       fetchUsers(searchParams);
     }
   })
+  $('#submitButton').click(function(e) {
+    e.preventDefault();
+    searchParams = $('#searchBox').val();
+    clearUnchecked();
+    fetchUsers(searchParams);
+  });
   $('#save-button').on('click', function(event) {
     var action = $('#add-delete-role').val();
     if (action == 'Add') {
@@ -14,7 +20,23 @@ $('.admin-edit-user-roles').ready(function() {
       removeUserRoles();
     }
   })
+  $('#checkAll').on('click', function(event) {
+    if ($('#checkAll').is(":checked")) {
+      $( ".singleBox" ).prop( "checked", true );
+    } else {
+      $( ".singleBox" ).prop( "checked", false );
+    }
+  })
 })
+
+function updateTable(data) {
+  $('#user-role-search tbody').remove();
+  appendUsers(data);
+  $(".admin-edit-user-roles").notify(
+  data.length == 1 ? data.length + " user updated!" : data.length + " users updated!", "success");
+  { position:"top center"
+};
+}
 
 function fetchUsers(searchParams) {
   $.ajax({
@@ -32,7 +54,9 @@ function requestAddUserRoles(userIds, roleIds) {
     url: '/api/v1/users/add_roles',
     data: {users: userIds, roles: roleIds}
   })
-  .done(console.log("Added roles"))
+  .done(function(data){
+    updateTable(data)
+  })
   .fail(onFail);
 }
 
@@ -42,10 +66,11 @@ function requestRemoveUserRoles(userIds, roleIds) {
     url: '/api/v1/users/remove_roles',
     data: {users: userIds, roles: roleIds}
   })
-  .done(console.log("Removed roles"))
+  .done(function(data){
+    updateTable(data)
+  })
   .fail(onFail);
 }
-
 
 function appendUsers(data) {
   var userTable = $('#user-role-search');
@@ -61,7 +86,7 @@ function appendUsers(data) {
         cohort = user["cohort"]["name"]
       }
       userTable.append('<tr data-user-id='+user["id"]+'>'+
-        '<td class="selected-user"><input type="checkbox"</td>'+
+        '<td class="selected-user"><input type="checkbox" class="singleBox"</td>'+
         '<td>'+user["first_name"]+'</td>'+
         '<td>'+user["last_name"]+'</td>'+
         '<td>'+cohort+'</td>'+

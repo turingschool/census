@@ -1,14 +1,17 @@
 <div class="admin-edit-user-roles">
 
-  <div class="row">
-    Find: <input type="search" id="searchBox">
-  </div>
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Find Users" id="searchBox">
+      <span class="input-group-btn" style="width:0;">
+        <button class="btn btn-default" type="button" id="submitButton"><i class="glyphicon glyphicon-search"></i></button>
+      </span>
+    </div>
 
   <div class="row">
     <table id="user-role-search" class="table table-hover role-table" data-toggle="table">
       <thead>
         <tr>
-          <th></th>
+          <th><input type="checkbox" id="checkAll"></input></th>
           <th data-sortable="true">First</th>
           <th data-sortable="true">Last</th>
           <th data-sortable="true">Cohort</th>
