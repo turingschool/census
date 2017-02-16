@@ -25,6 +25,10 @@ $('.admin-edit-user-roles').ready(function() {
 function updateTable(data) {
   $('#user-role-search tbody').remove();
   appendUsers(data);
+  $(".admin-edit-user-roles").notify(
+  data.length == 1 ? data.length + " user updated!" : data.length + " users updated!", "success");
+  { position:"top center"
+};
 }
 
 function fetchUsers(searchParams) {
@@ -60,7 +64,6 @@ function requestRemoveUserRoles(userIds, roleIds) {
   })
   .fail(onFail);
 }
-
 
 function appendUsers(data) {
   var userTable = $('#user-role-search');
