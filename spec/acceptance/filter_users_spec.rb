@@ -11,9 +11,9 @@ RSpec.feature 'Filter users by cohort' do
 
     expect(page).to have_css("tr", count: 3)
     find("option[value='#{cohort.id}']").select_option
-    click_button "Filter"
+    click_button "Filter by Cohort"
 
-    expect(page).to have_content("Cohort 1606")
+    expect(page).to have_content("1606")
     expect(page).to have_css("tr", count: 2)
   end
 end

@@ -8,7 +8,7 @@ RSpec.feature 'User edits affiliations' do
     new_group = create(:group, name: "LGBTTuring")
     login(user)
 
-    click_link "Account Info"
+    click_link "My Account"
     click_link "Edit affiliations"
     find("##{original_group.id}").set(false)
     find("##{new_group.id}").set(true)
