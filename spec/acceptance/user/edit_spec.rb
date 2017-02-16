@@ -24,7 +24,7 @@ RSpec.feature 'Edit all user attributes' do
                        git_hub: "not_joe_git" }
 
     login(user)
-    click_link "Account Info"
+    click_link "My Account"
     click_link "Edit profile"
     fill_in "First Name*", with: new_attributes[:first_name]
     fill_in "Last Name*", with: new_attributes[:last_name]
