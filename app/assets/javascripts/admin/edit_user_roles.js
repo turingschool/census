@@ -20,6 +20,13 @@ $('.admin-edit-user-roles').ready(function() {
       removeUserRoles();
     }
   })
+  $('#checkAll').on('click', function(event) {
+    if ($('#checkAll').is(":checked")) {
+      $( ".singleBox" ).prop( "checked", true );
+    } else {
+      $( ".singleBox" ).prop( "checked", false );
+    }
+  })
 })
 
 function updateTable(data) {
@@ -79,7 +86,7 @@ function appendUsers(data) {
         cohort = user["cohort"]["name"]
       }
       userTable.append('<tr data-user-id='+user["id"]+'>'+
-        '<td class="selected-user"><input type="checkbox"</td>'+
+        '<td class="selected-user"><input type="checkbox" class="singleBox"</td>'+
         '<td>'+user["first_name"]+'</td>'+
         '<td>'+user["last_name"]+'</td>'+
         '<td>'+cohort+'</td>'+
