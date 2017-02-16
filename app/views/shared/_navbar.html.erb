@@ -2,19 +2,20 @@
 <div class='navbar navbar-inverse navbar-static-top' role='navigation'>
   <div class='container-fluid'>
     <div class='navbar-header'>
-      <%= link_to 'Census', root_path, class: 'navbar-brand' %>
+      <%= link_to 'Census', root_path, class: 'navbar-brand blue-link' %>
     </div>
-    <ul class='nav navbar-nav'>
-      <% if user_signed_in? %>
-        <li><%= link_to 'Account Info', user_path(current_user) %></li>
-        <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
-      <% else %>
-        <li><%= link_to 'Login', new_user_session_path %></li>
+    <ul class='nav navbar-nav navbar-right'>
+      <% if user_is_admin? %>
+        <li><%= link_to 'Go to Dashboard', admin_dashboard_path, class:"blue-link" %></li>
+        <li><%= link_to 'Invite Users', new_invitation_path, class:"blue-link" %></li>
       <% end %>
 
-      <% if user_is_admin? %>
-        <li><%= link_to 'Go to Dashboard', admin_dashboard_path %></li>
-        <li><%= link_to 'Invite Users', new_invitation_path %></li>
+      <% if user_signed_in? %>
+        <li><%= link_to 'Community', root_path, class: 'blue-link' %></li>
+        <li><%= link_to 'My Account', user_path(current_user), class:"blue-link" %></li>
+        <li><%= link_to 'Logout', destroy_user_session_path, method: :delete, class:"blue-link" %></li>
+      <% else %>
+        <li><%= link_to 'Login', new_user_session_path, class:"blue-link" %></li>
       <% end %>
     </ul>
   </div>

@@ -12,11 +12,13 @@
  *
  *= require_tree .
  *= require_self
+ *= require bootstrap-table
  */
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
  @import 'bootstrap/theme';
+ @import "bootstrap-table";
 
 input.input-field-error {
   background: #ff9999;
@@ -44,11 +46,11 @@ input.input-field-error {
 #search-by-name {
   margin: 10px;
   border-radius: 3px;
-  width: 20%;
+  width: 60%;
 }
 
 .emails-input {
-  width: 40%;
+  width: 100%;
   margin-bottom: 10px;
 }
 
@@ -57,7 +59,15 @@ input.input-field-error {
 }
 
 .alert {
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 88%;
+  margin-left: 7%;
+  margin-right: 5%;
+}
+
+.blue-link:hover {
+  color: #00bbd2 !important;
+}
+
+.btn-container {
+  padding-top: 2%;
 }

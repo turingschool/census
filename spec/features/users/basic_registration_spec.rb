@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'User signs up' do
   scenario 'by completing minimum registration' do
-    role = create :role, name: 'Staff'
+    role = create :role, name: 'admin'
     invite = create :invitation, role: role
 
     visit invite.generate_url(new_user_registration_url)
@@ -13,7 +13,7 @@ RSpec.feature 'User signs up' do
     fill_in 'Password confirmation', with: 'password'
     click_button 'Sign up'
 
-    help_message = 'You have succesfully signed up! Please log in to continue.'
+    help_message = 'You have succesfully signed up!'
 
     expect(page).to have_content(help_message)
     expect(User.count).to eq(1)

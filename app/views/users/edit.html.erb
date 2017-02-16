@@ -1,9 +1,9 @@
-<h2>Edit Profile</h2>
-<div class='container'>
-<%= form_for @user do |f| %>
-  <%= render 'shared/registration_fields', f: f, cohorts: @cohorts %>
-  <div class="actions">
-    <%= f.submit "Update", class: 'btn btn-default btn-xs' %>
-  </div>
-<% end %>
+<div class='container well col-md-4 col-md-offset-4'>
+  <h2>Edit Profile</h2>
+  <%= form_for @user do |f| %>
+    <%= render 'shared/registration_fields', f: f, cohorts: @cohorts %>
+    <div class="actions">
+      <%= f.submit "Update", class: 'btn btn-default btn-xs' %>
+    </div>
+  <% end %>
 </div>

@@ -1,9 +1,11 @@
-<table class="table table-hover role-table">
-  <tr>
-    <th>Name</th>
-    <th># of Members</th>
-    <th></th>
-  </tr>
+<table class="table table-hover role-table" data-toggle="table">
+  <thead>
+    <tr>
+      <th data-sortable="true">Name</th>
+      <th data-sortable="true"># of Members</th>
+      <th></th>
+    </tr>
+  </thead>
   <% roles.each do |role| %>
     <tr id="role-<%= role.id %>" class="role <%= role.name %>">
       <td><p class="role-name"><%= role.name %></p></td>
