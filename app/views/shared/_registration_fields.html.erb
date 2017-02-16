@@ -55,14 +55,16 @@
   <div class="field">
     <%= f.label :cohort_id %><br />
     <% if @user.cohort %>
-      <%= f.select :cohort_id, options_from_collection_for_select(cohorts, "id", "name", "#{@user.cohort.id}"), include_blank: true %>
+      <%= f.select :cohort_id, options_from_collection_for_select(cohorts, "id", "name", "#{@user.cohort.id}"), include_blank: true, class:"form-control"%>
     <% else %>
-      <%= f.select :cohort_id, options_from_collection_for_select(cohorts, "id", "name"), include_blank: true %>
+      <%= f.select :cohort_id, options_from_collection_for_select(cohorts, "id", "name"), include_blank: true, class:"form-control" %>
     <% end %>
   </div>
 </div>
 
-<div class="field">
-  <%= f.label "Upload an Image" %>
-  <%= f.file_field :image %>
+<div class="form-group">
+  <div class="field">
+    <%= f.label "Upload an Image" %>
+    <%= f.file_field :image, class:"form-control" %>
+  </div>
 </div>
