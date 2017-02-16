@@ -7,10 +7,10 @@ RSpec.feature 'User signs up' do
 
     visit invite.generate_url(new_user_registration_url)
 
-    fill_in 'First name', with: 'Jeff'
-    fill_in 'Last name', with: 'Casimir'
-    fill_in 'Password', with: 'password'
-    fill_in 'Password confirmation', with: 'password'
+    fill_in 'First Name*', with: 'Jeff'
+    fill_in 'Last Name*', with: 'Casimir'
+    fill_in 'Password*', with: 'password'
+    fill_in 'Password Confirmation*', with: 'password'
     click_button 'Sign up'
 
     help_message = 'You have succesfully signed up!'
@@ -27,9 +27,9 @@ RSpec.feature 'User signs up' do
 
     visit invite.generate_url(new_user_registration_url)
 
-    fill_in 'Last name', with: 'Casimir'
-    fill_in 'Password', with: 'password'
-    fill_in 'Password confirmation', with: 'password'
+    fill_in 'Last Name*', with: 'Casimir'
+    fill_in 'Password*', with: 'password'
+    fill_in 'Password Confirmation*', with: 'password'
     click_button 'Sign up'
 
     error_message = "First name can't be blank"

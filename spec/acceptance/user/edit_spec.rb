@@ -26,11 +26,10 @@ RSpec.feature 'Edit all user attributes' do
     login(user)
     click_link "My Account"
     click_link "Edit profile"
-    fill_in "First name", with: new_attributes[:first_name]
-    fill_in "Last name", with: new_attributes[:last_name]
-    fill_in "Email", with: new_attributes[:email]
+    fill_in "First Name*", with: new_attributes[:first_name]
+    fill_in "Last Name*", with: new_attributes[:last_name]
+    fill_in "Email*", with: new_attributes[:email]
     fill_in "user[slack]", with: new_attributes[:slack]
-    find("option[value='#{new_attributes[:cohort_id]}']").select_option
     fill_in "user[twitter]", with: new_attributes[:twitter]
     fill_in "user[linked_in]", with: new_attributes[:linked_in]
     fill_in "user[git_hub]", with: new_attributes[:git_hub]
@@ -43,7 +42,6 @@ RSpec.feature 'Edit all user attributes' do
     expect(page).to have_content(new_attributes[:last_name])
     expect(page).to have_content(new_attributes[:email])
     expect(page).to have_content(new_attributes[:slack])
-    expect(page).to have_content(cohort_2.name)
     expect(page).to have_content(new_attributes[:twitter])
     expect(page).to have_content(new_attributes[:linked_in])
     expect(page).to have_content(new_attributes[:git_hub])
