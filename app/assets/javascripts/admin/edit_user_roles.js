@@ -22,6 +22,11 @@ $('.admin-edit-user-roles').ready(function() {
   })
 })
 
+function updateTable(data) {
+  $('#user-role-search tbody').remove();
+  appendUsers(data);
+}
+
 function fetchUsers(searchParams) {
   $.ajax({
     method: 'GET',
@@ -38,7 +43,9 @@ function requestAddUserRoles(userIds, roleIds) {
     url: '/api/v1/users/add_roles',
     data: {users: userIds, roles: roleIds}
   })
-  .done(console.log("Added roles"))
+  .done(function(data){
+    updateTable(data)
+  })
   .fail(onFail);
 }
 
@@ -48,7 +55,9 @@ function requestRemoveUserRoles(userIds, roleIds) {
     url: '/api/v1/users/remove_roles',
     data: {users: userIds, roles: roleIds}
   })
-  .done(console.log("Removed roles"))
+  .done(function(data){
+    updateTable(data)
+  })
   .fail(onFail);
 }
 
