@@ -1,5 +1,8 @@
 <div class='container'>
 <h2>Account Profile</h2>
+<% if user_is_admin? && @user != current_user %>
+  <p><%= link_to "Edit User", edit_user_path(@user), class: 'btn btn-info btn-sm' %><p>
+<% end %>
 <table class="table acct-info">
   <%= render 'account_profile_row',
       header: "First name",
@@ -41,8 +44,8 @@
 <p>View the applications you have given permission to user your data:</p>
 <%= link_to 'Authorized Applications', oauth_authorized_applications_path, class: 'btn btn-success' %>
 <% elsif user_is_admin? %>
-<h3>Change Roles</h3>
   <% if @user.roles.where(name: 'active student').exists? %>
+    <h3>Change Roles</h3>
     <%= link_to 'Graduated', admin_user_path(@user, role: 'graduated'), method: :patch, class: 'btn btn-default btn-xs' %>
     <%= link_to 'Removed', admin_user_path(@user, role: 'removed'), method: :patch, class: 'btn btn-default btn-xs' %>
     <%= link_to 'Exited', admin_user_path(@user, role: 'exited'), method: :patch, class: 'btn btn-default btn-xs' %>
