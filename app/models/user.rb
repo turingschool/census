@@ -53,6 +53,10 @@ class User < ApplicationRecord
     roles.map { |role| role.name }.join(', ')
   end
 
+  def list_groups
+    groups.map {|group| group.name }.join(', ')
+  end
+
   def has_role?(role)
     roles.where(name: "#{role}").exists?
   end
