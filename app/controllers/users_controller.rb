@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def index
     @cohorts = Cohort.all
-    if params[:cohort]
+    if params[:cohort] != ''
       cohort = Cohort.find(params[:cohort])
       @users = User.where(cohort: params[:cohort])
       @header = "Cohort: #{cohort.name}"
