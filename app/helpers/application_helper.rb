@@ -8,4 +8,5 @@ module ApplicationHelper
       current_user.roles.where(name: 'admin').exists?
     end
   end
+
 end
