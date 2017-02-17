@@ -54,7 +54,7 @@
 <div class="form-group">
   <div class="field">
     <%= f.label :cohort_id %><br />
-    <% if user_is_admin? %>
+    <% if user_is_admin? && @user.cohort %>
       <%= f.select :cohort_id, options_from_collection_for_select(cohorts, "id", "name", "#{@user.cohort.id}"), class:"form-control" %>
     <% elsif @user.cohort %>
       <%= f.select :cohort_id, options_from_collection_for_select([@user.cohort], "id", "name", "#{@user.cohort.id}"),class:"form-control" %>
