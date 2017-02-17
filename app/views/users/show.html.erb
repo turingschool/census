@@ -1,48 +1,61 @@
 <div class='container'>
-<h2>Account Profile</h2>
-<table class="table acct-info">
-  <%= render 'account_profile_row',
-      header: "First name",
-      data: @user.first_name %>
-  <%= render 'account_profile_row',
-      header: "Last name",
-      data: @user.last_name %>
-  <%= render 'account_profile_row',
-      header: "Email",
-      data: @user.email %>
-  <%= render 'account_profile_row',
-      header: "Slack",
-      data: @user.slack %>
-  <%= render 'account_profile_row',
-      header: "Cohort",
-      data: @user.cohort_name %>
-  <%= render 'account_profile_row',
-      header: "Twitter",
-      data: @user.twitter %>
-  <%= render 'account_profile_row',
-      header: "LinkedIn",
-      data: @user.linked_in %>
-  <%= render 'account_profile_row',
-      header: "GitHub",
-      data: @user.git_hub %>
-  <%= render 'account_profile_row',
-      header: "Roles",
-      data: @user.list_roles %>
-</table>
+<h2>My Account</h2>
+<% if user_is_admin? && @user != current_user %>
+  <p><%= link_to "Edit User", edit_user_path(@user), class: 'btn btn-info btn-sm' %><p>
+<% end %>
+<div class="col-md-7">
+  <table class="table acct-info table-hover">
+    <%= render 'account_profile_row',
+        header: "First name",
+        data: @user.first_name %>
+    <%= render 'account_profile_row',
+        header: "Last name",
+        data: @user.last_name %>
+    <%= render 'account_profile_row',
+        header: "Email",
+        data: @user.email %>
+    <%= render 'account_profile_row',
+        header: "Slack",
+        data: @user.slack %>
+    <%= render 'account_profile_row',
+        header: "Cohort",
+        data: @user.cohort_name %>
+    <%= render 'account_profile_row',
+        header: "Twitter",
+        data: @user.twitter %>
+    <%= render 'account_profile_row',
+        header: "LinkedIn",
+        data: @user.linked_in %>
+    <%= render 'account_profile_row',
+        header: "GitHub",
+        data: @user.git_hub %>
+    <%= render 'account_profile_row',
+        header: "Roles",
+        data: @user.list_roles %>
+    <%= render 'account_profile_row',
+        header: "Groups",
+        data: @user.list_groups %>
+  </table>
+</div>
 <% if @user == current_user %>
-<%= render 'affiliations' %>
-<%= link_to 'Change password', edit_user_registration_path, class: 'btn btn-default btn-xs'%>
-<%= link_to "Edit profile", edit_user_path(@user), class: 'btn btn-default btn-xs' %>
-<%= link_to "Edit affiliations", new_affiliation_path, class: 'btn btn-default btn-xs' %>
-<hr />
-<h3>Oauth</h3>
-<p>Manage the applications you have registered with Census:</p>
-<%= link_to 'Registered Applications', oauth_applications_path, class: 'btn btn-info' %><br><br>
-<p>View the applications you have given permission to user your data:</p>
-<%= link_to 'Authorized Applications', oauth_authorized_applications_path, class: 'btn btn-success' %>
+  <div class="col-md-5">
+    <p><%= link_to 'Change password', edit_user_registration_path, class: 'btn btn-default btn-xs'%></p>
+    <p><%= link_to "Edit profile", edit_user_path(@user), class: 'btn btn-default btn-xs' %></p>
+    <p><%= link_to "Edit affiliations", new_affiliation_path, class: 'btn btn-default btn-xs' %></p>
+  </div>
+
+  <hr />
+  <div class="col-md-5">
+    <h3>Oauth</h3>
+    <p>Manage the applications you have registered with Census:</p>
+    <%= link_to 'Registered Applications', oauth_applications_path, class: 'btn btn-info btn-xs' %><br><br>
+    <p>View the applications you have given permission to user your data:</p>
+    <%= link_to 'Authorized Applications', oauth_authorized_applications_path, class: 'btn btn-success btn-xs' %>
+  </div>
+
 <% elsif user_is_admin? %>
-<h3>Change Roles</h3>
   <% if @user.roles.where(name: 'active student').exists? %>
+    <h3>Change Roles</h3>
     <%= link_to 'Graduated', admin_user_path(@user, role: 'graduated'), method: :patch, class: 'btn btn-default btn-xs' %>
     <%= link_to 'Removed', admin_user_path(@user, role: 'removed'), method: :patch, class: 'btn btn-default btn-xs' %>
     <%= link_to 'Exited', admin_user_path(@user, role: 'exited'), method: :patch, class: 'btn btn-default btn-xs' %>

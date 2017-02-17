@@ -1,4 +1,4 @@
-class Admin::Roles::UsersController < ApplicationController
+class Admin::Roles::UsersController < AdminController
   def edit
     @roles = Role.all
   end

@@ -1,21 +1,21 @@
 <div class="container">
   <h2>Users</h2>
 
-  <div class="cohort-filter">
-    <%= render 'cohort_dropdown', cohorts: @cohorts %>
+  <div class="cohort-filter col-md-5">
+    <%= render 'cohort_dropdown', cohorts: @cohorts, selected: @selected %>
   </div>
 
-  <div class="search-by-name">
+  <div class="search-by-name col-md-6">
     <label for="search_by_name">Search by Name: </label>
     <input id="search-by-name" name="search_by_name" type="text" />
   </div>
 
-  <table class="table">
+  <table class="table" data-toggle="table">
     <thead class="thead-inverse">
       <tr>
-        <th>Name</th>
-        <th>Slack</th>
-        <th>Cohort</th>
+        <th data-sortable="true">Name</th>
+        <th data-sortable="true">Slack</th>
+        <th data-sortable="true">Cohort</th>
       </tr>
     </thead>
       <% @users.each do |user| %>

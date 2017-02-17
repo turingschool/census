@@ -4,11 +4,12 @@ class UsersController < ApplicationController
 
   def index
     @cohorts = Cohort.all
-    if params[:cohort]
-      cohort = Cohort.find(params[:cohort])
-      @users = User.where(cohort: params[:cohort])
-      @header = "Cohort: #{cohort.name}"
+    if params[:cohort] != '' && params[:cohort]
+      @cohort = Cohort.find(params[:cohort])
+      @users = @cohort.users
+      @selected = @cohort.name
     else
+      @selected = 'All Users'
       @users = User.all
     end
   end

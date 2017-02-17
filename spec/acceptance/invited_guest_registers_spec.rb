@@ -8,10 +8,10 @@ RSpec.feature 'Invited user' do
 
     expect(find('#user_email').value).to eq('me@example.com')
 
-    fill_in 'Password', with: 'password'
-    fill_in 'Password confirmation', with: 'password'
-    fill_in 'First name', with: 'Jeff'
-    fill_in 'Last name', with: 'Casimir'
+    fill_in 'Password*', with: 'password'
+    fill_in 'Password Confirmation*', with: 'password'
+    fill_in 'First Name*', with: 'Jeff'
+    fill_in 'Last Name*', with: 'Casimir'
 
     expect { click_button 'Sign up' }.to change { User.count }.by(1)
 

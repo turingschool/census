@@ -26,6 +26,9 @@ class Ability
       can :read, Cohort
       can :read, Group
       can :read, Role
+      can :read, Affiliation
+      can :create, Affiliation
+      can :update, Affiliation
       cannot :manage, Invitation
     elsif user.has_role?("exited") || user.has_role?("removed")
       cannot :manage, :all

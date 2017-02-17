@@ -48,20 +48,4 @@ RSpec.describe 'Admin' do
     expect(page).not_to have_content 'active student'
     expect(page).to have_content 'exited'
   end
-
-  it 'can change a users role from applicant to active student' do
-    admin = create :admin
-    sign_in admin
-
-    student = create :user
-    student_role = create :role, name: 'active student'
-    applicant_role = create :role, name: 'applicant'
-    student.roles << applicant_role
-    visit user_path(student)
-
-    click_on 'Enroll'
-    expect(current_path).to eq user_path(student)
-    expect(page).not_to have_content 'applicant'
-    expect(page).to have_content 'active student'
-  end
 end

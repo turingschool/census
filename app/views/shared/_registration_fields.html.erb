@@ -1,20 +1,20 @@
 <div class="form-group">
   <div class="field">
-    <%= f.label :first_name %><br />
+    <%= f.label :first_name, "First Name*" %><br />
     <%= f.text_field :first_name, class: "form-control" %><br />
   </div>
 </div>
 
 <div class="form-group">
   <div class="field">
-    <%= f.label :last_name %><br />
+    <%= f.label :last_name, "Last Name*" %><br />
     <%= f.text_field :last_name, class: "form-control" %><br />
   </div>
 </div>
 
 <div class="form-group">
   <div class="field">
-    <%= f.label :email %><br />
+    <%= f.label :email, "Email*" %><br />
     <% if invited? %>
       <%= f.email_field :email, readonly: true, class: 'form-control' %><br />
     <% else %>
@@ -54,15 +54,19 @@
 <div class="form-group">
   <div class="field">
     <%= f.label :cohort_id %><br />
-    <% if @user.cohort %>
-      <%= f.select :cohort_id, options_from_collection_for_select(cohorts, "id", "name", "#{@user.cohort.id}"), include_blank: true %>
+    <% if user_is_admin? && @user.cohort %>
+      <%= f.select :cohort_id, options_from_collection_for_select(cohorts, "id", "name", "#{@user.cohort.id}"), class:"form-control" %>
+    <% elsif @user.cohort %>
+      <%= f.select :cohort_id, options_from_collection_for_select([@user.cohort], "id", "name", "#{@user.cohort.id}"),class:"form-control" %>
     <% else %>
-      <%= f.select :cohort_id, options_from_collection_for_select(cohorts, "id", "name"), include_blank: true %>
+      <%= f.select :cohort_id, options_from_collection_for_select(cohorts, "id", "name"), include_blank: true, class:"form-control" %>
     <% end %>
   </div>
 </div>
 
-<div class="field">
-  <%= f.label "Upload an Image" %>
-  <%= f.file_field :image %>
+<div class="form-group">
+  <div class="field">
+    <%= f.label "Upload an Image" %>
+    <%= f.file_field :image, style: "margin-left:25%;" %>
+  </div>
 </div>

@@ -1,4 +1,4 @@
-class Admin::CohortsController < ApplicationController
+class Admin::CohortsController < AdminController
   before_action :set_cohort, only: [:show, :update, :destroy, :edit]
 
   def index
