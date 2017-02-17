@@ -1,4 +1,6 @@
 <%= form_tag("/users", method: "get") do %>
-  <%= select_tag :cohort, options_from_collection_for_select(cohorts, "id", "name"), include_blank: true, class: "pretty-select" %>
+  <%= select_tag :cohort, options_from_collection_for_select(cohorts,
+    "id", "name"), include_blank: true, class: "pretty-select",
+    :onchange => "this.form.submit();" %>
   <%= submit_tag "Filter by Cohort", class: "btn btn-default btn-xs" %>
 <% end %>
