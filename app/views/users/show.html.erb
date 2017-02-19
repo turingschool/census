@@ -37,6 +37,11 @@
         data: @user.list_groups %>
   </table>
 </div>
+
+<div class="profile-pic">
+  <%= image_tag @user.image.url(:square) %>
+</div>
+
 <% if @user == current_user %>
   <div class="col-md-5">
     <p><%= link_to 'Change password', edit_user_registration_path, class: 'btn btn-default btn-xs'%></p>
