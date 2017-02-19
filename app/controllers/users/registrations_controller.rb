@@ -109,7 +109,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
         :slack,
         :cohort_id,
         :password,
-        :password_confirmation
+        :password_confirmation,
+        :image
       )
     end
 

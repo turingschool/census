@@ -6,7 +6,7 @@ RSpec.feature 'User logs out' do
     login(user)
     click_link 'Logout'
 
-    expect(page).to have_content('Log in')
+    expect(page).to have_content('Log In')
     expect(page).to_not have_content("#{user.first_name} #{user.last_name}")
   end
 end

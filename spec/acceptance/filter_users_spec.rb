@@ -8,6 +8,7 @@ RSpec.feature 'Filter users by cohort' do
     user = create(:enrolled_user, cohort_id: cohort_2.id)
 
     login(user)
+    visit '/users'
 
     expect(page).to have_css("tr", count: 3)
     find("option[value='#{cohort.id}']").select_option

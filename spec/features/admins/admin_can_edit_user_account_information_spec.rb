@@ -7,7 +7,7 @@ RSpec.describe 'User profiles' do
 
     login me
 
-    visit "users/#{other.id}/edit"
+    visit "#{other.id}/edit"
 
     expect(page).to have_field("user[first_name]", with: "#{other.first_name}")
     expect(page).to have_field("user[last_name]", with: "#{other.last_name}")
