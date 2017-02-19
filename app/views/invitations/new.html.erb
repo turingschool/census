@@ -4,7 +4,7 @@
     <%= f.label :email, "Emails" %>
     <%= f.text_area :email, placeholder: "Comma separated list of email addresses", class: "form-control emails-input" %>
     <%= label_tag :role %>
-    <%= select_tag :role, options_for_select(["Student", "Mentor", "Admin"]), id: "role-select", class: "pretty-select" %>
+    <%= select_tag :role, options_for_select(["Student", "Staff", "Mentor"]), id: "role-select", class: "pretty-select" %>
     <%= label_tag :cohort %>
     <%= select_tag :cohort, options_for_select(@cohorts), id: "cohort-select", class: "pretty-select" %>
     <%= f.submit "Invite", class: 'btn btn-warning btn-xs' %>
