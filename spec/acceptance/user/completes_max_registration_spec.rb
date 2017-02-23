@@ -17,6 +17,8 @@ RSpec.feature 'User signs up' do
     fill_in 'user[linked_in]', with: user[:linked_in]
     fill_in 'user[git_hub]', with: user[:git_hub]
     fill_in 'user[slack]', with: user[:slack]
+    fill_in 'user[stackoverflow]', with: user[:stackoverflow]
+
     find("option[value='#{cohort.id}']").select_option
 
     click_button 'Sign up'

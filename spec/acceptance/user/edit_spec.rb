@@ -12,7 +12,8 @@ RSpec.feature 'Edit all user attributes' do
                      cohort_id: cohort_1.id,
                      twitter: "joe_tweet",
                      linked_in: "joelinkedin",
-                     git_hub: "joe_git")
+                     git_hub: "joe_git",
+                     stackoverflow: "http://stackwhatever.com/person")
 
     new_attributes = { first_name: "not_joe",
                        last_name: "not_shmoe",
@@ -21,7 +22,8 @@ RSpec.feature 'Edit all user attributes' do
                        cohort_id: cohort_2.id,
                        twitter: "not_joe_tweet",
                        linked_in: "notjoelinkedin",
-                       git_hub: "not_joe_git" }
+                       git_hub: "not_joe_git",
+                       stackoverflow: "http://stackoverflow.com/blah"}
 
     login(user)
     click_link "My Account"
@@ -33,6 +35,8 @@ RSpec.feature 'Edit all user attributes' do
     fill_in "user[twitter]", with: new_attributes[:twitter]
     fill_in "user[linked_in]", with: new_attributes[:linked_in]
     fill_in "user[git_hub]", with: new_attributes[:git_hub]
+    fill_in "user[stackoverflow]", with: new_attributes[:stackoverflow]
+
     click_button "Update"
 
     expect(current_path).to eq(user_path(user))
@@ -45,5 +49,7 @@ RSpec.feature 'Edit all user attributes' do
     expect(page).to have_content(new_attributes[:twitter])
     expect(page).to have_content(new_attributes[:linked_in])
     expect(page).to have_content(new_attributes[:git_hub])
+    expect(page).to have_content(new_attributes[:stackoverflow])
+
   end
 end

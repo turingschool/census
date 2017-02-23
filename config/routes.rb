@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :users do
         get '/by_name', to: 'by_name#index'
+        get '/by_cohort', to: 'by_cohort#index'
 
         get '/search_all', to: 'search_all#index'
 
@@ -27,11 +28,10 @@ Rails.application.routes.draw do
 
       end
 
-      # get '/mentor_ship/users', to: 'mentorship#index'
-
       get '/users/:id', to: 'users#show', as: 'user'
 
       get '/users', to: 'users#index'
+      get '/cohorts', to: 'cohorts#index'
 
       get '/user_credentials', to: 'credentials#show'
 
