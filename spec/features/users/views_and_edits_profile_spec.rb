@@ -18,7 +18,7 @@ RSpec.describe 'User visits edit profile page', js: :true do
   end
 
   context "they enter an '@' with their twitter username" do
-    xscenario "that input field turns red, but it is corrected for them" do
+    scenario "that input field turns red, but it is corrected for them", js: true do
       user = create :enrolled_user, twitter: ""
 
       login user
@@ -56,7 +56,7 @@ RSpec.describe 'User visits edit profile page', js: :true do
   end
 
   context "they enter an invalid LinkedIn username" do
-    xscenario "they are shown a warning and then the update is rejected" do
+    scenario "they are shown a warning and then the update is rejected", js: true do
       user = create :enrolled_user, linked_in: ""
 
       login user
