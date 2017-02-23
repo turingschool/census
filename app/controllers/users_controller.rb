@@ -47,7 +47,8 @@ class UsersController < ApplicationController
                                     :git_hub,
                                     :slack,
                                     :cohort_id,
-                                    :image )
+                                    :image,
+                                    :stackoverflow )
     end
 
     def set_user

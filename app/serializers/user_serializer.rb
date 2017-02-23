@@ -6,6 +6,10 @@ class UserSerializer < ActiveModel::Serializer
              :image_url,
              :email,
              :slack,
+             :stackoverflow,
+             :linked_in,
+             :git_hub,
+             :twitter,
              :roles,
              :groups
 

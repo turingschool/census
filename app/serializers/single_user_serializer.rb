@@ -1,5 +1,17 @@
 class SingleUserSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :last_name, :cohort, :image_url, :email, :slack, :twitter, :linked_in, :git_hub, :groups, :roles
+  attributes :id,
+             :first_name,
+             :last_name,
+             :cohort,
+             :image_url,
+             :email,
+             :slack,
+             :twitter,
+             :linked_in,
+             :git_hub,
+             :stackoverflow,
+             :groups,
+             :roles
 
   def image_url
     url = object.image.url
