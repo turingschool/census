@@ -3,15 +3,7 @@ class UsersController < ApplicationController
   authorize_resource
 
   def index
-    @cohorts = Cohort.all
-    if params[:cohort] != '' && params[:cohort]
-      cohort = Cohort.find(params[:cohort])
-      @users = cohort.users
-      @selected = cohort.name
-    else
-      @selected = 'All Users'
-      @users = User.all
-    end
+    @presenter = UsersPresenter.new(params[:cohort])
   end
 
   def show
