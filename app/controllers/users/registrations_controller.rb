@@ -110,7 +110,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
         :cohort_id,
         :password,
         :password_confirmation,
-        :image
+        :image,
+        :stackoverflow
       )
     end
 

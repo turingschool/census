@@ -30,6 +30,9 @@
         header: "GitHub",
         data: @user.git_hub %>
     <%= render 'account_profile_row',
+        header: "StackOverflow",
+        data: @user.stackoverflow %>
+    <%= render 'account_profile_row',
         header: "Roles",
         data: @user.list_roles %>
     <%= render 'account_profile_row',
