@@ -6,7 +6,8 @@
 > Census serves as a central location for identity management and authentication across the [Turing School](https://github.com/turingschool) community.
 
 ## Table of Contents
-
+- [Onboarding Tips](#onboarding)
+  - [Heroku](#heroku)
 - [Requirements](#requirements)
   - [Ruby on Rails](#ror)
   - [Environment Variables](#environment-variables)
@@ -23,6 +24,21 @@
     - [Original Contributors](#original-contributors)
 - [Contribute](#contribute)
 - [License](#license)
+
+## [Onboarding tips](#onboarding)
+### [Heroku](#heroku)
+* staging: https://census-app-staging.herokuapp.com/
+* production: https://turing-census.herokuapp.com/
+* Other teams will use the staging app for their staging environment. Switching between environments requires switching the oauth gem. In staging, Gemfile should include:
+```
+gem 'omniauth-census', git: "https://github.com/nzenitram/census_staging_oauth"
+```
+In production:
+```
+gem 'omniauth-census', git: "https://github.com/turingschool-projects/omniauth-census"
+```
+* There will be two apps connected to the same repository, staging auto deploys from the staging branch, and production auto deploys from master.
+* To access the heroku console for a specific app, run `heroku run --app <APP-NAME> console`
 
 ## [Requirements](#requirements)
 ### [Ruby on Rails](#ror)
@@ -140,7 +156,7 @@ The cohort endpoints return JSON in this format:
 ```
 
 ## [Register an Application](#register)
-Census uses [Devise](https://github.com/plataformatec/devise) and [Doorkeeper](https://github.com/doorkeeper-gem/doorkeeper) to manage authentication.
+Census uses [Devise](https://github.com/plataformatec/devise), [Doorkeeper](https://github.com/doorkeeper-gem/doorkeeper) and [cancancan](https://github.com/CanCanCommunity/cancancan) to manage authentication and authorization.
 
 ### [Gems](#gems)
 Currently, there are 2 gems to help you set up OAuth, one for [staging](https://github.com/NZenitram/census_staging_oauth) and one for [production](https://github.com/turingschool-projects/omniauth-census). Soon, we will add a configuation option so you don't need to change your gemfile before pushing to production.
@@ -156,6 +172,8 @@ Currently, there are 2 gems to help you set up OAuth, one for [staging](https://
 Some roles are just a flag for querying, others define your permissions on the site. Below is a list of all the currently available roles.
 <br>
 Note that the staging server is messy and roles may be incorrect for some users. Contact an admin if you need to change your permissions.
+<br>
+Roles are changed according to cohort status. For example, when an active cohort is moved to finished, all the "active student"s in that cohort will be moved to "graduated." "Removed" and "exited" students roles will not be effected.
 
 ### [Permissions](#permissions)
 * Admin
