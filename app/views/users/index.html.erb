@@ -2,7 +2,7 @@
   <h2>Users</h2>
 
   <div class="cohort-filter col-md-5">
-    <%= render 'cohort_dropdown', cohorts: @cohorts, selected: @selected %>
+    <%= render 'cohort_dropdown', cohorts: @presenter.cohorts, selected: @presenter.selected %>
   </div>
 
   <div class="search-by-name col-md-6">
@@ -18,7 +18,7 @@
         <th data-sortable="true">Cohort</th>
       </tr>
     </thead>
-      <% @users.each do |user| %>
+      <% @presenter.users.each do |user| %>
         <%= render 'user_row', user: user %>
       <% end %>
   </table>
