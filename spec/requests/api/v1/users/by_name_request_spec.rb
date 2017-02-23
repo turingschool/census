@@ -10,7 +10,7 @@ RSpec.describe Api::V1::Users::ByNameController do
   end
 
   context "Request is sent _with_ authorization credentials" do
-    xit "returns info for users whose names match search criterion" do
+    it "returns info for users whose names match search criterion" do
       test_root_url = "http://www.example.com/"
       user1 = create :user, first_name: "Dan", last_name: "Broadbent"
       create :user, first_name: "Susi", last_name: "Irwin"
@@ -23,7 +23,7 @@ RSpec.describe Api::V1::Users::ByNameController do
       expect(response).to have_http_status(200)
       expect(response_users.count).to eq(2)
 
-      expect(response_users.first["cohort"]).to eq(user1.cohort.name)
+      expect(response_users.first["cohort"]["name"]).to eq(user1.cohort.name)
       expect(response_users.first["image_url"]).to eq(test_root_url + user1.image.url)
     end
   end
