@@ -8,6 +8,7 @@
 ## Table of Contents
 - [Onboarding Tips](#onboarding)
   - [Heroku](#heroku)
+  - [FAQ](#faq)
 - [Requirements](#requirements)
   - [Ruby on Rails](#ror)
   - [Environment Variables](#environment-variables)
@@ -16,7 +17,6 @@
 - [API Endpoints](#api-endpoints)
 - [Register an Application](#register)
   - [Gems](#gems)
-  - [Common Issues](#issues)
 - [Roles](#roles)
   - [Permissions](#permissions)
   - [Flags](#flags)
@@ -39,6 +39,13 @@ gem 'omniauth-census', git: "https://github.com/turingschool-projects/omniauth-c
 ```
 * There will be two apps connected to the same repository, staging auto deploys from the staging branch, and production auto deploys from master.
 * To access the heroku console for a specific app, run `heroku run --app <APP-NAME> console`
+
+### [FAQ](#faq)
+* Why can't I authenticate from localhost?
+  - Census only allows authentication from a secure connection. This won't be a problem on a Heroku server, but it's a bit of a headache on localhost. In order to test OAuth locally, you need to create an ssl certificate and run a local server "securly." Luckily, Nick Martinez wrote a great [tutorial](https://github.com/NZenitram/census_staging_oauth) to make this work in the "Important Stuff" section of the oauth staging gem.
+
+* What's up with these tokens?
+  - Be aware that tokens expire every 90 days. Doorkeeper provides a way to grab a refresh token so your session isn't interupted.
 
 ## [Requirements](#requirements)
 ### [Ruby on Rails](#ror)
@@ -160,13 +167,6 @@ Census uses [Devise](https://github.com/plataformatec/devise), [Doorkeeper](http
 
 ### [Gems](#gems)
 Currently, there are 2 gems to help you set up OAuth, one for [staging](https://github.com/NZenitram/census_staging_oauth) and one for [production](https://github.com/turingschool-projects/omniauth-census). Soon, we will add a configuation option so you don't need to change your gemfile before pushing to production.
-
-### [Common Issues](#issues)
-* HTTPS
-  - Census only allows authentication from a secure connection. This won't be a problem on a Heroku server, but it's a bit of a headache on localhost. In order to test OAuth locally, you need to create an ssl certificate and run a local server "securly." Luckily, Nick Martinez wrote a great [tutorial](https://github.com/NZenitram/census_staging_oauth) to make this work in the "Important Stuff" section of the oauth staging gem.
-
-* Expiring Tokens
-  - Be aware that tokens expire every 90 days. Doorkeeper provides a way to grab a refresh token so your session isn't interupted.
 
 ## [Roles](#roles)
 Some roles are just a flag for querying, others define your permissions on the site. Below is a list of all the currently available roles.
