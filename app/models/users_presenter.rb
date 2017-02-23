@@ -1,19 +1,9 @@
 class UsersPresenter
 
-  # attr_reader  :selected
   def initialize(cohort_id = nil)
     @cohort_id = cohort_id
     @all_selected = 'All Users'
     @all_users = User.all
-
-    # if cohort_id != '' && cohort_id
-    #   cohort = Cohort.find(cohort_id)
-    #   # @users = cohort.users
-    #   @selected = cohort.name
-    # else
-    #   @selected = 'All Users'
-    #   # @users = User.all
-    # end
   end
 
   def cohorts
@@ -37,8 +27,5 @@ class UsersPresenter
       @all_selected
     end
   end
-
-
-
 
 end
