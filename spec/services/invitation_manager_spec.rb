@@ -84,7 +84,7 @@ RSpec.describe InvitationManager do
   it "has a status for no role" do
     params = { email: "good@example.com" }
     manager = InvitationManager.new(params, user, url)
-    msg = "Select a role."
+    msg = "You must select a cohort for students."
 
     expect(manager.status_message).to eq(msg)
   end
@@ -92,7 +92,7 @@ RSpec.describe InvitationManager do
   it "returns an error if bad emails" do
     manager = InvitationManager.new(invitation_params, user, url)
 
-    expect(manager.status).to eq(:error)
+    expect(manager.status).to eq(:danger)
     expect(manager.success?).to eq(false)
   end
 
@@ -100,7 +100,7 @@ RSpec.describe InvitationManager do
     params = { email: "good@example.com" }
     manager = InvitationManager.new(params, user, url)
 
-    expect(manager.status).to eq(:error)
+    expect(manager.status).to eq(:danger)
     expect(manager.success?).to eq(false)
   end
 
@@ -131,10 +131,10 @@ RSpec.describe InvitationManager do
     expect(invite.role.name).to eq("graduated")
   end
 
-  it "returns a notice if all invitations are created" do
+  it "returns a success if all invitations are created" do
     manager = InvitationManager.new(good_params, user, url)
 
-    expect(manager.status).to eq(:notice)
+    expect(manager.status).to eq(:success)
     expect(manager.success?).to eq(true)
   end
 
