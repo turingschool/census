@@ -116,14 +116,12 @@ The user endpoints return JSON in this format:
   "cohort": "1608-BE",
   "image_url": "https://census-app-staging.herokuapp.com/images/original/missing.png",
   "email": "Channa.Golan@example.com",
-  "slack": "",
-  "twitter": "",
-  "linked_in": "",
-  "git_hub": "",
+  "slack": "channa55",
+  "twitter": "chanana",
+  "linked_in": "channa-golan",
+  "git_hub": "golen5000",
   "groups": [],
   "roles": [
-    "invited",
-    "enrolled",
     "active student"
   ]
 }
