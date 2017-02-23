@@ -12,23 +12,23 @@ class InvitationManager
   end
 
   def status_message
-    return no_role if @role.nil?
+    return no_cohort if @role.nil?
     return good if @bad_emails.empty?
     return bad if !@bad_emails.empty?
   end
 
   def status
-    @role && @bad_emails.empty? ? :notice : :error
+    @role && @bad_emails.empty? ? :success : :danger
   end
 
   def success?
-    status == :notice
+    status == :success
   end
 
   private
 
     def find_role(role)
-      if role == "Student"
+      if role == "Student" && Cohort.find_by(name: @cohort)
         set_role_for_student
       elsif role == "Mentor"
         set_role_for_mentor
@@ -75,7 +75,7 @@ class InvitationManager
       "sent. Error sending #{bad_emails.join(', ')}."
     end
 
-    def no_role
-      "Select a role."
+    def no_cohort
+      "You must select a cohort for students."
     end
 end
