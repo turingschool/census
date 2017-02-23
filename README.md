@@ -83,6 +83,15 @@ To receive a user by name:
 GET 'https://census-app-staging/api/v1/users/by_name?q=[NAME]'
 ```
 
+To receive all users by cohort:
+```
+GET 'https://census-app-staging/api/v1/users/by_cohort?cohort_id=<ID>'
+```
+You can use the `api/v1/cohorts` endpoint to find cohort ids.
+<br>
+<br>
+<br>
+
 To receive a user by ID:
 ```
 GET 'https://census-app-staging/api/v1/users/:id'
@@ -91,6 +100,11 @@ GET 'https://census-app-staging/api/v1/users/:id'
 To receive all users:
 ```
 GET 'https://census-app-staging/api/v1/users/'
+```
+
+To receive your own user credentials:
+```
+GET 'https://census-app-staging/api/v1/user_credentials'
 ```
 
 The user endpoints return JSON in this format:
@@ -115,9 +129,16 @@ The user endpoints return JSON in this format:
 }
 ```
 
-To receive your own user credentials:
+To receive all cohorts:
+
 ```
-GET 'https://census-app-staging/api/v1/user_credentials'
+GET 'https://census-app-staging/api/v1/cohorts'
+```
+
+The cohort endpoints return JSON in this format:
+```
+[{"id"=>30, "name"=>"1608-BE", "created_at"=>"2017-02-23T16:38:39.134Z", "updated_at"=>"2017-02-23T16:38:39.134Z", "status"=>"active"},
+ {"id"=>31, "name"=>"1606-FE", "created_at"=>"2017-02-23T16:38:39.145Z", "updated_at"=>"2017-02-23T16:38:39.145Z", "status"=>"finished"}]
 ```
 
 ## [Register an Application](#register)
@@ -129,7 +150,7 @@ Currently, there are 2 gems to help you set up OAuth, one for [staging](https://
 ### [Common Issues](#issues)
 * HTTPS
   - Census only allows authentication from a secure connection. This won't be a problem on a Heroku server, but it's a bit of a headache on localhost. In order to test OAuth locally, you need to create an ssl certificate and run a local server "securly." Luckily, Nick Martinez wrote a great [tutorial](https://github.com/NZenitram/census_staging_oauth) to make this work in the "Important Stuff" section of the oauth staging gem.
-  
+
 * Expiring Tokens
   - Be aware that tokens expire every 90 days. Doorkeeper provides a way to grab a refresh token so your session isn't interupted.
 
@@ -142,20 +163,20 @@ Note that the staging server is messy and roles may be incorrect for some users.
 * Admin
   - Can crud all aspects of users.
   - Can manage applications
-  
+
 * Staff / Active Student / Graduated / Mentor
   - Can read and update their own personal info.
   - Can join public groups.
   - Can read cohort information (view cohort pages).
   - Can manage applications
-  
+
 * Enrolled
   - Can read and update their own personal info.
   - Can read cohort information (view cohort pages).
-  
+
 * Exited / Removed
   - Can't do anything
-  
+
 ### [Flags](#flags)
 * Instructor
 

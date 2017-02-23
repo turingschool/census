@@ -17,6 +17,7 @@ RSpec.describe Api::V1::CohortsController do
 
       get '/api/v1/cohorts', params: {access_token: token}
       response_cohorts = JSON.parse(response.body)
+      binding.pry
 
       expect(response_cohorts.length).to eq(4)
 
