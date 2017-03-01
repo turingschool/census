@@ -1,6 +1,7 @@
 class Invitation < ApplicationRecord
   belongs_to :user
   belongs_to :role
+  belongs_to :cohort
   validates_uniqueness_of :email
   validates_presence_of :email
   validates_format_of :email, with: /\A\S+@\S+\z/

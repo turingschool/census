@@ -6,22 +6,16 @@
 
     <div class="col-md-4 well">
       <h2>Sign up</h2>
+      <p style='color:gray;'><i>required*</i></p>
 
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), multipart: true) do |f| %>
         <%= devise_error_messages! %>
 
-        <%= render 'shared/registration_fields', f: f %>
+        <%= render 'shared/registration_fields', f: f, cohorts: @cohorts %>
 
         <div class="form-group">
           <div class="field">
-            <%= check_box("Armstrong", "Armstrong", id: "armstrong") %>
-            <%= label_tag "Armstrong" %>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="field">
-            <%= f.label :password %>
+            <%= f.label :password, "Password*" %>
             <% if @minimum_password_length %>
             <em>(<%= @minimum_password_length %> characters minimum)</em>
             <% end %><br />
@@ -31,7 +25,7 @@
 
         <div class="form-group">
           <div class="field">
-            <%= f.label :password_confirmation %><br />
+            <%= f.label :password_confirmation, "Password Confirmation*" %><br />
             <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
           </div>
         </div>
@@ -42,8 +36,6 @@
           </div>
         </div>
       <% end %>
-
-      <%= render "devise/shared/links" %>
     </div>
   </div>
 </div>

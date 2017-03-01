@@ -1,10 +1,12 @@
-<table class="table table-hover">
-  <tr>
-    <th>Email</th>
-    <th>Status</th>
-    <th>Created at</th>
-    <th>Actions</th>
-  </tr>
+<table class="table table-hover" data-toggle="table">
+  <thead>
+    <tr>
+      <th data-sortable="true">Email</th>
+      <th data-sortable="true">Status</th>
+      <th data-sortable="true">Created at</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
   <% invitations.each do |invite| %>
     <tr>
       <td><%= invite.email %></td>
@@ -15,11 +17,11 @@
           <%= link_to "Resend",
               invitation_path(invite),
               method: 'put',
-              class: 'btn btn-default' %>
+              class: 'btn btn-default btn-xs' %>
           <%= link_to "Cancel",
               invitation_path(invite),
               method: 'delete',
-              class: 'btn btn-default' %>
+              class: 'btn btn-default btn-xs' %>
         </div>
       </td>
     </tr>

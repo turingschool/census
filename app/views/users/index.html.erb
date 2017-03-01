@@ -1,20 +1,24 @@
 <div class="container">
-  <h2><%= @header %></h2>
+  <h2>Users</h2>
 
-  <%= render 'cohort_dropdown' %>
+  <div class="cohort-filter col-md-5">
+    <%= render 'cohort_dropdown', cohorts: @presenter.cohorts, selected: @presenter.selected %>
+  </div>
 
-  <label for="search_by_name">Search by Name:</label>
-  <input id="search-by-name" name="search_by_name" type="text" />
+  <div class="search-by-name col-md-6">
+    <label for="search_by_name">Search by Name: </label>
+    <input id="search-by-name" name="search_by_name" type="text" />
+  </div>
 
-  <table class="table">
+  <table class="table" data-toggle="table">
     <thead class="thead-inverse">
       <tr>
-        <th>Name</th>
-        <th>Slack</th>
-        <th>Cohort</th>
+        <th data-sortable="true">Name</th>
+        <th data-sortable="true">Slack</th>
+        <th data-sortable="true">Cohort</th>
       </tr>
     </thead>
-      <% @users.each do |user| %>
+      <% @presenter.users.each do |user| %>
         <%= render 'user_row', user: user %>
       <% end %>
   </table>

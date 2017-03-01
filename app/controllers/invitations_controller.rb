@@ -1,5 +1,6 @@
 class InvitationsController < ApplicationController
   before_action :invitation, only: [:destroy, :update]
+  authorize_resource
 
   def index
     @invitations = current_user.invitations.last_five_minutes
@@ -7,6 +8,7 @@ class InvitationsController < ApplicationController
 
   def new
     @invitation = Invitation.new
+    @cohorts = Cohort.all.map{ |c| c.name }.unshift("")
   end
 
   def create
@@ -19,6 +21,7 @@ class InvitationsController < ApplicationController
 
   def update
     @invitation.send!(new_user_registration_url)
+    flash[:success] = "Invitation Re-Sent."
     redirect_to admin_dashboard_path
   end
 
@@ -31,6 +34,7 @@ class InvitationsController < ApplicationController
     def invitation_params
       whitelist = params.require(:invitation).permit(:email)
       whitelist[:role] = params[:role]
+      whitelist[:cohort] = params[:cohort]
       return whitelist
     end
 

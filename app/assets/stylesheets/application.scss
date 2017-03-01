@@ -12,11 +12,13 @@
  *
  *= require_tree .
  *= require_self
+ *= require bootstrap-table
  */
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
  @import 'bootstrap/theme';
+ @import "bootstrap-table";
 
 input.input-field-error {
   background: #ff9999;
@@ -24,4 +26,98 @@ input.input-field-error {
 
 .hidden {
   visibility: hidden;
+}
+
+.pretty-select {
+  width: 100px;
+  border: .5px solid grey;
+  box-shadow: none;
+  margin: 10px;
+}
+
+.cohort-filter {
+  margin: 10px;
+}
+
+.search-by-name {
+  margin: 10px;
+}
+
+#search-by-name {
+  margin: 10px;
+  border-radius: 3px;
+  width: 60%;
+}
+
+.emails-input {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.acct-info {
+  width: 50%;
+}
+
+.alert {
+  width: 88%;
+  margin-left: 7%;
+  margin-right: 5%;
+}
+
+.blue-link:hover {
+  color: #00bbd2 !important;
+}
+
+.btn-container {
+  padding-top: 2%;
+}
+
+#searchBox {
+  height: 2.5em;
+}
+
+.search-group {
+  margin-bottom: 2em;
+}
+
+#add-delete-role {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+#save-button {
+  margin-top: 2em;
+}
+
+.border-form-div {
+  max-width: 300px;
+  padding: 19px 29px 19px;
+  margin: 0 auto 20px;
+  background-color: #e9e9e9;
+  border: 1px solid #e5e5e5;
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+          box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+
+.border-form-div .form-signin-heading,
+.border-form-div input[type="text"],
+.border-form-div input[type="email"],
+.border-form-div input[type="password"] {
+  font-size: 16px;
+  height: auto;
+  margin-bottom: 15px;
+  padding: 7px 9px;
+}
+
+.forgot-button {
+  text-align: center;
+}
+
+.profile-pic {
+  margin-top: -20px;
+  margin-bottom: 20px;
 }

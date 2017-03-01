@@ -17,7 +17,7 @@ RSpec.describe AffiliationsController, type: :controller do
 
   context 'Logged in user navigates to' do
     before do
-      @user = create :user
+      @user = create :active_student
       sign_in @user
     end
     it 'affiliations#create, they are redirected' do

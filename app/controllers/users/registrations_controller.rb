@@ -4,10 +4,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
+    @cohorts = Cohort.all
     if params[:invite_code]
-      invitation = invitation(params[:invite_code])
+      invite_code = params[:invite_code]
+      invitation = invitation(invite_code)
       if invitation
-        @user = User.new(email: invitation.email)
+        @user = User.new(email: invitation.email, cohort: invitation.cohort)
         @user.skip_confirmation!
         session[:invitation_code] = invitation.invitation_code
         render :new
@@ -22,15 +24,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     if valid_invitation_code?
-      @user= User.new(invited_user_params)
+      @user = User.new(invited_user_params)
       @user.roles << invitation(session[:invitation_code]).role
       @user.skip_confirmation!
       if @user.save
+        invitation = Invitation.find_by(invitation_code: session[:invitation_code])
+        invitation.accepted!
         session[:invitation_code] = nil
-        flash[:info] = 'You have succesfully signed up! Please log in to continue.'
-        redirect_to new_user_session_path
+        flash[:success] = 'You have succesfully signed up!'
+        sign_in(resource_name, resource)
+        if session[:return_path]
+          redirect_to session[:return_path]
+        else
+          respond_with resource, location: after_sign_in_path_for(resource)
+        end
       else
-        flash[:error] = @user.errors.full_messages.join(", ")
+        flash[:danger] = @user.errors.full_messages.join(", ")
         redirect_to new_user_registration_path(invite_code: session[:invitation_code])
       end
     else
@@ -98,9 +107,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
         :linked_in,
         :git_hub,
         :slack,
-        :cohort,
+        :cohort_id,
         :password,
-        :password_confirmation
+        :password_confirmation,
+        :image,
+        :stackoverflow
       )
     end
 

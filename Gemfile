@@ -11,6 +11,10 @@ gem 'jbuilder', '~> 2.5'
 gem "paperclip", "~> 5.0.0"
 gem 'aws-sdk', '~> 2.3'
 gem 'active_model_serializers', '~> 0.10.0'
+gem 'sprockets', '~> 3.0'
+gem 'rb-readline'
+gem 'coolline'
+gem 'active_designer'
 
 # Production debugging
 gem 'rails_12factor', group: :production
@@ -28,6 +32,7 @@ gem 'cancancan'
 # Styling
 gem 'bootstrap-sass'
 gem 'rack-cors', require: 'rack/cors'
+gem "bootstrap-table-rails"
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -42,6 +47,7 @@ group :development, :test do
   gem 'faker'
   gem 'simplecov', require: false
   gem 'oauth2' #used to simulate client app in testing
+  gem 'phantomjs', :require => 'phantomjs/poltergeist'
 end
 
 group :development do

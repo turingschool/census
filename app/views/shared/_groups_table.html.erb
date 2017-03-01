@@ -1,0 +1,16 @@
+<table class="table table-hover group-table" data-toggle="table">
+  <thead>
+    <tr>
+      <th data-sortable="true">Name</th>
+      <th data-sortable="true"># of Members</th>
+      <th></th>
+    </tr>
+  </thead>
+  <% groups.each do |group| %>
+    <tr id="group-<%= group.id %>" class="group <%= group.name %>">
+      <td><p class="group-name"><%= group.name %></p></td>
+      <td><%= group.member_count %></td>
+      <td><p class='btn btn-default btn-xs group-delete-button'>Delete</p></td>
+    </tr>
+  <% end %>
+</table>
