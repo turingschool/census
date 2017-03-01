@@ -58,6 +58,11 @@ RSpec.describe User, type: :model do
     expect(too_long.valid?).to be false
   end
 
+  it "allows LinkedIn username to have hyphens" do
+    okay = build(:user, linked_in: "matthew-leo-kaufman")
+    expect(okay.valid?).to be true
+  end
+
   context 'Role change' do
     it 'can change students to graduated' do
       user = create :user

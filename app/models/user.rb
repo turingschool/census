@@ -15,7 +15,7 @@ class User < ApplicationRecord
   validates :linked_in,
     length: { in: 5..30 },
     format: {
-      with: /\A[a-zA-Z0-9]+\z/,
+      with: /\A[a-zA-Z0-9-]+\z/,
       message: "accepts only alphanumeric characters"
     },
     allow_blank: true
