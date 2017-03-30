@@ -67,13 +67,14 @@ Census is built to expect a certain number of environment variables. We suggest 
 You will need an AWS S3 Bucket, Access Key ID, a Secret Access Key and an AWS region defined. Use the [AWS SDK](https://github.com/aws/aws-sdk-ruby) gem to get started.
 
 Environment Variables:
-```
-SALT # used for salting email invite tokens
+
+```yaml
+SALT # used for salting email invite tokens. Can be any random string.
 MY_EMAIL # used for testing purposes. Can be any email.
-S3_BUCKET_NAME
-AWS_ACCESS_KEY_ID
-AWS_SECRET_ACCESS_KEY
-AWS_REGION
+S3_BUCKET_NAME # Not needed in development
+AWS_ACCESS_KEY_ID # Not needed in development
+AWS_SECRET_ACCESS_KEY # Not needed in development
+AWS_REGION # Not needed in development
 ```
 
 ### [Paperclip Gem](#paperclip)
