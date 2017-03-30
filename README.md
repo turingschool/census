@@ -67,13 +67,14 @@ Census is built to expect a certain number of environment variables. We suggest 
 You will need an AWS S3 Bucket, Access Key ID, a Secret Access Key and an AWS region defined. Use the [AWS SDK](https://github.com/aws/aws-sdk-ruby) gem to get started.
 
 Environment Variables:
-```
-SALT # used for salting email invite tokens
+
+```yaml
+SALT # used for salting email invite tokens. Can be any random string.
 MY_EMAIL # used for testing purposes. Can be any email.
-S3_BUCKET_NAME
-AWS_ACCESS_KEY_ID
-AWS_SECRET_ACCESS_KEY
-AWS_REGION
+S3_BUCKET_NAME # Not needed in development
+AWS_ACCESS_KEY_ID # Not needed in development
+AWS_SECRET_ACCESS_KEY # Not needed in development
+AWS_REGION # Not needed in development
 ```
 
 ### [Paperclip Gem](#paperclip)
@@ -82,7 +83,7 @@ Census uses the [Paperclip](https://github.com/thoughtbot/paperclip#ruby-and-rai
 
 If you're on Mac OS X, you'll want to run the following with Homebrew:
 
-```brew install imagemagick```
+`brew install imagemagick`
 
 ## [Installation](#installation)
 
@@ -97,6 +98,22 @@ To run development locally, use the command:
 ```
 rails server
 ```
+
+To get some helpful user accounts to play around in development:
+
+```
+bundle exec rake db:seed
+```
+
+This will create the following users, all with the password `password`:
+
+- An Admin user with the email `admin@example.com`
+- A Student with an email of `j.s@example.com`
+- A Student with an email of `a.s@example.com`
+- A Student with an email of `b.g@example.com`
+
+More info in [seeds.rb](./db/seeds.rb)
+
 ## [API Endpoints](#api-endpoints)
 
 To hit the Census API, you need to send an `access_token` as a param. This is the token that you get back with the users credentials during the OAuth handshake. That will look something like `user_credentials['token']` depending on the variable that you use to store the response.
