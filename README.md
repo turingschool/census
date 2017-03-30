@@ -107,9 +107,9 @@ bundle exec rake db:seed
 This will create the following users, all with the password `password`:
 
 - An Admin user with the email `admin@example.com`
-- A Student with an email of `joey.stansfield@example.com`
-- A Student with an email of `ali.schlereth@example.com`
-- A Student with an email of `brad.green@example.com`
+- A Student with an email of `j.s@example.com`
+- A Student with an email of `a.s@example.com`
+- A Student with an email of `b.g@example.com`
 
 More info in [seeds.rb](./db/seeds.rb)
 
