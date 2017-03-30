@@ -82,7 +82,7 @@ Census uses the [Paperclip](https://github.com/thoughtbot/paperclip#ruby-and-rai
 
 If you're on Mac OS X, you'll want to run the following with Homebrew:
 
-```brew install imagemagick```
+`brew install imagemagick`
 
 ## [Installation](#installation)
 
@@ -97,6 +97,22 @@ To run development locally, use the command:
 ```
 rails server
 ```
+
+To get some helpful user accounts to play around in development:
+
+```
+bundle exec rake db:seed
+```
+
+This will create the following users, all with the password `password`:
+
+- An Admin user with the email `admin@example.com`
+- A Student with an email of `joey.stansfield@example.com`
+- A Student with an email of `ali.schlereth@example.com`
+- A Student with an email of `brad.green@example.com`
+
+More info in [seeds.rb](./db/seeds.rb)
+
 ## [API Endpoints](#api-endpoints)
 
 To hit the Census API, you need to send an `access_token` as a param. This is the token that you get back with the users credentials during the OAuth handshake. That will look something like `user_credentials['token']` depending on the variable that you use to store the response.
