@@ -13,7 +13,7 @@
         <li class="<%= 'active' if current_page?(users_path) %>"><%= link_to "Community", users_path %></li>
         <li class="<%= 'active' if current_page?(user_path(current_user)) %>"><%= link_to "My Account", user_path(current_user) %></li>
         <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
-      <% elsif current_page?(:action=>"new", :controller=>"registrations") == false %>
+      <% else %>
         <li><%= link_to 'Login', new_user_session_path %></li>
       <% end %>
     </ul>
