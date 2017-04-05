@@ -147,6 +147,11 @@ To receive your own user credentials:
 GET 'https://census-app-staging/api/v1/user_credentials'
 ```
 
+To receive a user's credentials by github username:
+```
+GET 'https://census-app-staging/api/v1/find_by_github?q=github_username'
+```
+
 The user endpoints return JSON in this format:
 ```
 {
