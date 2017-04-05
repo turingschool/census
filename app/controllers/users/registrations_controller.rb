@@ -28,10 +28,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
       @user.roles << invitation(session[:invitation_code]).role
       @user.skip_confirmation!
       if @user.save
+        invitation = Invitation.find_by(invitation_code: session[:invitation_code])
+        invitation.accepted!
         session[:invitation_code] = nil
         flash[:success] = 'You have succesfully signed up!'
-        # redirect_to new_user_session_path
-        # respond_with resource, location: after_sign_in_path_for(resource)
         sign_in(resource_name, resource)
         if session[:return_path]
           redirect_to session[:return_path]
