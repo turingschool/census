@@ -1,4 +1,4 @@
-class Api::V1::Users::FindByGithubController < Api::V1::ApiController
+class Api::V1::Users::ByGithubController < Api::V1::ApiController
   before_action :doorkeeper_authorize!
 
   def show

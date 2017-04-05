@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Github find API' do
-  context 'GET api/v1/users/find_by_github' do
+  context 'GET api/v1/users/by_github' do
 
     let(:user)  {create(:user, git_hub: 'username')}
     let(:token) {create(:access_token, resource_owner_id: user.id).token}
@@ -9,7 +9,7 @@ RSpec.describe 'Github find API' do
     context '_with_ authorization credentials' do
       context 'with one match to github username' do
         it 'returns match' do
-          get '/api/v1/users/find_by_github?q=username', params: {access_token: token}
+          get '/api/v1/users/by_github?q=username', params: {access_token: token}
 
           expect(response).to be_success
 
@@ -24,7 +24,7 @@ RSpec.describe 'Github find API' do
       context 'with multiple matches to github username' do
         it 'returns first match' do
           other_user = create(:user, git_hub: 'username')
-          get '/api/v1/users/find_by_github?q=username', params: {access_token: token}
+          get '/api/v1/users/by_github?q=username', params: {access_token: token}
 
           expect(response).to be_success
 
@@ -38,7 +38,7 @@ RSpec.describe 'Github find API' do
 
       context 'with no matches to github username' do
         it 'returns a 404 (not found) status' do
-          get '/api/v1/users/find_by_github?q=name', params: {access_token: token}
+          get '/api/v1/users/by_github?q=name', params: {access_token: token}
 
           expect(response.status).to eq 404
         end
@@ -46,7 +46,7 @@ RSpec.describe 'Github find API' do
 
       context 'with invalid parameters' do
         it 'returns a 404 (not found) status' do
-          get '/api/v1/users/find_by_github?s=username', params: {access_token: token}
+          get '/api/v1/users/by_github?s=username', params: {access_token: token}
 
           expect(response.status).to eq 404
         end
@@ -55,7 +55,7 @@ RSpec.describe 'Github find API' do
   
     context '_without_ authorization credentials' do
       it 'returns a 401 (unauthorized) status' do
-        get '/api/v1/users/find_by_github?q=username'
+        get '/api/v1/users/by_github?q=username'
 
         expect(response.status).to eq 401
       end
