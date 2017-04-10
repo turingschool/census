@@ -14,7 +14,6 @@ RSpec.describe "General Search API" do
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
-
       expect(json_users.count).to eq(2)
 
       first = json_users.any? do |user|

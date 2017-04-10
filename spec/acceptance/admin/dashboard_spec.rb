@@ -6,14 +6,15 @@ RSpec.feature "Admin dashboard" do
 
   it "displays invitation content" do
     admin = create :admin
-    create :invitation, email: "you@example.com"
-    create :invitation
+    create :invitation, email: "you@example.com", status: 'mailed'
+    create :invitation, status: 'mailed'
 
     login(admin)
     visit admin_dashboard_path
 
     expect(page).to have_link("Invite People")
     expect(page).to have_content("Pending Invitations")
+
     within "#pending-invitations" do
       expect(page).to have_css("tr", count: 3)
       expect(page).to have_link("Resend", count: 2)
