@@ -187,6 +187,21 @@ The cohort endpoints return JSON in this format:
 ## [Register an Application](#register)
 Census uses [Devise](https://github.com/plataformatec/devise), [Doorkeeper](https://github.com/doorkeeper-gem/doorkeeper) and [cancancan](https://github.com/CanCanCommunity/cancancan) to manage authentication and authorization.
 
+To Get a token, register your app through Census and then make a request:
+
+Source [here.](https://github.com/doorkeeper-gem/doorkeeper/wiki/Client-Credentials-flow)
+
+```javascript
+conn.post do |req|
+  req.url '/oauth/token'
+  req.params['grant_type'] = 'client_credentials'
+  req.params['client_id'] = ENV['CENSUS_CLIENT_ID'] #=> To be supplied by the developer
+  req.params['client_secret'] = ENV['CENSUS_SECRET_ID'] #=> To be supplied by the developer
+end
+```
+
+This request will generate a token for your application.
+
 ### [Gems](#gems)
 Currently, there are 2 gems to help you set up OAuth, one for [staging](https://github.com/NZenitram/census_staging_oauth) and one for [production](https://github.com/turingschool-projects/omniauth-census). Soon, we will add a configuation option so you don't need to change your gemfile before pushing to production.
 
