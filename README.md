@@ -191,12 +191,14 @@ To Get a token, register your app through Census and then make a request:
 
 Source [here.](https://github.com/doorkeeper-gem/doorkeeper/wiki/Client-Credentials-flow)
 
-```javascript
+Developers can use any HTTP library to make the request (such as [Faraday](https://github.com/lostisland/faraday))
+
+```ruby
 conn.post do |req|
   req.url '/oauth/token'
   req.params['grant_type'] = 'client_credentials'
-  req.params['client_id'] = ENV['CENSUS_CLIENT_ID'] #=> To be supplied by the developer
-  req.params['client_secret'] = ENV['CENSUS_SECRET_ID'] #=> To be supplied by the developer
+  req.params['client_id'] = ENV['CENSUS_CLIENT_ID'] #=> provided by census interface
+  req.params['client_secret'] = ENV['CENSUS_SECRET_ID'] #=> provided by census interface
 end
 ```
 
