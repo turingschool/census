@@ -27,7 +27,7 @@ class Admin::CohortsController < AdminController
 
   def update
     @cohort.update_student_roles(params[:status]) if params[:status]
-    if @cohort.update_attributes(cohort_params)
+    if @cohort.update_attributes(update_cohort_params)
       redirect_to admin_cohorts_path
     else
       flash[:danger] = @cohort.errors.full_messages.join(', ')
@@ -44,8 +44,12 @@ class Admin::CohortsController < AdminController
 
   private
 
-  def cohort_params
+  def update_cohort_params
     params.permit(:name, :status)
+  end
+
+  def cohort_params
+    params.require(:cohort).permit(:name, :status)
   end
 
   def set_cohort
