@@ -15,6 +15,12 @@ FactoryGirl.define do
       end
     end
 
+    factory :staff do
+      after(:create) do | staff, _ |
+        create_list(:role, 1, name: "staff", users: [staff])
+      end
+    end
+
     factory :active_student do
       after(:create) do |active_student, _ |
         create_list(:role, 1, name: "active student", users: [active_student])
