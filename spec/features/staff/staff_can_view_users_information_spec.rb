@@ -2,10 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'User Information' do
 
-  before(:all) do
+  before(:each) do
     @staff = create :staff
     @other = create :user, first_name: "FirstName", last_name: "LastName"
-
   end
 
   it 'links from users index' do
@@ -38,6 +37,5 @@ RSpec.describe 'User Information' do
 
     expect(page).to_not have_content("#{@other.first_name}")
   end
-
 
 end
