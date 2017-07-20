@@ -9,4 +9,10 @@ module ApplicationHelper
     end
   end
 
+  def user_is_staff?
+    if current_user
+      current_user.roles.where(name: 'staff').exists?
+    end 
+  end
+
 end
