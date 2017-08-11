@@ -250,4 +250,5 @@ Roles are changed according to cohort status. For example, when an active cohort
 `TODO:` Add a CONTRIBUTING.md
 
 ## [License](#license)
-`TODO:` Add a license.md
+
+Census is released under the [MIT License](http://www.opensource.org/licenses/MIT).
