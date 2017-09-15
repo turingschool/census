@@ -11,6 +11,7 @@ RSpec.feature 'User signs up' do
     fill_in 'Last Name*', with: 'Casimir'
     fill_in 'Password*', with: 'password'
     fill_in 'Password Confirmation*', with: 'password'
+
     click_button 'Sign up'
 
     help_message = 'You have succesfully signed up!'
@@ -64,6 +65,26 @@ RSpec.feature 'User signs up' do
 
     expect(page).to have_content("Cohort")
     expect(page).to have_content("Upload an image")
+  end
+
+  scenario "and enters some pronouns" do
+    role = create :role, name: 'Mentor'
+    invite = create :invitation, role: role
+
+    visit invite.generate_url(new_user_registration_url)
+
+    fill_in 'First Name*', with: 'Jeff'
+    fill_in 'Last Name*', with: 'Casimir'
+    fill_in 'Password*', with: 'password'
+    fill_in 'Password Confirmation*', with: 'password'
+    fill_in 'Gender Pronoun(s)', with: 'she/her'
+    
+    click_button 'Sign up'
+
+    new_user = User.last
+    expect(new_user.first_name).to eq('Jeff')
+    expect(new_user.last_name).to eq('Casimir')
+    # expect(new_user.gender_pronouns).to eq("she/her")
   end
 
 end
