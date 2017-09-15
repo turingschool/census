@@ -40,7 +40,8 @@ class UsersController < ApplicationController
                                     :slack,
                                     :cohort_id,
                                     :image,
-                                    :stackoverflow )
+                                    :stackoverflow,
+                                    :gender_pronouns )
     end
 
     def set_user
