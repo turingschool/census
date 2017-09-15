@@ -105,11 +105,14 @@ class User < ApplicationRecord
   end
 
   def self.search_all(query)
+    terms = query.upcase.split
     users = User.none
-    users += search_cohorts(query)
-    users += search_roles(query)
-    users += search_groups(query)
-    users += search_users(query)
+    terms.each do |term|
+      users += search_cohorts(term)
+      users += search_roles(term)
+      users += search_groups(term)
+      users += search_users(term)
+    end
     users.flatten
   end
 
@@ -146,14 +149,13 @@ class User < ApplicationRecord
   end
 
   def self.search_users(query)
-    query.split.map do |term|
+    # query.split.map do |term|
        User.where(
         "upper(first_name) LIKE ? OR
         upper(last_name) LIKE ?",
-        "%#{term.upcase}%",
-        "%#{term.upcase}%"
+        "%#{query.upcase}%",
+        "%#{query.upcase}%"
       )
-    end.flatten
   end
 
 
