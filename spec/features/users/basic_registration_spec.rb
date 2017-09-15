@@ -83,7 +83,7 @@ RSpec.feature 'User signs up' do
     new_user = User.last
     expect(new_user.first_name).to eq('Jeff')
     expect(new_user.last_name).to eq('Casimir')
-    # expect(new_user.gender_pronouns).to eq("she/her")
+    expect(new_user.gender_pronouns).to eq("she/her")
   end
 
 end
