@@ -249,8 +249,10 @@ RSpec.describe "General Search API" do
 
     expect(returned_users.count).to eq(2)
 
-    expect(returned_users.include?(user_1)).to be_truthy
-    expect(returned_users.include?(user_2)).to be_truthy
-    expect(returned_users.include?(user_3)).to be_falsey
+    included = returned_users.any? do |user|
+      user['last_name'] || user['first_name'] == "first" || "last"
+    end
+
+    expect(included).to be_truthy
   end
 end

@@ -146,12 +146,14 @@ class User < ApplicationRecord
   end
 
   def self.search_users(query)
-    User.where(
-      "upper(first_name) LIKE ? OR
-      upper(last_name) LIKE ?",
-      "%#{query.upcase}%",
-      "%#{query.upcase}%"
+    query.split.map do |term|
+       User.where(
+        "upper(first_name) LIKE ? OR
+        upper(last_name) LIKE ?",
+        "%#{term.upcase}%",
+        "%#{term.upcase}%"
       )
+    end.flatten
   end
 
 
