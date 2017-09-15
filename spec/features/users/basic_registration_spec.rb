@@ -77,8 +77,7 @@ RSpec.feature 'User signs up' do
     fill_in 'Last Name*', with: 'Casimir'
     fill_in 'Password*', with: 'password'
     fill_in 'Password Confirmation*', with: 'password'
-    fill_in 'Gender Pronoun(s)', with: 'she/her'
-    
+    fill_in 'user[gender_pronouns]', with: 'she/her'
     click_button 'Sign up'
 
     new_user = User.last
