@@ -37,4 +37,33 @@ RSpec.feature 'User signs up' do
     expect(page).to have_content(error_message)
     expect(User.count).to eq(0)
   end
+
+  scenario 'they see all input fields' do
+    role = create :role, name: 'Staff'
+    invite = create :invitation, role: role
+
+    visit invite.generate_url(new_user_registration_url)
+
+    expect(page).to have_content("Gender Pronoun(s)")
+    expect(page.find_field("gender_pronouns-field")).to be_truthy
+
+    expect(page).to have_content("Twitter")
+    expect(page.find_field("twitter-field")).to be_truthy
+
+    expect(page).to have_content("LinkedIn")
+    expect(page.find_field("linkedin-field")).to be_truthy
+
+    expect(page).to have_content("GitHub")
+    expect(page.find_field("github-field")).to be_truthy
+
+    expect(page).to have_content("Slack")
+    expect(page.find_field("slack-field")).to be_truthy
+
+    expect(page).to have_content("StackOverflow")
+    expect(page.find_field("stack_overflow-field")).to be_truthy
+
+    expect(page).to have_content("Cohort")
+    expect(page).to have_content("Upload an image")
+  end
+
 end
