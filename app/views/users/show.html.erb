@@ -15,6 +15,9 @@
         header: "Email",
         data: @user.email %>
     <%= render 'account_profile_row',
+        header: "Gender Pronoun(s)",
+        data: @user.gender_pronouns %>
+    <%= render 'account_profile_row',
         header: "Slack",
         data: @user.slack %>
     <%= render 'account_profile_row',
