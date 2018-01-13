@@ -116,8 +116,6 @@ class User < ApplicationRecord
     users.flatten
   end
 
-# "name iLIKE ANY ( array[?] )", words
-
   def self.search_cohorts(query)
     cohorts = Cohort.where(
       "upper(name) iLIKE ANY (array[?])",
