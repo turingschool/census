@@ -47,32 +47,39 @@ RSpec.describe User, type: :model do
 
     expect(users.sort).to eq([dan, nate])
   end
+  context 'add identifying information' do
+    it "rejects invalid twitter usernames" do
+      okay = build(:user, twitter: "_calaway_")
+      invalid_characters = build(:user, twitter: "_ca!away_")
+      too_long = build(:user, twitter: "1234567890123456")
 
-  it "rejects invalid twitter usernames" do
-    okay = build(:user, twitter: "_calaway_")
-    invalid_characters = build(:user, twitter: "_ca!away_")
-    too_long = build(:user, twitter: "1234567890123456")
+      expect(okay.valid?).to be true
+      expect(invalid_characters.valid?).to be false
+      expect(too_long.valid?).to be false
+    end
 
-    expect(okay.valid?).to be true
-    expect(invalid_characters.valid?).to be false
-    expect(too_long.valid?).to be false
-  end
+    it "rejects invalid LinkedIn usernames" do
+      okay = build(:user, linked_in: "calaway")
+      invalid_characters = build(:user, linked_in: "ca!away_")
+      too_short = build(:user, linked_in: "1234")
+      too_long = build(:user, linked_in: "1234567890123456789012345678901")
 
-  it "rejects invalid LinkedIn usernames" do
-    okay = build(:user, linked_in: "calaway")
-    invalid_characters = build(:user, linked_in: "ca!away_")
-    too_short = build(:user, linked_in: "1234")
-    too_long = build(:user, linked_in: "1234567890123456789012345678901")
+      expect(okay.valid?).to be true
+      expect(invalid_characters.valid?).to be false
+      expect(too_short.valid?).to be false
+      expect(too_long.valid?).to be false
+    end
 
-    expect(okay.valid?).to be true
-    expect(invalid_characters.valid?).to be false
-    expect(too_short.valid?).to be false
-    expect(too_long.valid?).to be false
-  end
+    it "allows LinkedIn username to have hyphens" do
+      okay = build(:user, linked_in: "matthew-leo-kaufman")
+      expect(okay.valid?).to be true
+    end
 
-  it "allows LinkedIn username to have hyphens" do
-    okay = build(:user, linked_in: "matthew-leo-kaufman")
-    expect(okay.valid?).to be true
+    it "creates user with gender pronouns" do
+      user = create :user, gender_pronouns: "she/her"
+
+      expect(user).to be_valid
+    end
   end
 
   context 'Role change' do
@@ -127,7 +134,7 @@ RSpec.describe User, type: :model do
       user = create(:user)
       user.groups = groups
 
-      expect(user.list_groups.include?(groups.first.name)).to be_truthy 
+      expect(user.list_groups.include?(groups.first.name)).to be_truthy
     end
   end
 end

@@ -76,4 +76,16 @@ RSpec.describe 'User visits edit profile page', js: :true do
       expect(page).to have_text("Linked in accepts only alphanumeric characters")
     end
   end
+
+  context "they have a gender pronoun" do
+    it "is listed on the profile page" do
+      user = create :enrolled_user, gender_pronouns: "they/them"
+
+      login user
+
+      visit user_path(user)
+
+      expect(page).to have_content("they/them")
+    end
+  end
 end
