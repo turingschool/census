@@ -1,6 +1,6 @@
 # Census - An Identity Manager
 
-[![security](https://hakiri.io/github/bcgoss/census/master.svg)](https://hakiri.io/github/bcgoss/census/master) [![Dependency Status](https://gemnasium.com/badges/github.com/bcgoss/census.svg)](https://gemnasium.com/github.com/bcgoss/census) [![Code Climate](https://codeclimate.com/github/bcgoss/census/badges/gpa.svg)](https://codeclimate.com/github/bcgoss/census) [![Test Coverage](https://codeclimate.com/github/bcgoss/census/badges/coverage.svg)](https://codeclimate.com/github/bcgoss/census/coverage)
+[![Code Climate](https://codeclimate.com/github/bcgoss/census/badges/gpa.svg)](https://codeclimate.com/github/bcgoss/census) [![Test Coverage](https://codeclimate.com/github/bcgoss/census/badges/coverage.svg)](https://codeclimate.com/github/bcgoss/census/coverage)
 [![Build Status](https://travis-ci.org/bcgoss/census.svg?branch=staging)](https://travis-ci.org/bcgoss/census)
 
 > Census serves as a central location for identity management and authentication across the [Turing School](https://github.com/turingschool) community.
@@ -29,11 +29,7 @@
 ### [Heroku](#heroku)
 * staging: https://census-app-staging.herokuapp.com/
 * production: https://turing-census.herokuapp.com/
-* Other teams will use the staging app for their staging environment. Switching between environments requires switching the oauth gem. In staging, Gemfile should include:
-```
-gem 'omniauth-census', git: "https://github.com/nzenitram/census_staging_oauth"
-```
-In production:
+* Other teams will use the staging app for their staging environment. Switching between environments requires switching the oauth gem. Gemfile should include:
 ```
 gem 'omniauth-census', git: "https://github.com/turingschool-projects/omniauth-census"
 ```
@@ -120,12 +116,12 @@ To hit the Census API, you need to send an `access_token` as a param. This is th
 
 To receive a user by name:
 ```
-GET 'https://census-app-staging/api/v1/users/by_name?q=[NAME]'
+GET 'https://census-app-staging.herokuapp.com/api/v1/users/by_name?q=[NAME]'
 ```
 
 To receive all users by cohort:
 ```
-GET 'https://census-app-staging/api/v1/users/by_cohort?cohort_id=<ID>'
+GET 'https://census-app-staging.herokuapp.com/api/v1/users/by_cohort?cohort_id=<ID>'
 ```
 You can use the `api/v1/cohorts` endpoint to find cohort ids.
 <br>
@@ -134,22 +130,22 @@ You can use the `api/v1/cohorts` endpoint to find cohort ids.
 
 To receive a user by ID:
 ```
-GET 'https://census-app-staging/api/v1/users/:id'
+GET 'https://census-app-staging.herokuapp.com/api/v1/users/:id'
 ```
 
 To receive all users:
 ```
-GET 'https://census-app-staging/api/v1/users/'
+GET 'https://census-app-staging.herokuapp.com/api/v1/users/'
 ```
 
 To receive your own user credentials:
 ```
-GET 'https://census-app-staging/api/v1/user_credentials'
+GET 'https://census-app-staging.herokuapp.com/api/v1/user_credentials'
 ```
 
 To receive a user's credentials by github username:
 ```
-GET 'https://census-app-staging/api/v1/find_by_github?q=github_username'
+GET 'https://census-app-staging.herokuapp.com/api/v1/find_by_github?q=github_username'
 ```
 
 The user endpoints return JSON in this format:
@@ -175,7 +171,7 @@ The user endpoints return JSON in this format:
 To receive all cohorts:
 
 ```
-GET 'https://census-app-staging/api/v1/cohorts'
+GET 'https://census-app-staging.herokuapp.com/api/v1/cohorts'
 ```
 
 The cohort endpoints return JSON in this format:
@@ -237,14 +233,8 @@ Roles are changed according to cohort status. For example, when an active cohort
 
 ## [Maintainer](#maintainer)
 
-* Jeff Casimir - [jcasimir](https://github.com/jcasimir)
+* Ali Schlereth - [AliSchlereth](https://github.com/AliSchlereth)
 
-### [Original Contributors](#original-contributors)
-
-* Jesse Spevack - [PlanetEfficacy](https://github.com/PlanetEfficacy)
-* Calaway - [calaway](hhttps://github.com/calaway)
-* Bryan Goss - [bcgoss](https://github.com/bcgoss)
-* Jasmin Hudacsek - [j-sm-n](https://github.com/j-sm-n)
 
 ## [Contribute](#contribute)
 `TODO:` Add a CONTRIBUTING.md
