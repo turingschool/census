@@ -49,13 +49,18 @@ GEM
     arel (7.1.4)
     autoprefixer-rails (7.2.5)
       execjs
-    aws-sdk (2.10.117)
-      aws-sdk-resources (= 2.10.117)
-    aws-sdk-core (2.10.117)
+    aws-partitions (1.70.0)
+    aws-sdk-core (3.17.0)
+      aws-partitions (~> 1.0)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.10.117)
-      aws-sdk-core (= 2.10.117)
+    aws-sdk-kms (1.5.0)
+      aws-sdk-core (~> 3)
+      aws-sigv4 (~> 1.0)
+    aws-sdk-s3 (1.8.2)
+      aws-sdk-core (~> 3)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.0)
     aws-sigv4 (1.0.2)
     bcrypt (3.1.11)
     bindex (0.5.0)
@@ -63,10 +68,10 @@ GEM
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
     bootstrap-table-rails (1.11.1.1)
-    brakeman (4.1.1)
+    brakeman (4.2.0)
     builder (3.2.3)
     byebug (10.0.0)
-    cancancan (2.1.2)
+    cancancan (2.1.3)
     capybara (2.17.0)
       addressable
       mini_mime (>= 0.1.3)
@@ -112,7 +117,7 @@ GEM
       i18n (>= 0.7)
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
-    ffi (1.9.18)
+    ffi (1.9.23)
     figaro (1.1.1)
       thor (~> 0.14)
     globalid (0.4.1)
@@ -133,9 +138,10 @@ GEM
     jwt (1.5.6)
     launchy (2.4.3)
       addressable (~> 2.3)
-    listen (3.0.8)
+    listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
+      ruby_dep (~> 1.2)
     loofah (2.2.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -214,7 +220,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (12.3.0)
-    rb-fsevent (0.10.2)
+    rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     rb-readline (0.5.5)
@@ -238,6 +244,7 @@ GEM
       rspec-mocks (~> 3.7.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.0)
+    ruby_dep (1.5.0)
     sass (3.5.5)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -270,7 +277,7 @@ GEM
     tilt (2.0.8)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.3)
+    uglifier (4.1.7)
       execjs (>= 0.3.0, < 3)
     unicode_utils (1.4.0)
     warden (1.2.7)
@@ -292,7 +299,7 @@ PLATFORMS
 DEPENDENCIES
   active_designer
   active_model_serializers (~> 0.10.0)
-  aws-sdk (~> 2.3)
+  aws-sdk-s3
   bootstrap-sass
   bootstrap-table-rails
   brakeman
@@ -311,7 +318,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   launchy
-  listen (~> 3.0.5)
+  listen (~> 3.1.5)
   oauth2
   paperclip (~> 6.0.0)
   pg (~> 0.18)
