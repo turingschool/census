@@ -45,7 +45,7 @@ end
 
 group :development do
   gem 'brakeman', :require => false
-  gem 'listen', '~> 3.0.5'
+  gem 'listen', '~> 3.1.5'
   gem 'web-console'
 end
 
