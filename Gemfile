@@ -18,7 +18,7 @@ gem 'honeybadger'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'pg', '~> 0.18'
-gem 'puma', '~> 3.0'
+gem 'puma', '~> 3.11'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'rails_12factor', group: :production
