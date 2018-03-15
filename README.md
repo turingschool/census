@@ -201,14 +201,21 @@ end
 This request will generate a token for your application.
 
 ### [Gems](#gems)
-Currently, there are 2 gems to help you set up OAuth, one for [staging](https://github.com/NZenitram/census_staging_oauth) and one for [production](https://github.com/turingschool-projects/omniauth-census). Soon, we will add a configuation option so you don't need to change your gemfile before pushing to production.
+[`omniauth-census`](https://github.com/turingschool-projects/omniauth-census)
+can be used to configure oauth in application. See its README for instructions
+on how to use it against different Census environments.
 
 ## [Roles](#roles)
-Some roles are just a flag for querying, others define your permissions on the site. Below is a list of all the currently available roles.
+Some roles are just a flag for querying, others define your permissions on the
+site. Below is a list of all the currently available roles.
 <br>
-Note that the staging server is messy and roles may be incorrect for some users. Contact an admin if you need to change your permissions.
+Note that the staging server is messy and roles may be incorrect for some
+users. Contact an admin if you need to change your permissions.
 <br>
-Roles are changed according to cohort status. For example, when an active cohort is moved to finished, all the "active student"s in that cohort will be moved to "graduated." "Removed" and "exited" students roles will not be effected.
+Roles are changed according to cohort status. For example, when an active
+cohort is moved to finished, all the "active student"s in that cohort will be
+moved to "graduated." "Removed" and "exited" students roles will not be
+effected.
 
 ### [Permissions](#permissions)
 * Admin
