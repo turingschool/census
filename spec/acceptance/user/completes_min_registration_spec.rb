@@ -2,7 +2,6 @@ require 'rails_helper'
 
 RSpec.feature 'User signs up' do
   scenario 'by completing minimum registration' do
-    create :cohort
     user = attributes_for(:user)
     role = create :role, name: 'active student'
     invite = create :invitation, role: role

@@ -28,7 +28,7 @@ class InvitationManager
   private
 
     def find_role(role)
-      if role == "Student" && Cohort.find_by(name: @cohort)
+      if role == "Student" && Cohort.find_by_name(@cohort)
         set_role_for_student
       elsif role == "Mentor"
         set_role_for_mentor
@@ -38,7 +38,7 @@ class InvitationManager
     end
 
     def set_role_for_student
-      cohort_status = Cohort.find_by(name: @cohort).status
+      cohort_status = Cohort.find_by_name(@cohort).status
       Role.find_by(name: role_key[cohort_status])
     end
 
@@ -51,15 +51,16 @@ class InvitationManager
     end
 
     def role_key
-      { "unstarted" => "enrolled",
-        "active" => "active student",
-        "finished" => "graduated" }
+      {
+        "open" => "active student",
+        "closed" => "graduated"
+      }
     end
 
     def process_emails
       emails.reduce([]) do |bad_emails, email|
         invitation = @user.invitations.new(email: email, status: 0, role: @role)
-        invitation.cohort = Cohort.find_by(name: @cohort) unless @cohort.empty?
+        invitation.cohort_id = Cohort.find_by_name(@cohort).id unless @cohort.empty?
         invitation.save ? invitation.send!(@url) : bad_emails << email
         bad_emails
       end

@@ -5,7 +5,6 @@ RSpec.describe InvitationManager do
   before(:each) { create :role, name: "active student" }
   before(:each) { create :role, name: "enrolled" }
   before(:each) { create :role, name: "graduated" }
-  before(:each) { create :cohort, name: "1608-BE" }
 
   let(:invitation_params) do
     { email: "bad_email, good@example.com, bad_example.com",
@@ -104,7 +103,8 @@ RSpec.describe InvitationManager do
     expect(manager.success?).to eq(false)
   end
 
-  it "sets role to enrolled if student and unstarted cohort" do
+  xit "sets role to enrolled if student and unstarted cohort" do
+    # TODO: currently skipped because Enroll cohorts don't have unstarted states
     params = { email: "good@example.com", role: "Student", cohort: "1703-FE" }
     cohort = create(:cohort, name: "1703-FE", status: "unstarted")
     manager = InvitationManager.new(params, user, url)
@@ -115,7 +115,11 @@ RSpec.describe InvitationManager do
 
   it "sets role to active student if student and active cohort" do
     params = { email: "good@example.com", role: "Student", cohort: "1703-FE" }
-    cohort = create(:cohort, name: "1703-FE", status: "active")
+    cohort_stubs = [
+      Cohort.new(OpenStruct.new(id: 1234, status: "closed", name: "1608-BE")),
+      Cohort.new(OpenStruct.new(id: 1230, status: "open", name: "1703-FE"))
+    ]
+    stub_cohorts_with(cohort_stubs)
     manager = InvitationManager.new(params, user, url)
     invite = Invitation.first
 
@@ -124,7 +128,11 @@ RSpec.describe InvitationManager do
 
   it "sets role to graduated if student and finished cohort" do
     params = { email: "good@example.com", role: "Student", cohort: "1703-FE" }
-    cohort = create(:cohort, name: "1703-FE", status: "finished")
+    cohort_stubs = [
+      Cohort.new(OpenStruct.new(id: 1234, status: "open", name: "1608-BE")),
+      Cohort.new(OpenStruct.new(id: 1230, status: "closed", name: "1703-FE"))
+    ]
+    stub_cohorts_with(cohort_stubs)
     manager = InvitationManager.new(params, user, url)
     invite = Invitation.first
 
@@ -154,6 +162,6 @@ RSpec.describe InvitationManager do
     expect(invite.email).to eq("good@example.com")
     expect(invite.role.name).to eq("mentor")
     expect(invite.status).to eq("mailed")
-    expect(invite.cohort.name).to eq("1608-BE")
+    expect(invite.cohort_id).to eq(1234)
   end
 end

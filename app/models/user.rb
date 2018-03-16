@@ -29,8 +29,6 @@ class User < ApplicationRecord
   has_many :user_roles, dependent: :destroy
   has_many :roles, through: :user_roles
   has_many :invitations
-  belongs_to :cohort
-
   has_many :oauth_applications, class_name: 'Doorkeeper::Application', as: :owner
 
   # paperclip configuration
@@ -55,6 +53,10 @@ class User < ApplicationRecord
 
   def list_groups
     groups.map {|group| group.name }.join(', ')
+  end
+
+  def cohort
+    Cohort.find(self.cohort_id)
   end
 
   def has_role?(role)
@@ -108,6 +110,7 @@ class User < ApplicationRecord
     terms = query.upcase.split.map do |term|
       "%#{term}%"
     end
+
     users = User.none
     users += search_cohorts(terms)
     users += search_roles(terms)
@@ -117,10 +120,8 @@ class User < ApplicationRecord
   end
 
   def self.search_cohorts(query)
-    cohorts = Cohort.where(
-      "upper(name) iLIKE ANY (array[?])",
-      query
-      )
+    cohorts = Cohort.search_by_name(query)
+
     users = cohorts.map do |cohort|
       cohort.users
     end
