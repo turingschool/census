@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.feature 'Filter users by cohort' do
   scenario 'by selecting cohort from dropdown', js: true do
-    cohort   = create(:cohort, name: "1606")
-    cohort_2 = create(:cohort, name: "1608")
+    cohort = Cohort.new(OpenStruct.new(id: 1234, status: "closed", name: "1606"))
+    cohort_2 = Cohort.new(OpenStruct.new(id: 1230, status: "open", name: "1608"))
+    stub_cohorts_with([cohort, cohort_2])
     create(:enrolled_user, cohort_id: cohort.id)
     user = create(:enrolled_user, cohort_id: cohort_2.id)
 

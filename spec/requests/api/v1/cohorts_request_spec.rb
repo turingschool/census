@@ -11,9 +11,13 @@ RSpec.describe Api::V1::CohortsController do
 
   context "Request is sent _with_ authorization credentials" do
     it "returns all cohorts" do
+      user_cohort = Cohort.new(OpenStruct.new(id: 1234, name: "1609-be"))
       user = create :user
       token = create(:access_token, resource_owner_id: user.id).token
-      cohort1, cohort2, cohort3 = create_list(:cohort, 3)
+      cohort_1 = Cohort.new(OpenStruct.new(id: 1232, name: "1606-be"))
+      cohort_2 = Cohort.new(OpenStruct.new(id: 1230, name: "1606-fe"))
+      cohort_3 = Cohort.new(OpenStruct.new(id: 1231, name: "1608-be"))
+      stub_cohorts_with([user_cohort, cohort_1, cohort_2, cohort_3])
 
       get '/api/v1/cohorts', params: {access_token: token}
       response_cohorts = JSON.parse(response.body)
@@ -21,22 +25,22 @@ RSpec.describe Api::V1::CohortsController do
       expect(response_cohorts.length).to eq(4)
 
       res_cohort1 = response_cohorts.any? do |cohort|
-        cohort["id"] == cohort1.id
+        cohort["id"] == cohort_1.id
       end
 
       res_cohort2 = response_cohorts.any? do |cohort|
-        cohort["id"] == cohort2.id
+        cohort["id"] == cohort_2.id
       end
 
       res_cohort3 = response_cohorts.any? do |cohort|
-        cohort["id"] == cohort3.id
+        cohort["id"] == cohort_3.id
       end
 
-      res_cohort4 = response_cohorts.any? do |cohort|
+      res_user_cohort = response_cohorts.any? do |cohort|
         cohort["id"] == user.cohort.id
       end
 
-      expect(res_cohort4).to be_truthy
+      expect(user_cohort).to be_truthy
       expect(res_cohort3).to be_truthy
       expect(res_cohort2).to be_truthy
       expect(res_cohort1).to be_truthy

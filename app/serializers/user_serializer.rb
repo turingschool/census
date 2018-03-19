@@ -30,4 +30,9 @@ class UserSerializer < ActiveModel::Serializer
     end
   end
 
+  def cohort
+   {
+     name: object.cohort.present? ? object.cohort.name : ""
+   }
+  end
 end

@@ -20,7 +20,7 @@ RSpec.describe 'Github find API' do
           expect(response_user['last_name']).to eq user.last_name
         end
       end
-    
+
       context 'with multiple matches to github username' do
         it 'returns first match' do
           other_user = create(:user, git_hub: 'username')

@@ -3,14 +3,17 @@ require 'rails_helper'
 RSpec.describe "General Search API" do
   context  "GET api/v1/users/search" do
     it "searches by cohort and returns users with first, last and groups" do
-      cohort_1, cohort_2 = create_list(:cohort, 2)
+      cohort_1 = Cohort.new(OpenStruct.new(id: 1234, status: "closed", name: "1608-BE"))
+      cohort_2 = Cohort.new(OpenStruct.new(id: 1230, status: "open", name: "1703-FE"))
+      stub_cohorts_with([cohort_1, cohort_2])
       users = create_list(:user, 3)
-      users.first.cohort = cohort_1
-      users.second.cohort = cohort_1
-      users.third.cohort = cohort_2
+      users.first.cohort_id = cohort_1.id
+      users.second.cohort_id = cohort_1.id
+      users.third.cohort_id = cohort_2.id
+      token = create(:access_token, resource_owner_id: users.first.id).token
       group = create(:group, users: users)
 
-      params = {q: cohort_1.name}
+      params = {q: cohort_1.name, access_token: token}
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
@@ -30,18 +33,19 @@ RSpec.describe "General Search API" do
     end
 
     it "returns users matching cohort partial search query" do
-      cohort_1 = create(:cohort, name: "1608")
-      cohort_2 = create(:cohort, name: "1610")
-      cohort_3 = create(:cohort, name: "1701")
-
+      cohort_1 = Cohort.new(OpenStruct.new(id: 1234, name: "1608"))
+      cohort_2 = Cohort.new(OpenStruct.new(id: 1230, name: "1610"))
+      cohort_3 = Cohort.new(OpenStruct.new(id: 1231, name: "1701"))
+      stub_cohorts_with([cohort_1, cohort_2, cohort_3])
 
       users = create_list(:user, 3)
-      users.first.cohort = cohort_1
-      users.second.cohort = cohort_2
-      users.third.cohort = cohort_3
+      users.first.cohort_id = cohort_1.id
+      users.second.cohort_id = cohort_2.id
+      users.third.cohort_id = cohort_3.id
       group = create(:group, users: users)
 
-      params = {q: "16"}
+      token = create(:access_token, resource_owner_id: users.first.id).token
+      params = {q: "16", access_token: token}
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
@@ -64,7 +68,8 @@ RSpec.describe "General Search API" do
       users.third.roles << role_2
       group = create(:group, users: users)
 
-      params = {q: role_1.name}
+      token = create(:access_token, resource_owner_id: users.first.id).token
+      params = {q: role_1.name, access_token: token}
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
@@ -94,7 +99,8 @@ RSpec.describe "General Search API" do
       users.third.roles << role_3
       group = create(:group, users: users)
 
-      params = {q: "fakerole"}
+      token = create(:access_token, resource_owner_id: users.first.id).token
+      params = {q: "fakerole", access_token: token}
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
@@ -116,7 +122,8 @@ RSpec.describe "General Search API" do
       users.second.groups << group_1
       users.third.groups << group_2
 
-      params = {q: group_1.name}
+      token = create(:access_token, resource_owner_id: users.first.id).token
+      params = {q: group_1.name, access_token: token}
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
@@ -145,7 +152,8 @@ RSpec.describe "General Search API" do
       users.second.groups << group_2
       users.third.groups << group_3
 
-      params = {q: "fakegroup"}
+      token = create(:access_token, resource_owner_id: users.first.id).token
+      params = {q: "fakegroup", access_token: token}
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
@@ -167,7 +175,8 @@ RSpec.describe "General Search API" do
       user_3 = create(:user, first_name: "ali")
       group = create(:group, users: [user_1, user_2, user_3])
 
-      params = {q: "brad"}
+      token = create(:access_token, resource_owner_id: user_1.id).token
+      params = {q: "brad", access_token: token}
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
@@ -193,7 +202,8 @@ RSpec.describe "General Search API" do
       user_3 = create(:user, first_name: "brad", last_name: "green")
       group = create(:group, users: [user_1, user_2, user_3])
 
-      params = {q: "gibberish"}
+      token = create(:access_token, resource_owner_id: user_1.id).token
+      params = {q: "gibberish", access_token: token}
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
@@ -215,7 +225,8 @@ RSpec.describe "General Search API" do
       user_3 = create(:user, last_name: "green")
       group = create(:group, users: [user_1, user_2, user_3])
 
-      params = {q: "schlereth"}
+      token = create(:access_token, resource_owner_id: user_1.id).token
+      params = {q: "schlereth", access_token: token}
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
@@ -242,7 +253,8 @@ RSpec.describe "General Search API" do
     user_3 = create(:user, first_name: "other")
     group = create(:group, users: [user_1, user_2, user_3])
 
-    params = {q: "first last"}
+    token = create(:access_token, resource_owner_id: user_1.id).token
+    params = {q: "first last", access_token: token}
     get "/api/v1/users/search_all", params: params
 
     returned_users = JSON.parse(response.body)

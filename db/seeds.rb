@@ -3,7 +3,6 @@ Doorkeeper::Application.create(name: "Monocle", redirect_uri: "http://localhost:
 Invitation.destroy_all
 User.destroy_all
 Affiliation.destroy_all
-Cohort.destroy_all
 Group.destroy_all
 Role.destroy_all
 UserRole.destroy_all
@@ -19,10 +18,7 @@ cohort_1608 = [
   p "Group #{name} has been created"
 end
 
-cohort = Cohort.create(name: "1608-BE")
-Cohort.create(name: "1608-FE")
-Cohort.create(name: "1610-BE")
-Cohort.create(name: "1610-FE")
+cohort = Cohort.find_by_name("1608")
 
 ["enrolled", "active student", "graduated", "exited", "removed", "mentor", "admin", "staff", "instructor"].each do |role|
    Role.find_or_create_by(name: role)
