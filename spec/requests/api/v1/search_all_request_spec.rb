@@ -8,9 +8,11 @@ RSpec.describe "General Search API" do
       users.first.cohort = cohort_1
       users.second.cohort = cohort_1
       users.third.cohort = cohort_2
+
+      token = create(:access_token, resource_owner_id: users.first.id).token
       group = create(:group, users: users)
 
-      params = {q: cohort_1.name}
+      params = {q: cohort_1.name, access_token: token}
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
@@ -41,7 +43,8 @@ RSpec.describe "General Search API" do
       users.third.cohort = cohort_3
       group = create(:group, users: users)
 
-      params = {q: "16"}
+      token = create(:access_token, resource_owner_id: users.first.id).token
+      params = {q: "16", access_token: token}
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
@@ -64,7 +67,8 @@ RSpec.describe "General Search API" do
       users.third.roles << role_2
       group = create(:group, users: users)
 
-      params = {q: role_1.name}
+      token = create(:access_token, resource_owner_id: users.first.id).token
+      params = {q: role_1.name, access_token: token}
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
@@ -94,7 +98,8 @@ RSpec.describe "General Search API" do
       users.third.roles << role_3
       group = create(:group, users: users)
 
-      params = {q: "fakerole"}
+      token = create(:access_token, resource_owner_id: users.first.id).token
+      params = {q: "fakerole", access_token: token}
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
@@ -116,7 +121,8 @@ RSpec.describe "General Search API" do
       users.second.groups << group_1
       users.third.groups << group_2
 
-      params = {q: group_1.name}
+      token = create(:access_token, resource_owner_id: users.first.id).token
+      params = {q: group_1.name, access_token: token}
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
@@ -145,7 +151,8 @@ RSpec.describe "General Search API" do
       users.second.groups << group_2
       users.third.groups << group_3
 
-      params = {q: "fakegroup"}
+      token = create(:access_token, resource_owner_id: users.first.id).token
+      params = {q: "fakegroup", access_token: token}
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
@@ -167,7 +174,8 @@ RSpec.describe "General Search API" do
       user_3 = create(:user, first_name: "ali")
       group = create(:group, users: [user_1, user_2, user_3])
 
-      params = {q: "brad"}
+      token = create(:access_token, resource_owner_id: user_1.id).token
+      params = {q: "brad", access_token: token}
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
@@ -193,7 +201,8 @@ RSpec.describe "General Search API" do
       user_3 = create(:user, first_name: "brad", last_name: "green")
       group = create(:group, users: [user_1, user_2, user_3])
 
-      params = {q: "gibberish"}
+      token = create(:access_token, resource_owner_id: user_1.id).token
+      params = {q: "gibberish", access_token: token}
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
@@ -215,7 +224,8 @@ RSpec.describe "General Search API" do
       user_3 = create(:user, last_name: "green")
       group = create(:group, users: [user_1, user_2, user_3])
 
-      params = {q: "schlereth"}
+      token = create(:access_token, resource_owner_id: user_1.id).token
+      params = {q: "schlereth", access_token: token}
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
@@ -242,7 +252,8 @@ RSpec.describe "General Search API" do
     user_3 = create(:user, first_name: "other")
     group = create(:group, users: [user_1, user_2, user_3])
 
-    params = {q: "first last"}
+    token = create(:access_token, resource_owner_id: user_1.id).token
+    params = {q: "first last", access_token: token}
     get "/api/v1/users/search_all", params: params
 
     returned_users = JSON.parse(response.body)
