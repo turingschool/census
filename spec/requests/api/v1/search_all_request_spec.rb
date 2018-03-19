@@ -1,7 +1,25 @@
 require 'rails_helper'
 
 RSpec.describe "General Search API" do
+  include Warden::Test::Helpers
+
   context  "GET api/v1/users/search" do
+    context 'without an access token' do
+      it 'authenticates logged in users' do
+        user = create :user
+        login_as(user, scope: Devise::Mapping.find_scope!(user))
+
+        get "/api/v1/users/search_all", params: { q: 'foo' }
+
+        expect(response.status).to eq 200
+      end
+
+      it 'rejects guest users' do
+        get "/api/v1/users/search_all", params: { q: 'foo' }
+        expect(response.status).to eq 401
+      end
+    end
+
     it "searches by cohort and returns users with first, last and groups" do
       cohort_1 = Cohort.new(OpenStruct.new(id: 1234, status: "closed", name: "1608-BE"))
       cohort_2 = Cohort.new(OpenStruct.new(id: 1230, status: "open", name: "1703-FE"))
