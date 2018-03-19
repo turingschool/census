@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 RSpec.describe User, type: :model do
   it { should validate_presence_of :first_name }
   it { should validate_presence_of :last_name }
@@ -8,7 +9,6 @@ RSpec.describe User, type: :model do
   it { should have_many(:roles).through(:user_roles) }
   it { should have_many(:invitations) }
   it { should have_many(:oauth_applications) }
-  it { should belong_to(:cohort) }
 
   # testing paperclip
   it { should have_attached_file(:image) }
@@ -47,6 +47,7 @@ RSpec.describe User, type: :model do
 
     expect(users.sort).to eq([dan, nate])
   end
+
   context 'add identifying information' do
     it "rejects invalid twitter usernames" do
       okay = build(:user, twitter: "_calaway_")
@@ -115,10 +116,9 @@ RSpec.describe User, type: :model do
     end
 
     it 'knows its own cohort if it belongs to one' do
-      cohort = create :cohort, name: "1606-BE"
-      user = create :user, cohort_id: cohort.id
+      user = create :user, cohort_id: 123
 
-      expect(user.cohort_name).to eq("1606-BE")
+      expect(user.cohort_id).to eq(123)
     end
 
     it 'reports that it does not belong to a cohort' do

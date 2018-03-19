@@ -12,7 +12,9 @@ RSpec.describe Api::V1::UsersController do
   context "Request is sent _with_ authorization credentials" do
     it "returns info for all users" do
       test_root_url = "http://www.example.com/"
-      users = create_list(:user, 2)
+      user_1 = create(:user, cohort_id: 1234)
+      user_2 = create(:user, cohort_id: 1234)
+      users = [user_1, user_2]
       token = create(:access_token, resource_owner_id: users.first.id).token
 
       get api_v1_users_path, params: {access_token: token}
@@ -44,7 +46,7 @@ RSpec.describe Api::V1::UsersController do
     it "returns info for requested user" do
 
       test_root_url = "http://www.example.com/"
-      user = create(:enrolled_user)
+      user = create(:enrolled_user, cohort_id: 1234)
       create_list(:group, 1, name: "dummygroup", users: [user])
       token = create(:access_token, resource_owner_id: user.id).token
 

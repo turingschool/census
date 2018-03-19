@@ -3,12 +3,13 @@ require 'rails_helper'
 RSpec.describe "General Search API" do
   context  "GET api/v1/users/search" do
     it "searches by cohort and returns users with first, last and groups" do
-      cohort_1, cohort_2 = create_list(:cohort, 2)
+      cohort_1 = Cohort.new(OpenStruct.new(id: 1234, status: "closed", name: "1608-BE"))
+      cohort_2 = Cohort.new(OpenStruct.new(id: 1230, status: "open", name: "1703-FE"))
+      stub_cohorts_with([cohort_1, cohort_2])
       users = create_list(:user, 3)
-      users.first.cohort = cohort_1
-      users.second.cohort = cohort_1
-      users.third.cohort = cohort_2
-
+      users.first.cohort_id = cohort_1.id
+      users.second.cohort_id = cohort_1.id
+      users.third.cohort_id = cohort_2.id
       token = create(:access_token, resource_owner_id: users.first.id).token
       group = create(:group, users: users)
 
@@ -32,15 +33,15 @@ RSpec.describe "General Search API" do
     end
 
     it "returns users matching cohort partial search query" do
-      cohort_1 = create(:cohort, name: "1608")
-      cohort_2 = create(:cohort, name: "1610")
-      cohort_3 = create(:cohort, name: "1701")
-
+      cohort_1 = Cohort.new(OpenStruct.new(id: 1234, name: "1608"))
+      cohort_2 = Cohort.new(OpenStruct.new(id: 1230, name: "1610"))
+      cohort_3 = Cohort.new(OpenStruct.new(id: 1231, name: "1701"))
+      stub_cohorts_with([cohort_1, cohort_2, cohort_3])
 
       users = create_list(:user, 3)
-      users.first.cohort = cohort_1
-      users.second.cohort = cohort_2
-      users.third.cohort = cohort_3
+      users.first.cohort_id = cohort_1.id
+      users.second.cohort_id = cohort_2.id
+      users.third.cohort_id = cohort_3.id
       group = create(:group, users: users)
 
       token = create(:access_token, resource_owner_id: users.first.id).token

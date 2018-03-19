@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.feature 'User signs up' do
   scenario 'by completing full registration' do
-    cohort = create :cohort
+    cohort = Cohort.new(OpenStruct.new(id: 1234, status: "open", name: "1608-BE"))
+    allow(Cohort).to receive(:all).and_return([cohort])
     user = attributes_for(:user)
     role = create :role, name: 'active student'
     invite = create :invitation, role: role
