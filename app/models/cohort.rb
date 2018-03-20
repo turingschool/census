@@ -8,7 +8,7 @@ class Cohort
     @raw_cohort = cohort
   end
 
-  def as_json(args)
+  def as_json(args=nil)
     {
       course_id: self.course_id,
       end_date: self.end_date,
