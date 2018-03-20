@@ -17,12 +17,10 @@ end
 CohortsQuery = Enroll::Client.parse <<-'GRAPHQL'
   query {
     cohorts {
-      course_id
       created_at
-      end_date
       id
-      max_number_of_students
       name
+      program_id
       start_date
       status
       updated_at

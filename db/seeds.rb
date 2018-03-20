@@ -18,7 +18,7 @@ cohort_1608 = [
   p "Group #{name} has been created"
 end
 
-cohort = Cohort.find_by_name("1608")
+cohort = Cohort.find_by_name("1608-BE")
 
 ["enrolled", "active student", "graduated", "exited", "removed", "mentor", "admin", "staff", "instructor"].each do |role|
    Role.find_or_create_by(name: role)
