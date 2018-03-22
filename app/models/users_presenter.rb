@@ -7,7 +7,21 @@ class UsersPresenter
   end
 
   def cohorts
-    Cohort.all
+    @cohorts ||= Cohort.all
+  end
+
+  def cohort_name_for_user(user:)
+    user_cohort = cohort(cohort_id: user.cohort_id)
+
+    if user_cohort
+      user_cohort.name
+    else
+      "n/a"
+    end
+  end
+
+  def cohort(cohort_id:)
+    cohorts.find { |cohort| cohort.id == cohort_id }
   end
 
   def users

@@ -56,7 +56,7 @@ class User < ApplicationRecord
   end
 
   def cohort
-    Cohort.find(self.cohort_id)
+    @cohort ||= Cohort.find(self.cohort_id)
   end
 
   def has_role?(role)

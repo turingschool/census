@@ -4,6 +4,7 @@
   <% else %>
     <td class="user-name"><%= user.full_name %></td>
   <% end %>
+
   <td class="user-slack"><%= user.slack %></td>
-  <td class="user-cohort"><%= user.cohort_name %></td>
+  <td class="user-cohort"><%= @presenter.cohort_name_for_user(user: user) %></td>
 </tr>
