@@ -60,7 +60,7 @@ class User < ApplicationRecord
   end
 
   def has_role?(role)
-    roles.where(name: "#{role}").exists?
+    roles.any? { |user_role| user_role.name == role }
   end
 
   def self.search_by_name(term)
