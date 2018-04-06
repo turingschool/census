@@ -16,12 +16,18 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      namespace :admin do
+        namespace :users do
+          get '/search_all', to: 'search_all#index'
+        end
+      end
+
       namespace :users do
         get '/by_name', to: 'by_name#index'
         get '/by_cohort', to: 'by_cohort#index'
         get '/by_github', to: 'by_github#show'
 
-        get '/search_all', to: 'search_all#index'
+        # get '/search_all', to: 'search_all#index'
 
         patch '/add_roles', to: 'roles#add'
 
