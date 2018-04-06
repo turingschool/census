@@ -1,4 +1,4 @@
-class Api::V1::Admin::Users::SearchAllController < Api::V1::ApiController
+class Api::V1::Admin::Users::SearchAllController < Api::V1::Admin::BaseController
   skip_before_action :doorkeeper_authorize!, only: [:index]
   before_action :require_admin
 
@@ -7,7 +7,4 @@ class Api::V1::Admin::Users::SearchAllController < Api::V1::ApiController
     render json: users
   end
 
-  def require_admin
-    current_user && current_user.has_role?("admin") || doorkeeper_authorize!
-  end
 end
