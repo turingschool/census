@@ -43,7 +43,7 @@ RSpec.describe "Groups API" do
       end
     end
 
-    it "updates and returns 204" do
+    it "updates and returns 200" do
       user = create(:user)
       token = create(:access_token, resource_owner_id: user.id).token
       original_group = create(:group)
@@ -64,6 +64,42 @@ RSpec.describe "Groups API" do
   end
 
   context "delete /api/v1/groups/:id" do
+    context "checks for authentication" do
+      it "authenticates logged in admin users" do
+        admin = create(:admin)
+        login_as(admin, scope: Devise::Mapping.find_scope!(admin))
+        original_group = create(:group)
+
+        headers = {"CONTENT-TYPE" => "application/json"}
+
+        delete "/api/v1/admin/groups/#{original_group.id}", headers: headers
+
+        expect(response.status).to eq 200
+      end
+
+      it 'rejects logged in users' do
+        user = create(:user)
+        login_as(user, scope: Devise::Mapping.find_scope!(user))
+        original_group = create(:group)
+
+        headers = {"CONTENT-TYPE" => "application/json"}
+
+        delete "/api/v1/admin/groups/#{original_group.id}",  headers: headers
+
+        expect(response.status).to eq 401
+      end
+
+      it 'rejects guest users' do
+        original_group = create(:group)
+
+        headers = {"CONTENT-TYPE" => "application/json"}
+
+        delete "/api/v1/admin/groups/#{original_group.id}", headers: headers
+
+        expect(response.status).to eq 401
+      end
+    end
+
     it "deletes a group" do
       user = create(:user)
       token = create(:access_token, resource_owner_id: user.id).token
