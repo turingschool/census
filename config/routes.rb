@@ -22,6 +22,8 @@ Rails.application.routes.draw do
         end
         patch '/roles/:id',   to: 'roles#update'
         delete '/roles/:id',  to: 'roles#destroy'
+        patch '/groups/:id',  to: 'groups#update'
+        delete '/groups/:id', to: 'groups#destroy'
       end
 
       namespace :users do
@@ -47,8 +49,8 @@ Rails.application.routes.draw do
 
       # patch '/roles/:id',   to: 'roles#update'
       # delete '/roles/:id',  to: 'roles#destroy'
-      patch '/groups/:id',  to: 'groups#update'
-      delete '/groups/:id', to: 'groups#destroy'
+      # patch '/groups/:id',  to: 'groups#update'
+      # delete '/groups/:id', to: 'groups#destroy'
       # namespace :users do
       #   get '/by_name', to: 'by_name#index'
       # end
