@@ -4,41 +4,39 @@ RSpec.describe "Roles API" do
   include Warden::Test::Helpers
 
   context "checks for authentication" do
-    # context 'without an access token' do
-      it "authenticates logged in admin users" do
-        admin = create(:admin)
-        role = create(:role)
-        login_as(admin, scope: Devise::Mapping.find_scope!(admin))
-        headers = {"CONTENT-TYPE" => "application/json"}
-        params = {role: {id: role.id, name: "UpdatedName"}}.to_json
+    it "authenticates logged in admin users" do
+      admin = create(:admin)
+      role = create(:role)
+      login_as(admin, scope: Devise::Mapping.find_scope!(admin))
+      headers = {"CONTENT-TYPE" => "application/json"}
+      params = {role: {id: role.id, name: "UpdatedName"}}.to_json
 
-        patch "/api/v1/admin/roles/#{role.id}", params: params, headers: headers
+      patch "/api/v1/admin/roles/#{role.id}", params: params, headers: headers
 
-        expect(response.status).to eq 200
-      end
+      expect(response.status).to eq 200
+    end
 
-      it 'rejects logged in users' do
-        user = create(:user)
-        role = create(:role)
-        login_as(user, scope: Devise::Mapping.find_scope!(user))
-        headers = {"CONTENT-TYPE" => "application/json"}
-        params = {role: {id: role.id, name: "UpdatedName"}}.to_json
+    it 'rejects logged in users' do
+      user = create(:user)
+      role = create(:role)
+      login_as(user, scope: Devise::Mapping.find_scope!(user))
+      headers = {"CONTENT-TYPE" => "application/json"}
+      params = {role: {id: role.id, name: "UpdatedName"}}.to_json
 
-        patch "/api/v1/admin/roles/#{role.id}", params: params, headers: headers
+      patch "/api/v1/admin/roles/#{role.id}", params: params, headers: headers
 
-        expect(response.status).to eq 401
-      end
+      expect(response.status).to eq 401
+    end
 
-      it 'rejects guest users' do
-        role = create(:role)
-        headers = {"CONTENT-TYPE" => "application/json"}
-        params = {role: {id: role.id, name: "UpdatedName"}}.to_json
+    it 'rejects guest users' do
+      role = create(:role)
+      headers = {"CONTENT-TYPE" => "application/json"}
+      params = {role: {id: role.id, name: "UpdatedName"}}.to_json
 
-        patch "/api/v1/admin/roles/#{role.id}", params: params, headers: headers
+      patch "/api/v1/admin/roles/#{role.id}", params: params, headers: headers
 
-        expect(response.status).to eq 401
-      end
-
+      expect(response.status).to eq 401
+    end
   end
 
   context  "PATCH api/v1/roles" do
