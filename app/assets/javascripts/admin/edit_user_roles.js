@@ -43,7 +43,7 @@ function updateTable(data) {
 function fetchUsers(searchParams) {
   $.ajax({
     method: 'GET',
-    url: '/api/v1/users/search_all',
+    url: '/api/v1/admin/users/search_all',
     data: {q: searchParams}
   })
   .done(appendUsers)
@@ -53,7 +53,7 @@ function fetchUsers(searchParams) {
 function requestAddUserRoles(userIds, roleIds) {
   $.ajax({
     method: 'PATCH',
-    url: '/api/v1/users/add_roles',
+    url: '/api/v1/admin/users/add_roles',
     data: {users: userIds, roles: roleIds}
   })
   .done(function(data){
@@ -65,7 +65,7 @@ function requestAddUserRoles(userIds, roleIds) {
 function requestRemoveUserRoles(userIds, roleIds) {
   $.ajax({
     method: 'PATCH',
-    url: '/api/v1/users/remove_roles',
+    url: '/api/v1/admin/users/remove_roles',
     data: {users: userIds, roles: roleIds}
   })
   .done(function(data){

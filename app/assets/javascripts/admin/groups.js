@@ -22,7 +22,7 @@ function editGroup() {
       var updatedGroupName = document.getElementsByClassName('group-update')[0].value;
       $.ajax({
         method: 'PATCH',
-        url: '/api/v1/groups/' + groupID,
+        url: '/api/v1/admin/groups/' + groupID,
         data: {group: {'name': updatedGroupName}}
       })
       .done(onGroupUpdate)
@@ -35,7 +35,7 @@ function deleteGroup() {
   var groupID = this.parentElement.parentElement.id.split('-')[1];
   $.ajax({
     method: 'DELETE',
-    url: '/api/v1/groups/' + groupID,
+    url: '/api/v1/admin/groups/' + groupID,
   })
   .done(onGroupDelete)
   .fail(onFail);
