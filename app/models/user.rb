@@ -128,29 +128,21 @@ class User < ApplicationRecord
   end
 
   def self.search_roles(query)
-    roles = Role.where(
+    joins(:roles).where(
       "upper(name) iLIKE ANY (array[?])",
       query
       )
-
-    users = roles.map do |role|
-      role.users
-    end
-
   end
 
   def self.search_groups(query)
-    groups = Group.where(
+    joins(:groups).where(
     "upper(name) iLIKE ANY (array[?])",
     query
       )
-    users = groups.map do |group|
-      group.users
-    end
   end
 
   def self.search_users(query)
-       User.where(
+       where(
         "upper(first_name) iLIKE ANY (array[?]) OR
         upper(last_name) iLIKE ANY (array[?])",
         query,
