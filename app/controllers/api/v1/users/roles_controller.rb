@@ -1,4 +1,6 @@
 class Api::V1::Users::RolesController < Api::V1::ApiController
+  skip_before_action :doorkeeper_authorize!, only: [:add, :remove]
+  before_action :require_user_or_doorkeeper_authorize!
 
   def add
     roles = Role.find(params[:roles])

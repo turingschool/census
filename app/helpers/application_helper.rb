@@ -4,9 +4,10 @@ module ApplicationHelper
   end
 
   def user_is_admin?
-    if current_user
-      current_user.roles.where(name: 'admin').exists?
-    end
+    current_user.has_role?("admin") if current_user
   end
 
+  def user_is_staff?
+    current_user.has_role?("staff") if current_user
+  end
 end

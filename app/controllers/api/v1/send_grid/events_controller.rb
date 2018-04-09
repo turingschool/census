@@ -1,4 +1,6 @@
 class Api::V1::SendGrid::EventsController < Api::V1::ApiController
+  skip_before_action :doorkeeper_authorize!, only: [:update]
+
   def update
     webhook_data = JSON.parse(request.body.read)
     webhook_data.each do |data|

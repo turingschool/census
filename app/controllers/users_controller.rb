@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    find_user_if_admin
+    find_user_if_admin || find_user_if_staff
   end
 
   def edit
@@ -40,7 +40,8 @@ class UsersController < ApplicationController
                                     :slack,
                                     :cohort_id,
                                     :image,
-                                    :stackoverflow )
+                                    :stackoverflow,
+                                    :gender_pronouns )
     end
 
     def set_user
@@ -49,5 +50,9 @@ class UsersController < ApplicationController
 
     def find_user_if_admin
       @user = User.find(params[:id]) if current_user.has_role?("admin")
+    end
+
+    def find_user_if_staff
+      @user = User.find(params[:id]) if current_user.has_role?("staff")
     end
 end

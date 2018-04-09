@@ -7,7 +7,8 @@ RSpec.describe "User Roles API" do
       user_1, user_2 = create_list(:user, 2, roles: [role_1, role_2])
 
       headers = {"CONTENT-TYPE" => "application/json"}
-      params = {roles: [role_2.id], users: [user_1.id, user_2.id]}.to_json
+      token = create(:access_token, resource_owner_id: user_1.id).token
+      params = {roles: [role_2.id], users: [user_1.id, user_2.id], access_token: token}.to_json
 
       patch "/api/v1/users/remove_roles", params: params, headers: headers
 

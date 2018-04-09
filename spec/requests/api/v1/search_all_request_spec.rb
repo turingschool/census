@@ -1,20 +1,40 @@
 require 'rails_helper'
 
 RSpec.describe "General Search API" do
+  include Warden::Test::Helpers
+
   context  "GET api/v1/users/search" do
+    context 'without an access token' do
+      it 'authenticates logged in users' do
+        user = create :user
+        login_as(user, scope: Devise::Mapping.find_scope!(user))
+
+        get "/api/v1/users/search_all", params: { q: 'foo' }
+
+        expect(response.status).to eq 200
+      end
+
+      it 'rejects guest users' do
+        get "/api/v1/users/search_all", params: { q: 'foo' }
+        expect(response.status).to eq 401
+      end
+    end
+
     it "searches by cohort and returns users with first, last and groups" do
-      cohort_1, cohort_2 = create_list(:cohort, 2)
+      cohort_1 = Cohort.new(OpenStruct.new(id: 1234, status: "closed", name: "1608-BE"))
+      cohort_2 = Cohort.new(OpenStruct.new(id: 1230, status: "open", name: "1703-FE"))
+      stub_cohorts_with([cohort_1, cohort_2])
       users = create_list(:user, 3)
-      users.first.cohort = cohort_1
-      users.second.cohort = cohort_1
-      users.third.cohort = cohort_2
+      users.first.cohort_id = cohort_1.id
+      users.second.cohort_id = cohort_1.id
+      users.third.cohort_id = cohort_2.id
+      token = create(:access_token, resource_owner_id: users.first.id).token
       group = create(:group, users: users)
 
-      params = {q: cohort_1.name}
+      params = {q: cohort_1.name, access_token: token}
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
-
       expect(json_users.count).to eq(2)
 
       first = json_users.any? do |user|
@@ -28,80 +48,22 @@ RSpec.describe "General Search API" do
       expect(first).to be_truthy
       expect(last).to be_truthy
       expect(json_users.first["groups"].first).to eq(group.name)
-
-    end
-  end
-  context  "GET api/v1/users/search" do
-  it "returns users matching cohort partial search query" do
-    cohort_1 = create(:cohort, name: "1608")
-    cohort_2 = create(:cohort, name: "1610")
-    cohort_3 = create(:cohort, name: "1701")
-
-
-    users = create_list(:user, 3)
-    users.first.cohort = cohort_1
-    users.second.cohort = cohort_2
-    users.third.cohort = cohort_3
-    group = create(:group, users: users)
-
-    params = {q: "16"}
-    get "/api/v1/users/search_all", params: params
-
-    json_users = JSON.parse(response.body)
-
-    expect(json_users.count).to eq(2)
-
-    first = json_users.any? do |user|
-      user["first_name"] == users.first.first_name
-      user["first_name"] == users.second.first_name
     end
 
-    expect(first).to be_truthy
+    it "returns users matching cohort partial search query" do
+      cohort_1 = Cohort.new(OpenStruct.new(id: 1234, name: "1608"))
+      cohort_2 = Cohort.new(OpenStruct.new(id: 1230, name: "1610"))
+      cohort_3 = Cohort.new(OpenStruct.new(id: 1231, name: "1701"))
+      stub_cohorts_with([cohort_1, cohort_2, cohort_3])
 
-  end
-end
-  context  "GET api/v1/users/search" do
-    it "searches by role and returns users with first, last and groups" do
-      role_1, role_2 = create_list(:role, 2)
       users = create_list(:user, 3)
-      users.first.roles << role_1
-      users.second.roles << role_1
-      users.third.roles << role_2
+      users.first.cohort_id = cohort_1.id
+      users.second.cohort_id = cohort_2.id
+      users.third.cohort_id = cohort_3.id
       group = create(:group, users: users)
 
-      params = {q: role_1.name}
-      get "/api/v1/users/search_all", params: params
-
-      json_users = JSON.parse(response.body)
-
-      expect(json_users.count).to eq(2)
-
-      first = json_users.any? do |user|
-        user["first_name"] == users.first.first_name
-      end
-
-      last = json_users.any? do |user|
-        user["last_name"] == users.first.last_name
-      end
-
-      expect(first).to be_truthy
-      expect(last).to be_truthy
-      expect(json_users.first["groups"].first).to eq(group.name)
-
-    end
-  end
-  context  "GET api/v1/users/search" do
-    it "searches by partial role query" do
-      role_1 = create(:role, name: "fakerole")
-      role_2 = create(:role, name: "fakerole2")
-      role_3 = create(:role, name: "admin")
-      users = create_list(:user, 3)
-      users.first.roles << role_1
-      users.second.roles << role_2
-      users.third.roles << role_3
-      group = create(:group, users: users)
-
-      params = {q: "fakerole"}
+      token = create(:access_token, resource_owner_id: users.first.id).token
+      params = {q: "16", access_token: token}
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
@@ -114,10 +76,63 @@ end
       end
 
       expect(first).to be_truthy
-
     end
-  end
-  context  "GET api/v1/users/search" do
+
+    it "searches by role and returns users with first, last and groups" do
+      role_1, role_2 = create_list(:role, 2)
+      users = create_list(:user, 3)
+      users.first.roles << role_1
+      users.second.roles << role_1
+      users.third.roles << role_2
+      group = create(:group, users: users)
+
+      token = create(:access_token, resource_owner_id: users.first.id).token
+      params = {q: role_1.name, access_token: token}
+      get "/api/v1/users/search_all", params: params
+
+      json_users = JSON.parse(response.body)
+
+      expect(json_users.count).to eq(2)
+
+      first = json_users.any? do |user|
+        user["first_name"] == users.first.first_name
+      end
+
+      last = json_users.any? do |user|
+        user["last_name"] == users.first.last_name
+      end
+
+      expect(first).to be_truthy
+      expect(last).to be_truthy
+      expect(json_users.first["groups"].first).to eq(group.name)
+    end
+
+    it "searches by partial role query" do
+      role_1 = create(:role, name: "fakerole")
+      role_2 = create(:role, name: "fakerole2")
+      role_3 = create(:role, name: "admin")
+      users = create_list(:user, 3)
+      users.first.roles << role_1
+      users.second.roles << role_2
+      users.third.roles << role_3
+      group = create(:group, users: users)
+
+      token = create(:access_token, resource_owner_id: users.first.id).token
+      params = {q: "fakerole", access_token: token}
+      get "/api/v1/users/search_all", params: params
+
+      json_users = JSON.parse(response.body)
+
+      expect(json_users.count).to eq(2)
+
+      first = json_users.any? do |user|
+        user["first_name"] == users.first.first_name
+        user["first_name"] == users.second.first_name
+      end
+
+      expect(first).to be_truthy
+    end
+
     it "searches by group and returns users with first, last and groups" do
       group_1, group_2 = create_list(:group, 2)
       users = create_list(:user, 3)
@@ -125,7 +140,8 @@ end
       users.second.groups << group_1
       users.third.groups << group_2
 
-      params = {q: group_1.name}
+      token = create(:access_token, resource_owner_id: users.first.id).token
+      params = {q: group_1.name, access_token: token}
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
@@ -143,10 +159,8 @@ end
       expect(first).to be_truthy
       expect(last).to be_truthy
       expect(json_users.first["groups"].first).to eq(group_1.name)
-
     end
-  end
-  context  "GET api/v1/users/search" do
+
     it "searches by partial group" do
       group_1 = create(:group, name: "fakegroup")
       group_2 = create(:group, name: "fakegroup2")
@@ -156,7 +170,8 @@ end
       users.second.groups << group_2
       users.third.groups << group_3
 
-      params = {q: "fakegroup"}
+      token = create(:access_token, resource_owner_id: users.first.id).token
+      params = {q: "fakegroup", access_token: token}
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
@@ -170,17 +185,16 @@ end
       end
 
       expect(first).to be_truthy
-
     end
-  end
-  context  "GET api/v1/users/search" do
+
     it "searches by first_name and returns users with first, last and groups" do
       user_1 = create(:user, first_name: "brad")
       user_2 = create(:user, first_name: "brad")
       user_3 = create(:user, first_name: "ali")
       group = create(:group, users: [user_1, user_2, user_3])
 
-      params = {q: "brad"}
+      token = create(:access_token, resource_owner_id: user_1.id).token
+      params = {q: "brad", access_token: token}
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
@@ -199,15 +213,15 @@ end
       expect(last).to be_truthy
       expect(json_users.first["groups"].first).to eq(group.name)
     end
-  end
-  context  "GET api/v1/users/search" do
+
     it "searches by partial name" do
       user_1 = create(:user, first_name: "gibberish")
       user_2 = create(:user, last_name: "gibberish")
       user_3 = create(:user, first_name: "brad", last_name: "green")
       group = create(:group, users: [user_1, user_2, user_3])
 
-      params = {q: "gibberish"}
+      token = create(:access_token, resource_owner_id: user_1.id).token
+      params = {q: "gibberish", access_token: token}
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
@@ -221,17 +235,16 @@ end
       end
 
       expect(first).to be_truthy
-
     end
-  end
-  context  "GET api/v1/users/search" do
+
     it "searches by last_name and returns users with first, last and groups" do
       user_1 = create(:user, last_name: "schlereth")
       user_2 = create(:user, last_name: "schlereth")
       user_3 = create(:user, last_name: "green")
       group = create(:group, users: [user_1, user_2, user_3])
 
-      params = {q: "schlereth"}
+      token = create(:access_token, resource_owner_id: user_1.id).token
+      params = {q: "schlereth", access_token: token}
       get "/api/v1/users/search_all", params: params
 
       json_users = JSON.parse(response.body)
@@ -250,5 +263,26 @@ end
       expect(last).to be_truthy
       expect(json_users.first["groups"].first).to eq(group.name)
     end
+  end
+
+  it "searches by full name returning records for matches of first and last names" do
+    user_1 = create(:user, first_name: "first")
+    user_2 = create(:user, last_name: "last")
+    user_3 = create(:user, first_name: "other")
+    group = create(:group, users: [user_1, user_2, user_3])
+
+    token = create(:access_token, resource_owner_id: user_1.id).token
+    params = {q: "first last", access_token: token}
+    get "/api/v1/users/search_all", params: params
+
+    returned_users = JSON.parse(response.body)
+
+    expect(returned_users.count).to eq(2)
+
+    included = returned_users.any? do |user|
+      user['last_name'] || user['first_name'] == "first" || "last"
+    end
+
+    expect(included).to be_truthy
   end
 end
