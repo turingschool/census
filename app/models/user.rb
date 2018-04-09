@@ -29,8 +29,6 @@ class User < ApplicationRecord
   has_many :user_roles, dependent: :destroy
   has_many :roles, through: :user_roles
   has_many :invitations
-  belongs_to :cohort
-
   has_many :oauth_applications, class_name: 'Doorkeeper::Application', as: :owner
 
   # paperclip configuration
@@ -57,8 +55,12 @@ class User < ApplicationRecord
     groups.map {|group| group.name }.join(', ')
   end
 
+  def cohort
+    @cohort ||= Cohort.find(self.cohort_id)
+  end
+
   def has_role?(role)
-    roles.where(name: "#{role}").exists?
+    roles.any? { |user_role| user_role.name == role }
   end
 
   def self.search_by_name(term)
@@ -105,52 +107,46 @@ class User < ApplicationRecord
   end
 
   def self.search_all(query)
+    terms = query.upcase.split.map do |term|
+      "%#{term}%"
+    end
+
     users = User.none
-    users += search_cohorts(query)
-    users += search_roles(query)
-    users += search_groups(query)
-    users += search_users(query)
+    users += search_cohorts(terms)
+    users += search_roles(terms)
+    users += search_groups(terms)
+    users += search_users(terms)
     users.flatten
   end
 
   def self.search_cohorts(query)
-    cohorts = Cohort.where(
-      "upper(name) LIKE ?",
-      "%#{query.upcase}%"
-      )
+    cohorts = Cohort.search_by_name(query)
+
     users = cohorts.map do |cohort|
       cohort.users
     end
   end
 
   def self.search_roles(query)
-    roles = Role.where(
-      "upper(name) LIKE ?",
-      "%#{query.upcase}%"
+    joins(:roles).where(
+      "upper(name) iLIKE ANY (array[?])",
+      query
       )
-
-    users = roles.map do |role|
-      role.users
-    end
-
   end
 
   def self.search_groups(query)
-    groups = Group.where(
-      "upper(name) LIKE ?",
-      "%#{query.upcase}%"
+    joins(:groups).where(
+    "upper(name) iLIKE ANY (array[?])",
+    query
       )
-    users = groups.map do |group|
-      group.users
-    end
   end
 
   def self.search_users(query)
-    User.where(
-      "upper(first_name) LIKE ? OR
-      upper(last_name) LIKE ?",
-      "%#{query.upcase}%",
-      "%#{query.upcase}%"
+       where(
+        "upper(first_name) iLIKE ANY (array[?]) OR
+        upper(last_name) iLIKE ANY (array[?])",
+        query,
+        query
       )
   end
 

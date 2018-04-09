@@ -9,7 +9,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       invite_code = params[:invite_code]
       invitation = invitation(invite_code)
       if invitation
-        @user = User.new(email: invitation.email, cohort: invitation.cohort)
+        @user = User.new(email: invitation.email, cohort_id: invitation.cohort_id)
         @user.skip_confirmation!
         session[:invitation_code] = invitation.invitation_code
         render :new
@@ -98,21 +98,23 @@ class Users::RegistrationsController < Devise::RegistrationsController
     def invitation(code)
       @invitation ||= Invitation.find_by(invitation_code: code)
     end
+
     def invited_user_params
       params.require(:user).permit(
-        :email,
-        :first_name,
-        :last_name,
-        :twitter,
-        :linked_in,
-        :git_hub,
-        :slack,
-        :cohort_id,
-        :password,
-        :password_confirmation,
-        :image,
-        :stackoverflow
-      )
+                                    :email,
+                                    :first_name,
+                                    :last_name,
+                                    :twitter,
+                                    :linked_in,
+                                    :git_hub,
+                                    :slack,
+                                    :cohort_id,
+                                    :password,
+                                    :password_confirmation,
+                                    :image,
+                                    :stackoverflow,
+                                    :gender_pronouns
+                                    )
     end
 
     def valid_invitation_code?

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170223005124) do
+ActiveRecord::Schema.define(version: 20180317195113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,6 +137,7 @@ ActiveRecord::Schema.define(version: 20170223005124) do
     t.datetime "image_updated_at"
     t.integer  "cohort_id"
     t.string   "stackoverflow"
+    t.string   "gender_pronouns"
     t.index ["cohort_id"], name: "index_users_on_cohort_id", using: :btree
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -145,12 +146,10 @@ ActiveRecord::Schema.define(version: 20170223005124) do
 
   add_foreign_key "affiliations", "groups"
   add_foreign_key "affiliations", "users"
-  add_foreign_key "invitations", "cohorts"
   add_foreign_key "invitations", "roles"
   add_foreign_key "invitations", "users"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
-  add_foreign_key "users", "cohorts"
 end

@@ -3,12 +3,10 @@ require 'rails_helper'
 RSpec.feature "admin dashboard inviation actions" do
   it "can resend a pending invitation" do
     admin = create :admin
-    invite = create :invitation
+    invite = create :invitation, status: 'mailed'
 
     sign_in admin
     visit admin_dashboard_path
-    expect(page).to have_content("queued")
-
     click_link "Resend"
 
     expect(current_path).to eq(admin_dashboard_path)
@@ -17,7 +15,7 @@ RSpec.feature "admin dashboard inviation actions" do
 
   it "can rescind a pending invitation" do
     admin = create :admin
-    invite = create :invitation
+    invite = create :invitation, status: 'mailed'
 
     sign_in admin
     visit admin_dashboard_path

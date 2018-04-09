@@ -1,17 +1,21 @@
 FactoryGirl.define do
-  # possible_cohorts = %w(1602 1603 1605 1606 1608 1610 1611 1701 1703)
-
   factory :user do
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
     email { Faker::Internet.email }
     password "password"
     confirmed_at DateTime.new()
-    cohort
+    cohort_id 1234
 
     factory :admin do
       after(:create) do | admin, _ |
         create_list(:role, 1, name: "admin", users: [admin])
+      end
+    end
+
+    factory :staff do
+      after(:create) do | staff, _ |
+        create_list(:role, 1, name: "staff", users: [staff])
       end
     end
 

@@ -1,39 +1,26 @@
 require 'rails_helper'
 
 RSpec.describe Cohort, type: :model do
-  it { should have_many(:users) }
-  it { should validate_presence_of(:name) }
-
-  it "knows how many students belong to it" do
-    cohort = create :cohort, name: "1606-be"
-    create :user, cohort: cohort
-    create :user, cohort: cohort
-    create :user, cohort: cohort
-    create :user
-
-    expect(cohort.student_count).to eq(3)
-  end
-
   it "can update student roles" do
-    cohort = create :cohort, name: "1608-BE"
-    user = create :enrolled_user, cohort: cohort
+    cohort = Cohort.new(OpenStruct.new(id: 1234, status: "open"))
+    user = create :active_student, cohort_id: cohort.id
     create :role, name: "active student"
     create :role, name: "graduated"
 
-    cohort.update_student_roles("active")
-    expect(user.roles.first.name).to eq("active student")
+    cohort.update_student_roles("closed")
+    expect(user.roles.first.name).to eq("graduated")
   end
 
   it "doesn't update students with wonky roles" do
-    cohort = create :cohort, name: "1608-BE"
+    cohort = Cohort.new(OpenStruct.new(id: 1234, status: "open"))
     create :role, name: "active student"
     create :role, name: "graduated"
     create :role, name: "enrolled"
     exited = create :role, name: "exited"
-    user = create :user, cohort: cohort
+    user = create :user, cohort_id: cohort.id
     user.roles << exited
 
-    cohort.update_student_roles("active")
+    cohort.update_student_roles("open")
     expect(user.roles.first.name).to eq("exited")
   end
 end

@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       namespace :users do
         get '/by_name', to: 'by_name#index'
         get '/by_cohort', to: 'by_cohort#index'
+        get '/by_github', to: 'by_github#show'
 
         get '/search_all', to: 'search_all#index'
 
@@ -26,6 +27,7 @@ Rails.application.routes.draw do
 
         patch '/remove_roles', to: 'roles#remove'
 
+        get '/by_name', to: 'by_name#index'
       end
 
       get '/users/:id', to: 'users#show', as: 'user'
@@ -41,9 +43,9 @@ Rails.application.routes.draw do
       delete '/roles/:id',  to: 'roles#destroy'
       patch '/groups/:id',  to: 'groups#update'
       delete '/groups/:id', to: 'groups#destroy'
-      namespace :users do
-        get '/by_name', to: 'by_name#index'
-      end
+      # namespace :users do
+      #   get '/by_name', to: 'by_name#index'
+      # end
     end
   end
 
@@ -55,7 +57,7 @@ Rails.application.routes.draw do
     resources :users,  only: [:update]
     resources :roles,  only: [:index, :create]
     resources :groups, only: [:index, :create]
-    resources :cohorts
+    resources :cohorts, only: [:index, :show]
   end
 
 end
