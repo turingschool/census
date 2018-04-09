@@ -70,7 +70,6 @@ RSpec.describe User, type: :model do
       expect(too_short.valid?).to be false
       expect(too_long.valid?).to be false
     end
-<<<<<<< HEAD
 
     it "allows LinkedIn username to have hyphens" do
       okay = build(:user, linked_in: "matthew-leo-kaufman")
@@ -80,17 +79,6 @@ RSpec.describe User, type: :model do
     it "creates user with gender pronouns" do
       user = create :user, gender_pronouns: "she/her"
 
-=======
-
-    it "allows LinkedIn username to have hyphens" do
-      okay = build(:user, linked_in: "matthew-leo-kaufman")
-      expect(okay.valid?).to be true
-    end
-
-    it "creates user with gender pronouns" do
-      user = create :user, gender_pronouns: "she/her"
-
->>>>>>> 6a4747d704cbaa9fa41d43fee96d167453d0cca0
       expect(user).to be_valid
     end
   end
