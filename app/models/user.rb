@@ -77,11 +77,6 @@ class User < ApplicationRecord
     twitter.sub!(/\A@+/,"") if twitter
   end
 
-  # def set_role
-  #   role = Role.find_or_create_by(name: 'enrolled')
-  #   roles << role
-  # end
-
   def change_role(new_role_name)
     new_role = Role.find_by(name: new_role_name)
 
