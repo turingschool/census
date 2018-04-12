@@ -25,14 +25,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     if valid_invitation_code?
       @user = User.new(invited_user_params)
-      @user.roles << invitation(session[:invitation_code]).role
+
+      invitation = Invitation.find_by(invitation_code: session[:invitation_code])
+      if invitation.enroll_elligible?
+        @user.roles << Role.find_by(name: "enroll-elligible")
+      else
+        @user.roles << invitation.role
+      end
+
       @user.skip_confirmation!
       if @user.save
-        invitation = Invitation.find_by(invitation_code: session[:invitation_code])
         invitation.accepted!
         session[:invitation_code] = nil
         flash[:success] = 'You have succesfully signed up!'
         sign_in(resource_name, resource)
+
         if session[:return_path]
           redirect_to session[:return_path]
         else
@@ -46,52 +53,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
       super
     end
   end
-
-  # GET /resource/edit
-  # def edit
-  #   super
-  # end
-
-  # PUT /resource
-  # def update
-  #   super
-  # end
-
-  # DELETE /resource
-  # def destroy
-  #   super
-  # end
-
-  # GET /resource/cancel
-  # Forces the session data which is usually expired after sign
-  # in to be expired now. This is useful if the user wants to
-  # cancel oauth signing in/up in the middle of the process,
-  # removing all OAuth session data.
-  # def cancel
-  #   super
-  # end
-
-  # protected
-
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
-  # end
-
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-  # end
-
-  # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
-
-  # The path used after sign up for inactive accounts.
-  # def after_inactive_sign_up_path_for(resource)
-  #   super(resource)
-  # end
 
   private
 

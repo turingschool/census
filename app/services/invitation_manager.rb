@@ -34,6 +34,8 @@ class InvitationManager
         set_role_for_mentor
       elsif role == "Staff"
         set_role_for_admin
+      elsif role == "Invitee"
+        set_role_for_invitee
       end
     end
 
@@ -48,6 +50,10 @@ class InvitationManager
 
     def set_role_for_admin
       Role.find_by(name: "staff")
+    end
+
+    def set_role_for_invitee
+      Role.find_by(name: "invitee")
     end
 
     def role_key

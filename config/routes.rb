@@ -14,8 +14,23 @@ Rails.application.routes.draw do
   resources :affiliations,  only: [:new, :create]
   resources :invitations,   only: [:new, :create, :update, :destroy, :index]
 
+  namespace :admin do
+    namespace :roles do
+      get '/users', to: 'users#edit', as: 'users_edit'
+    end
+    get '/dashboard', to: 'dashboard#show', as: 'dashboard'
+    resources :users,  only: [:update]
+    resources :roles,  only: [:index, :create]
+    resources :groups, only: [:index, :create]
+    resources :cohorts, only: [:index, :show]
+  end
+
   namespace :api do
     namespace :v1 do
+      namespace :admin do
+        resources :invitations, only: [:create]
+      end
+
       namespace :users do
         get '/by_name', to: 'by_name#index'
         get '/by_cohort', to: 'by_cohort#index'
@@ -48,16 +63,4 @@ Rails.application.routes.draw do
       # end
     end
   end
-
-  namespace :admin do
-    namespace :roles do
-      get '/users', to: 'users#edit', as: 'users_edit'
-    end
-    get '/dashboard', to: 'dashboard#show', as: 'dashboard'
-    resources :users,  only: [:update]
-    resources :roles,  only: [:index, :create]
-    resources :groups, only: [:index, :create]
-    resources :cohorts, only: [:index, :show]
-  end
-
 end

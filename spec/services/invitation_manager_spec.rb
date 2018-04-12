@@ -1,14 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe InvitationManager do
-  before(:each) { create :role, name: "mentor" }
-  before(:each) { create :role, name: "active student" }
-  before(:each) { create :role, name: "enrolled" }
-  before(:each) { create :role, name: "graduated" }
+  before(:each) do
+    create :role, name: "mentor"
+    create :role, name: "active student"
+    create :role, name: "enrolled"
+    create :role, name: "graduated"
+    create :role, name: "invitee"
+  end
 
   let(:invitation_params) do
-    { email: "bad_email, good@example.com, bad_example.com",
-      role: "Mentor" }
+    {
+      email: "bad_email, good@example.com, bad_example.com",
+      role: "Mentor"
+    }
   end
 
   let(:no_space_invitation_params) do
@@ -111,6 +116,15 @@ RSpec.describe InvitationManager do
     invite = Invitation.first
 
     expect(invite.role.name).to eq("enrolled")
+  end
+
+  it 'sets role to invitee for invitee invitations' do
+    params = { email: "invited@example.com", role: "Invitee" }
+    manager = InvitationManager.new(params, user, url)
+
+    invite = Invitation.first
+
+    expect(invite.role.name).to eq("invitee")
   end
 
   it "sets role to active student if student and active cohort" do
