@@ -27,35 +27,26 @@
 
 ## [Onboarding tips](#onboarding)
 ### [Heroku](#heroku)
-* staging: https://census-app-staging.herokuapp.com/
-* production: https://turing-census.herokuapp.com/
-* Other teams will use the staging app for their staging environment. Switching between environments requires switching the oauth gem. Gemfile should include:
+* staging: census-app-staging and login-staging.turing.io
+* production: turing-census and login.turing.io
+* Other teams will use the staging app for their staging environment. Switching
+  between environments requires configuring the oauth gem oauth endpoint.
+  Install the gem via:
+
 ```
 gem 'omniauth-census', git: "https://github.com/turingschool-projects/omniauth-census"
 ```
+
 * There will be two apps connected to the same repository, staging auto deploys from the staging branch, and production auto deploys from master.
-* To access the heroku console for a specific app, run `heroku run --app <APP-NAME> console`
 
 ### [FAQ](#faq)
-* Why can't I authenticate from localhost?
-  - Census only allows authentication from a secure connection. This won't be a problem on a Heroku server, but it's a bit of a headache on localhost. In order to test OAuth locally, you need to create an ssl certificate and run a local server "securly." Luckily, Nick Martinez wrote a great [tutorial](https://github.com/NZenitram/census_staging_oauth) to make this work in the "Important Stuff" section of the oauth staging gem.
-
 * What's up with these tokens?
-  - Be aware that tokens expire every 90 days. Doorkeeper provides a way to grab a refresh token so your session isn't interupted.
+  - Be aware that app specific tokens expire every 90 days. Doorkeeper provides
+    a way to grab a refresh token so your session isn't interupted. If your app
+    requires programatic access on behalf of the app (as opposed to on behalf of a
+    specific user) token refresh logic will need to be included.
 
 ## [Requirements](#requirements)
-### [Ruby on Rails](#ror)
-```
-RAILS VERSION
-  - 5.0.0.1
-
-RUBY VERSION
-  - 2.3.0p0
-
-BUNDLED WITH
-  - 1.13.7
-```
-
 ### [Environment Variables](#environment-variables)
 
 Census is built to expect a certain number of environment variables. We suggest using something like [Figaro](https://github.com/laserlemon/figaro) to set them securely.
@@ -75,11 +66,20 @@ AWS_REGION # Not needed in development
 
 ### [Paperclip Gem](#paperclip)
 
-Census uses the [Paperclip](https://github.com/thoughtbot/paperclip#ruby-and-rails) gem in order to upload user profile photos. To ensure testing and development works, ImageMagick must be installed and Paperclip must have access to it.
+Census uses the
+[Paperclip](https://github.com/thoughtbot/paperclip#ruby-and-rails) gem in
+order to upload user profile photos. To ensure testing and development works,
+ImageMagick must be installed and Paperclip must have access to it.
 
 If you're on Mac OS X, you'll want to run the following with Homebrew:
 
 `brew install imagemagick`
+
+### Other services
+Census depends on Enroll's API to fetch Cohort data. This access is performed
+via a GraphQL client pointed at `ENROLL_GRAPHQL_ENDPOINT` (defaulted to having
+Enroll running on `localhost:3001` and authorized via the `API_AUTH_SECRET` env
+var. Census tests mock out this dependency.
 
 ## [Installation](#installation)
 
@@ -201,14 +201,21 @@ end
 This request will generate a token for your application.
 
 ### [Gems](#gems)
-Currently, there are 2 gems to help you set up OAuth, one for [staging](https://github.com/NZenitram/census_staging_oauth) and one for [production](https://github.com/turingschool-projects/omniauth-census). Soon, we will add a configuation option so you don't need to change your gemfile before pushing to production.
+[`omniauth-census`](https://github.com/turingschool-projects/omniauth-census)
+can be used to configure oauth in application. See its README for instructions
+on how to use it against different Census environments.
 
 ## [Roles](#roles)
-Some roles are just a flag for querying, others define your permissions on the site. Below is a list of all the currently available roles.
+Some roles are just a flag for querying, others define your permissions on the
+site. Below is a list of all the currently available roles.
 <br>
-Note that the staging server is messy and roles may be incorrect for some users. Contact an admin if you need to change your permissions.
+Note that the staging server is messy and roles may be incorrect for some
+users. Contact an admin if you need to change your permissions.
 <br>
-Roles are changed according to cohort status. For example, when an active cohort is moved to finished, all the "active student"s in that cohort will be moved to "graduated." "Removed" and "exited" students roles will not be effected.
+Roles are changed according to cohort status. For example, when an active
+cohort is moved to finished, all the "active student"s in that cohort will be
+moved to "graduated." "Removed" and "exited" students roles will not be
+effected.
 
 ### [Permissions](#permissions)
 * Admin

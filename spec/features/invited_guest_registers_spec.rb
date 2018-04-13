@@ -19,8 +19,7 @@ RSpec.feature 'Invited user features' do
 
   it 'sees the registration form again if details are missing' do
     role = create :role, name: 'Mentor'
-    cohort = create :cohort, name: "1608-BE"
-    invite = create :invitation, role: role, cohort: cohort
+    invite = create :invitation, role: role, cohort_id: 1234
     invite_path = invite.generate_url(new_user_registration_url)
     visit invite_path
 

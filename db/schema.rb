@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170915191929) do
+ActiveRecord::Schema.define(version: 20180317195113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -146,12 +146,10 @@ ActiveRecord::Schema.define(version: 20170915191929) do
 
   add_foreign_key "affiliations", "groups"
   add_foreign_key "affiliations", "users"
-  add_foreign_key "invitations", "cohorts"
   add_foreign_key "invitations", "roles"
   add_foreign_key "invitations", "users"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
-  add_foreign_key "users", "cohorts"
 end

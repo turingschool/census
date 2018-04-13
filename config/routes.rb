@@ -57,7 +57,7 @@ Rails.application.routes.draw do
     resources :users,  only: [:update]
     resources :roles,  only: [:index, :create]
     resources :groups, only: [:index, :create]
-    resources :cohorts
+    resources :cohorts, only: [:index, :show]
   end
 
 end

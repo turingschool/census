@@ -29,8 +29,6 @@ class User < ApplicationRecord
   has_many :user_roles, dependent: :destroy
   has_many :roles, through: :user_roles
   has_many :invitations
-  belongs_to :cohort
-
   has_many :oauth_applications, class_name: 'Doorkeeper::Application', as: :owner
 
   # paperclip configuration
@@ -57,8 +55,12 @@ class User < ApplicationRecord
     groups.map {|group| group.name }.join(', ')
   end
 
+  def cohort
+    @cohort ||= Cohort.find(self.cohort_id)
+  end
+
   def has_role?(role)
-    roles.where(name: "#{role}").exists?
+    roles.any? { |user_role| user_role.name == role }
   end
 
   def self.search_by_name(term)
@@ -74,11 +76,6 @@ class User < ApplicationRecord
     # Remove any "@" symbols from the begining of the string.
     twitter.sub!(/\A@+/,"") if twitter
   end
-
-  # def set_role
-  #   role = Role.find_or_create_by(name: 'enrolled')
-  #   roles << role
-  # end
 
   def change_role(new_role_name)
     new_role = Role.find_by(name: new_role_name)
@@ -108,6 +105,7 @@ class User < ApplicationRecord
     terms = query.upcase.split.map do |term|
       "%#{term}%"
     end
+
     users = User.none
     users += search_cohorts(terms)
     users += search_roles(terms)
@@ -117,39 +115,29 @@ class User < ApplicationRecord
   end
 
   def self.search_cohorts(query)
-    cohorts = Cohort.where(
-      "upper(name) iLIKE ANY (array[?])",
-      query
-      )
+    cohorts = Cohort.search_by_name(query)
+
     users = cohorts.map do |cohort|
       cohort.users
     end
   end
 
   def self.search_roles(query)
-    roles = Role.where(
+    joins(:roles).where(
       "upper(name) iLIKE ANY (array[?])",
       query
       )
-
-    users = roles.map do |role|
-      role.users
-    end
-
   end
 
   def self.search_groups(query)
-    groups = Group.where(
+    joins(:groups).where(
     "upper(name) iLIKE ANY (array[?])",
     query
       )
-    users = groups.map do |group|
-      group.users
-    end
   end
 
   def self.search_users(query)
-       User.where(
+       where(
         "upper(first_name) iLIKE ANY (array[?]) OR
         upper(last_name) iLIKE ANY (array[?])",
         query,

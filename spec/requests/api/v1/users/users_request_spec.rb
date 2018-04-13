@@ -12,7 +12,9 @@ RSpec.describe Api::V1::UsersController do
   context "Request is sent _with_ authorization credentials" do
     it "returns info for all users" do
       test_root_url = "http://www.example.com/"
-      users = create_list(:user, 2)
+      user_1 = create(:user, cohort_id: 1234)
+      user_2 = create(:user, cohort_id: 1234)
+      users = [user_1, user_2]
       token = create(:access_token, resource_owner_id: users.first.id).token
 
       get api_v1_users_path, params: {access_token: token}
@@ -40,11 +42,11 @@ RSpec.describe Api::V1::UsersController do
       expect(response_users.last["roles"]).to eq([])
     end
   end
+
   context "Request for user by id is sent _with_ authorization credentials" do
     it "returns info for requested user" do
-
       test_root_url = "http://www.example.com/"
-      user = create(:enrolled_user)
+      user = create(:enrolled_user, cohort_id: 1234)
       create_list(:group, 1, name: "dummygroup", users: [user])
       token = create(:access_token, resource_owner_id: user.id).token
 
@@ -66,7 +68,6 @@ RSpec.describe Api::V1::UsersController do
       expect(json_user["git_hub"]).to eq(user.git_hub)
       expect(json_user["groups"].first).to eq(user.groups.first.name)
       expect(json_user["roles"].first).to eq(user.roles.first.name)
-
     end
   end
 end

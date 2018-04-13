@@ -12,13 +12,13 @@ RSpec.describe Api::V1::Users::ByCohortController do
   context "Request is sent _with_ authorization credentials" do
     it "returns info for users who belong to cohort" do
       test_root_url = "http://www.example.com/"
-      cohort = create(:cohort)
-      user1 = create :user, first_name: "Dan", last_name: "Broadbent", cohort: cohort
-      user2 = create :user, first_name: "Susi", last_name: "Irwin", cohort: cohort
-      user3 = create :user, first_name: "Nate", last_name: "Anderson"
+      cohort_id = 1234
+      user1 = create :user, first_name: "Dan", last_name: "Broadbent", cohort_id: cohort_id
+      user2 = create :user, first_name: "Susi", last_name: "Irwin", cohort_id: cohort_id
+      user3 = create :user, first_name: "Nate", last_name: "Anderson", cohort_id: 999
       token = create(:access_token, resource_owner_id: user1.id).token
 
-      get "/api/v1/users/by_cohort?cohort_id=#{cohort.id}", params: {access_token: token}
+      get "/api/v1/users/by_cohort?cohort_id=#{cohort_id}", params: {access_token: token}
       response_users = JSON.parse(response.body)
 
       expect(response).to have_http_status(200)

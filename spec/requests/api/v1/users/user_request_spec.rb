@@ -2,26 +2,11 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::CredentialsController do
   context "Request is sent _without_ authorization credentials" do
-    it "returns a 401 (unauthorized) response status" do
+    it "returns a 401 (unauthorized) JSON response" do
       get api_v1_user_credentials_path
 
       expect(response).to have_http_status(401)
-    end
-  end
-
-  context "Request is sent _with_ authorization credentials" do
-    it "returns info for all users" do
-      user = create :user
-      token = create(:access_token, resource_owner_id: user.id).token
-
-      get  api_v1_user_credentials_path, params: {access_token: token}
-      response_user = JSON.parse(response.body)
-
-      expect(response).to have_http_status(200)
-      expect(response_user["first_name"]).to eq(user["first_name"])
-      expect(response_user["last_name"]).to eq(user["last_name"])
-      expect(response_user["cohort"]["name"]).to eq(user.cohort.name)
-      expect(response_user["id"]).to eq(user.id)
+      expect(JSON.parse(response.body)["errors"]).to match_array(["Not authorized"])
     end
   end
 end
