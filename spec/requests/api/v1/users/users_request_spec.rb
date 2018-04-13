@@ -42,9 +42,9 @@ RSpec.describe Api::V1::UsersController do
       expect(response_users.last["roles"]).to eq([])
     end
   end
+
   context "Request for user by id is sent _with_ authorization credentials" do
     it "returns info for requested user" do
-
       test_root_url = "http://www.example.com/"
       user = create(:enrolled_user, cohort_id: 1234)
       create_list(:group, 1, name: "dummygroup", users: [user])
@@ -68,7 +68,6 @@ RSpec.describe Api::V1::UsersController do
       expect(json_user["git_hub"]).to eq(user.git_hub)
       expect(json_user["groups"].first).to eq(user.groups.first.name)
       expect(json_user["roles"].first).to eq(user.roles.first.name)
-
     end
   end
 end
