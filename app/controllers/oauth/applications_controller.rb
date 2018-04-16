@@ -1,4 +1,6 @@
 class Oauth::ApplicationsController < Doorkeeper::ApplicationsController
+  ADMIN_SCOPE_NAME = "admin"
+
   authorize_resource class: Doorkeeper::Application
 
   def index
@@ -9,6 +11,7 @@ class Oauth::ApplicationsController < Doorkeeper::ApplicationsController
   def create
     @application = Doorkeeper::Application.new(application_params)
     @application.owner = current_user if Doorkeeper.configuration.confirm_application_owner?
+
     if @application.save
       flash[:success] = I18n.t(:success, :scope => [:doorkeeper, :flash, :applications, :create])
       redirect_to oauth_application_url(@application)
@@ -20,6 +23,17 @@ class Oauth::ApplicationsController < Doorkeeper::ApplicationsController
 
   private
 
+  def application_params
+    sanitized_params = params.require(:doorkeeper_application).permit(:name, :redirect_uri, :scopes)
+
+    if sanitized_params["scopes"].split(" ").include?(ADMIN_SCOPE_NAME) && !current_user.has_role?("admin")
+      allowed_scopes = sanitized_params["scopes"].split(" ").reject { |scope| scope == ADMIN_SCOPE_NAME }
+      sanitized_params["scopes"] = allowed_scopes.join(" ")
+    end
+
+    sanitized_params
+  end
+
   def set_application
     if current_user
       @application = current_user.oauth_applications.find(params[:id])
@@ -27,5 +41,4 @@ class Oauth::ApplicationsController < Doorkeeper::ApplicationsController
       render file: "/public/404", status: 404, layout: false
     end
   end
-
 end
