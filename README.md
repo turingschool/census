@@ -221,6 +221,7 @@ effected.
 * Admin
   - Can crud all aspects of users.
   - Can manage applications
+  - Can make applications including the `admin` scope
 
 * Staff / Active Student / Graduated / Mentor
   - Can read and update their own personal info.
