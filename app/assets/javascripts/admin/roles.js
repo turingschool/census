@@ -22,7 +22,7 @@ function editRole() {
       var updatedRoleName = document.getElementsByClassName('role-update')[0].value;
       $.ajax({
         method: 'PATCH',
-        url: '/api/v1/roles/' + roleID,
+        url: '/api/v1/admin/roles/' + roleID,
         data: {role: {'name': updatedRoleName}}
       })
       .done(onRoleUpdate)
@@ -35,7 +35,7 @@ function deleteRole() {
   var roleID = this.parentElement.parentElement.id.split('-')[1];
   $.ajax({
     method: 'DELETE',
-    url: '/api/v1/roles/' + roleID,
+    url: '/api/v1/admin/roles/' + roleID,
   })
   .done(onRoleDelete)
   .fail(onFail);

@@ -1,4 +1,6 @@
-class Api::V1::RolesController < Api::V1::ApiController
+class Api::V1::Admin::RolesController < Api::V1::Admin::BaseController
+  skip_before_action :doorkeeper_authorize!, only: [:update, :destroy]
+  before_action :require_admin
 
   def update
     role = Role.find(params[:id])

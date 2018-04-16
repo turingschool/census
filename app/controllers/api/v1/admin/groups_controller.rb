@@ -1,4 +1,6 @@
-class Api::V1::GroupsController < Api::V1::ApiController
+class Api::V1::Admin::GroupsController < Api::V1::Admin::BaseController
+  skip_before_action :doorkeeper_authorize!, only: [:update, :destroy]
+  before_action :require_admin
 
   def update
     group = Group.find(params[:id]) if Group.find(params[:id])
@@ -16,7 +18,7 @@ class Api::V1::GroupsController < Api::V1::ApiController
       render json: group
     else
       render json: "Error deleting Group", status: 400
-    end 
+    end
   end
 
 
