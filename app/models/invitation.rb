@@ -26,7 +26,7 @@ class Invitation < ApplicationRecord
   end
 
   def enroll_elligible?
-    role == Role.find_by(name: "invitee")
+    role == Role.find_by(name: Role::ENROLL_ELLIGIBLE_ROLE_NAME)
   end
 
   private

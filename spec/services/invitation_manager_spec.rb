@@ -6,7 +6,7 @@ RSpec.describe InvitationManager do
     create :role, name: "active student"
     create :role, name: "enrolled"
     create :role, name: "graduated"
-    create :role, name: "invitee"
+    create :role, name: Role::ENROLL_ELLIGIBLE_ROLE_NAME
   end
 
   let(:invitation_params) do
@@ -124,7 +124,7 @@ RSpec.describe InvitationManager do
 
     invite = Invitation.first
 
-    expect(invite.role.name).to eq("invitee")
+    expect(invite.role.name).to eq(Role::ENROLL_ELLIGIBLE_ROLE_NAME)
   end
 
   it "sets role to active student if student and active cohort" do

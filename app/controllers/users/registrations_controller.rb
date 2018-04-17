@@ -25,15 +25,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     if valid_invitation_code?
       @user = User.new(invited_user_params)
-
       invitation = Invitation.find_by(invitation_code: session[:invitation_code])
-      if invitation.enroll_elligible?
-        @user.roles << Role.find_by(name: "enroll-elligible")
-      else
-        @user.roles << invitation.role
-      end
-
+      @user.roles << invitation.role
       @user.skip_confirmation!
+
       if @user.save
         invitation.accepted!
         session[:invitation_code] = nil

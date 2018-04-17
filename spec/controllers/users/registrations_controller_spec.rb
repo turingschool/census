@@ -5,9 +5,8 @@ RSpec.describe Users::RegistrationsController, type: :controller do
     context 'with an invitee invitation' do
       it 'creates the user with enroll-elligible role' do
         @request.env["devise.mapping"] = Devise.mappings[:user]
-        invitee_role = create(:role, name: "invitee")
-        enroll_elligible_role = create(:role, name: "enroll-elligible")
-        invitation = create(:invitation, email: "invited@example.com", role: invitee_role)
+        enroll_elligible_role = create(:role, name: Role::ENROLL_ELLIGIBLE_ROLE_NAME)
+        invitation = create(:invitation, email: "invited@example.com", role: enroll_elligible_role)
 
         expect {
           post :create,

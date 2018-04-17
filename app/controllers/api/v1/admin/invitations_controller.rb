@@ -18,7 +18,10 @@ module Api::V1::Admin
     private
 
     def invitation_params
-      params.require(:invitation).permit(:email, :role)
+      {
+        email: params[:invitation][:email],
+        role: "Invitee"
+      }
     end
   end
 end

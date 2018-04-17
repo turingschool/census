@@ -27,14 +27,14 @@ class InvitationManager
 
   private
 
-    def find_role(role)
-      if role == "Student" && Cohort.find_by_name(@cohort)
+    def find_role(role_name)
+      if role_name == "Student" && Cohort.find_by_name(@cohort)
         set_role_for_student
-      elsif role == "Mentor"
+      elsif role_name == "Mentor"
         set_role_for_mentor
-      elsif role == "Staff"
+      elsif role_name == "Staff"
         set_role_for_admin
-      elsif role == "Invitee"
+      elsif role_name == "Invitee"
         set_role_for_invitee
       end
     end
@@ -53,7 +53,7 @@ class InvitationManager
     end
 
     def set_role_for_invitee
-      Role.find_by(name: "invitee")
+      Role.find_by(name: Role::ENROLL_ELLIGIBLE_ROLE_NAME)
     end
 
     def role_key

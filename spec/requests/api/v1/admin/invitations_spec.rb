@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::Admin::InvitationsController do
   before :each do
-    create :role, name: "invitee"
+    create :role, name: Role::ENROLL_ELLIGIBLE_ROLE_NAME
   end
 
   context "Request is sent _without_ authorization credentials" do
@@ -34,10 +34,7 @@ RSpec.describe Api::V1::Admin::InvitationsController do
       expect {
         post api_v1_admin_invitations_path, params: {
           access_token: token,
-          invitation:  {
-            email: invitee_email,
-            role: "Invitee"
-          }
+          invitation:  { email: invitee_email }
         }
       }.to change { Invitation.where(email: invitee_email).count }.by(1)
 
