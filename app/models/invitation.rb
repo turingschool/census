@@ -25,6 +25,10 @@ class Invitation < ApplicationRecord
     url + "?invite_code=#{create_invitation_code}"
   end
 
+  def enroll_elligible?
+    role == Role.find_by(name: Role::ENROLL_ELLIGIBLE_ROLE_NAME)
+  end
+
   private
 
     def part_1

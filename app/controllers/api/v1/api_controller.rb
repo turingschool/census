@@ -12,6 +12,10 @@ module Api::V1
       { json: { errors: ["Not authorized"] } }
     end
 
+    def doorkeeper_forbidden_render_options(error: nil)
+      { json: { errors: ["Not authorized"] } }
+    end
+
     private
 
     def current_resource_owner

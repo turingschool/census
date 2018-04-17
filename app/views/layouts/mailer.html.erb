@@ -1,13 +1,253 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <meta content='width=device-width; initial-scale=1.0; maximum-scale=1.0;' name='viewport'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <base target='_blank'>
+    <title>Turing Email</title>
     <style>
-      /* Email styles need to be inline */
+      body *{font-family: 'Open Sans', Arial, sans-serif !important; color: #3c4040; }
+      
+      div, p, a, li, td { -webkit-text-size-adjust:none; }
+      
+      *{-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}
+      td{word-break: break-word;}
+      a{word-break: break-word; text-decoration: none; color: inherit; color: #00c2d3;}
+      
+      body .ReadMsgBody
+      {width: 100%; background-color: #ffffff;}
+      body .ExternalClass
+      {width: 100%; background-color: #ffffff;}
+      body{width: 100%; height: 100%; background-color: #ffffff; margin:0; padding:0; -webkit-font-smoothing: antialiased; color: #3c4040;}
+      html{ background-color:#ffffff; width: 100%;}
+      
+      body p {padding: 0!important; margin-top: 0!important; margin-right: 0!important; margin-bottom: 20px !important; margin-left: 0!important; }
+      body img {user-drag: none; -moz-user-select: none; -webkit-user-drag: none;}
+      body a.rotator img {-webkit-transition: all 1s ease-in-out;-moz-transition: all 1s ease-in-out; -o-transition: all 1s ease-in-out; -ms-transition: all 1s ease-in-out; }
+      body a.rotator img:hover { -webkit-transform: rotate(360deg); -moz-transform: rotate(360deg); -o-transform: rotate(360deg);-ms-transform: rotate(360deg); }
+      body .hover:hover {opacity:0.85;filter:alpha(opacity=85);}
+      body .jump:hover {opacity:0.75; filter:alpha(opacity=75); padding-top: 10px!important;}
+      
+      body .logo img {width: 140px; height: auto;}
+      body .image110 img {width: 110px; height: auto;}
+      body .image280 img {width: 280px; height: auto;}
+      body .image600 img {width: 600px; height: auto;}
+      body .image200 img {width: 200px; height: auto;}
+      body .image185 img {width: 185px; height: auto;}
+      body .icon38 img {width: 38px; height: auto;}
+      body .smallIcon8 img {width: 8px; height: auto;}
+      body #footerIcon16 {width: 16px; height: auto;}
+    </style>
+    <style>
+      @media only screen and (max-width: 640px){
+            body body{width:auto!important;}
+            body table[class=full] {width: 100%!important; clear: both; }
+            body table[class=mobile] {width: 100%!important; padding-left: 30px; padding-right: 30px; clear: both; }
+            body table[class=fullCenter] {width: 100%!important; text-align: center!important; clear: both; }
+            body td[class=fullCenter] {width: 100%!important; text-align: center!important; clear: both; }
+            body .erase {display: none;}
+            body .buttonScale {float: none!important; text-align: center!important; display: inline-block!important; clear: both;}
+            body td[class=pad30] {width: 35px!important; clear: both;}
+            body td[class=w35] {width: 7%!important; clear: both;}
+            body .image280 img {width: 100%!important;}
+            body .image600 img {width: 100%!important;}
+            body table[class=mcenter] {width: 100%!important; text-align:center; vertical-align:middle; clear:both!important; float:none; margin: 0px!important;}
+            body td[class=h5] {height: 5px!important; clear: both;}
+          }
+    </style>
+    <style>
+      @media only screen and (max-width: 479px){
+            body body{width:auto!important;}
+            body table[class=full] {width: 100%!important; clear: both; }
+            body table[class=mobile] {width: 100%!important; padding-left: 20px; padding-right: 20px; clear: both; }
+            body table[class=fullCenter] {width: 100%!important; text-align: center!important; clear: both; }
+            body td[class=fullCenter] {width: 100%!important; text-align: center!important; clear: both; }
+            body .erase {display: none;}
+            body .buttonScale {float: none!important; text-align: center!important; display: inline-block!important; clear: both;}
+            body .eraseMob {display: none!important;}
+            body .font32 {font-size: 32px!important; line-height: 46px!important;}
+            body td[class=pad30] {width: 35px!important; clear: both;}
+            body td[class=w35] {width: 7%!important; clear: both;}
+            body .image280 img {width: 100%!important;}
+            body .image600 img {width: 100%!important;}
+            body table[class=mcenter] {text-align:center; vertical-align:middle; clear:both!important; float:none; margin: 0px!important;}
+            body td[class=h5] {height: 5px!important; clear: both;}
+          }
     </style>
   </head>
-
-  <body>
-    <%= yield %>
+  <body style='margin: 0; padding: 0;'>
+    <table align='center' bgcolor='#e3e6ea' border='0' cellpadding='0' cellspacing='0' class='full' style='padding: 20px;' width='100%'>
+      <tr>
+        <td align='center' valign='top' width='100%'>
+          <table align='center' bgcolor='#ffffff' border='0' cellpadding='0' cellspacing='0' class='full' width='100%'>
+            <tbody>
+              <tr>
+                <td align='center' valign='top' width='100%'>
+                  <table align='center' border='0' cellpadding='0' cellspacing='0' class='mobile' width='100%'>
+                    <tbody>
+                      <tr>
+                        <td align='center'>
+                          <table align='center' border='0' cellpadding='0' cellspacing='0' class='full' width='100%'>
+                            <tbody>
+                              <tr>
+                                <td height='70' width='100%'></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <table align='center' border='0' cellpadding='0' cellspacing='0' class='full' width='600'>
+                            <tbody>
+                              <tr>
+                                <td align='center' width='100%'>
+                                  <!-- Centered Title -->
+                                  <table align='center' border='0' cellpadding='0' cellspacing='0' class='fullCenter' style='border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;' width='600'>
+                                    <tbody>
+                                      <tr style='text-align:center;'>
+                                        <img height='86' src='https://gallery.mailchimp.com/8080b7a05247f0dee13a0a26f/images/db2387f1-1ece-417a-9939-c2541f7b54ba.png' style='margin: 0 auto 30px auto;' width='86'>
+                                        <td height='25' width='100%'></td>
+                                      </tr>
+                                      <tr>
+                                        <td valign='middle' width='100%'>
+                                          <%= yield %>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td height='25' width='100%'></td>
+                                      </tr>
+                                      <tr>
+                                        <td align='center' width='100%'>
+                                          <table align='center' border='0' cellpadding='0' cellspacing='0' width='70'>
+                                            <tbody>
+                                              <tr>
+                                                <td align='center' bgcolor='#00C2D3' height='2' style='text-align: center; font-size: 1px; line-height: 1px; background-color: #00c2d3;' width='70'> </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td height='25' width='100%'></td>
+                                      </tr>
+                                      <tr>
+                                        <td height='22' width='100%'></td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <table align='center' border='0' cellpadding='0' cellspacing='0' class='full' width='100%'>
+                            <tbody>
+                              <tr>
+                                <td height='70' width='100%'></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table align='center' bgcolor='#3c4040' border='0' cellpadding='0' cellspacing='0' class='full' style='background-color: #3c4040;' width='100%'>
+            <tbody>
+              <tr>
+                <td align='center' valign='top' width='100%'>
+                  <table align='center' border='0' cellpadding='0' cellspacing='0' class='mobile' width='100%'>
+                    <tbody>
+                      <tr>
+                        <td align='center'>
+                          <table align='center' border='0' cellpadding='0' cellspacing='0' class='full' width='100%'>
+                            <tbody>
+                              <tr>
+                                <td height='40' width='100%'></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <table align='center' border='0' cellpadding='0' cellspacing='0' class='full' width='600'>
+                            <tbody>
+                              <tr>
+                                <td width='100%'>
+                                  <table align='left' border='0' cellpadding='0' cellspacing='0' class='full' style='border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;' width='450'>
+                                    <tbody>
+                                      <tr>
+                                        <td align='center' class='fullCenter' width='100%'>
+                                          <table align='left' border='0' cellpadding='0' cellspacing='0' class='fullCenter' style='border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;' width='420'>
+                                            <tbody>
+                                              <tr>
+                                                <td class='fullCenter' style="text-align: left; font-size: 14px; color: #ffffff; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 700;" width='420'>
+                                                  <a href='mailto:contact@turing.io' style='text-decoration: none; color: #ffffff;' target='_blank'>contact@turing.io</a>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                          </table>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td height='5' style='font-size: 1px; line-height: 1px;'> </td>
+                                      </tr>
+                                      <tr>
+                                        <td align='center' class='fullCenter' style="text-align: left; font-size: 13px; color: #ffffff; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 400;" width='100%'>
+                                          © 2017 All rights Reserved
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td height='5' style='font-size: 1px; line-height: 1px;'> </td>
+                                      </tr>
+                                      <tr>
+                                        <td align='center' class='fullCenter' style="text-align: left; font-size: 13px; color: #00c2d3; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 400;" width='100%'>
+                                          <a href='&lt;?php echo $base_root . base_path(); ?&gt;' style='color: #00c2d3; text-decoration: none;' target='_blank'>turing.io</a>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <table align='left' border='0' cellpadding='0' cellspacing='0' class='full' style='border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;' width='1'>
+                                    <tbody>
+                                      <tr>
+                                        <td height='30' width='100%'></td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <table align='right' border='0' cellpadding='0' cellspacing='0' class='full' style='border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;' width='130'>
+                                    <tbody>
+                                      <tr>
+                                        <td align='center' class='fullCenter' style="text-align: right; font-size: 13px; color: #ffffff; font-family: Helvetica, Arial, sans-serif, 'Open Sans'; line-height: 22px; vertical-align: top; font-weight: 400;" width='100%'>
+                                          <p style='color: #FFFFFF;'>
+                                            Turing School
+                                            <br>
+                                            <a href='https://www.google.com/maps/place/Turing+School+of+Software+%26+Design/@39.7501696,-104.9977749,17z/data=!4m5!3m4!1s0x876c78c4f77d2b15:0x3ff4c7d558d0edd1!8m2!3d39.7508006!4d-104.9965947' style='color: #ffffff; text-decoration: none;' target='_blank'>1331 17th Street  Denver, CO 80202</a>
+                                          </p>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <table align='center' border='0' cellpadding='0' cellspacing='0' class='full' width='100%'>
+                            <tbody>
+                              <tr>
+                                <td height='40' width='100%'></td>
+                              </tr>
+                              <tr>
+                                <td height='1' style='font-size: 1px; line-height: 1px;'> </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </table>
   </body>
 </html>
