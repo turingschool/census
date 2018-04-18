@@ -1,5 +1,5 @@
 module Api::V1::Admin
-  class InvitationsController < AdminController
+  class InvitationsController < Api::V1::Admin::AdminController
     def create
       manager = InvitationManager.new(
         invitation_params,
