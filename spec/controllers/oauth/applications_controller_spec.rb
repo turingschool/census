@@ -62,14 +62,27 @@ RSpec.describe Oauth::ApplicationsController, type: :controller do
       expect(response.status).to eq(200)
     end
 
-    it "oauth/applications#create, they are redirected" do
-      params = {doorkeeper_application: {
-        name: "Monocle",
-        redirect_uri: "https://localhost:3000/auth/census/callback",
-        scopes: ""}}
-      post :create, params: params
+    describe '#create' do
+      it "with valid scopes they are redirected" do
+        params = {doorkeeper_application: {
+          name: "Monocle",
+          redirect_uri: "https://localhost:3000/auth/census/callback",
+          scopes: ""}}
+        post :create, params: params
 
-      expect(response.status).to eq(302)
+        expect(response.status).to eq(302)
+      end
+
+      it "it removes the admin scope if provided" do
+        params = {doorkeeper_application: {
+          name: "Monocle",
+          redirect_uri: "https://localhost:3000/auth/census/callback",
+          scopes: "foo #{Oauth::ApplicationsController::ADMIN_SCOPE_NAME}"}}
+        post :create, params: params
+
+        expect(response.status).to eq(302)
+        expect(@user.oauth_applications.last.scopes).to eq(["foo"])
+      end
     end
 
     it "oauth/applications#index, the page is rendered successfully" do
@@ -91,9 +104,13 @@ RSpec.describe Oauth::ApplicationsController, type: :controller do
     end
 
     it "oauth/applications#update, they are redirected" do
-      post :update, params: {id: @app.id, doorkeeper_application: {name: "Monocle"}}
+      post :update, params: {
+        id: @app.id,
+        doorkeeper_application: {name: "Monocle", scopes: "foo #{Oauth::ApplicationsController::ADMIN_SCOPE_NAME}"}
+      }
 
       expect(response.status).to eq(302)
+      expect(@user.oauth_applications.last.scopes).to eq(["foo"])
     end
 
     it "oauth/applications#destory, they are redirected" do
@@ -116,14 +133,17 @@ RSpec.describe Oauth::ApplicationsController, type: :controller do
       expect(response.status).to eq(200)
     end
 
-    it "oauth/applications#create, they are redirected" do
-      params = {doorkeeper_application: {
-        name: "Monocle",
-        redirect_uri: "https://localhost:3000/auth/census/callback",
-        scopes: ""}}
-      post :create, params: params
+    describe '#create' do
+      it "they are redirected and the application is assigned the admin scope" do
+        params = {doorkeeper_application: {
+          name: "Monocle",
+          redirect_uri: "https://localhost:3000/auth/census/callback",
+          scopes: "foo #{Oauth::ApplicationsController::ADMIN_SCOPE_NAME}"}}
+        post :create, params: params
 
-      expect(response.status).to eq(302)
+        expect(response.status).to eq(302)
+        expect(@admin.oauth_applications.last.scopes).to eq(["foo", Oauth::ApplicationsController::ADMIN_SCOPE_NAME])
+      end
     end
 
     it "oauth/applications#index, the page is rendered successfully" do
@@ -145,9 +165,13 @@ RSpec.describe Oauth::ApplicationsController, type: :controller do
     end
 
     it "oauth/applications#update, they are redirected" do
-      post :update, params: {id: @app.id, doorkeeper_application: {name: "Monocle"}}
+      post :update, params: {
+        id: @app.id,
+        doorkeeper_application: {name: "Monocle", scopes: "foo #{Oauth::ApplicationsController::ADMIN_SCOPE_NAME}"}
+      }
 
       expect(response.status).to eq(302)
+      expect(@admin.oauth_applications.last.scopes).to eq(["foo", Oauth::ApplicationsController::ADMIN_SCOPE_NAME])
     end
 
     it "oauth/applications#destory, they are redirected" do

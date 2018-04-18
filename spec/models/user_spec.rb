@@ -137,4 +137,115 @@ RSpec.describe User, type: :model do
       expect(user.list_groups.include?(groups.first.name)).to be_truthy
     end
   end
+
+  context "Class Methods" do
+    context "#search_all" do
+      it "returns users by partial search terms" do
+        # cohort_1 = create(:cohort, name: "1608")
+        # cohort_2 = create(:cohort, name: "1610")
+        # cohort_3 = create(:cohort, name: "1701")
+
+        role_1 = create(:role, name: "mentor")
+        role_2 = create(:role, name: "enrolled")
+        role_3 = create(:role, name: "exited")
+
+        users = create_list(:user, 3)
+        # users.first.cohort = cohort_1
+        # users.second.cohort = cohort_2
+        # users.third.cohort = cohort_3
+
+        users.first.roles << role_1
+        users.second.roles << role_2
+        users.third.roles << role_3
+
+        group_1 = create(:group, users: [users.first], name: "grouping")
+        group_2 = create(:group, users: [users.second], name: "groupers")
+        group_2 = create(:group, users: [users.third], name: "having")
+
+
+        # search_return = User.search_all('16')
+        #
+        # expect(search_return).to include(users.first)
+        # expect(search_return).to include(users.second)
+
+        search_return = User.search_all("ed")
+
+        expect(search_return).to include(users.second)
+        expect(search_return).to include(users.third)
+
+        search_return = User.search_all("ing")
+
+        expect(search_return).to include(users.first)
+        expect(search_return).to include(users.third)
+      end
+    end
+    #
+    # context "#search_cohorts" do
+    #   it "returns users by partial cohort search terms" do
+    #     cohort_1 = create(:cohort, name: "1608")
+    #     cohort_2 = create(:cohort, name: "1610")
+    #     cohort_3 = create(:cohort, name: "1701")
+    #
+    #     users = create_list(:user, 3)
+    #     users.first.cohort = cohort_1
+    #     users.second.cohort = cohort_2
+    #     users.third.cohort = cohort_3
+    #     group = create(:group, users: users)
+    #
+    #     search_return = User.search_cohorts(["%16%"])
+    #
+    #     expect(search_return).to include(users.first)
+    #     expect(search_return).to include(users.second)
+    #   end
+    # end
+
+    context "#search_roles" do
+      it "returns users by partial role search terms" do
+        role_1 = create(:role, name: "mentor")
+        role_2 = create(:role, name: "enrolled")
+        role_3 = create(:role, name: "exited")
+        users = create_list(:user, 3)
+        users.first.roles << role_1
+        users.second.roles << role_2
+        users.third.roles << role_3
+        group = create(:group, users: users)
+
+        search_return = User.search_roles(["%ED%"])
+
+        expect(search_return).to include(users.second)
+        expect(search_return).to include(users.third)
+      end
+    end
+
+    context "#search_groups" do
+      it "returns users by partial role search terms" do
+        role_1 = create(:role, name: "mentor")
+        users = create_list(:user, 3, roles: [role_1])
+        group_1 = create(:group, users: [users.first], name: "Turing Lab")
+        group_2 = create(:group, users: [users.second], name: "Pahlka")
+        group_2 = create(:group, users: [users.third], name: "Turing LGBTQ")
+
+        search_return = User.search_groups(["%TURING%"])
+
+        expect(search_return).to include(users.first)
+        expect(search_return).to include(users.third)
+      end
+    end
+
+    context "#search_groups" do
+      it "returns users by partial role search terms" do
+        users = []
+        users << create(:user, first_name: "Name")
+        users << create(:user, last_name: "Name")
+        users << create(:user, last_name: "Nope")
+        group = create(:group, users: users)
+
+        search_return = User.search_users(["%NAME%"])
+
+        expect(search_return).to include(users.first)
+        expect(search_return).to include(users.second)
+      end
+    end
+
+  end
 end

@@ -30,6 +30,7 @@ Rails.application.configure do
 
   # Configuration for Devise Action Mailer and Send Grid
   config.action_mailer.default_url_options = { host: "http://localhost:3000" }
+  Rails.application.default_url_options = config.action_mailer.default_url_options
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = { address: "localhost", port: 1025 }
 
