@@ -63,7 +63,6 @@ RSpec.feature 'User signs up' do
     expect(page).to have_content("StackOverflow")
     expect(page.find_field("stack_overflow-field")).to be_truthy
 
-    expect(page).to have_content("Cohort")
     expect(page).to have_content("Upload an image")
   end
 

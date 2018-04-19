@@ -20,8 +20,6 @@ RSpec.feature 'User signs up' do
     fill_in 'user[slack]', with: user[:slack]
     fill_in 'user[stackoverflow]', with: user[:stackoverflow]
 
-    find("option[value='#{cohort.id}']").select_option
-
     click_button 'Sign up'
 
     help_message = 'You have succesfully signed up!'
