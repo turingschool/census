@@ -242,6 +242,19 @@ effected.
 ### [Flags](#flags)
 * Instructor
 
+## Running in a Docker container
+
+Want to run this app without all the pain?! Get on the Docker train!
+
+1. Install [Docker for Mac](https://docs.docker.com/docker-for-mac/install/)
+1. `cd` into this project's root folder
+1. Run `docker network create turing-network`
+1. Run `docker-compose up --build`
+1. wait
+1. Run `docker-compose exec website rake db:create db:schema:load db:test:prepare`
+1. visit `0.0.0.0:3010`
+1. You're running on Docker
+
 ## [Maintainer](#maintainer)
 
 * Ali Schlereth - [AliSchlereth](https://github.com/AliSchlereth)
