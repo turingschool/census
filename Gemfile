@@ -28,26 +28,29 @@ gem 'sass-rails', '~> 5.0'
 gem 'sprockets', '~> 3.0'
 gem 'uglifier', '>= 1.3.0'
 
-group :development, :test do
-  gem 'byebug', platform: :mri
-  gem 'capybara'
-  gem 'database_cleaner'
-  gem 'factory_girl_rails'
-  gem 'faker'
-  gem 'launchy'
-  gem 'oauth2' #used to simulate client app in testing
+group :development do
+  gem 'brakeman', :require => false
+  gem 'listen', '~> 3.1.5'
+  gem 'web-console'
+end
+
+group :test do
   gem 'phantomjs', :require => 'phantomjs/poltergeist'
+  gem 'database_cleaner'
+  gem 'capybara'
+  gem 'factory_girl_rails'
   gem 'poltergeist'
-  gem 'pry-rails'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
 end
 
-group :development do
-  gem 'brakeman', :require => false
-  gem 'listen', '~> 3.1.5'
-  gem 'web-console'
+group :development, :test do
+  gem 'byebug', platform: :mri
+  gem 'faker'
+  gem 'launchy'
+  gem 'oauth2' #used to simulate client app in testing
+  gem 'pry-rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
