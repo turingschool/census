@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.feature 'Edit all user attributes' do
   scenario 'by submitting edit user form' do
-    cohort_1 = Cohort.new(OpenStruct.new(id: 1234, status: "open", name: "1608-BE"))
-    cohort_2 = Cohort.new(OpenStruct.new(id: 1230, status: "open", name: "1703-FE"))
+    cohort_1 = Cohort.new(RemoteCohort.new(id: 1234, status: "open", name: "1608-BE"))
+    cohort_2 = Cohort.new(RemoteCohort.new(id: 1230, status: "open", name: "1703-FE"))
     allow(Cohort).to receive(:all).and_return([cohort_1, cohort_2])
     user   = create( :enrolled_user,
                      first_name: "Joe",

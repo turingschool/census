@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Cohort, type: :model do
   it "can update student roles" do
-    cohort = Cohort.new(OpenStruct.new(id: 1234, status: "open"))
+    cohort = Cohort.new(RemoteCohort.new(id: 1234, status: "open"))
     user = create :active_student, cohort_id: cohort.id
     create :role, name: "active student"
     create :role, name: "graduated"
@@ -12,7 +12,7 @@ RSpec.describe Cohort, type: :model do
   end
 
   it "doesn't update students with wonky roles" do
-    cohort = Cohort.new(OpenStruct.new(id: 1234, status: "open"))
+    cohort = Cohort.new(RemoteCohort.new(id: 1234, status: "open"))
     create :role, name: "active student"
     create :role, name: "graduated"
     create :role, name: "enrolled"
