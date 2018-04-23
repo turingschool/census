@@ -11,12 +11,12 @@ RSpec.describe Api::V1::CohortsController do
 
   context "Request is sent _with_ authorization credentials" do
     it "returns all cohorts" do
-      user_cohort = Cohort.new(OpenStruct.new(id: 1234, name: "1609-be"))
+      user_cohort = Cohort.new(RemoteCohort.new(id: 1234, name: "1609-be"))
       user = create :user
       token = create(:access_token, resource_owner_id: user.id).token
-      cohort_1 = Cohort.new(OpenStruct.new(id: 1232, name: "1606-be"))
-      cohort_2 = Cohort.new(OpenStruct.new(id: 1230, name: "1606-fe"))
-      cohort_3 = Cohort.new(OpenStruct.new(id: 1231, name: "1608-be"))
+      cohort_1 = Cohort.new(RemoteCohort.new(id: 1232, name: "1606-be"))
+      cohort_2 = Cohort.new(RemoteCohort.new(id: 1230, name: "1606-fe"))
+      cohort_3 = Cohort.new(RemoteCohort.new(id: 1231, name: "1608-be"))
       stub_cohorts_with([user_cohort, cohort_1, cohort_2, cohort_3])
 
       get '/api/v1/cohorts', params: {access_token: token}

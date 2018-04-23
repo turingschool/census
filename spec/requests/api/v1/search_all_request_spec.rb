@@ -21,8 +21,8 @@ RSpec.describe "General Search API" do
     end
 
     it "searches by cohort and returns users with first, last and groups" do
-      cohort_1 = Cohort.new(OpenStruct.new(id: 1234, status: "closed", name: "1608-BE"))
-      cohort_2 = Cohort.new(OpenStruct.new(id: 1230, status: "open", name: "1703-FE"))
+      cohort_1 = Cohort.new(RemoteCohort.new(id: 1234, status: "closed", name: "1608-BE"))
+      cohort_2 = Cohort.new(RemoteCohort.new(id: 1230, status: "open", name: "1703-FE"))
       stub_cohorts_with([cohort_1, cohort_2])
       users = create_list(:user, 3)
       users.first.cohort_id = cohort_1.id
@@ -51,9 +51,9 @@ RSpec.describe "General Search API" do
     end
 
     it "returns users matching cohort partial search query" do
-      cohort_1 = Cohort.new(OpenStruct.new(id: 1234, name: "1608"))
-      cohort_2 = Cohort.new(OpenStruct.new(id: 1230, name: "1610"))
-      cohort_3 = Cohort.new(OpenStruct.new(id: 1231, name: "1701"))
+      cohort_1 = Cohort.new(RemoteCohort.new(id: 1234, name: "1608"))
+      cohort_2 = Cohort.new(RemoteCohort.new(id: 1230, name: "1610"))
+      cohort_3 = Cohort.new(RemoteCohort.new(id: 1231, name: "1701"))
       stub_cohorts_with([cohort_1, cohort_2, cohort_3])
 
       users = create_list(:user, 3)

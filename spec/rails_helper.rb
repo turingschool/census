@@ -31,6 +31,18 @@ RSpec.configure do |config|
   config.include Paperclip::Shoulda::Matchers
 end
 
+class RemoteCohort
+  attr_reader :id, :end_date, :name, :start_date, :status
+
+  def initialize(id:, end_date: DateTime.new, name: "cohort-name", start_date: DateTime.new, status: "open")
+    @id = id
+    @end_date = end_date
+    @name = name
+    @start_date = start_date
+    @status = status
+  end
+end
+
 def login(user)
   visit root_path
   click_link 'Login'
