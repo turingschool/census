@@ -187,7 +187,10 @@ To Get a token, register your app through Census and then make a request:
 
 Source [here.](https://github.com/doorkeeper-gem/doorkeeper/wiki/Client-Credentials-flow)
 
-Developers can use any HTTP library to make the request (such as [Faraday](https://github.com/lostisland/faraday))
+Developers can use any HTTP library to make the request (such as
+[Faraday](https://github.com/lostisland/faraday)) or use
+`Census::Client.generate_token` from the [client
+gem](https://github.com/turingschool-projects/omniauth-census).
 
 ```ruby
 conn.post do |req|
