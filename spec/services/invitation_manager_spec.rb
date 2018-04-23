@@ -130,8 +130,8 @@ RSpec.describe InvitationManager do
   it "sets role to active student if student and active cohort" do
     params = { email: "good@example.com", role: "Student", cohort: "1703-FE" }
     cohort_stubs = [
-      Cohort.new(OpenStruct.new(id: 1234, status: "closed", name: "1608-BE")),
-      Cohort.new(OpenStruct.new(id: 1230, status: "open", name: "1703-FE"))
+      Cohort.new(RemoteCohort.new(id: 1234, status: "closed", name: "1608-BE")),
+      Cohort.new(RemoteCohort.new(id: 1230, status: "open", name: "1703-FE"))
     ]
     stub_cohorts_with(cohort_stubs)
     manager = InvitationManager.new(params, user, url)
@@ -143,8 +143,8 @@ RSpec.describe InvitationManager do
   it "sets role to graduated if student and finished cohort" do
     params = { email: "good@example.com", role: "Student", cohort: "1703-FE" }
     cohort_stubs = [
-      Cohort.new(OpenStruct.new(id: 1234, status: "open", name: "1608-BE")),
-      Cohort.new(OpenStruct.new(id: 1230, status: "closed", name: "1703-FE"))
+      Cohort.new(RemoteCohort.new(id: 1234, status: "open", name: "1608-BE")),
+      Cohort.new(RemoteCohort.new(id: 1230, status: "closed", name: "1703-FE"))
     ]
     stub_cohorts_with(cohort_stubs)
     manager = InvitationManager.new(params, user, url)

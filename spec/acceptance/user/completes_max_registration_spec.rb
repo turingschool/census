@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'User signs up' do
   scenario 'by completing full registration' do
-    cohort = Cohort.new(OpenStruct.new(id: 1234, status: "open", name: "1608-BE"))
+    cohort = Cohort.new(RemoteCohort.new(id: 1234, status: "open", name: "1608-BE"))
     allow(Cohort).to receive(:all).and_return([cohort])
     user = attributes_for(:user)
     role = create :role, name: 'active student'
@@ -19,8 +19,6 @@ RSpec.feature 'User signs up' do
     fill_in 'user[git_hub]', with: user[:git_hub]
     fill_in 'user[slack]', with: user[:slack]
     fill_in 'user[stackoverflow]', with: user[:stackoverflow]
-
-    find("option[value='#{cohort.id}']").select_option
 
     click_button 'Sign up'
 

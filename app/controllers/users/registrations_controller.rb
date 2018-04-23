@@ -24,8 +24,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     if valid_invitation_code?
-      @user = User.new(invited_user_params)
       invitation = Invitation.find_by(invitation_code: session[:invitation_code])
+      @user = User.new(invited_user_params.merge(email: invitation.email, cohort_id: invitation.cohort_id))
       @user.roles << invitation.role
       @user.skip_confirmation!
 
@@ -57,20 +57,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     def invited_user_params
       params.require(:user).permit(
-                                    :email,
-                                    :first_name,
-                                    :last_name,
-                                    :twitter,
-                                    :linked_in,
-                                    :git_hub,
-                                    :slack,
-                                    :cohort_id,
-                                    :password,
-                                    :password_confirmation,
-                                    :image,
-                                    :stackoverflow,
-                                    :gender_pronouns
-                                    )
+        :first_name,
+        :gender_pronouns,
+        :git_hub,
+        :image,
+        :last_name,
+        :linked_in,
+        :password,
+        :password_confirmation,
+        :slack,
+        :stackoverflow,
+        :twitter
+      )
     end
 
     def valid_invitation_code?
