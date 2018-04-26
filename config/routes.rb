@@ -34,6 +34,7 @@ Rails.application.routes.draw do
           patch '/add_roles', to: 'roles#add'
           patch '/remove_roles', to: 'roles#remove'
         end
+        resources :roles, only: [:update, :destroy]
       end
 
       namespace :users do
@@ -46,7 +47,6 @@ Rails.application.routes.draw do
 
       resources :users, only: [:show, :index]
       resources :groups, only: [:update, :destroy]
-      resources :roles, only: [:update, :destroy]
       get '/cohorts', to: 'cohorts#index'
       get '/user_credentials', to: 'credentials#show'
       post '/sendgrid/events', to: 'send_grid/events#update'
