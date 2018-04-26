@@ -75,7 +75,7 @@ Devise.setup do |config|
   # It will change confirmation, password recovery and other workflows
   # to behave the same regardless if the e-mail provided was right or wrong.
   # Does not affect registerable.
-  # config.paranoid = true
+  config.paranoid = true
 
   # By default Devise will store the user in session. You can skip storage for
   # particular strategies by setting this option.
@@ -111,7 +111,7 @@ Devise.setup do |config|
   # config.pepper = '44b952d1823bb91660b12456eeffe18f0c5ff5143cbee7f635b1f62ba03efeedfd1daa975f16da03e2837a1494e4915966ab3eeaa1473e47e89d55070c799e3a'
 
   # Send a notification email when the user's password is changed
-  # config.send_password_change_notification = false
+  config.send_password_change_notification = true
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
