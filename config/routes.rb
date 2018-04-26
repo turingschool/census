@@ -29,38 +29,27 @@ Rails.application.routes.draw do
     namespace :v1 do
       namespace :admin do
         resources :invitations, only: [:create]
+
+        namespace :users do
+          patch '/add_roles', to: 'roles#add'
+          patch '/remove_roles', to: 'roles#remove'
+        end
       end
 
       namespace :users do
         get '/by_name', to: 'by_name#index'
         get '/by_cohort', to: 'by_cohort#index'
         get '/by_github', to: 'by_github#show'
-
         get '/search_all', to: 'search_all#index'
-
-        patch '/add_roles', to: 'roles#add'
-
-        patch '/remove_roles', to: 'roles#remove'
-
         get '/by_name', to: 'by_name#index'
       end
 
-      get '/users/:id', to: 'users#show', as: 'user'
-
-      get '/users', to: 'users#index'
+      resources :users, only: [:show, :index]
+      resources :groups, only: [:update, :destroy]
+      resources :roles, only: [:update, :destroy]
       get '/cohorts', to: 'cohorts#index'
-
       get '/user_credentials', to: 'credentials#show'
-
       post '/sendgrid/events', to: 'send_grid/events#update'
-
-      patch '/roles/:id',   to: 'roles#update'
-      delete '/roles/:id',  to: 'roles#destroy'
-      patch '/groups/:id',  to: 'groups#update'
-      delete '/groups/:id', to: 'groups#destroy'
-      # namespace :users do
-      #   get '/by_name', to: 'by_name#index'
-      # end
     end
   end
 end
