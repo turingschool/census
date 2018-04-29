@@ -59,6 +59,7 @@ RSpec.describe Api::V1::UsersController do
       expect(json_user["first_name"]).to eq(user["first_name"])
       expect(json_user["last_name"]).to eq(user["last_name"])
       expect(json_user["cohort"]).to eq(user.cohort.name)
+      expect(json_user["cohort_id"]).to eq(user.cohort.id)
       expect(json_user["image_url"]).to eq(test_root_url + user.image.url)
       expect(json_user["id"]).to eq(user.id)
       expect(json_user["email"]).to eq(user.email)
