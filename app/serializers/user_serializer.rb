@@ -3,6 +3,7 @@ class UserSerializer < ActiveModel::Serializer
              :first_name,
              :last_name,
              :cohort,
+             :cohort_id,
              :image_url,
              :email,
              :slack,
@@ -31,8 +32,13 @@ class UserSerializer < ActiveModel::Serializer
   end
 
   def cohort
-   {
-     name: object.cohort.present? ? object.cohort.name : ""
-   }
+    if object.cohort.nil?
+      return {}
+    end
+
+    {
+      id: object.cohort.id,
+      name: object.cohort.name
+    }
   end
 end

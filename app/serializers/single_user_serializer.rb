@@ -3,6 +3,7 @@ class SingleUserSerializer < ActiveModel::Serializer
              :first_name,
              :last_name,
              :cohort,
+             :cohort_id,
              :image_url,
              :email,
              :slack,
