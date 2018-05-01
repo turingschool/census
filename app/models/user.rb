@@ -38,7 +38,7 @@ class User < ApplicationRecord
   has_many :oauth_applications, class_name: 'Doorkeeper::Application', as: :owner
 
   # paperclip configuration
-  has_attached_file :image, default_url: "images/:style/missing.png", styles: {
+  has_attached_file :image, default_url: ":style/missing.png", styles: {
     thumb: '100x100>',
     square: '200x200#',
     medium: '300x300>'
