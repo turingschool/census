@@ -1,5 +1,5 @@
 class Invitation < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :role
   validates_uniqueness_of :email
   validates_presence_of :email
