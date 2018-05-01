@@ -1,12 +1,5 @@
-FactoryGirl.define do
-  factory :access_grant, class: Doorkeeper::AccessGrant do
-    resource_owner_id { create(:user).id }
-    # application
-    redirect_uri 'https://app.com/callback'
-    expires_in 100
-    scopes 'public write'
-  end
-
+FactoryBot.define do
+  ActiveRecord::Base.inspect
   factory :access_token, class: Doorkeeper::AccessToken do
     resource_owner_id { create(:user).id }
     # application
