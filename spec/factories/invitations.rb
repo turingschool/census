@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :invitation do
     status 0
     email "me@example.com"

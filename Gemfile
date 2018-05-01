@@ -38,7 +38,7 @@ group :test do
   gem 'phantomjs', :require => 'phantomjs/poltergeist'
   gem 'database_cleaner'
   gem 'capybara'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'poltergeist'
   gem 'rspec-rails'
   gem 'shoulda-matchers'

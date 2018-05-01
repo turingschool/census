@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :affiliation do
     user factory: :active_student
     group
