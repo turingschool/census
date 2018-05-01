@@ -11,7 +11,7 @@ RSpec.describe 'Github find API' do
         it 'returns match' do
           get '/api/v1/users/by_github?q=username', params: {access_token: token}
 
-          expect(response).to be_success
+          expect(response).to be_successful
 
           response_user = JSON.parse(response.body)
 
@@ -26,7 +26,7 @@ RSpec.describe 'Github find API' do
           other_user = create(:user, git_hub: 'username')
           get '/api/v1/users/by_github?q=username', params: {access_token: token}
 
-          expect(response).to be_success
+          expect(response).to be_successful
 
           response_user = JSON.parse(response.body)
 
@@ -52,7 +52,7 @@ RSpec.describe 'Github find API' do
         end
       end
     end
-  
+
     context '_without_ authorization credentials' do
       it 'returns a 401 (unauthorized) status' do
         get '/api/v1/users/by_github?q=username'
