@@ -30,6 +30,17 @@ module Census
       enable_starttls_auto: true
     }
 
+    config.log_tags = [
+      :request_id,
+      :subdomain,
+      ->(req) {
+        session_key = (Rails.application.config.session_options || {})[:key]
+        session_data = req.cookie_jar.encrypted[session_key] || {}
+        user_id = session_data["warden.user.user.key"]&.first&.first || "guest"
+        "user: #{user_id.to_s}"
+      }
+    ]
+
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
