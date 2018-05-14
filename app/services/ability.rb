@@ -18,7 +18,7 @@ class Ability
       can :update, Affiliation
       can :manage, Doorkeeper::Application, owner_id: user.id
       cannot :manage, Invitation
-    elsif user.has_role?("enrolled")
+    elsif user.has_role?("enrolled") || user.has_role?(Role::ENROLL_ELLIGIBLE_ROLE_NAME)
       can :create, User
       can :update, User, id: user.id
       can :read, User, id: user.id
