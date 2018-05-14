@@ -12,6 +12,20 @@ RSpec.describe 'User abilities:' do
     end
   end
 
+  context 'invitee user who has not yet enrolled' do
+    it 'can manage most functionality' do
+      user = create :user
+      role = create :role, name: Role::ENROLL_ELLIGIBLE_ROLE_NAME
+      user.roles << role
+      ability = Ability.new(user)
+
+      expect(ability.can? :read, User).to eq(true)
+      expect(ability.can? :manage, Doorkeeper::Application, user_id: user.id).to eq(false)
+      expect(ability.can? :delete, User).to eq(false)
+      expect(ability.can? :manage, UserRole).to eq(false)
+    end
+  end
+
   context 'enrolled or active student user' do
     it 'can manage most functionality' do
       user = create :user
