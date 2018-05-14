@@ -11,21 +11,6 @@ class ApplicationController < ActionController::Base
   end
 
   protected
-  # def current_permission
-  #   @current_permission ||= Permission.new(current_user)
-  # end
-  #
-  # def authorize!
-  #   unless authorized?
-  #     render file: "/public/404", status: 404, layout: false
-  #   end
-  # end
-  #
-  # def authorized?
-  #   current_permission.authorized?(current_user,
-  #                                  params[:controller],
-  #                                  params[:action])
-  # end
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [ :first_name,

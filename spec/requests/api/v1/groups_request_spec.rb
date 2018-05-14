@@ -35,7 +35,7 @@ RSpec.describe "Groups API" do
 
       group = JSON.parse(response.body)
 
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(group['id']).to eq(original_group.id)
       expect(group['name']).to eq("#{original_group.name}")
       expect(group['member_count']).to eq(original_group.member_count)
