@@ -5,7 +5,8 @@ class InvitationMailer < ApplicationMailer
     enroll_elligible = invitation.enroll_elligible?
     mail(
       to: @email,
-      subject: "Turing School: Census Invitation",
+      bcc: ['jeff@turing.io', 'erin@turing.io'],
+      subject: "Welcome to Turing",
       template_name: enroll_elligible ? "invite_with_enroll" : "invite"
     )
   end
