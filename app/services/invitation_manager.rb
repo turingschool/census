@@ -6,6 +6,7 @@ class InvitationManager
     @cohort = params[:cohort] || ""
     @role = find_role(params[:role])
     @emails = params[:email].split(",").map{|e| e.strip}
+    @name = params[:name] # NB: name should be used only when used with a single email (via API)
     @user = user
     @url = url
     @bad_emails = process_emails if @role
@@ -65,7 +66,7 @@ class InvitationManager
 
     def process_emails
       emails.reduce([]) do |bad_emails, email|
-        invitation = @user.invitations.new(email: email, status: 0, role: @role)
+        invitation = @user.invitations.new(email: email, name: @name, status: 0, role: @role)
         invitation.cohort_id = Cohort.find_by_name(@cohort).id unless @cohort.empty?
         invitation.save ? invitation.send!(@url) : bad_emails << email
         bad_emails

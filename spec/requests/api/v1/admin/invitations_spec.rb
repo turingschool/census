@@ -54,13 +54,14 @@ RSpec.describe Api::V1::Admin::InvitationsController do
         scopes: Oauth::ApplicationsController::ADMIN_SCOPE_NAME
       ).token
       invitee_email = "invitee@example.com"
+      invitee_name = "Margot Tenenbaum"
 
       expect {
         post api_v1_admin_invitations_path, params: {
           access_token: token,
-          invitation:  { email: invitee_email }
+          invitation:  { email: invitee_email, name: invitee_name }
         }
-      }.to change { Invitation.where(email: invitee_email).count }.by(1)
+      }.to change { Invitation.where(email: invitee_email, name: invitee_name).count }.by(1)
 
       expect(response.status).to eq 201
       response_body = JSON.parse(response.body)
