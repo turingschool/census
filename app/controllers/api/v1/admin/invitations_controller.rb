@@ -20,6 +20,7 @@ module Api::V1::Admin
     def invitation_params
       {
         email: params[:invitation][:email],
+        name: params[:invitation][:name],
         role: "Invitee"
       }
     end
