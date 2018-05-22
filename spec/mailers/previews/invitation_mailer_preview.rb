@@ -1,17 +1,20 @@
 class InvitationMailerPreview < ActionMailer::Preview
-  # FIXME(srt32): this import is polluting the mailer preview methods
-
-  include Rails.application.routes.url_helpers
 
   def invite
     invitation = Invitation.last!
     invitation.update!(role: Role.find_or_create_by(name: "student"))
-    InvitationMailer.invite(invitation, new_user_registration_url)
+    InvitationMailer.invite(invitation, invite_url)
   end
 
   def invite_with_enroll
     invitation = Invitation.last!
-    invitation.update!(role: Role.find_or_create_by(name: "invitee"))
-    InvitationMailer.invite(invitation, new_user_registration_url)
+    invitation.update!(role: Role.find_or_create_by(name: Role::ENROLL_ELLIGIBLE_ROLE_NAME))
+    InvitationMailer.invite(invitation, invite_url)
+  end
+
+  private
+
+  def invite_url
+    "localhost:#{ENV.fetch('PORT', 3010)}/users/sign_up"
   end
 end
