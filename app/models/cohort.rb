@@ -19,10 +19,8 @@ class Cohort
   end
 
   def self.all
-    Rails.cache.fetch("cohorts-all", expires: 5.minutes) do
-      result = Enroll::Client.query(CohortsQuery)
-      result.data.cohorts.map { |cohort| Cohort.new(cohort) }
-    end
+    result = Enroll::Client.query(CohortsQuery)
+    result.data.cohorts.map { |cohort| Cohort.new(cohort) }
   end
 
   def self.search_by_name(query)
