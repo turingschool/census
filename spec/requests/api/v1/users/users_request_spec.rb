@@ -10,10 +10,30 @@ RSpec.describe Api::V1::UsersController do
   end
 
   context "Request is sent _with_ authorization credentials" do
-    it "returns info for all users" do
-      test_root_url = "http://www.example.com/"
+    it 'accepts pagination params' do
       user_1 = create(:user, cohort_id: 1234)
       user_2 = create(:user, cohort_id: 1234)
+      users = [user_1, user_2]
+      token = create(:access_token, resource_owner_id: users.first.id).token
+
+      get api_v1_users_path, params: {access_token: token, limit: 1}
+      response_users = JSON.parse(response.body)
+
+      expect(response).to have_http_status(200)
+      expect(response_users.count).to eq(1)
+      expect(response_users.first["id"]).to eq(user_2.id)
+
+      get api_v1_users_path, params: {access_token: token, limit: 1, offset: 1}
+      response_users = JSON.parse(response.body)
+
+      expect(response_users.count).to eq(1)
+      expect(response_users.first["id"]).to eq(user_1.id)
+    end
+
+    it "returns info for all users" do
+      test_root_url = "http://www.example.com/"
+      user_2 = create(:user, cohort_id: 1234)
+      user_1 = create(:user, cohort_id: 1234)
       users = [user_1, user_2]
       token = create(:access_token, resource_owner_id: users.first.id).token
 
