@@ -72,7 +72,7 @@ GEM
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
     bootstrap-table-rails (1.11.1.1)
-    brakeman (4.3.0)
+    brakeman (4.3.1)
     builder (3.2.3)
     byebug (10.0.2)
     cancancan (2.2.0)
