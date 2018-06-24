@@ -25,7 +25,7 @@ gem 'rails', '~> 5.2.0'
 gem 'rails_12factor', group: :production
 gem 'rb-readline'
 gem 'sass-rails', '~> 5.0'
-gem 'sprockets', '~> 3.0'
+gem 'sprockets', '~> 3.7'
 gem 'uglifier', '>= 1.3.0'
 
 group :development do
