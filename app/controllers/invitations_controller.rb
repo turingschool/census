@@ -20,7 +20,7 @@ class InvitationsController < ApplicationController
   end
 
   def update
-    @invitation.send!(new_user_registration_url)
+    @invitation.send!(new_user_registration_url, is_resend: true)
     flash[:success] = "Invitation Re-Sent."
     redirect_to admin_dashboard_path
   end
