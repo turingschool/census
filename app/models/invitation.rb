@@ -10,8 +10,8 @@ class Invitation < ApplicationRecord
 
   scope :last_five_minutes, -> { where("created_at >=  ?", Time.current - 5.minutes) }
 
-  def send!(url)
-    InvitationMailer.invite(self, url).deliver_now
+  def send!(url, is_resend: false)
+    InvitationMailer.invite(self, url, is_resend: is_resend).deliver_now
     self.mailed!
   end
 
