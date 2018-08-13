@@ -2,7 +2,7 @@ require 'forwardable'
 
 class Cohort
   extend Forwardable
-  def_delegators :@raw_cohort, :id, :start_date, :end_date, :name, :status
+  def_delegators :@raw_cohort, :id, :start_date, :name, :status
 
   def initialize(cohort)
     @raw_cohort = cohort
@@ -10,7 +10,6 @@ class Cohort
 
   def as_json(args=nil)
     {
-      end_date: self.end_date,
       id: self.id,
       name: self.name,
       start_date: self.start_date,
