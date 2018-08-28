@@ -1,9 +1,8 @@
 # Census - An Identity Manager
 
-[![Code Climate](https://codeclimate.com/github/bcgoss/census/badges/gpa.svg)](https://codeclimate.com/github/bcgoss/census) [![Test Coverage](https://codeclimate.com/github/bcgoss/census/badges/coverage.svg)](https://codeclimate.com/github/bcgoss/census/coverage)
-[![Build Status](https://travis-ci.org/bcgoss/census.svg?branch=staging)](https://travis-ci.org/bcgoss/census)
-
-> Census serves as a central location for identity management and authentication across the [Turing School](https://github.com/turingschool) community.
+> Census serves as a central location for identity management and
+> authentication across the [Turing School](https://github.com/turingschool)
+> community.
 
 ## Table of Contents
 - [Onboarding Tips](#onboarding)
@@ -37,7 +36,8 @@
 gem 'omniauth-census', git: "https://github.com/turingschool-projects/omniauth-census"
 ```
 
-* There will be two apps connected to the same repository, staging auto deploys from the staging branch, and production auto deploys from master.
+* There will be two apps connected to the same repository, staging auto deploys
+  from the staging branch, and production auto deploys from master.
 
 ### [FAQ](#faq)
 * What's up with these tokens?
@@ -49,9 +49,13 @@ gem 'omniauth-census', git: "https://github.com/turingschool-projects/omniauth-c
 ## [Requirements](#requirements)
 ### [Environment Variables](#environment-variables)
 
-Census is built to expect a certain number of environment variables. We suggest using something like [Figaro](https://github.com/laserlemon/figaro) to set them securely.
+Census is built to expect a certain number of environment variables. We suggest
+using something like [Figaro](https://github.com/laserlemon/figaro) to set them
+securely.
 
-You will need an AWS S3 Bucket, Access Key ID, a Secret Access Key and an AWS region defined. Use the [AWS SDK](https://github.com/aws/aws-sdk-ruby) gem to get started.
+You will need an AWS S3 Bucket, Access Key ID, a Secret Access Key and an AWS
+region defined. Use the [AWS SDK](https://github.com/aws/aws-sdk-ruby) gem to
+get started.
 
 Environment Variables:
 
@@ -255,13 +259,10 @@ Want to run this app without all the pain?! Get on the Docker train!
 1. visit `0.0.0.0:3010`
 1. You're running on Docker
 
-## [Maintainer](#maintainer)
+## CI and Deployment
 
-* Ali Schlereth - [AliSchlereth](https://github.com/AliSchlereth)
-
-
-## [Contribute](#contribute)
-`TODO:` Add a CONTRIBUTING.md
+The app builds on CircleCI and auto deploys green staging branches to staging
+and green master branches to production.
 
 ## [License](#license)
 
