@@ -2,50 +2,50 @@ require 'rails_helper'
 
 RSpec.describe Oauth::ApplicationsController, type: :controller do
   context "Visitor navigates to" do
-    it "oauth/applications#new, they receive 404 page" do
+    it "oauth/applications#new, they receive 302 page" do
       post :new
 
-      expect(response.status).to eq(404)
+      expect(response.status).to eq(302)
     end
 
-    it "oauth/applications#create, they receive 404 page" do
+    it "oauth/applications#create, they receive 302 page" do
       params = {oauth_application: {
         name: "Monocle",
         redirect_uri: "https://localhost:3000/auth/census/callback",
         scopes: ""}}
       post :create, params: params
 
-      expect(response.status).to eq(404)
+      expect(response.status).to eq(302)
     end
 
-    it "oauth/applications#index, they receive 404 page" do
+    it "oauth/applications#index, they receive 302 page" do
       post :index
 
-      expect(response.status).to eq(404)
+      expect(response.status).to eq(302)
     end
 
-    it "oauth/applications#edit, they receive 404 page" do
+    it "oauth/applications#edit, they receive 302 page" do
       get :edit, params: {id: 1}
 
-      expect(response.status).to eq(404)
+      expect(response.status).to eq(302)
     end
 
-    it "oauth/applications#show, they receive 404 page" do
+    it "oauth/applications#show, they receive 302 page" do
       get :show, params: {id: 1}
 
-      expect(response.status).to eq(404)
+      expect(response.status).to eq(302)
     end
 
-    it "oauth/applications#update, they receive 404 page" do
+    it "oauth/applications#update, they receive 302 page" do
       post :update, params: {id: 1, doorkeeper_application: {name: "Monocle"}}
 
-      expect(response.status).to eq(404)
+      expect(response.status).to eq(302)
     end
 
-    it "oauth/applications#destory, they receive 404 page" do
+    it "oauth/applications#destory, they receive 302 page" do
       delete :destroy, params: {id: 1}
 
-      expect(response.status).to eq(404)
+      expect(response.status).to eq(302)
     end
   end
 

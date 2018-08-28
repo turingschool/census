@@ -7,8 +7,7 @@ Doorkeeper.configure do
   end
 
   admin_authenticator do
-    # Example implementation:
-    # Admin.find_by_id(session[:admin_id]) || redirect_to(new_admin_session_url)
+    current_user || redirect_to(new_user_session_url)
   end
 
   # Authorization Code expiration time (default 10 minutes).
