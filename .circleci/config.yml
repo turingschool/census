@@ -1,0 +1,90 @@
+version: 2
+jobs:
+  build:
+    docker:
+       - image: circleci/ruby:2.5.1-node-browsers
+         environment:
+           - RAILS_ENV=test
+           - RACK_ENV=test
+       - image: circleci/postgres:10.0-alpine
+         environment:
+           - POSTGRES_USER=circleci
+           - POSTGRES_DB=census_test
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "Gemfile.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run:
+          name: install dependencies
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+      # Database setup
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+
+      # run tests!
+      - run:
+          name: run tests
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+            bundle exec rspec spec
+      # collect reports
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
+  deploy-staging:
+    docker:
+      - image: buildpack-deps:trusty
+    steps:
+      - checkout
+      - run:
+          name: Deploy Staging to Heroku Staging
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/census-app-staging.git staging:master
+  deploy-production:
+    docker:
+      - image: buildpack-deps:trusty
+    steps:
+      - checkout
+      - run:
+          name: Deploy Production to Heroku Production
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/turing-census.git master
+
+workflows:
+  version: 2
+  build_test_deploy:
+    jobs:
+      - build
+      - deploy-staging:
+          filters:
+            branches:
+              only:
+                - staging
+          requires:
+            - build
+      - deploy-production:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - build
