@@ -26,9 +26,7 @@ class UserSerializer < ActiveModel::Serializer
   end
 
   def groups
-    object.groups.map do |group|
-      group.name
-    end
+    object.groups.pluck(:name)
   end
 
   def cohort
