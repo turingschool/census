@@ -29,11 +29,11 @@ class SingleUserSerializer < ActiveModel::Serializer
   end
 
   def groups
-    object.groups.map {|group| group.name}
+    object.groups.pluck(:name)
   end
 
   def roles
-    object.roles.map {|role| role.name}
+    object.roles.pluck(:name)
   end
 
 end

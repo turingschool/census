@@ -69,6 +69,10 @@ class User < ApplicationRecord
     roles.any? { |user_role| user_role.name == role }
   end
 
+  def self.with_serializer_info
+    includes(:groups, :roles)
+  end
+
   def self.search_by_name(term)
     User.where(
       "upper(first_name) LIKE ? OR
