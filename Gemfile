@@ -21,7 +21,7 @@ gem 'jquery-rails'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 3.12'
 gem 'rack-cors', require: 'rack/cors'
-gem 'rails', '~> 5.2.1'
+gem 'rails', '~> 5.2.2'
 gem 'rails_12factor', group: :production
 gem 'rb-readline'
 gem 'sass-rails', '~> 5.0'
