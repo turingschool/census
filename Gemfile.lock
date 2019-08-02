@@ -130,7 +130,7 @@ GEM
     graphql-client (0.12.3)
       activesupport (>= 3.0, < 6.0)
       graphql (~> 1.6)
-    honeybadger (3.3.1)
+    honeybadger (4.4.2)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     jbuilder (2.7.0)
