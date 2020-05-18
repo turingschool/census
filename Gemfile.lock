@@ -190,6 +190,11 @@ GEM
       capybara (~> 2.1)
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
+    postmark (1.21.1)
+      json
+    postmark-rails (0.20.0)
+      actionmailer (>= 3.0.0)
+      postmark (~> 1.15)
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -340,6 +345,7 @@ DEPENDENCIES
   pg (~> 1.1)
   phantomjs
   poltergeist
+  postmark-rails
   pry-rails
   puma (~> 3.12)
   rack-cors
@@ -359,4 +365,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.1
+   1.17.3
