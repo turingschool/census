@@ -18,17 +18,9 @@ Bundler.require(*Rails.groups)
 
 module Census
   class Application < Rails::Application
-    config.action_mailer.delivery_method = :smtp
-
-    config.action_mailer.smtp_settings = {
-      address:              'smtp.sendgrid.net',
-      port:                 '587',
-      domain:               'heroku.com',
-      user_name:            ENV["SENDGRID_USERNAME"],
-      password:             ENV["SENDGRID_PASSWORD"],
-      authentication:       'plain',
-      enable_starttls_auto: true
-    }
+    # Set up transactional emails through Postmark
+    config.action_mailer.delivery_method = :postmark
+    config.action_mailer.postmark_settings = { api_token: Rails.application.secrets.postmark_api_token }
 
     config.log_tags = [
       :request_id,
