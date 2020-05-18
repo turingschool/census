@@ -49,7 +49,6 @@ Rails.application.routes.draw do
       resources :groups, only: [:update, :destroy]
       get '/cohorts', to: 'cohorts#index'
       get '/user_credentials', to: 'credentials#show'
-      post '/sendgrid/events', to: 'send_grid/events#update'
     end
   end
 end
