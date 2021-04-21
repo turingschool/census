@@ -27,8 +27,8 @@
 
 ## [Onboarding tips](#onboarding)
 ### [Heroku](#heroku)
-* staging: census-app-staging and login-staging.turing.io
-* production: turing-census and login.turing.io
+* staging: census-app-staging and login-staging.turing.edu
+* production: turing-census and login.turing.edu
 * Other teams will use the staging app for their staging environment. Switching
   between environments requires configuring the oauth gem oauth endpoint.
   Install the gem via:
