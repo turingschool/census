@@ -16,6 +16,6 @@ RUN bundle install --without test --binstubs --jobs 3
 
 COPY . .
 
-LABEL maintainer="Turing Engineering <contact@turing.io>"
+LABEL maintainer="Turing Engineering <contact@turing.edu>"
 
 CMD rm -f tmp/pids/server.pid && bin/rails server puma -p $PORT -b 0.0.0.0
