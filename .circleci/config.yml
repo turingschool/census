@@ -58,7 +58,7 @@ jobs:
       - run:
           name: Deploy Staging to Heroku Staging
           command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/census-app-staging.git staging:master
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/census-app-staging.git staging:main
   deploy-production:
     docker:
       - image: buildpack-deps:trusty
@@ -67,7 +67,7 @@ jobs:
       - run:
           name: Deploy Production to Heroku Production
           command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/turing-census.git master
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/turing-census.git main
 
 workflows:
   version: 2
@@ -85,6 +85,6 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
           requires:
             - build
