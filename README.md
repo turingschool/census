@@ -1,3 +1,5 @@
+# INACTIVE
+
 Census has been decommissioned as of January 2022. It is no longer used by any Turing application.
 
 ---
