@@ -1,3 +1,7 @@
+Census has been decommissioned as of January 2022. It is no longer used by any Turing application.
+
+---
+
 # Census - An Identity Manager
 
 > Census serves as a central location for identity management and
