@@ -20,7 +20,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'pg', '~> 1.1'
 gem 'postmark-rails'
-gem 'puma', '~> 4.3'
+gem 'puma', '~> 5.6'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rails', '~> 5.2.2'
 gem 'rails_12factor', group: :production
